@@ -13,7 +13,7 @@ import Spinner from "./../spinner/Spinner";
 import { getCustomerProfile } from "../../../redux/reducers/customer/customerSlice";
 
 const LeftSection = () => {
-  //fetch customer
+  //fetch customer abd displayed
   const [user, setUser] = useState(null);
 
   // console.log("branchId", user?.data?.data?.branchId);
