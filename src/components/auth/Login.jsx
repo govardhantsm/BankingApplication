@@ -44,6 +44,7 @@ const Login = ({ name }) => {
       }
       if (x.payload.role == "BRANCH_MANAGER") {
         window.location.assign("/bankmanager");
+
         localStorage.setItem("role", x.payload.role);
       }
       if (x.payload.role == "ACCOUNT_HOLDER") {
@@ -102,7 +103,7 @@ const Login = ({ name }) => {
               onChange={handleChange}
               placeholder="Email-id"
             />
-            <span className="absolute top-2 right-7 text-2xl text-[rgb(157,155,155)]">
+            <span className="absolute top-2 right-12 text-2xl text-[rgb(157,155,155)]">
               <HiOutlineMail />
             </span>
           </div>
@@ -118,7 +119,7 @@ const Login = ({ name }) => {
               placeholder="Password"
             />
             <span
-              className="absolute top-2 right-7 text-2xl text-[rgb(157,155,155)]"
+              className="absolute top-2 right-12 text-2xl text-[rgb(157,155,155)]"
               onClick={() => setIspswdVisible(!isPswdVisible)}
             >
               {state.password ? (
