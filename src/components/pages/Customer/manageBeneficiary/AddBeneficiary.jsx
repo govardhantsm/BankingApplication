@@ -3,7 +3,7 @@ import React from "react";
 const AddBeneficiary = () => {
   return (
     <section>
-      <div className="bg-white">
+      <div className="bg-white border-t-2 border-orange-300">
         <form className="p-7 flex flex-col gap-5 shadow-md">
           <div>
             <label className="inline-block w-[220px] text-slate-400" htmlFor="">

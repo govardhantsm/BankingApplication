@@ -21,7 +21,7 @@ import CreateBranchManager from "../components/pages/md/BranchManager/CreateBran
 import AllBranchManager from "../components/pages/md/BranchManager/AllBranchManager";
 import ManagingDirectorDashboard from "../components/pages/md/MdDashboard/ManagingDirectorDashboard";
 import Bhome from "../components/BankManager/Bhome";
-import CreateAccount from "../components/BankManager/CreateAccount";
+import CreateAccount from "../components/bankmanager/CreateAccount";;
 import PersonalDetails from "../components/BankManager/PersonalDetails";
 import ServiceSection from "../components/BankManager/ServiceSection";
 import DocumentSection from "../components/bankmanager/DocumentSection";
@@ -263,7 +263,34 @@ const router = createBrowserRouter([
             children: [
               {
                 path: "/customer/Manage Beneficiary/add Beneficiary",
-                element:<AddBeneficiary />
+                element: <AddBeneficiary />,
+              },
+            ],
+          },
+          {
+            path: "/customer/Manage Beneficiary",
+            element: <ManageBeneficiary />,
+            children: [
+              {
+                index: true,
+                element: <AddBeneficiary />,
+              },
+              {
+                path: "/customer/Manage Beneficiary/add Beneficiary",
+                element: <AddBeneficiary />,
+              },
+
+              {
+                path: "/customer/Manage Beneficiary/Modify Beneficiary",
+                element: <ServiceSection />,
+              },
+              {
+                path: "/customer/Manage Beneficiary/Delete Beneficiary",
+                element: <DocumentSection />,
+              },
+              {
+                path:"/customer/Manage Beneficiary/View Beneficiary",
+                element: <DocumentSection />,
               },
             ],
           },
