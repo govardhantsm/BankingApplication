@@ -5,7 +5,7 @@ import {
   AxiosInstancePublic,
 } from "../../../axios/AxiosInstance";
 import { data } from "autoprefixer";
-
+import { savebeneficiary } from "../../services/CustomerThunk/AccountsThunk";
 
 const initialState = {
   data: [],
@@ -25,7 +25,6 @@ export const getCustomerProfile = createAsyncThunk("getBmProfile", async () => {
   }
 });
 
-
 export const customerSlice = createSlice({
   name: "bankManager",
   initialState,
@@ -43,6 +42,23 @@ export const customerSlice = createSlice({
         state.data = action.payload;
       })
       .addCase(getCustomerProfile.rejected, (state, action) => {
+        state.status = false;
+        state.error = action.error.message;
+        state.success = false;
+      });
+
+    //savebeneficiary
+    builder
+      .addCase(savebeneficiary.pending, state => {
+        state.status = true;
+        state.success = false;
+      })
+      .addCase(savebeneficiary.fulfilled, (state, action) => {
+        state.status = false;
+        state.success = true;
+        state.data = action.payload;
+      })
+      .addCase(savebeneficiary.rejected, (state, action) => {
         state.status = false;
         state.error = action.error.message;
         state.success = false;
