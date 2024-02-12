@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { RiArrowDropRightLine } from "react-icons/ri";
+import { RiArrowDropDownLine } from "react-icons/ri";
+
 import { IoMail } from "react-icons/io5";
 import useGetBm from "../../utils/useGetBm";
 import { RiDashboard3Fill } from "react-icons/ri";
@@ -72,8 +74,13 @@ const BleftSideSection = () => {
           >
             <FaRegUserCircle className="mr-2" />
             <p>Accounts</p>
+
             <span>
-              <RiArrowDropRightLine className="text-2xl ms-[4rem]" />
+              {account ? (
+                <RiArrowDropDownLine className="text-2xl ms-[3.8rem]" />
+              ) : (
+                <RiArrowDropRightLine className="text-2xl ms-[3.8rem]" />
+              )}
             </span>
           </div>
           {account &&
@@ -106,8 +113,13 @@ const BleftSideSection = () => {
           >
             <FaHandHoldingDollar className="mr-2" />
             <p>Loans</p>
+
             <span>
-              <RiArrowDropRightLine className="text-2xl ms-[5.5rem]" />
+              {loan ? (
+                <RiArrowDropDownLine className="text-2xl ms-[5.6rem]" />
+              ) : (
+                <RiArrowDropRightLine className="text-2xl ms-[5.6rem]" />
+              )}
             </span>
           </div>
           {loan &&
@@ -143,8 +155,13 @@ const BleftSideSection = () => {
           >
             <LiaIdCardSolid className="mr-2" />
             <p>Cards</p>
+
             <span>
-              <RiArrowDropRightLine className="text-2xl ms-[5.4rem]" />
+              {card ? (
+                <RiArrowDropDownLine className="text-2xl ms-[5.5rem]" />
+              ) : (
+                <RiArrowDropRightLine className="text-2xl ms-[5.5rem]" />
+              )}
             </span>
           </div>
           {card &&

@@ -14,9 +14,9 @@ const Navbar = () => {
       <div className="w-[17%] bg-orange-400 h-[100%] flex items-center justify-center">
         {role === "MANAGING_DIRECTOR"
           ? bankName
-          : (role === "BRANCH_MANAGER"
+          : role === "BRANCH_MANAGER"
           ? branchName
-          : "BankLauncher")}
+          : "BankLauncher"}
       </div>
       <div className="flex justify-between w-[83%] h-[100%]">
         <section className="w-[33%] flex justify-evenly items-center">

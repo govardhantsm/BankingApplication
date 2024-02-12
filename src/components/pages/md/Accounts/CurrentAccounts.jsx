@@ -190,6 +190,7 @@ const BCurrentAccounts = () => {
                           <span className="px-2  text-red-500">
                             <NavLink
                               to={`/adminlayout/update-md/${data.employeeId}`}
+                              state={"CurrentAccount"}
                             >
                               <BiSolidPencil />
                             </NavLink>{" "}
@@ -227,6 +228,7 @@ const BCurrentAccounts = () => {
                           <span className="px-2  text-red-500">
                             <NavLink
                               to={`/mdlayout/account/update/${data?.accountNumber}`}
+                              state={"CurrentAccount"}
                             >
                               <BiSolidPencil />
                             </NavLink>

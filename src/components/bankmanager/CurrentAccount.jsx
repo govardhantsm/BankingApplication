@@ -16,7 +16,7 @@ import {
 } from "../../redux/reducers/bankmanager/bankManagerSlice";
 
 const BranchCurrentAccount = () => {
-  localStorage.setItem("path", "/bankmanager/Current Accounts");
+  // localStorage.setItem("path", "/bankmanager/Current Accounts");
   let [state, setState] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(2);
@@ -24,7 +24,7 @@ const BranchCurrentAccount = () => {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = state?.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(state?.length / itemsPerPage);
- let [search, setSearch] = useState("");
+  let [search, setSearch] = useState("");
   let dispatch = useDispatch();
 
   const handlePageChange = pageNumber => {
@@ -218,6 +218,7 @@ const BranchCurrentAccount = () => {
                             <span className="px-2  text-red-500">
                               <NavLink
                                 to={`/bankmanager/account/update/${data?.accountNumber}`}
+                                state={"CurrentAccount"}
                               >
                                 <BiSolidPencil />
                               </NavLink>
@@ -255,6 +256,7 @@ const BranchCurrentAccount = () => {
                           <span className="px-2  text-red-500">
                             <NavLink
                               to={`/bankmanager/account/update/${data?.accountNumber}`}
+                              state={"CurrentAccount"}
                             >
                               <BiSolidPencil />
                             </NavLink>

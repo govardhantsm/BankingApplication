@@ -195,7 +195,10 @@ const SavingsAccounts = () => {
                         <div className="flex">
                           <span className="px-2  text-red-500">
                             <NavLink
-                              to={`/adminlayout/update-md/${data.employeeId}`}
+                              // to={`/adminlayout/update-md/${data.employeeId}`}
+                              // state={"AllAccount"}
+                              to={`/mdlayout/account/update/${data?.accountNumber}`}
+                              state={"CurrentAccount"}
                             >
                               <BiSolidPencil />
                             </NavLink>{" "}
@@ -231,6 +234,7 @@ const SavingsAccounts = () => {
                           <span className="px-2  text-red-500">
                             <NavLink
                               to={`/mdlayout/account/update/${data?.accountNumber}`}
+                              state={"SavingAccount"}
                             >
                               <BiSolidPencil />
                             </NavLink>

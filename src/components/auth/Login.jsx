@@ -37,6 +37,7 @@ const Login = ({ name }) => {
       if (x.role == "MANAGING_DIRECTOR") {
         window.location.assign("/mdlayout");
         localStorage.setItem("role", x.role);
+        console.log(x)
       }
       if (x.role == "BRANCH_MANAGER") {
         window.location.assign("/bankmanager");
