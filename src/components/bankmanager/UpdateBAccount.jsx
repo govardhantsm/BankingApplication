@@ -12,8 +12,8 @@ import {
 } from "../../redux/services/managingDirectorThunk/mdAccountThunk/MdAccountThunk";
 
 const UpdateBAccount = () => {
-  let location = useLocation();
-  console.log(location);
+  const location = useLocation();
+  let { state } = location;
   let [cou, setCon] = useState(null);
   let [stat, setStat] = useState(null);
 
@@ -45,8 +45,18 @@ const UpdateBAccount = () => {
   let handleSubmit = e => {
     e.preventDefault();
     dispatch(getUpdateAccount(updatedState));
-    navigate(`${localStorage.getItem("path")}`);
-    toast.success("updated successfully");
+    // navigate(`${localStorage.getItem("path")}`);
+    // toast.success("updated successfully");
+    if (state == "AllAccount") {
+      navigate("/bankmanager/All Accounts");
+      toast.success("Account updated successfully");
+    } else if (state == "SavingAccount") {
+      navigate("/bankmanager/Savings Accounts");
+      toast.success("saving Account updated successfully");
+    } else if (state == "CurrentAccount") {
+      navigate("/bankmanager/Current Accounts");
+      toast.success("CurrentAccount updated successfully");
+    }
   };
 
   // Animation:

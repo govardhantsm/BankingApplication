@@ -44,13 +44,13 @@ const handleSubmit = async e => {
     toast.success("Bank created successfully");
   };
 
-  // // Animation:
-  // useEffect(() => {
-  //   AOS.init();
-  // }, []);
+  // Animation:
+  useEffect(() => {
+    AOS.init();
+  }, []);
 
   return (
-    <section className="h-[100%] w-[100%] relative">
+    <section className="h-[100%] w-[100%] relative" data-aos="zoom-in">
       <section className="rounded-md border-2 py-1.5 w-[97%] bg-white absolute top-4 left-3">
         <div className="ps-4 py-3 uppercase font-semibold">Create Bank</div>
         <form onSubmit={handleSubmit} className="p-2 ps-4">
@@ -141,7 +141,7 @@ const handleSubmit = async e => {
                 -- Select The State --
               </option>
               {State.getStatesOfCountry(cou).map(state => (
-                <option key={state.isoCode} value={state.name} >
+                <option key={state.isoCode} value={state.name}>
                   {state.name}
                 </option>
               ))}

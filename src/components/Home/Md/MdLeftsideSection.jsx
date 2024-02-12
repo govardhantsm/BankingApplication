@@ -19,6 +19,8 @@ const MdLeftsideSection = () => {
   //const user = useGetProfile();
 
   const user = useGetMd();
+  console.log(user);
+  localStorage.setItem("bankName", user?.data?.data?.bankName);
 
   let bankId = user?.data?.data?.bankId;
 

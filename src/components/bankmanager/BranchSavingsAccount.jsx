@@ -12,7 +12,7 @@ import { getAllSavingAccount } from "../../redux/reducers/bankmanager/bankManage
 
 const BranchSavingsAccount = () => {
   let [state, setState] = useState(null);
-  localStorage.setItem("path", "/bankmanager/Savings Accounts");
+  // localStorage.setItem("path", "/bankmanager/Savings Accounts");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(2);
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -206,6 +206,7 @@ const BranchSavingsAccount = () => {
                             <span className="px-2  text-red-500">
                               <NavLink
                                 to={`/bankmanager/account/update/${data?.accountNumber}`}
+                                state={"SavingAccount"}
                               >
                                 <BiSolidPencil />
                               </NavLink>
@@ -243,6 +244,7 @@ const BranchSavingsAccount = () => {
                           <span className="px-2  text-red-500">
                             <NavLink
                               to={`/bankmanager/account/update/${data?.accountNumber}`}
+                              state={"SavingAccount"}
                             >
                               <BiSolidPencil />
                             </NavLink>

@@ -205,6 +205,7 @@ const AllAccounts = () => {
                           <span className="px-2  text-red-500">
                             <NavLink
                               to={`/mdlayout/account/update/${data?.accountNumber}`}
+                              state={"AllAccount"}
                             >
                               <BiSolidPencil />
                             </NavLink>{" "}
@@ -243,6 +244,7 @@ const AllAccounts = () => {
                           <span className="px-2  text-red-500">
                             <NavLink
                               to={`/mdlayout/account/update/${data?.accountNumber}`}
+                              state={"AllAccount"}
                             >
                               <BiSolidPencil />
                             </NavLink>

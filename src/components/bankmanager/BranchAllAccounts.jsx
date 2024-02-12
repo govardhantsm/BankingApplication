@@ -21,7 +21,7 @@ const BranchAllAccounts = () => {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = state?.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(state?.length / itemsPerPage);
-  localStorage.setItem("path", JSON.stringify("/bankmanager/All Accounts"));
+  // localStorage.setItem("path", JSON.stringify("/bankmanager/All Accounts"));
   let dispatch = useDispatch();
   let [search, setSearch] = useState("");
   let [loading, setLoading] = useState(false);
@@ -53,7 +53,8 @@ const BranchAllAccounts = () => {
     if (branchId) {
       dispatch(getAllAccount(branchId))
         .unwrap()
-        .then(x => {console.log(x.data);
+        .then(x => {
+          console.log(x.data);
           setState(x.data);
         });
     }
@@ -62,7 +63,7 @@ const BranchAllAccounts = () => {
   useEffect(() => {
     AOS.init();
   }, []);
-  
+
   return (
     <div className="w-[98%] ssh-[100%]" data-aos="zoom-in">
       <div className="flex items-center justify-between pt-3 px-5">
@@ -116,7 +117,7 @@ const BranchAllAccounts = () => {
                         ?.toLowerCase()
                         .includes(e.target.value.toLowerCase())
                   );
-                 console.log(currentItems,"currentitems");
+                  console.log(currentItems, "currentitems");
                   for (let i = 0; i < data.length; i++) {
                     for (let j = 0; j < currentItems.length; j++) {
                       if (
@@ -129,7 +130,7 @@ const BranchAllAccounts = () => {
                       }
                     }
                   }
-                   console.log(data);
+                  console.log(data);
                   e.target.value && true ? setSearch(data) : setSearch(null);
                 }}
               />
@@ -198,43 +199,45 @@ const BranchAllAccounts = () => {
                 </tr>
               </thead>
               <tbody>
-                {search&&search?.map((data, ind) => {
-                  return (
-                    <tr className="text-xs border-b-2" key={ind}>
-                      <td className="px-2 py-3 ">{data.name}</td>
-                      <td className="px-2">{data.phoneNumber}</td>
-                      <td className="px-2">{data.emailID}</td>
-                      <td className="px-2">{data.accountType}</td>
-                      <td className="px-2">{data.accountNumber}</td>
-                      <td className="px-2">{data.status}</td>
-                      <td className="px-2">
-                        <div className="flex">
-                          <span className="px-2  text-red-500">
-                            <NavLink
-                              to={`/bankmanager/account/update/${data?.accountNumber}`}
-                            >
-                              <BiSolidPencil />
-                            </NavLink>
-                          </span>
-                          <span className="px-2 ">
-                            <MdDelete
-                              onClick={() => {
-                                let deleteConfirm =
-                                  window.confirm("Are you sure");
-                                if (deleteConfirm === true) {
-                                  console.log(data);
-                                  dispatch(
-                                    deleteBankAccount(data.accountNumber)
-                                  );
-                                }
-                              }}
-                            />
-                          </span>
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                })}
+                {search &&
+                  search?.map((data, ind) => {
+                    return (
+                      <tr className="text-xs border-b-2" key={ind}>
+                        <td className="px-2 py-3 ">{data.name}</td>
+                        <td className="px-2">{data.phoneNumber}</td>
+                        <td className="px-2">{data.emailID}</td>
+                        <td className="px-2">{data.accountType}</td>
+                        <td className="px-2">{data.accountNumber}</td>
+                        <td className="px-2">{data.status}</td>
+                        <td className="px-2">
+                          <div className="flex">
+                            <span className="px-2  text-red-500">
+                              <NavLink
+                                to={`/bankmanager/account/update/${data?.accountNumber}`}
+                                state={"AllAccount"}
+                              >
+                                <BiSolidPencil />
+                              </NavLink>
+                            </span>
+                            <span className="px-2 ">
+                              <MdDelete
+                                onClick={() => {
+                                  let deleteConfirm =
+                                    window.confirm("Are you sure");
+                                  if (deleteConfirm === true) {
+                                    console.log(data);
+                                    dispatch(
+                                      deleteBankAccount(data.accountNumber)
+                                    );
+                                  }
+                                }}
+                              />
+                            </span>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 {currentItems?.map((data, ind) => {
                   return (
                     <tr className="text-xs border-b-2" key={ind}>
@@ -249,6 +252,7 @@ const BranchAllAccounts = () => {
                           <span className="px-2  text-red-500">
                             <NavLink
                               to={`/bankmanager/account/update/${data?.accountNumber}`}
+                              state={"AllAccount"}
                             >
                               <BiSolidPencil />
                             </NavLink>
