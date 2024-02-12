@@ -14,7 +14,7 @@ const Login = ({ name }) => {
   let [isPswdVisible, setIspswdVisible] = useState(true);
   const navigate = useNavigate();
   let dispatch = useDispatch();
-
+  let [incorrect, setIncorrect] = useState(false);
   let [state, setState] = useState({
     email: "",
     password: "",
@@ -27,27 +27,53 @@ const Login = ({ name }) => {
 
   let handleSubmit = e => {
     e.preventDefault();
-    let data = dispatch(userLogin(state));
-    data.unwrap().then(x => {
-      localStorage.setItem("access_token", x.token);
-      if (x.role == "ADMIN") {
+    // let data =
+    dispatch(userLogin(state)).then(x => {
+      if (x.payload == "Employee not found");
+      {
+        setIncorrect(true);
+      }
+      localStorage.setItem("access_token", x.payload.token);
+      if (x.payload.role == "ADMIN") {
         window.location.assign("/adminlayout");
-        localStorage.setItem("role", x.role);
+        localStorage.setItem("role", x.payload.role);
       }
-      if (x.role == "MANAGING_DIRECTOR") {
+      if (x.payload.role == "MANAGING_DIRECTOR") {
         window.location.assign("/mdlayout");
-        localStorage.setItem("role", x.role);
+        localStorage.setItem("role", x.payload.role);
       }
-      if (x.role == "BRANCH_MANAGER") {
+      if (x.payload.role == "BRANCH_MANAGER") {
         window.location.assign("/bankmanager");
-        localStorage.setItem("role", x.role);
+
+        localStorage.setItem("role", x.payload.role);
       }
-      if (x.role == "ACCOUNT_HOLDER") {
-        console.log(x);
+      if (x.payload.role == "ACCOUNT_HOLDER") {
         window.location.assign("/customer");
-        localStorage.setItem("role", x.role);
+        localStorage.setItem("role", x.payload.role);
       }
     });
+
+    // data.unwrap().then(x => {
+    //   console.log(x);
+    //   localStorage.setItem("access_token", x.token);
+    //   if (x.role == "ADMIN") {
+    //     window.location.assign("/adminlayout");
+    //     localStorage.setItem("role", x.role);
+    //   }
+    //   if (x.role == "MANAGING_DIRECTOR") {
+    //     window.location.assign("/mdlayout");
+    //     localStorage.setItem("role", x.role);
+    //   }
+    //   if (x.role == "BRANCH_MANAGER") {
+    //     window.location.assign("/bankmanager");
+    //     localStorage.setItem("role", x.role);
+    //   }
+    //   if (x.role == "ACCOUNT_HOLDER") {
+    //     console.log(x);
+    //     window.location.assign("/customer");
+    //     localStorage.setItem("role", x.role);
+    //   }
+    // });
   };
   // Animation:
   useEffect(() => {
@@ -57,9 +83,17 @@ const Login = ({ name }) => {
   return (
     <div data-aos="zoom-in">
       <FormComp name={name + "_" + "Login"}>
+        <p
+          className={`${
+            incorrect ? " text-red-500 text-center " : "hidden"
+          }  p-0  mb-4`}
+        >
+          {"invalid credentials"}
+        </p>
         <form onSubmit={handleSubmit}>
           <div className="form-group relative">
             {/* <label htmlFor="email">email</label> */}
+
             <input
               type="email"
               className="form-control p-2 border-b-2 w-[88%] mx-6 mb-4"
