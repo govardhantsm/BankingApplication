@@ -1,29 +1,28 @@
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { RiDashboard3Line } from "react-icons/ri";
 import { CiBank } from "react-icons/ci";
 import { RiArrowDropRightLine } from "react-icons/ri";
 import { IoMail } from "react-icons/io5";
-import useGetProfile from "../../../utils/useGetProfile";
+
 import { useDispatch } from "react-redux";
 import { logout } from "../../../redux/reducers/auth/authSlice";
-import Spinner from "../../pages/spinner/Spinner";
+
 import Button from "../../../utilities/Button";
 import { RiArrowDropDownLine } from "react-icons/ri";
 
 const AdminLeftSideSection = () => {
-  const user = useGetProfile();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   let [bank, setBank] = useState(false);
   let [md, setMd] = useState(false);
+  let location = useLocation();
+  console.log(location);
 
   return (
     <>
       <section className="text-sm h-[100%] w-[100%] bg-black">
-        {user.status === true ? (
-          <Spinner />
-        ) : (
+        {
           <div className="flex flex-col items-center">
             <img
               src={
@@ -33,12 +32,12 @@ const AdminLeftSideSection = () => {
               alt=""
               className="h-[4rem] w-[4rem] rounded-full mt-5"
             />
-            <p className="mt-3">{user?.userInfo?.data?.name}</p>
+            <p className="mt-3">{location?.state?.name}</p>
             <p className="mt-1 text-[rgb(112,112,112)]">
-              {user?.userInfo?.data?.role}
+              {location?.state?.role}
             </p>
           </div>
-        )}
+        }
 
         {/* <li className="list-none">
         <NavLink
@@ -53,7 +52,6 @@ const AdminLeftSideSection = () => {
           onClick={() =>
             setBank(e => {
               setMd(false);
-              console.log(e);
               return !e;
             })
           }
@@ -96,7 +94,6 @@ const AdminLeftSideSection = () => {
           onClick={() =>
             setMd(e => {
               setBank(false);
-              console.log(e);
               return !e;
             })
           }

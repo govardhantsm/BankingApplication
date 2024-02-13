@@ -26,7 +26,7 @@ const PersonalDetails = () => {
     pincode: "",
     country: "",
     State: "",
-    city: "",
+    city: "", 
     primaryAccount: true,
     accountType: "",
     branchId: "",

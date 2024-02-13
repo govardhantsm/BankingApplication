@@ -42,10 +42,10 @@ const CreateMD = () => {
     address: {
       addressId: "",
       addressLine: state.addressLine,
-      pincode: "qsp5160003",
+      pincode: state.pincode,
       state: state.state,
-      country: "India",
-      city: "Banglore",
+      country:state.country,
+      city: state.city,
     },
   };
 
