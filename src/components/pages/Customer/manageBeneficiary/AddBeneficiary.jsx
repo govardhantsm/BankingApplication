@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { savebeneficiary } from "../../../../redux/services/CustomerThunk/AccountsThunk";
 import { getCustomerProfile } from "../../../../redux/reducers/customer/customerSlice";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const AddBeneficiary = () => {
   let dispatch = useDispatch();
@@ -31,8 +33,12 @@ const AddBeneficiary = () => {
     if (payload.reciverAccountNumber == payload.cnumber)
       dispatch(savebeneficiary(payload));
   };
+  // Animation:
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
-    <section>
+    <section data-aos="zoom-in">
       <div className="bg-white border-t-2 border-orange-300">
         <form
           className="p-7 flex flex-col gap-5 shadow-md"
