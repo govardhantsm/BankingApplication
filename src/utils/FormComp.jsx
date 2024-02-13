@@ -9,8 +9,8 @@ const FormComp = ({ name, children }) => {
             <strong className="text-green-700 text-xl">S</strong>{" "}
           </span>{" "}
         </p>
-        <p className="text-center my-2 font-[600]">Welcome to QSP Bank</p>
-        <p className="uppercase text-center text-xs pb-4 ">{name}</p>
+        <p className="text-center my-2 font-[600]">Welcome to { name }</p>
+        {/* <p className="uppercase text-center text-xs pb-4 ">{name}</p> */}
         {children}
       </div>
     </section>
