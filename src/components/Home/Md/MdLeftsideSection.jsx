@@ -19,7 +19,7 @@ const MdLeftsideSection = () => {
   //const user = useGetProfile();
 
   // const user = useGetMd();
-  let location = useLocation();
+ const data = JSON.parse(sessionStorage.getItem("myObject"));
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -44,9 +44,9 @@ const MdLeftsideSection = () => {
             alt=""
             className="h-[4rem] w-[4rem] rounded-full mt-5"
           />
-          <p className="mt-3">{location?.state?.name}</p>
+          <p className="mt-3">{data?.name}</p>
           <p className="mt-1 text-[rgb(112,112,112)]">
-            {location?.state?.role == "MANAGING_DIRECTOR"?"MANAGING DIRECTOR":""}
+            {data?.role == "MANAGING_DIRECTOR"?"MANAGING DIRECTOR":""}
           </p>
           <p className="mt-1 text-[rgb(112,112,112)]"></p>
         </div>

@@ -5,7 +5,7 @@ import { CiBank } from "react-icons/ci";
 import { RiArrowDropRightLine } from "react-icons/ri";
 import { IoMail } from "react-icons/io5";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../redux/reducers/auth/authSlice";
 
 import Button from "../../../utilities/Button";
@@ -16,8 +16,7 @@ const AdminLeftSideSection = () => {
   const dispatch = useDispatch();
   let [bank, setBank] = useState(false);
   let [md, setMd] = useState(false);
-  let location = useLocation();
-  console.log(location);
+  const data = JSON.parse(sessionStorage.getItem("myObject"));
 
   return (
     <>
@@ -32,10 +31,8 @@ const AdminLeftSideSection = () => {
               alt=""
               className="h-[4rem] w-[4rem] rounded-full mt-5"
             />
-            <p className="mt-3">{location?.state?.name}</p>
-            <p className="mt-1 text-[rgb(112,112,112)]">
-              {location?.state?.role}
-            </p>
+            <p className="mt-3">{data?.name}</p>
+            <p className="mt-1 text-[rgb(112,112,112)]">{data?.role}</p>
           </div>
         }
 
