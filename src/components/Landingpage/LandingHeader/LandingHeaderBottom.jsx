@@ -4,10 +4,11 @@ import { MdOutlineSearch } from "react-icons/md";
 import { FaMicrophone } from "react-icons/fa";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { FaUserShield } from "react-icons/fa6";
+import logo from "../../../images/QSP-bank-1.png";
 const LandingHeaderBottom = () => {
   return (
     <section className="flex border-2 items-center h-[65%] w-[100%] bg-white ">
-      <div className="w-[20%] text-center ">LoGo</div>
+      <div className="w-[20%] text-center "><figure ><img src={logo} alt="" /></figure> </div>
       <section className="flex items-center w-[80%] ">
         <div className="flex items-center border-r-2 pe-3">
           Contact Us <IoIosArrowDown className="pl-2 text-2xl" />

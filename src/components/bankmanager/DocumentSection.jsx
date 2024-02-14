@@ -11,22 +11,24 @@ import {
   createAccountWithFile,
 } from "../../redux/reducers/bankmanager/bankManagerSlice";
 const DocumentSection = () => {
-  const data = useGetBm();
+  const data = JSON.parse(sessionStorage.getItem("myObject"));
   let { state } = useLocation();
   let navigate = useNavigate();
   let dispatch = useDispatch();
-  //console.log("location", location);
+
   let [file, setFile] = useState();
 
   const handleSubmit = e => {
+    e.preventDefault();
     let formData = new FormData();
     formData.append("files", file);
-    e.preventDefault();
 
-    state.branchId = data?.data?.data?.branchId;
-    if (dispatch(createAccount(state)))
+    state.branchId = data?.branchId;
+    dispatch(createAccount(state)).then(x => {
       dispatch(createAccountWithFile(formData));
-    navigate(`${JSON.parse(localStorage.getItem("path"))}`);
+    });
+
+    navigate(`${localStorage.getItem("path")}`);
   };
   // Animation:
   useEffect(() => {
