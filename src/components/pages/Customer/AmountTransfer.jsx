@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getCustomerProfile } from "../../../redux/reducers/customer/customerSlice";
@@ -26,8 +27,9 @@ const AmountTransfer = () => {
         SetBeneficiary(x.payload.data);
       });
   }, [payload.senderAccountNumber]);
+
   return (
-    <div className="bg-gray-50">
+    <div className="bg-gray-50" data-aos="zoom-in">
       <div className="middle font-semibold text-lg p-2 m-2 ">
         Amount Transfer
       </div>

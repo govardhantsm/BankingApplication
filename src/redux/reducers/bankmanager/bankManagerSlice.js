@@ -37,7 +37,7 @@ export const createAccountWithFile = createAsyncThunk(
   "createAccountWithFile",
   async payload => {
     let userId = localStorage.getItem("userId");
-  
+
     if (userId) {
       try {
         const { data } = await axios.post(

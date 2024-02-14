@@ -55,28 +55,6 @@ const Login = ({ name }) => {
         setIncorrect(true);
       }
     });
-
-    // data.unwrap().then(x => {
-    //   console.log(x);
-    //   localStorage.setItem("access_token", x.token);
-    //   if (x.role == "ADMIN") {
-    //     window.location.assign("/adminlayout");
-    //     localStorage.setItem("role", x.role);
-    //   }
-    //   if (x.role == "MANAGING_DIRECTOR") {
-    //     window.location.assign("/mdlayout");
-    //     localStorage.setItem("role", x.role);
-    //   }
-    //   if (x.role == "BRANCH_MANAGER") {
-    //     window.location.assign("/bankmanager");
-    //     localStorage.setItem("role", x.role);
-    //   }
-    //   if (x.role == "ACCOUNT_HOLDER") {
-    //     console.log(x);
-    //     window.location.assign("/customer");
-    //     localStorage.setItem("role", x.role);
-    //   }
-    // });
   };
   // Animation:
   useEffect(() => {

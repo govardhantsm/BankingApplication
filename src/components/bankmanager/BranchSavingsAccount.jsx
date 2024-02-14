@@ -156,14 +156,7 @@ const BranchSavingsAccount = () => {
                       </span>
                     </div>
                   </th>
-                  <th>
-                    <div className="w-18% flex justify-between align-center px-2 text-sm">
-                      <span>Account Type</span>
-                      <span>
-                        <TbArrowsDownUp />
-                      </span>
-                    </div>
-                  </th>
+
                   <th>
                     <div className="w-18% flex justify-between align-center px-2 text-sm">
                       <span>Account Number</span>
@@ -198,7 +191,6 @@ const BranchSavingsAccount = () => {
                         <td className="px-2 py-3 ">{data.name}</td>
                         <td className="px-2">{data.phoneNumber}</td>
                         <td className="px-2">{data.emailID}</td>
-                        <td className="px-2">{data.accountType}</td>
                         <td className="px-2">{data.accountNumber}</td>
                         <td className="px-2">{data.status}</td>
                         <td className="px-2">
@@ -236,7 +228,6 @@ const BranchSavingsAccount = () => {
                       <td className="px-2 py-3 ">{data.name}</td>
                       <td className="px-2">{data.phoneNumber}</td>
                       <td className="px-2">{data.emailID}</td>
-                      <td className="px-2">{data.accountType}</td>
                       <td className="px-2">{data.accountNumber}</td>
                       <td className="px-2">{data.status}</td>
                       <td className="px-2">
