@@ -92,9 +92,10 @@ export const mdSlice = createSlice({
       .addCase(updateMd.fulfilled, (state, action) => {
         state.status = false;
         state.success = true;
-        state.data = state.data.map(el =>
-          action.payload.bankId === el.bankId ? action.payload : el
-        );
+        state.data = action.payload;
+        // state.data = state.data.map(el =>
+        //   action.payload.bankId === el.bankId ? action.payload : el
+        // );
       })
 
       .addCase(updateMd.rejected, (state, action) => {

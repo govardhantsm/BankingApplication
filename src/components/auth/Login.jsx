@@ -9,6 +9,10 @@ import { HiOutlineMail } from "react-icons/hi";
 import { FiEyeOff } from "react-icons/fi";
 import { FiEye } from "react-icons/fi";
 import { userLogin } from "./../../redux/services/authThunk/UserLoginThunk";
+import useGetProfile from "../../utils/useGetProfile";
+import { GetAdminProfile } from "../../redux/services/authThunk/GetAdminProfileThunk";
+import { getMdProfile } from "../../redux/services/managingDirectorThunk/mdBranchThunk/MdBranchThunk";
+import { getBmProfile } from "../../redux/reducers/bankmanager/bankManagerSlice";
 
 const Login = ({ name }) => {
   let [isPswdVisible, setIspswdVisible] = useState(true);
@@ -29,27 +33,26 @@ const Login = ({ name }) => {
     e.preventDefault();
     // let data =
     dispatch(userLogin(state)).then(x => {
-      if (x.payload == "Employee not found");
-      {
-        setIncorrect(true);
-      }
       localStorage.setItem("access_token", x.payload.token);
       if (x.payload.role == "ADMIN") {
-        window.location.assign("/adminlayout");
-        localStorage.setItem("role", x.payload.role);
-      }
-      if (x.payload.role == "MANAGING_DIRECTOR") {
-        window.location.assign("/mdlayout");
-        localStorage.setItem("role", x.payload.role);
-      }
-      if (x.payload.role == "BRANCH_MANAGER") {
-        window.location.assign("/bankmanager");
+        dispatch(GetAdminProfile()).then(y => {
+          navigate("/adminlayout", { state: y.payload.data });
+        });
 
-        localStorage.setItem("role", x.payload.role);
-      }
-      if (x.payload.role == "ACCOUNT_HOLDER") {
-        window.location.assign("/customer");
-        localStorage.setItem("role", x.payload.role);
+        //window.location.reload();
+      } else if (x.payload.role == "MANAGING_DIRECTOR") {
+        dispatch(getMdProfile()).then(y => {
+          navigate("/mdlayout", { state: y.payload.data });
+        });
+      } else if (x.payload.role == "BRANCH_MANAGER") {
+        dispatch(getBmProfile()).then(y => {
+          navigate("/bankmanager", { state: y.payload.data });
+        });
+      } else if (x.payload.role == "ACCOUNT_HOLDER") {
+        navigate("/customer", { state: "Customer" });
+        window.location.reload();
+      } else {
+        setIncorrect(true);
       }
     });
   };
@@ -60,7 +63,7 @@ const Login = ({ name }) => {
 
   return (
     <div data-aos="zoom-in">
-      <FormComp name={name + "_" + "Login"}>
+      <FormComp name={name + " " + "Login"}>
         <p
           className={`${
             incorrect ? " text-red-500 text-center " : "hidden"

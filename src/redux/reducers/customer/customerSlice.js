@@ -5,7 +5,10 @@ import {
   AxiosInstancePublic,
 } from "../../../axios/AxiosInstance";
 import { data } from "autoprefixer";
-import { savebeneficiary } from "../../services/CustomerThunk/AccountsThunk";
+import {
+  findAllBeneficiarys,
+  savebeneficiary,
+} from "../../services/CustomerThunk/AccountsThunk";
 
 const initialState = {
   data: [],
@@ -59,6 +62,39 @@ export const customerSlice = createSlice({
         state.data = action.payload;
       })
       .addCase(savebeneficiary.rejected, (state, action) => {
+        state.status = false;
+        state.error = action.error.message;
+        state.success = false;
+      });
+
+    //findAllbeneficiary
+    builder
+      .addCase(findAllBeneficiarys.pending, state => {
+        state.status = true;
+        state.success = false;
+      })
+      .addCase(findAllBeneficiarys.fulfilled, (state, action) => {
+        state.status = false;
+        state.success = true;
+        state.data = action.payload;
+      })
+      .addCase(findAllBeneficiarys.rejected, (state, action) => {
+        state.status = false;
+        state.error = action.error.message;
+        state.success = false;
+      });
+    //amountTransfer
+    builder
+      .addCase(amountTransfer.pending, state => {
+        state.status = true;
+        state.success = false;
+      })
+      .addCase(amountTransfer.fulfilled, (state, action) => {
+        state.status = false;
+        state.success = true;
+        state.data = action.payload;
+      })
+      .addCase(amountTransfer.rejected, (state, action) => {
         state.status = false;
         state.error = action.error.message;
         state.success = false;

@@ -30,7 +30,7 @@ export const getMdById = createAsyncThunk("getMdById", async employeeId => {
     const { data } = await AxiosInstanceProtected.get(
       `/managingDirectors/getManagingDirectorById?managingDirectorId=${employeeId}`
     );
-    console.log(data);
+   
     return data;
   } catch (error) {
     return error.message;
@@ -44,7 +44,7 @@ export const updateMd = createAsyncThunk("updateMd", async payload => {
       `/managingDirectors?managerId=${payload.employeeId}`,
       payload
     );
-    window.location.reload();
+    //window.location.reload();
     return data;
   } catch (error) {
     return error.message;

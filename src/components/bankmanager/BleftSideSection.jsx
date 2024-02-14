@@ -1,55 +1,39 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { RiArrowDropRightLine } from "react-icons/ri";
 import { RiArrowDropDownLine } from "react-icons/ri";
 
-import { IoMail } from "react-icons/io5";
-import useGetBm from "../../utils/useGetBm";
+
 import { RiDashboard3Fill } from "react-icons/ri";
 import { FaRegUserCircle } from "react-icons/fa";
 import { logout } from "../../redux/reducers/auth/authSlice";
-import Spinner from "../pages/spinner/Spinner";
+
 import { LiaIdCardSolid } from "react-icons/lia";
 import { FaHandHoldingDollar } from "react-icons/fa6";
-import { useDispatch } from "react-redux";
-import { getBmProfile } from "../../redux/reducers/bankmanager/bankManagerSlice";
 
 const BleftSideSection = () => {
-  const [user, setUser] = useState(null);
-  localStorage.setItem("branchId", user?.branchId);
-  localStorage.setItem("branchName", user?.bankName);
-
-  let dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getBmProfile())
-      .unwrap()
-      .then(x => {
-        setUser(x.data);
-      });
-  }, []);
+  let loc = useLocation();
+  
   let [account, setAccount] = useState(false);
   let [loan, setLoan] = useState(false);
   let [card, setCard] = useState(false);
   return (
     <div className="flex items-center justify-between flex-col h-[100%]">
       <section className="text-sm h-[10%] w-[100%] bg-black">
-        {user?.status === true ? (
-          <Spinner />
-        ) : (
-          <div className="flex flex-col items-center">
-            <img
-              src={
-                // user?.avatar ||
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAK2Ud4gQr9pQFT6rc3xbeq74MhZe7bOdvQ&usqp=CAU"
-              }
-              alt=""
-              className="h-[4rem] w-[4rem] rounded-full mt-5"
-            />
-            <p className="mt-3">{user?.branchManagerName}</p>
-            <p className="mt-1 text-[rgb(112,112,112)]">{user?.role}</p>
-          </div>
-        )}
+        <div className="flex flex-col items-center">
+          <img
+            src={
+              // user?.avatar ||
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAK2Ud4gQr9pQFT6rc3xbeq74MhZe7bOdvQ&usqp=CAU"
+            }
+            alt=""
+            className="h-[4rem] w-[4rem] rounded-full mt-5"
+          />
+          <p className="mt-3">{loc.state.branchManagerName}</p>
+          <p className="mt-1 text-[rgb(112,112,112)]">
+            {loc.state.role == "BRANCH_MANAGER"?"BRANCH MANAGER":""}
+          </p>
+        </div>
       </section>
       <section className="h-[65%]">
         <div className="ms-8 mt-6">

@@ -21,7 +21,7 @@ import CreateBranchManager from "../components/pages/md/BranchManager/CreateBran
 import AllBranchManager from "../components/pages/md/BranchManager/AllBranchManager";
 import ManagingDirectorDashboard from "../components/pages/md/MdDashboard/ManagingDirectorDashboard";
 import Bhome from "../components/BankManager/Bhome";
-import CreateAccount from "../components/bankmanager/CreateAccount";;
+import CreateAccount from "../components/bankmanager/CreateAccount";
 import PersonalDetails from "../components/BankManager/PersonalDetails";
 import ServiceSection from "../components/BankManager/ServiceSection";
 import DocumentSection from "../components/bankmanager/DocumentSection";
@@ -50,6 +50,7 @@ import BranchSavingsAccount from "../components/bankmanager/BranchSavingsAccount
 import BranchCurrentAccount from "../components/bankmanager/CurrentAccount";
 import ManageBeneficiary from "../components/pages/Customer/manageBeneficiary/ManageBeneficiary";
 import AddBeneficiary from "../components/pages/Customer/manageBeneficiary/AddBeneficiary";
+import PassBook from "../components/pages/Customer/PassBook";
 // import LoanAccounts from './../components/pages/md/Accounts/LoanAccount';
 
 const router = createBrowserRouter([
@@ -289,7 +290,7 @@ const router = createBrowserRouter([
                 element: <DocumentSection />,
               },
               {
-                path:"/customer/Manage Beneficiary/View Beneficiary",
+                path: "/customer/Manage Beneficiary/View Beneficiary",
                 element: <DocumentSection />,
               },
             ],
@@ -301,7 +302,7 @@ const router = createBrowserRouter([
 
           {
             path: "/customer/Passbook",
-            element: <ServiceSection />,
+            element: <PassBook />,
           },
           {
             path: "/customer/Account Statement",

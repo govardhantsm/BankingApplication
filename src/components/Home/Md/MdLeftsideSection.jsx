@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { CiBank } from "react-icons/ci";
 import { RiArrowDropRightLine, RiDashboard2Fill } from "react-icons/ri";
 import { RiArrowDropDownLine } from "react-icons/ri";
@@ -18,13 +18,9 @@ import useGetMd from "../../../utils/useGetMd";
 const MdLeftsideSection = () => {
   //const user = useGetProfile();
 
-  const user = useGetMd();
-  console.log(user);
-  localStorage.setItem("bankName", user?.data?.data?.bankName);
+  // const user = useGetMd();
+  let location = useLocation();
 
-  let bankId = user?.data?.data?.bankId;
-
-  localStorage.setItem("bankId", bankId);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -38,25 +34,23 @@ const MdLeftsideSection = () => {
   return (
     <>
       <section className="text-sm h-[100%] w-[100%] bg-black flex justify-between flex-col">
-        {user.status === true ? (
-          <Spinner />
-        ) : (
-          <div className="flex flex-col items-center h-[20%]">
-            <img
-              src={
-                // user?.avatar ||
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAK2Ud4gQr9pQFT6rc3xbeq74MhZe7bOdvQ&usqp=CAU"
-              }
-              alt=""
-              className="h-[4rem] w-[4rem] rounded-full mt-5"
-            />
-            <p className="mt-3">{user?.data?.data?.name}</p>
-            <p className="mt-1 text-[rgb(112,112,112)]">
-              {user?.data?.data?.role}
-            </p>
-            <p className="mt-1 text-[rgb(112,112,112)]"></p>
-          </div>
-        )}
+        
+        <div className="flex flex-col items-center h-[20%]">
+          <img
+            src={
+              // user?.avatar ||
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAK2Ud4gQr9pQFT6rc3xbeq74MhZe7bOdvQ&usqp=CAU"
+            }
+            alt=""
+            className="h-[4rem] w-[4rem] rounded-full mt-5"
+          />
+          <p className="mt-3">{location?.state?.name}</p>
+          <p className="mt-1 text-[rgb(112,112,112)]">
+            {location?.state?.role == "MANAGING_DIRECTOR"?"MANAGING DIRECTOR":""}
+          </p>
+          <p className="mt-1 text-[rgb(112,112,112)]"></p>
+        </div>
+        
         <section className="h-[70%]">
           <div className="flex mt-8 ms-8">
             <NavLink to="/mdlayout">
