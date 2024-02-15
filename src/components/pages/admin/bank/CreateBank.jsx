@@ -36,14 +36,19 @@ const CreateBank = () => {
       city: state.city,
     },
   };
+  let bankNameValidation;
   const handleSubmit = async e => {
     e.preventDefault();
     if (isValidation()) {
       console.log("clicked");
       dispatch(createBank(payload));
-      navigate("/adminlayout/all-bank");
+      // navigate("/adminlayout/all-bank");
       toast.success("Bank created successfully");
+    } else {
+      toast.error("Please enter all fields");
     }
+    bankNameValidation = state.bankName.length;
+    console.log(bankNameValidation);
   };
 
   // Animation:
@@ -52,14 +57,15 @@ const CreateBank = () => {
   }, []);
 
   let isValidation = () => {
-    return (
-      state.bankName &&
-      state.addressLine &&
-      state.pincode &&
-      state.country &&
-      state.state &&
-      state.city
-    );
+    if (/^[A-Za-z\s]+$/.test(state.bankName) && /^[0-9]+$/.test(state.pincode))
+      return (
+        state.bankName &&
+        state.addressLine &&
+        state.pincode &&
+        state.country &&
+        state.state &&
+        state.city
+      );
   };
 
   return (
@@ -72,9 +78,9 @@ const CreateBank = () => {
               Bank Name
             </label>
             {!/^[A-Za-z\s]+$/.test(state.bankName) && state.bankName ? (
-              <div>
+              <div className="w-[80%]">
                 <input
-                  className="border-red-600 rounded-md py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6 w-[59rem] "
+                  className="border-red-600 rounded-md py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6 w-[100%] "
                   type="text"
                   pattern="[A-Za-z\s]+"
                   placeholder="Enter bankname"
@@ -88,18 +94,20 @@ const CreateBank = () => {
                 <p className="text-red-600 text-xs">Enter only string value</p>
               </div>
             ) : (
-              <input
-                className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-                type="text"
-                pattern="[A-Za-z\s]+"
-                placeholder="Enter bankname"
-                id="bankname"
-                name="bankname"
-                value={state.bankName}
-                onChange={e => {
-                  setState({ ...state, bankName: e.target.value });
-                }}
-              />
+              <div className="w-[80%]">
+                <input
+                  className="w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+                  type="text"
+                  pattern="[A-Za-z\s]{4,}"
+                  placeholder="Enter bankname"
+                  id="bankname"
+                  name="bankname"
+                  value={state.bankName}
+                  onChange={e => {
+                    setState({ ...state, bankName: e.target.value });
+                  }}
+                />
+              </div>
             )}
           </div>
           <div className="flex justify-between w-[99%] mb-4">
@@ -214,9 +222,9 @@ const CreateBank = () => {
               Pincode
             </label>
             {!/^[0-9]+$/.test(state.pincode) && state.pincode ? (
-              <div>
+              <div className="w-[80%]">
                 <input
-                  className="w-[59rem] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+                  className="w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
                   type="tel"
                   pattern="[0-9]{6}"
                   placeholder="Enter pincode"

@@ -6,7 +6,10 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import toast from "react-hot-toast";
 import { Country, State, City } from "country-state-city";
-import { getMdById, updateMd } from "../../../../redux/services/adminThunk/adminMdThunk/AdminMdThunk";
+import {
+  getMdById,
+  updateMd,
+} from "../../../../redux/services/adminThunk/adminMdThunk/AdminMdThunk";
 const UpdateMd = () => {
   let { employeeId } = useParams();
   let navigate = useNavigate();
@@ -35,15 +38,23 @@ const UpdateMd = () => {
 
   let handleSubmit = e => {
     e.preventDefault();
+    // if (isValidation()) {
     dispatch(updateMd(updatedState));
     navigate("/adminlayout/all-md");
     toast.success("updated successfully");
+    // }
   };
 
   // Animation:
   useEffect(() => {
     AOS.init();
   }, []);
+  let isValidation = () => {
+    return updatedState?.name && updatedState?.phoneNumber;
+  };
+
+  console.log(isValidation());
+
   return (
     <section className="h-[100%] w-[100%] relative" data-aos="zoom-in">
       <section className="rounded-md border-2 py-1.5 w-[97%] bg-white absolute top-4 left-3">
