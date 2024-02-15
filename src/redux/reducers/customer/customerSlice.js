@@ -7,6 +7,7 @@ import {
 import { data } from "autoprefixer";
 import {
   findAllBeneficiarys,
+  getStatement,
   savebeneficiary,
 } from "../../services/CustomerThunk/AccountsThunk";
 
@@ -95,6 +96,23 @@ export const customerSlice = createSlice({
         state.data = action.payload;
       })
       .addCase(amountTransfer.rejected, (state, action) => {
+        state.status = false;
+        state.error = action.error.message;
+        state.success = false;
+      });
+
+    // getStatement
+    builder
+      .addCase(getStatement.pending, state => {
+        state.status = true;
+        state.success = false;
+      })
+      .addCase(getStatement.fulfilled, (state, action) => {
+        state.status = false;
+        state.success = true;
+        state.data = action.payload;
+      })
+      .addCase(getStatement.rejected, (state, action) => {
         state.status = false;
         state.error = action.error.message;
         state.success = false;

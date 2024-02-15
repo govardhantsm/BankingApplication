@@ -40,3 +40,16 @@ export const amountTransfer = createAsyncThunk(
     }
   }
 );
+
+//getStatements
+
+export const getStatement = createAsyncThunk("getStatement", async acnumber => {
+  try {
+    const { data } = await AxiosInstanceProtected.get(
+      `/transactions/passBook?accountNumber=${acnumber}`
+    );
+    return data;
+  } catch (error) {
+    return error.message;
+  }
+});

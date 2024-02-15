@@ -1,43 +1,45 @@
-
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { getCustomerProfile } from "../../../redux/reducers/customer/customerSlice";
-import { amountTransfer, findAllBeneficiarys } from "../../../redux/services/CustomerThunk/AccountsThunk";
+import {
+  amountTransfer,
+  findAllBeneficiarys,
+} from "../../../redux/services/CustomerThunk/AccountsThunk";
 
 const AmountTransfer = () => {
-  let [account, SetAccount] = useState();
+  const data = JSON.parse(sessionStorage.getItem("myObject"));
+  let account = data.accounts;
   let dispatch = useDispatch();
   let [flag, SetFlag] = useState(false);
-  let [payload, SetPayload] = useState({
-    senderAccountNumber: "",
-    receiverAccountNumber: "",
-    purpose: "",
-    amount: 0,
-  });
+  let [senderAccountNumber, SetSenderAccountNumber] = useState(
+    account[0].accountNumber
+  );
+  let [receiverAccountNumber, SetReceiverAccountNumber] = useState();
+  let [amount, SetAmount] = useState(0);
+  let [beneficiariesList, setBeneficiariesList] = useState();
+  let [purpose, SetPurpose] = useState();
   let [name, SetName] = useState(null);
-  useEffect(() => {
-    dispatch(getCustomerProfile()).then(x => {
-      SetAccount(x.payload.data.accounts);
-    });
-  }, []);
+
   let [beneficiary, SetBeneficiary] = useState();
   useEffect(() => {
-    if (payload.senderAccountNumber)
-      dispatch(findAllBeneficiarys(payload.senderAccountNumber)).then(x => {
-        SetBeneficiary(x.payload.data);
-      });
-  }, [payload.senderAccountNumber]);
+    dispatch(findAllBeneficiarys(senderAccountNumber)).then(x => {
+      console.log(x.payload.data);
+      if (x?.payload) SetBeneficiary(x?.payload?.data);
+    });
+  }, []);
 
   return (
     <div className="bg-gray-50" data-aos="zoom-in">
-      <div className="middle font-semibold text-lg p-2 m-2 ">
+      <div key={`001`} className="middle font-semibold text-lg p-2 m-2 ">
         Amount Transfer
       </div>
-      <div className="bottom p-4 bg-white  shadow-md me-10 ms-10 ">
+      <section className="bottom p-4 bg-white  shadow-md me-10 ms-10 ">
         <p className="text-blue-500 pb-2 text-sm  ">
           Select the account from which you wish to transfer funds
         </p>
-        <div className="flex justify-between text-sm font-semibold text-gray-400 border-b-[1px] pb-3 ms-3 me-8">
+        <div
+          key={`003`}
+          className="flex justify-between text-sm font-semibold text-gray-400 border-b-[1px] pb-3 ms-3 me-8"
+        >
           <label htmlFor="account" className="basis-[25%]">
             Account Number
           </label>
@@ -48,7 +50,7 @@ const AmountTransfer = () => {
 
         {account?.map(ac => {
           return (
-            <div
+            <section
               key={ac.account}
               className="flex justify-between pt-2 items-center border-b-[1px] ms-2 me-8 text-gray-400 pb-2"
             >
@@ -57,13 +59,9 @@ const AmountTransfer = () => {
                   type="radio"
                   name="account"
                   className="accent-black"
-                  checked={ac.accountNumber==payload.senderAccountNumber}
-                  value={payload.senderAccountNumber}
+                  checked={ac.accountNumber == data?.accounts[0]?.accountNumber}
                   onChange={() => {
-                    SetPayload({
-                      ...payload,
-                      senderAccountNumber: ac.accountNumber,
-                    });
+                    SetSenderAccountNumber(ac.accountNumber);
                   }}
                 ></input>
                 <p className="ps-2 text-sm font-semibold text-gray-500">
@@ -83,24 +81,22 @@ const AmountTransfer = () => {
                     : ac.currentBalance}
                 </p>
               </div>
-            </div>
+            </section>
           );
         })}
         <div className="flex ms-2 pt-4 text-slate-400">
           <p className="text-xs pe-8">Selected Account Number</p>
           <p className="text-xs">
-            {payload.senderAccountNumber
-              ? payload.senderAccountNumber
-              : "Not Selected"}
+            {senderAccountNumber ? senderAccountNumber : "Not Selected"}
           </p>
         </div>
         <div className="flex ms-2 pt-4 items-center">
           <p className="text-xs pe-[130px] text-slate-400 ">Amount</p>
           <input
             type="text"
-            value={payload?.amount}
+            value={amount}
             onChange={e => {
-              SetPayload({ ...payload, amount: e.target.value });
+              SetAmount(e.target.value);
             }}
             className="border-[1px] border-gray-300 w-[20%] rounded p-1"
           ></input>
@@ -109,9 +105,9 @@ const AmountTransfer = () => {
           <p className="text-xs pe-[130px]">Purpose</p>
           <select
             className="border-[1px] p-1 border-gray-300 rounded w-[20%] text-xs text-slate-400"
-            value={payload?.purpose}
+            value={purpose}
             onChange={e => {
-              SetPayload({ ...payload, purpose: e.target.value });
+              SetPurpose(e.target.value);
             }}
           >
             <option>--select purpose--</option>
@@ -143,14 +139,10 @@ const AmountTransfer = () => {
                 <input
                   type="radio"
                   name="rc"
-                  
-                  value={payload.receiverAccountNumber}
+                  checked={receiverAccountNumber}
                   onChange={() => {
                     SetName(ben.beneficiaryName);
-                    SetPayload({
-                      ...payload,
-                      receiverAccountNumber: ben.reciverAccountNumber,
-                    });
+                    SetReceiverAccountNumber(ben.reciverAccountNumber);
                   }}
                 ></input>
                 <p className="ps-2 text-sm font-semibold text-slate-500">
@@ -200,36 +192,24 @@ const AmountTransfer = () => {
             className="border-[1px] bg-blue-600 text-white rounded p-1 px-2"
             onClick={e => {
               e.preventDefault();
-              if (flag){dispatch(amountTransfer(payload));};
+              if (flag) {
+                 dispatch(amountTransfer({senderAccountNumber,receiverAccountNumber,amount,purpose}));
+              }
             }}
           >
             Submit
           </button>
-          <button
-            onClick={e => {
-              e.preventDefault();
-              SetName(null);
-              SetPayload(d => {
-                let {
-                  senderAccountNumber,
-                  reciverAccountNumber,
-                  purpose,
-                  amount,
-                } = d;
-                return {
-                  senderAccountNumber,
-                  receiverAccountNumber: "",
-                  purpose: "",
-                  amount: "",
-                };
-              });
-            }}
-            className="border-[1px] bg-gray-400 rounded text-white p-1 px-2"
-          >
+          <button onClick={(e) => {
+            e.preventDefault();
+            SetName("");
+            SetAmount(0);
+            SetPurpose("");
+            SetReceiverAccountNumber("")
+          }} className="border-[1px] bg-gray-400 rounded text-white p-1 px-2">
             Cancel
           </button>
         </div>
-      </div>
+      </section>
     </div>
   );
 };

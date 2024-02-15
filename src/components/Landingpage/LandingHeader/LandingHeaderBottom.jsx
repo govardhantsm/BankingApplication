@@ -4,7 +4,7 @@ import { MdOutlineSearch } from "react-icons/md";
 import { FaMicrophone } from "react-icons/fa";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { FaUserShield } from "react-icons/fa6";
-import logo from "../../../images/QSP-bank-1.png";
+import logo from "../../../images/QSP-demo-logo-2-blue.png";
 const LandingHeaderBottom = () => {
   return (
     <section className="flex border-2 items-center h-[65%] w-[100%] bg-white ">
