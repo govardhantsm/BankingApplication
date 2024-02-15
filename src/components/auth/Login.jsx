@@ -13,6 +13,8 @@ import useGetProfile from "../../utils/useGetProfile";
 import { GetAdminProfile } from "../../redux/services/authThunk/GetAdminProfileThunk";
 import { getMdProfile } from "../../redux/services/managingDirectorThunk/mdBranchThunk/MdBranchThunk";
 import { getBmProfile } from "../../redux/reducers/bankmanager/bankManagerSlice";
+import { addData } from "../../redux/reducers/login/loginSlice";
+import { getCustomerProfile } from "../../redux/reducers/customer/customerSlice";
 
 const Login = ({ name }) => {
   let [isPswdVisible, setIspswdVisible] = useState(true);
@@ -36,21 +38,26 @@ const Login = ({ name }) => {
       localStorage.setItem("access_token", x.payload.token);
       if (x.payload.role == "ADMIN") {
         dispatch(GetAdminProfile()).then(y => {
-          navigate("/adminlayout", { state: y.payload.data });
+          sessionStorage.setItem("myObject", JSON.stringify(y.payload.data));
+          navigate("/adminlayout");
         });
 
         //window.location.reload();
       } else if (x.payload.role == "MANAGING_DIRECTOR") {
         dispatch(getMdProfile()).then(y => {
-          navigate("/mdlayout", { state: y.payload.data });
+          sessionStorage.setItem("myObject", JSON.stringify(y.payload.data));
+          navigate("/mdlayout");
         });
       } else if (x.payload.role == "BRANCH_MANAGER") {
         dispatch(getBmProfile()).then(y => {
-          navigate("/bankmanager", { state: y.payload.data });
+          sessionStorage.setItem("myObject", JSON.stringify(y.payload.data));
+          navigate("/bankmanager");
         });
       } else if (x.payload.role == "ACCOUNT_HOLDER") {
-        navigate("/customer", { state: "Customer" });
-        window.location.reload();
+        dispatch(getCustomerProfile()).then(y => {
+          sessionStorage.setItem("myObject", JSON.stringify(y.payload.data));
+          navigate("/customer");
+        });
       } else {
         setIncorrect(true);
       }

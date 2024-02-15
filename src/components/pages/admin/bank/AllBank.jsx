@@ -13,7 +13,7 @@ const AllBank = () => {
   let dispatch = useDispatch();
   let navigate = useNavigate();
   let state = useGetBank();
-  let data = state?.data?.data;
+  
 
   // Animation:
   useEffect(() => {
@@ -29,7 +29,6 @@ const AllBank = () => {
         <section className="w-full overflow-auto h-[95%] no-scrollbar">
           {Array.isArray(state?.data?.data) &&
             state?.data?.data?.map((user, index) => {
-              console.log(user);
               return (
                 <div
                   className="flex w-[100%] bg-white px-3 pt-3 mb-6"

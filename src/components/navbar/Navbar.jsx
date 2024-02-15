@@ -5,13 +5,13 @@ import { IoIosSearch } from "react-icons/io";
 import { BsBell } from "react-icons/bs";
 import { CiMail } from "react-icons/ci";
 import { PiDotsNineBold } from "react-icons/pi";
-import { useLocation } from "react-router-dom";
-const Navbar = () => {
-  let location = useLocation();
 
-  let role = location.state.role;
-  let branchName = location.state.branchName;
-  let bankName = location.state.bankName;
+const Navbar = () => {
+  const data = JSON.parse(sessionStorage.getItem("myObject"));
+
+  let role = data?.role;
+  let branchName = data?.branchName;
+  let bankName = data?.bankName;
   return (
     <section className="bg-white h-[100%] w-[100%] flex">
       <div className="w-[17%] bg-orange-400 h-[100%] flex items-center justify-center">

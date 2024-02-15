@@ -143,7 +143,11 @@ const CreateBank = () => {
               </option>
               {/* {Country.getAllCountries().map(li => console.log(li))} */}
               {Country.getAllCountries().map(city => {
-                return <option value={city.name}>{city.name}</option>;
+                return (
+                  <option key={city.name} value={city.name}>
+                    {city.name}
+                  </option>
+                );
               })}
               {/* {console.log(Country.getAllCountries())} */}
             </select>

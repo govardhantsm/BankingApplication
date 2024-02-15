@@ -54,6 +54,7 @@ export const createAccountWithFile = createAsyncThunk(
             },
           }
         );
+        window.location.reload();
         return data;
       } catch (error) {
         return error.message;

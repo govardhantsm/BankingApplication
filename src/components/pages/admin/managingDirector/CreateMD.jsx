@@ -51,10 +51,9 @@ const CreateMD = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(payload)
+   
     dispatch(createMd(payload));
     navigate("/adminlayout/all-md");
-    // 
     toast.success("MD Created successfully");
   };
 
@@ -208,7 +207,7 @@ const CreateMD = () => {
                 setState({ ...state, city: e.target.value });
               }}
             >
-              <option disabled value="" className="text-gray-400">
+              <option disabled className="text-gray-400">
                 -- Select The City --
               </option>
 

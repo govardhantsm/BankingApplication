@@ -10,10 +10,11 @@ import { logout } from "../../redux/reducers/auth/authSlice";
 
 import { LiaIdCardSolid } from "react-icons/lia";
 import { FaHandHoldingDollar } from "react-icons/fa6";
+import { useDispatch } from "react-redux";
 
 const BleftSideSection = () => {
-  let loc = useLocation();
-  
+  const data = JSON.parse(sessionStorage.getItem("myObject"));
+  let dispatch = useDispatch();
   let [account, setAccount] = useState(false);
   let [loan, setLoan] = useState(false);
   let [card, setCard] = useState(false);
@@ -29,9 +30,9 @@ const BleftSideSection = () => {
             alt=""
             className="h-[4rem] w-[4rem] rounded-full mt-5"
           />
-          <p className="mt-3">{loc.state.branchManagerName}</p>
+          <p className="mt-3">{data?.branchManagerName}</p>
           <p className="mt-1 text-[rgb(112,112,112)]">
-            {loc.state.role == "BRANCH_MANAGER"?"BRANCH MANAGER":""}
+            {data?.role == "BRANCH_MANAGER"?"BRANCH MANAGER":""}
           </p>
         </div>
       </section>

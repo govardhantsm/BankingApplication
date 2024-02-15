@@ -21,7 +21,7 @@ const BranchAllAccounts = () => {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = state?.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(state?.length / itemsPerPage);
-  // localStorage.setItem("path", JSON.stringify("/bankmanager/All Accounts"));
+   localStorage.setItem("path", "/bankmanager/All Accounts");
   let dispatch = useDispatch();
   let [search, setSearch] = useState("");
   let [loading, setLoading] = useState(false);
@@ -45,20 +45,20 @@ const BranchAllAccounts = () => {
       setCurrentPage(currentPage + 1);
     }
   }
-  const user = useGetBm();
+  const data = JSON.parse(sessionStorage.getItem("myObject"));
+
   // =========get all user Account=========//
   useEffect(() => {
-    let branchId = user?.data?.data?.branchId;
-
-    if (branchId) {
-      dispatch(getAllAccount(branchId))
+   
+    if (data.branchId) {
+      dispatch(getAllAccount(data?.branchId))
         .unwrap()
         .then(x => {
-          console.log(x.data);
+          
           setState(x.data);
         });
     }
-  }, [user?.data?.data?.branchId]);
+  }, [data?.branchId]);
   // Animation:
   useEffect(() => {
     AOS.init();
@@ -263,7 +263,6 @@ const BranchAllAccounts = () => {
                                 let deleteConfirm =
                                   window.confirm("Are you sure");
                                 if (deleteConfirm === true) {
-                                  console.log(data);
                                   dispatch(
                                     deleteBankAccount(data.accountNumber)
                                   );
