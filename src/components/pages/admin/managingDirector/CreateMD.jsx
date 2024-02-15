@@ -54,10 +54,13 @@ const CreateMD = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-
-    dispatch(createMd(payload));
-    navigate("/adminlayout/all-md");
-    toast.success("MD Created successfully");
+    if (isValidation()) {
+      dispatch(createMd(payload));
+      navigate("/adminlayout/all-md");
+      toast.success("MD Created successfully");
+    } else {
+      toast.error("Please enter all fields");
+    }
   };
 
   // Animation:
@@ -98,9 +101,9 @@ const CreateMD = () => {
               Name
             </label>
             {!/^[A-Za-z\s]+$/.test(state.name) && state.name ? (
-              <div>
+              <div className="w-[80%]">
                 <input
-                  className="w-[58.4rem] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+                  className="w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
                   type="text"
                   pattern="[A-Za-z\s]+"
                   placeholder="Enter Name"
@@ -149,9 +152,9 @@ const CreateMD = () => {
               Phone number
             </label>
             {!/^[0-9]+$/.test(state.phoneNumber) && state.phoneNumber ? (
-              <div>
+              <div className="w-[80%]">
                 <input
-                  className=" w-[58.4rem] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+                  className=" w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
                   type="tel"
                   pattern="[0-9]{10}"
                   placeholder="Enter Phonenumber"
@@ -285,9 +288,9 @@ const CreateMD = () => {
               Pincode
             </label>
             {!/^[0-9]+$/.test(state.pincode) && state.pincode ? (
-              <div>
+              <div className="w-[80%]">
                 <input
-                  className="w-[59rem] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+                  className="w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
                   type="tel"
                   pattern="[0-9]{6}"
                   placeholder="Enter pincode"
