@@ -17,7 +17,7 @@ export const createBank = createAsyncThunk("createBank", async payload => {
         },
       }
     );
-   window.location.reload()
+  //  window.location.reload()
     return data;
   });
 

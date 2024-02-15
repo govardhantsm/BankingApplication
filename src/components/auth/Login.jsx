@@ -14,6 +14,7 @@ import { GetAdminProfile } from "../../redux/services/authThunk/GetAdminProfileT
 import { getMdProfile } from "../../redux/services/managingDirectorThunk/mdBranchThunk/MdBranchThunk";
 import { getBmProfile } from "../../redux/reducers/bankmanager/bankManagerSlice";
 import { addData } from "../../redux/reducers/login/loginSlice";
+import { getCustomerProfile } from "../../redux/reducers/customer/customerSlice";
 
 const Login = ({ name }) => {
   let [isPswdVisible, setIspswdVisible] = useState(true);
@@ -53,9 +54,10 @@ const Login = ({ name }) => {
           navigate("/bankmanager");
         });
       } else if (x.payload.role == "ACCOUNT_HOLDER") {
-        sessionStorage.setItem("myObject", JSON.stringify(y.payload.data));
-        navigate("/customer");
-        window.location.reload();
+        dispatch(getCustomerProfile()).then(y => {
+          sessionStorage.setItem("myObject", JSON.stringify(y.payload.data));
+          navigate("/customer");
+        });
       } else {
         setIncorrect(true);
       }

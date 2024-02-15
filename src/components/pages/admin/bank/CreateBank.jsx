@@ -8,7 +8,7 @@ import axios from "axios";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import toast from "react-hot-toast";
-import { createBank } from './../../../../redux/services/adminThunk/adminBankThunk/AdminBankThunk';
+import { createBank } from "./../../../../redux/services/adminThunk/adminBankThunk/AdminBankThunk";
 
 const CreateBank = () => {
   let dispatch = useDispatch();
@@ -36,12 +36,14 @@ const CreateBank = () => {
       city: state.city,
     },
   };
-const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    console.log("clicked");
-    dispatch(createBank(payload));
-    navigate("/adminlayout/all-bank");
-    toast.success("Bank created successfully");
+    dispatch(createBank(payload)).then(x => {
+      if (x?.payload?.statusCode == 201) {
+        navigate("/adminlayout/all-bank");
+        toast.success("Bank created successfully");
+      }
+    });
   };
 
   // Animation:
@@ -111,7 +113,11 @@ const handleSubmit = async e => {
               </option>
               {/* {Country.getAllCountries().map(li => console.log(li))} */}
               {Country.getAllCountries().map(city => {
-                return <option value={city.name}>{city.name}</option>;
+                return (
+                  <option key={city.name} value={city.name}>
+                    {city.name}
+                  </option>
+                );
               })}
               {/* {console.log(Country.getAllCountries())} */}
             </select>

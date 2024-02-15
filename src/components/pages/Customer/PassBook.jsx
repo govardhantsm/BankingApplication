@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { getStatement } from "../../../redux/services/CustomerThunk/AccountsThunk";
 
 const PassBook = () => {
+  let dispatch = useDispatch();
+  let [statement, SetStatement] = useState();
+  const data = JSON.parse(sessionStorage.getItem("myObject"));
+
+  useEffect(() => {
+    dispatch(getStatement(data.accounts[0].accountNumber)).then(x => {
+      SetStatement(x.payload.data);
+    });
+  }, []);
+
   return (
     <section>
       <div className="m-4 mx-6 font-semibold">
@@ -43,46 +56,20 @@ const PassBook = () => {
             </tr>
           </thead>
           <tbody className="text-left">
-            <tr>
-              <td className="p-[10px] border">28/10/2023</td>
-              <td className="p-[10px]">
-                To Transfer <br />
-                UPI/DR/8989989898
-              </td>
-              <td className="p-[10px]">2000</td>
-              <td className="p-[10px]"></td>
-              <td className="p-[10px]">85000</td>
-            </tr>
-            <tr>
-              <td className="p-[10px]">28/10/2023</td>
-              <td className="p-[10px]">
-                To Transfer <br />
-                UPI/DR/8989989898
-              </td>
-              <td className="p-[10px]"></td>
-              <td className="p-[10px]">2000</td>
-              <td className="p-[10px]">85000</td>
-            </tr>
-            <tr>
-              <td className="p-[10px]">28/10/2023</td>
-              <td className="p-[10px]">
-                To Transfer <br />
-                UPI/DR/8989989898
-              </td>
-              <td className="p-[10px]">2000</td>
-              <td className="p-[10px]"></td>
-              <td className="p-[10px]">85000</td>
-            </tr>
-            <tr>
-              <td className="p-[10px]">28/10/2023</td>
-              <td className="p-[10px]">
-                To Transfer <br />
-                UPI/DR/8989989898
-              </td>
-              <td className="p-[10px]"></td>
-              <td className="p-[10px]">2000</td>
-              <td className="p-[10px]">85000</td>
-            </tr>
+            {statement?.map(st => {
+              return (
+                <tr className="bg-gray-50">
+                  <td className="p-[10px] border-r">{st.date?.slice(0,10)}</td>
+                  <td className="p-[10px] border-r  ">
+                    To Transfer <br />
+                    {st.narration}
+                  </td>
+                  <td className="p-[10px] border-r">{st.debit}</td>
+                  <td className="p-[10px] border-r">{st.credit}</td>
+                  <td className="p-[10px] ">{st.balance}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

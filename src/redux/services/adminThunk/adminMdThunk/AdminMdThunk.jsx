@@ -30,7 +30,7 @@ export const getMdById = createAsyncThunk("getMdById", async employeeId => {
     const { data } = await AxiosInstanceProtected.get(
       `/managingDirectors/getManagingDirectorById?managingDirectorId=${employeeId}`
     );
-   
+
     return data;
   } catch (error) {
     return error.message;
