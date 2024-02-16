@@ -122,7 +122,7 @@ const Login = ({ name }) => {
               placeholder="Password"
             />
             <span
-              className="absolute top-2 right-12 text-2xl text-[rgb(157,155,155)]"
+              className="absolute top-4 right-12 text-2xl text-[rgb(157,155,155)]"
               onClick={() => setIspswdVisible(!isPswdVisible)}
             >
               {state.password ? (

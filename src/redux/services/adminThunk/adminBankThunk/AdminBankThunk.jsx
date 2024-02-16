@@ -5,22 +5,31 @@ import toast from "react-hot-toast";
 
 //!create bank
 export const createBank = createAsyncThunk("createBank", async payload => {
-  const { data } = await axios.post(
-    "http://106.51.76.167:8082/api/version/v1/banks",
-    payload,
-    {
-      headers: {
-        Authorization: `Bearer ${
-          localStorage.getItem("access_token")
-            ? localStorage.getItem("access_token")
-            : null
-        }`,
-      },
+  try {
+    const { data } = await axios.post(
+      "http://106.51.76.167:8082/api/version/v1/banks",
+      payload,
+      {
+        headers: {
+          Authorization: `Bearer ${
+            localStorage.getItem("access_token")
+              ? localStorage.getItem("access_token")
+              : null
+          }`,
+        },
+      }
+    );
+    console.log(data);
+    if (data.statusCode == 201) {
+      toast.success("Bank Created Successfully");
     }
-  );
-  window.location.assign("/adminlayout/all-bank");
-  toast.success("Bank deleted successfully")
-  return data;
+    window.location.assign("/adminlayout/all-bank");
+
+    return data;
+  } catch (error) {
+    toast.error(error.message);
+    return error.message;
+  }
 });
 
 //! Get all banks
@@ -55,9 +64,11 @@ export const updateBank = createAsyncThunk("updateBank", async payload => {
       `/banks/bankId/${payload.bankId}`,
       payload
     );
-    window.location.reload();
+    toast.success("Bank updated successfully");
+    window.location.assign("/adminlayout/all-bank");
     return data;
   } catch (error) {
+    toast.error(error.message);
     return error.message;
   }
 });
