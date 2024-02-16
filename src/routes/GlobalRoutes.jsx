@@ -51,6 +51,8 @@ import BranchCurrentAccount from "../components/bankmanager/CurrentAccount";
 import ManageBeneficiary from "../components/pages/Customer/manageBeneficiary/ManageBeneficiary";
 import AddBeneficiary from "../components/pages/Customer/manageBeneficiary/AddBeneficiary";
 import PassBook from "../components/pages/Customer/PassBook";
+import UpdateBeneficiary from "../components/pages/Customer/manageBeneficiary/UpdateBeneficiary";
+import ViewBeneficiary from "../components/pages/Customer/manageBeneficiary/ViewBeneficiary";
 // import LoanAccounts from './../components/pages/md/Accounts/LoanAccount';
 
 const router = createBrowserRouter([
@@ -283,7 +285,7 @@ const router = createBrowserRouter([
 
               {
                 path: "/customer/Manage Beneficiary/Modify Beneficiary",
-                element: <ServiceSection />,
+                element: <UpdateBeneficiary />,
               },
               {
                 path: "/customer/Manage Beneficiary/Delete Beneficiary",
@@ -291,7 +293,7 @@ const router = createBrowserRouter([
               },
               {
                 path: "/customer/Manage Beneficiary/View Beneficiary",
-                element: <DocumentSection />,
+                element: <ViewBeneficiary />,
               },
             ],
           },

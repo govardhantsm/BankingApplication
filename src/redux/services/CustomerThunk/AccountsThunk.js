@@ -1,22 +1,27 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosInstanceProtected } from "../../../axios/AxiosInstance";
 
-
-export const savebeneficiary = createAsyncThunk("savebeneficiarys", async (payload) => {
-  try {
-    const { data } = await AxiosInstanceProtected.post(`/beneficiarys`,payload);
-    return data;
-  } catch (error) {
-    return error.message;
+export const savebeneficiary = createAsyncThunk(
+  "savebeneficiarys",
+  async payload => {
+    try {
+      const { data } = await AxiosInstanceProtected.post(
+        `/beneficiarys`,
+        payload
+      );
+      return data;
+    } catch (error) {
+      return error.message;
+    }
   }
-});
+);
 
 export const findAllBeneficiarys = createAsyncThunk(
   "findallbeneficiarys",
   async acnumber => {
     try {
       const { data } = await AxiosInstanceProtected.get(
-        `/beneficiarys/findAll?accountNumber=${acnumber}`,
+        `/beneficiarys/findAll?accountNumber=${acnumber}`
       );
       return data;
     } catch (error) {
@@ -32,7 +37,8 @@ export const amountTransfer = createAsyncThunk(
   async payload => {
     try {
       const { data } = await AxiosInstanceProtected.post(
-        `/transactions/fundTransfer`,payload
+        `/transactions/fundTransfer`,
+        payload
       );
       return data;
     } catch (error) {
@@ -53,3 +59,47 @@ export const getStatement = createAsyncThunk("getStatement", async acnumber => {
     return error.message;
   }
 });
+///transactions/getAccountStatement
+export const getAccountStatement = createAsyncThunk(
+  "getAccountStatement",
+  async payload => {
+    try {
+      const { data } = await AxiosInstanceProtected.get(
+        `/transactions/getAccountStatement?accountNumber=${payload.accountNumber}&startDate=${payload.startDate}&endDate=${payload.endDate}`
+      );
+      return data;
+    } catch (error) {
+      return error.message;
+    }
+  }
+);
+
+///transactions/getStatementExcel
+export const getStatementExcel = createAsyncThunk(
+  "getStatementExcel",
+  async payload => {
+    try {
+      const { data } = await AxiosInstanceProtected.get(
+        `/transactions/getAccountStatement/downloadExcel?accountNumber=${payload.accountNumber}&startDate=${payload.startDate}&endDate=${payload.endDate}`
+      );
+      return data;
+    } catch (error) {
+      return error.message;
+    }
+  }
+);
+
+///transactions/getStatementPdf
+export const getStatementPdf = createAsyncThunk(
+  "getStatementPdf ",
+  async payload => {
+    try {
+      const { data } = await AxiosInstanceProtected.get(
+        `/transactions/getAccountStatement/downloadPDF?accountNumber=${payload.accountNumber}&startDate=${payload.startDate}&endDate=${payload.endDate}`
+      );
+      return data;
+    } catch (error) {
+      return error.message;
+    }
+  }
+);
