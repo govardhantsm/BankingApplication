@@ -7,7 +7,10 @@ import {
 import { data } from "autoprefixer";
 import {
   findAllBeneficiarys,
+  getAccountStatement,
   getStatement,
+  getStatementExcel,
+  getStatementPdf,
   savebeneficiary,
 } from "../../services/CustomerThunk/AccountsThunk";
 
@@ -113,6 +116,55 @@ export const customerSlice = createSlice({
         state.data = action.payload;
       })
       .addCase(getStatement.rejected, (state, action) => {
+        state.status = false;
+        state.error = action.error.message;
+        state.success = false;
+      });
+
+    // getAccountStatement
+    builder
+      .addCase(getAccountStatement.pending, state => {
+        state.status = true;
+        state.success = false;
+      })
+      .addCase(getAccountStatement.fulfilled, (state, action) => {
+        state.status = false;
+        state.success = true;
+        state.data = action.payload;
+      })
+      .addCase(getAccountStatement.rejected, (state, action) => {
+        state.status = false;
+        state.error = action.error.message;
+        state.success = false;
+      });
+    // getStatementExcel
+    builder
+      .addCase(getStatementExcel.pending, state => {
+        state.status = true;
+        state.success = false;
+      })
+      .addCase(getStatementExcel.fulfilled, (state, action) => {
+        state.status = false;
+        state.success = true;
+        state.data = action.payload;
+      })
+      .addCase(getStatementExcel.rejected, (state, action) => {
+        state.status = false;
+        state.error = action.error.message;
+        state.success = false;
+      });
+    // getStatementPdf
+    builder
+      .addCase(getStatementPdf.pending, state => {
+        state.status = true;
+        state.success = false;
+      })
+      .addCase(getStatementPdf.fulfilled, (state, action) => {
+        state.status = false;
+        state.success = true;
+        state.data = action.payload;
+      })
+      .addCase(getStatementPdf.rejected, (state, action) => {
         state.status = false;
         state.error = action.error.message;
         state.success = false;
