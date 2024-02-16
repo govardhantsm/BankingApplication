@@ -15,9 +15,12 @@ import { getMdProfile } from "../../redux/services/managingDirectorThunk/mdBranc
 import { getBmProfile } from "../../redux/reducers/bankmanager/bankManagerSlice";
 import { addData } from "../../redux/reducers/login/loginSlice";
 import { getCustomerProfile } from "../../redux/reducers/customer/customerSlice";
+import toast from "react-hot-toast";
 
 const Login = ({ name }) => {
   let [isPswdVisible, setIspswdVisible] = useState(true);
+  let [emailVerify, setEmailVerify] = useState();
+  let [pswdVerify, setPswdVerify] = useState();
   const navigate = useNavigate();
   let dispatch = useDispatch();
   let [incorrect, setIncorrect] = useState(false);
@@ -31,37 +34,47 @@ const Login = ({ name }) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
 
+  let isValidation = () => {
+    return email !== "" && password !== "" ? true : false;
+  };
   let handleSubmit = e => {
     e.preventDefault();
-    // let data =
-    dispatch(userLogin(state)).then(x => {
-      localStorage.setItem("access_token", x.payload.token);
-      if (x.payload.role == "ADMIN") {
-        dispatch(GetAdminProfile()).then(y => {
-          sessionStorage.setItem("myObject", JSON.stringify(y.payload.data));
-          navigate("/adminlayout");
-        });
+    if (email == "") {
+      setEmailVerify("Email is required");
+    }
+    if (password === "") {
+      setPswdVerify("Password is required");
+    }
+    if (isValidation()) {
+      dispatch(userLogin(state)).then(x => {
+        localStorage.setItem("access_token", x.payload.token);
+        if (x.payload.role == "ADMIN") {
+          dispatch(GetAdminProfile()).then(y => {
+            sessionStorage.setItem("myObject", JSON.stringify(y.payload.data));
+            navigate("/adminlayout");
+          });
 
-        //window.location.reload();
-      } else if (x.payload.role == "MANAGING_DIRECTOR") {
-        dispatch(getMdProfile()).then(y => {
-          sessionStorage.setItem("myObject", JSON.stringify(y.payload.data));
-          navigate("/mdlayout");
-        });
-      } else if (x.payload.role == "BRANCH_MANAGER") {
-        dispatch(getBmProfile()).then(y => {
-          sessionStorage.setItem("myObject", JSON.stringify(y.payload.data));
-          navigate("/bankmanager");
-        });
-      } else if (x.payload.role == "ACCOUNT_HOLDER") {
-        dispatch(getCustomerProfile()).then(y => {
-          sessionStorage.setItem("myObject", JSON.stringify(y.payload.data));
-          navigate("/customer");
-        });
-      } else {
-        setIncorrect(true);
-      }
-    });
+          //window.location.reload();
+        } else if (x.payload.role == "MANAGING_DIRECTOR") {
+          dispatch(getMdProfile()).then(y => {
+            sessionStorage.setItem("myObject", JSON.stringify(y.payload.data));
+            navigate("/mdlayout");
+          });
+        } else if (x.payload.role == "BRANCH_MANAGER") {
+          dispatch(getBmProfile()).then(y => {
+            sessionStorage.setItem("myObject", JSON.stringify(y.payload.data));
+            navigate("/bankmanager");
+          });
+        } else if (x.payload.role == "ACCOUNT_HOLDER") {
+          dispatch(getCustomerProfile()).then(y => {
+            sessionStorage.setItem("myObject", JSON.stringify(y.payload.data));
+            navigate("/customer");
+          });
+        } else {
+          setIncorrect(true);
+        }
+      });
+    }
   };
   // Animation:
   useEffect(() => {
@@ -84,7 +97,7 @@ const Login = ({ name }) => {
 
             <input
               type="email"
-              className="form-control p-2 border-b-2 w-[88%] mx-6 mb-4"
+              className="form-control p-2 border-b-2 w-[88%] mx-6 mb-2"
               id="email"
               name="email"
               value={email}
@@ -95,11 +108,13 @@ const Login = ({ name }) => {
               <HiOutlineMail />
             </span>
           </div>
+          <p className="text-red-600 text-xm mx-7">{emailVerify}</p>
+
           <div className="form-group relative">
             {/* <label htmlFor="password">password</label> */}
             <input
               type={isPswdVisible ? "password" : "text"}
-              className="form-control p-2 border-b-2 w-[88%] mx-6"
+              className="form-control p-2 border-b-2 w-[88%] mx-6 m-2"
               id="password"
               name="password"
               value={password}
@@ -121,6 +136,7 @@ const Login = ({ name }) => {
               )}
             </span>
           </div>
+          <p className="text-red-600 text-xm mx-7">{pswdVerify}</p>
           {/* <div className="form-group pt-3" value={userType} onChange={handleChange}>
           <label htmlFor=" userType" className="ps-6">Choose UserType</label>
           <div>

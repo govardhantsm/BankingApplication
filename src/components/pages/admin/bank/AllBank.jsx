@@ -3,17 +3,16 @@ import { FaEdit } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { RxCross2 } from "react-icons/rx";
 import Spinner from "../../spinner/Spinner";
-import {NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import useGetBank from "../../../../utils/useGetAllBanks";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { deleteBank } from './../../../../redux/services/adminThunk/adminBankThunk/AdminBankThunk';
+import { deleteBank } from "./../../../../redux/services/adminThunk/adminBankThunk/AdminBankThunk";
 
 const AllBank = () => {
   let dispatch = useDispatch();
   let navigate = useNavigate();
   let state = useGetBank();
-  
 
   // Animation:
   useEffect(() => {
@@ -36,11 +35,11 @@ const AllBank = () => {
                 >
                   <div className="w-1/3 flex flex-col">
                     <div className="p-3 pl-4 font-medium">
-                    Bank Name : <strong>{user.bankName}</strong> 
+                      Bank Name : <strong>{user.bankName}</strong>
                     </div>
 
                     <div className="p-3 pl-4 font-medium">
-                      Bank Location : <strong>{user?.address?.city}</strong> 
+                      Bank Location : <strong>{user?.address?.city}</strong>
                     </div>
                     <div className="p-3 pl-4 font-medium">
                       MD Name : <strong>{user.managingDirectorName}</strong>
@@ -75,7 +74,7 @@ const AllBank = () => {
                             let deleteConfirm = window.confirm("Are you sure");
                             if (deleteConfirm === true) {
                               dispatch(deleteBank(user?.bankId));
-                              navigate("/adminlayout/all-bank");
+                              // navigate("/adminlayout/all-bank");
                             }
                           }}
                         />
