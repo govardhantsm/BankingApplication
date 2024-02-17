@@ -85,8 +85,9 @@ const AllBank = () => {
                         Main Branch Address :
                       </div>
                       <div className="ms-2  font-semibold text-gray w-[98%] h-[7vh] pt-2 ps-1">
-                        {user?.address?.addressLine} , {user?.address?.city} ,
-                        {user?.address?.country} , {user?.address?.pincode}
+                        {user?.address?.addressLine} ,{user?.address?.state},{" "}
+                        {user?.address?.city} ,{user?.address?.country} ,{" "}
+                        {user?.address?.pincode}
                       </div>
                     </div>
                   </div>

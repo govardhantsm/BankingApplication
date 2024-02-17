@@ -57,7 +57,7 @@ const CreateMD = () => {
     if (isValidation()) {
       dispatch(createMd(payload));
       navigate("/adminlayout/all-md");
-      toast.success("MD Created successfully");
+      // toast.success("MD Created successfully");
     } else {
       toast.error("Please enter all fields");
     }
@@ -114,7 +114,7 @@ const CreateMD = () => {
                     setState({ ...state, name: e.target.value });
                   }}
                 />
-                <p className="text-red-600 text-xs">Enter only string value</p>
+                <p className="text-red-600 text-xm">Enter only string value</p>
               </div>
             ) : (
               <input
@@ -165,7 +165,7 @@ const CreateMD = () => {
                     setState({ ...state, phoneNumber: e.target.value });
                   }}
                 />
-                <p className="text-red-600 text-xs">Enter only numeric value</p>
+                <p className="text-red-600 text-xm">Enter only numeric value</p>
               </div>
             ) : (
               <input
@@ -301,7 +301,7 @@ const CreateMD = () => {
                     setState({ ...state, pincode: e.target.value });
                   }}
                 />
-                <p className="text-red-600 text-xs">Enter only numeric value</p>
+                <p className="text-red-600 text-xm">Enter only numeric value</p>
               </div>
             ) : (
               <input

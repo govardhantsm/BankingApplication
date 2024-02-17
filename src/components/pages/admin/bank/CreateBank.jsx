@@ -36,19 +36,13 @@ const CreateBank = () => {
       city: state.city,
     },
   };
-  let bankNameValidation;
   const handleSubmit = async e => {
     e.preventDefault();
     if (isValidation()) {
-      console.log("clicked");
       dispatch(createBank(payload));
-      // navigate("/adminlayout/all-bank");
-      toast.success("Bank created successfully");
     } else {
       toast.error("Please enter all fields");
     }
-    bankNameValidation = state.bankName.length;
-    console.log(bankNameValidation);
   };
 
   // Animation:
@@ -91,7 +85,7 @@ const CreateBank = () => {
                     setState({ ...state, bankName: e.target.value });
                   }}
                 />
-                <p className="text-red-600 text-xs">Enter only string value</p>
+                <p className="text-red-600 text-xm">Enter only string value</p>
               </div>
             ) : (
               <div className="w-[80%]">
@@ -235,7 +229,7 @@ const CreateBank = () => {
                     setState({ ...state, pincode: e.target.value });
                   }}
                 />
-                <p className="text-red-600 text-xs">Enter only numeric value</p>
+                <p className="text-red-600 text-xm">Enter only numeric value</p>
               </div>
             ) : (
               <input

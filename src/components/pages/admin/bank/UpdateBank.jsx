@@ -41,8 +41,8 @@ const UpdateBank = () => {
     e.preventDefault();
     if (isValidation()) {
       dispatch(updateBank(updatedState));
-      navigate("/adminlayout/all-bank");
-      toast.success("updated successfully");
+      // navigate("/adminlayout/all-bank");
+      
     } else {
       toast.error("Please enter all fields");
     }
@@ -236,7 +236,7 @@ const UpdateBank = () => {
                     value={updatedState && updatedState.address.pincode}
                     onChange={handleChange}
                   />
-                  <p className="text-red-600 text-xs">
+                  <p className="text-red-600 text-xm">
                     Enter only numeric value
                   </p>
                 </div>
