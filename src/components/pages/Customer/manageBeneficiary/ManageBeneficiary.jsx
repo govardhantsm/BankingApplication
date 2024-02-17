@@ -19,12 +19,10 @@ const ManageBeneficiary = () => {
           <NavLink to="/customer/Manage Beneficiary/add Beneficiary ">
             Add Beneficiary
           </NavLink>
-          <NavLink to="/customer/Manage Beneficiary/Modify Beneficiary">
+          <NavLink to="#">
             Modify Beneficiary
           </NavLink>
-          <NavLink to="/customer/Manage Beneficiary/Delete Beneficiary">
-            Delete Beneficiary
-          </NavLink>
+         
           <NavLink to="/customer/Manage Beneficiary/View Beneficiary">
             View Beneficiary
           </NavLink>

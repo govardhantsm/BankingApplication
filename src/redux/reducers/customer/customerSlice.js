@@ -6,7 +6,9 @@ import {
 } from "../../../axios/AxiosInstance";
 import { data } from "autoprefixer";
 import {
+  SaveBeneficiary,
   findAllBeneficiarys,
+  findBeneficiary,
   getAccountStatement,
   getStatement,
   getStatementExcel,
@@ -165,6 +167,57 @@ export const customerSlice = createSlice({
         state.data = action.payload;
       })
       .addCase(getStatementPdf.rejected, (state, action) => {
+        state.status = false;
+        state.error = action.error.message;
+        state.success = false;
+      });
+
+    // findBeneficiary
+    builder
+      .addCase(findBeneficiary.pending, state => {
+        state.status = true;
+        state.success = false;
+      })
+      .addCase(findBeneficiary.fulfilled, (state, action) => {
+        state.status = false;
+        state.success = true;
+        state.data = action.payload;
+      })
+      .addCase(findBeneficiary.rejected, (state, action) => {
+        state.status = false;
+        state.error = action.error.message;
+        state.success = false;
+      });
+
+    //SaveBeneficiary
+    builder
+      .addCase(SaveBeneficiary.pending, state => {
+        state.status = true;
+        state.success = false;
+      })
+      .addCase(SaveBeneficiary.fulfilled, (state, action) => {
+        state.status = false;
+        state.success = true;
+        state.data = action.payload;
+      })
+      .addCase(SaveBeneficiary.rejected, (state, action) => {
+        state.status = false;
+        state.error = action.error.message;
+        state.success = false;
+      });
+
+    //DeleteBeneficiary
+    builder
+      .addCase(DeleteBeneficiary.pending, state => {
+        state.status = true;
+        state.success = false;
+      })
+      .addCase(DeleteBeneficiary.fulfilled, (state, action) => {
+        state.status = false;
+        state.success = true;
+        state.data = action.payload;
+      })
+      .addCase(DeleteBeneficiary.rejected, (state, action) => {
         state.status = false;
         state.error = action.error.message;
         state.success = false;

@@ -103,3 +103,50 @@ export const getStatementPdf = createAsyncThunk(
     }
   }
 );
+
+//beneficiarys/findBeneficiary?beneficiaryId
+export const findBeneficiary = createAsyncThunk(
+  "findBeneficiary ",
+  async payload => {
+    try {
+      const { data } = await AxiosInstanceProtected.get(
+        `/beneficiarys/findBeneficiary?beneficiaryId=${payload}`
+      );
+      return data;
+    } catch (error) {
+      return error.message;
+    }
+  }
+);
+
+//Savebeneficiarys
+export const SaveBeneficiary = createAsyncThunk(
+  "SaveBeneficiary ",
+  async payload => {
+    try {
+      const { data } = await AxiosInstanceProtected.post(
+        `/beneficiarys`,
+        payload
+      );
+      return data;
+    } catch (error) {
+      return error.message;
+    }
+  }
+);
+
+//DeleteBeneficiary
+export const DeleteBeneficiary = createAsyncThunk(
+  "DeleteBeneficiary",
+  async payload => {
+    try {
+      const { data } = await AxiosInstanceProtected.delete(
+        `/beneficiarys?beneficiaryId=${payload}`,
+        payload
+      );
+      return data;
+    } catch (error) {
+      return error.message;
+    }
+  }
+);
