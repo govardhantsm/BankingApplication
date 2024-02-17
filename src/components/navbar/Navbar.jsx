@@ -72,7 +72,7 @@ const Navbar = () => {
             {toggle ? (
               <div
                 class="shadow-lg w-[auto] rounded-lg p-6 mx-auto my-6 max-w-md  absolute top-[40px] right-[0] z-20 bg-[#89abfa] text-[#fff]"
-                data-aos="fade-left"
+                data-aos="fade-down"
               >
                 <div class="flex items-center mb-4 text-[#fff]">
                   <div class="mr-4">
