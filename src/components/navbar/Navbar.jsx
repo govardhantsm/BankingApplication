@@ -6,6 +6,15 @@ import { BsBell } from "react-icons/bs";
 import { CiMail } from "react-icons/ci";
 import { PiDotsNineBold } from "react-icons/pi";
 import { FaUserTie } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
+import { RiDashboard3Fill } from "react-icons/ri";
+import { GrUserManager } from "react-icons/gr";
+import { MdApproval } from "react-icons/md";
+import { MdAccountCircle } from "react-icons/md";
+import { FaHandHoldingDollar } from "react-icons/fa6";
+import { LiaIdCardSolid } from "react-icons/lia";
+import { CiBank } from "react-icons/ci";
+import AOS from "aos";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { FaUserCheck } from "react-icons/fa6";
 import { MdOutlineMail } from "react-icons/md";
@@ -54,7 +63,7 @@ const Navbar = () => {
             </span>
           </div> */}
         </section>
-        <section className="w-[14%] flex text-2xl justify-between items-center">
+        <section className="mr-6 w-[10%] flex text-2xl justify-between items-center">
           <BsBell className="text-xl" />
           {/* <CiMail /> */}
 
@@ -65,6 +74,7 @@ const Navbar = () => {
             alt=""
             className="h-[1.8rem] w-[1.8rem] rounded-full"
           /> */}
+          {/* <FaUserTie /> */}
           <div>
             <span onClick={() => setToggle(!toggle)}>
               <FaUserTie />
@@ -131,7 +141,48 @@ const Navbar = () => {
               ""
             )}
           </div>
-          <PiDotsNineBold className="me-2" />
+
+          <button className="group relative">
+            <PiDotsNineBold className="me-2" />
+            <div className="invisible bg-white border-orange-500 group-hover:visible h-[6rem] w-[10rem] border-[0.02rem] absolute z-10 right-0 mt-0 rounded ">
+              <div  className="flex flex-wrap gap-[.3rem] items-center ml-4 mt-3 justify-center h-[60%] w-[80%]">
+                <NavLink to="/mdlayout">
+                  <RiDashboard3Fill className="me-3 mt-[0.15rem]" />
+                </NavLink>
+                <NavLink
+                  to="/mdlayout/all-branches"
+                  className={({ isActive }) => (isActive ? "active" : "")}
+                >
+                  <CiBank className="me-3 text-[2rem]" />
+                </NavLink>
+                <NavLink
+                  to="/mdlayout/create-branchManager"
+                  className={({ isActive }) => (isActive ? "active" : "")}
+                >
+                  <MdApproval className="me-3" />
+                </NavLink>
+                <NavLink
+                  to="/mdlayout/all-accounts"
+                  className={({ isActive }) => (isActive ? "active" : "")}
+                >
+                  <MdAccountCircle className="me-3" />
+                </NavLink>
+
+                <NavLink
+                  to="/mdlayout/create-branchManager"
+                  className={({ isActive }) => (isActive ? "active" : "")}
+                >
+                  <FaHandHoldingDollar className="ms-3" />
+                </NavLink>
+                <NavLink
+                  to="/mdlayout/all-branchManager"
+                  className={({ isActive }) => (isActive ? "active" : "")}
+                >
+                  <LiaIdCardSolid className="ms-3 mt-[0.15rem] text-[2rem]" />
+                </NavLink>
+              </div>
+            </div>
+          </button>
         </section>
       </div>
     </section>

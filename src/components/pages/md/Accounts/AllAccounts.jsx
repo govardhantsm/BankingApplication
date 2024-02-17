@@ -12,10 +12,10 @@ import useGetMd from "../../../../utils/useGetMd";
 import DeleteAccountThunk, {
   getAllAccountsMd,
 } from "../../../../redux/services/managingDirectorThunk/mdAccountThunk/MdAccountThunk";
+import { MdOutlineCreditCard } from "react-icons/md";
 
 const AllAccounts = () => {
   const user = useGetMd();
-  console.log(user?.data?.data?.managingDirectorId);
 
   let bankId = user?.data?.data?.bankId;
 
@@ -81,7 +81,7 @@ const AllAccounts = () => {
         <section className=" bg-white w-[100%] overflow-auto h-[95%] no-scrollbar">
           <header className="mx-10 my-2 w-[93%] flex justify-between items-center ">
             <div>
-              Show
+              Show{" "}
               <select
                 className="px-2 rounded-[0.25rem] border-2"
                 onChange={e => {
@@ -92,7 +92,7 @@ const AllAccounts = () => {
                 <option value="4">4</option>
                 <option value="6">6</option>
                 <option value="8">8</option>
-              </select>
+              </select>{" "}
               entries
             </div>
             <div>
@@ -110,24 +110,25 @@ const AllAccounts = () => {
                         ?.toLowerCase()
                         .includes(e.target.value.toLowerCase())
                   );
-                  for (let i = 0; i < data.length; i++) {
-                    for (let j = 0; j < currentItems.length; j++) {
-                      if (
-                        data[i]?.email?.toLowerCase() ==
-                          currentItems[j]?.email?.toLowerCase() ||
-                        data[i]?.name?.toLowerCase() ==
-                          currentItems[j]?.name?.toLowerCase()
-                      ) {
-                        data = data.toSpliced(i, 1);
-                      }
-                    }
-                  }
+                  console.log(data);
+                  // for (let i = 0; i < data.length; i++) {
+                  //   for (let j = 0; j < currentItems.length; j++) {
+                  //     if (
+                  //       data[i]?.email?.toLowerCase() ==
+                  //         currentItems[j]?.email?.toLowerCase() ||
+                  //       data[i]?.name?.toLowerCase() ==
+                  //         currentItems[j]?.name?.toLowerCase()
+                  //     ) {
+                  //       data = data.toSpliced(i, 1);
+                  //     }
+                  //   }
+                  // }
                   e.target.value && true ? setSearch(data) : setSearch(null);
                 }}
               />
             </div>
           </header>
-          <div className="mx-12 w-[91%]">
+          <div className="mx-9 w-[95%]">
             <table style={{ tableLayout: "fixed", width: "100%" }}>
               <thead>
                 <tr className="border-b-2">
@@ -147,16 +148,9 @@ const AllAccounts = () => {
                       </span>
                     </div>
                   </th>
+
                   <th>
-                    <div className="w-20% flex justify-between align-center px-2">
-                      <span>Phone Number</span>
-                      <span>
-                        <TbArrowsDownUp />
-                      </span>
-                    </div>
-                  </th>
-                  <th>
-                    <div className="w-20% flex justify-between align-center px-2">
+                    <div className="w-15% flex justify-between align-center px-2">
                       <span>Account Type</span>
                       <span>
                         <TbArrowsDownUp />
@@ -164,7 +158,7 @@ const AllAccounts = () => {
                     </div>
                   </th>
                   <th>
-                    <div className="w-20% flex justify-between align-center px-2">
+                    <div className="w-20% flex justify-between align-center px-1">
                       <span>Account Number</span>
                       <span>
                         <TbArrowsDownUp />
@@ -172,7 +166,7 @@ const AllAccounts = () => {
                     </div>
                   </th>
                   <th>
-                    <div className="w-20% flex justify-between align-center px-2">
+                    <div className="w-15% flex justify-between align-center px-2">
                       <span>Status</span>
                       <span>
                         <TbArrowsDownUp />
@@ -180,7 +174,12 @@ const AllAccounts = () => {
                     </div>
                   </th>
                   <th>
-                    <div className="w-20% flex justify-between align-center px-2">
+                    <div className="w-5% flex justify-between align-center px-2">
+                      <span>Debit Card</span>
+                    </div>
+                  </th>
+                  <th>
+                    <div className="w-18% flex justify-between align-center px-2">
                       <span> Actions</span>
                       <span>
                         <TbArrowsDownUp />
@@ -195,11 +194,12 @@ const AllAccounts = () => {
                     <tr className="text-xs border-b-2">
                       <td className="px-2 py-3 ">{data.name}</td>
                       <td className="px-2">{data.emailID}</td>
-                      <td className="px-2">{data.phoneNumber}</td>
+
                       <td className="px-2">{data.accountType}</td>
                       <td className="px-2">{data?.accountNumber}</td>
                       <td className="px-2">{data.status}</td>
-                      <td className="px-2">{data?.accountNumber}</td>
+
+                      <td className="px-2">{""}</td>
                       <td className="px-2">
                         <div className="flex">
                           <span className="px-2  text-red-500">
@@ -230,15 +230,31 @@ const AllAccounts = () => {
                   );
                 })}
 
-                {currentItems?.map(data => {
+                {search==null&&currentItems?.map(data => {
                   return (
                     <tr className="text-xs border-b-2">
                       <td className="px-2 py-3 ">{data.name}</td>
                       <td className="px-2">{data.emailID}</td>
-                      <td className="px-2">{data.phoneNumber}</td>
+
                       <td className="px-2">{data.accountType}</td>
                       <td className="px-2">{data?.accountNumber}</td>
                       <td className="px-2">{data.status}</td>
+                      <td className="px-2">
+                        {
+                          <button className="group relative">
+                            <MdOutlineCreditCard className="text-[2rem] pl-2" />
+                            <div className="invisible bg-white border-orange-500 group-hover:visible h-[5rem] w-[10rem] border-[0.02rem] absolute z-10 -right-40 -mt-10 rounded pt-4 ">
+                              <p className="text-left pl-2">
+                                Name : {data.name}
+                              </p>{" "}
+                              <p className="text-left pl-2">Date : {} </p>
+                              <p className="text-left pl-2">
+                                Number:{"XXXX XXXX XXX"}
+                              </p>
+                            </div>
+                          </button>
+                        }
+                      </td>
                       <td className="px-2">
                         <div className="flex">
                           <span className="px-2  text-red-500">
