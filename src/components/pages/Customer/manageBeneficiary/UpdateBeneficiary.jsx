@@ -1,20 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { savebeneficiary } from "../../../../redux/services/CustomerThunk/AccountsThunk";
+import {
+  SaveBeneficiary,
+  findBeneficiary,
+  savebeneficiary,
+} from "../../../../redux/services/CustomerThunk/AccountsThunk";
 import { getCustomerProfile } from "../../../../redux/reducers/customer/customerSlice";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import {  useNavigate, useParams } from "react-router-dom";
 
 const UpdateBeneficiary = () => {
-  let dispatch = useDispatch();
+  let { beneficiaryId } = useParams();
+    let dispatch = useDispatch();
+    let navigate=useNavigate();
+
   let [payload, SetPayload] = useState({
     senderAccountNumber: "",
     reciverAccountNumber: "",
     beneficiaryTransferLimit: "",
     beneficiaryName: "",
     ifsccode: "",
-    cnumber: "",
   });
+
+  useEffect(() => {
+    dispatch(findBeneficiary(beneficiaryId)).then(x => {
+      console.log(x.payload.data);
+      SetPayload({ ...x.payload.data });
+    });
+  }, []);
   let [set, SetSet] = useState(false);
   let handleChange = e => {
     let { name, value } = e.target;
@@ -23,15 +37,9 @@ const UpdateBeneficiary = () => {
 
   let handleSubmit = e => {
     e.preventDefault();
-    dispatch(getCustomerProfile()).then(x => {
-      SetPayload({
-        ...payload,
-        senderAccountNumber: x.payload.data.accounts[0].accountNumber,
-      });
-    });
 
-    if (payload.reciverAccountNumber == payload.cnumber)
-      dispatch(savebeneficiary(payload));
+      dispatch(SaveBeneficiary(payload));
+      navigate("/customer/Manage Beneficiary/View Beneficiary");
   };
   // Animation:
   useEffect(() => {
@@ -71,25 +79,7 @@ const UpdateBeneficiary = () => {
               onChange={handleChange}
             />
           </div>
-          <div>
-            <label className="inline-block w-[220px] text-slate-400" htmlFor="">
-              Confirm Account Number
-            </label>
-            <input
-              className="w-[320px] p-[3px] rounded border"
-              type="password"
-              name="cnumber"
-              value={payload.cnumber}
-              onChange={e => {
-                handleChange(e);
 
-                e.target.value !== payload.reciverAccountNumber
-                  ? SetSet(true)
-                  : SetSet(false);
-                e.target.value == "" ? SetSet(false) : "";
-              }}
-            />
-          </div>
           <div>
             <label className="inline-block w-[220px] text-slate-400" htmlFor="">
               IFSC Code
@@ -102,43 +92,7 @@ const UpdateBeneficiary = () => {
               onChange={handleChange}
             />
           </div>
-          {/* <div>
-            <label className="inline-block w-[220px] text-slate-400" htmlFor="">
-              Address Line 1
-            </label>
-            <input
-              className="w-[320px] p-[3px] rounded border"
-              type="text"
-              name=""
-              id=""
-            />
-            <span className="ml-[15px] text-slate-400">
-              (Door No, Street Name)
-            </span>
-          </div>
-          <div>
-            <label className="inline-block w-[220px] text-slate-400" htmlFor="">
-              Address Line 2
-            </label>
-            <input
-              className="w-[320px] p-[3px] rounded border"
-              type="text"
-              name=""
-              id=""
-            />
-            <span className="ml-[15px] text-slate-400">(Locality, City)</span>
-          </div>
-          <div>
-            <label className="inline-block w-[220px] text-slate-400" htmlFor="">
-              Pincode
-            </label>
-            <input
-              className="w-[320px] p-[3px] rounded border"
-              type="text"
-              name=""
-              id=""
-            />
-          </div> */}
+         
           <div>
             <label className="inline-block w-[220px] text-slate-400" htmlFor="">
               Bank Transfer Limit(INR)
@@ -164,7 +118,7 @@ const UpdateBeneficiary = () => {
             <button className="text-white bg-blue-800 p-[6px] rounded mr-2">
               Update
             </button>
-            <button
+            {/* <button
               className="text-white bg-cyan-400 p-[6px] rounded "
               onClick={() => {
                 SetPayload({
@@ -178,7 +132,7 @@ const UpdateBeneficiary = () => {
               }}
             >
               Reset
-            </button>
+            </button> */}
           </div>
         </form>
       </div>

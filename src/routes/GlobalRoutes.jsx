@@ -53,6 +53,7 @@ import AddBeneficiary from "../components/pages/Customer/manageBeneficiary/AddBe
 import PassBook from "../components/pages/Customer/PassBook";
 import UpdateBeneficiary from "../components/pages/Customer/manageBeneficiary/UpdateBeneficiary";
 import ViewBeneficiary from "../components/pages/Customer/manageBeneficiary/ViewBeneficiary";
+import AccountDetails from "../components/pages/Customer/AccountDetails";
 // import LoanAccounts from './../components/pages/md/Accounts/LoanAccount';
 
 const router = createBrowserRouter([
@@ -284,7 +285,7 @@ const router = createBrowserRouter([
               },
 
               {
-                path: "/customer/Manage Beneficiary/Modify Beneficiary",
+                path: "/customer/Manage Beneficiary/Modify Beneficiary/:beneficiaryId",
                 element: <UpdateBeneficiary />,
               },
               {
@@ -311,10 +312,10 @@ const router = createBrowserRouter([
             element: <AccountStatement />,
           },
 
-          // {
-          //   path: "/customer/Account Details",
-          //   element: <AccountDetails />,
-          // },
+          {
+            path: "/customer/Account Details",
+            element: <AccountDetails />,
+          },
           // {
           //   path: "/customer/Apply Loans",
           //   element: <SavingsAccount />,

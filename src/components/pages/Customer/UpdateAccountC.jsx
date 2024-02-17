@@ -1,13 +1,74 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import toast from "react-hot-toast";
+import { Country, State, City } from "country-state-city";
+import Button from "../../../../utilities/Button";
+import {
+  getAccountById,
+  getUpdateAccount,
+} from "./../../../../redux/services/managingDirectorThunk/mdAccountThunk/MdAccountThunk";
 
-function AccountDetails() {
-  const updatedState = JSON.parse(sessionStorage.getItem("myObject"));
-  console.log(updatedState);
+const UpdateAccountC = () => {
+  let [cou, setCon] = useState(null);
+  let [stat, setStat] = useState(null);
+  const location = useLocation();
+  console.log(location);
+  let { state } = location;
+  console.log(state);
+  let { accountNumber } = useParams();
+  let navigate = useNavigate();
+  let dispatch = useDispatch();
+  let [updatedState, setUpdatedState] = useState();
+
+  useEffect(() => {
+    dispatch(getAccountById(accountNumber)).then(x => {
+      console.log(x.payload.data);
+      setUpdatedState(x.payload.data);
+    });
+  }, [accountNumber]);
+
+  const handleChange = e => {
+    if (Object.keys(updatedState.address).includes(e.target.name)) {
+      setUpdatedState({
+        ...updatedState,
+        address: { ...updatedState.address, [e.target.name]: e.target.value },
+      });
+    } else {
+      setUpdatedState({
+        ...updatedState,
+        [e.target.name]: e.target.value,
+      });
+    }
+  };
+
+  let handleSubmit = e => {
+    e.preventDefault();
+    dispatch(getUpdateAccount(updatedState));
+    if (state == "AllAccount") {
+      navigate("/mdlayout/all-accounts");
+      toast.success("Account updated successfully");
+    } else if (state == "SavingAccount") {
+      navigate("/mdlayout/savings-accounts");
+      toast.success("saving Account updated successfully");
+    } else if (state == "CurrentAccount") {
+      navigate("/mdlayout/current-accounts");
+      toast.success("CurrentAccount updated successfully");
+    }
+  };
+
+  // Animation:
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
   return (
     <section className="h-[100%] w-[100%] relative" data-aos="zoom-in">
       <section className="rounded-md border-2 py-1.5 w-[97%] bg-white absolute top-4 left-3">
-        <div className="ps-4 py-3 uppercase font-semibold">Account Details</div>
-        <form className="p-2 ps-4">
+        <div className="ps-4 py-3 uppercase font-semibold">Update Account</div>
+        <form className="p-2 ps-4" onSubmit={handleSubmit}>
           <div className="flex justify-between w-[99%] mb-4">
             <label htmlFor="name" className="text-[rgb(145,142,143)]">
               Name
@@ -19,6 +80,7 @@ function AccountDetails() {
               id="name"
               name="name"
               value={updatedState && updatedState.name}
+              onChange={handleChange}
             />
           </div>
           <div className="flex justify-between w-[99%] mb-4">
@@ -30,7 +92,8 @@ function AccountDetails() {
               type="email"
               id="emailID"
               name="emailID"
-              value={updatedState && updatedState.email}
+              value={updatedState && updatedState.emailID}
+              onChange={handleChange}
             />
           </div>
           <div className="flex justify-between w-[99%] mb-4">
@@ -45,6 +108,7 @@ function AccountDetails() {
               id="name"
               name="phoneNumber"
               value={updatedState && updatedState.phoneNumber}
+              onChange={handleChange}
             />
           </div>
 
@@ -58,11 +122,12 @@ function AccountDetails() {
               type="text"
               name="addressLine"
               value={updatedState && updatedState?.address?.addressLine}
+              onChange={handleChange}
               cols={30}
               rows={3}
             />
           </div>
-          {/* <div className="flex justify-between w-[99%] mb-4">
+          <div className="flex justify-between w-[99%] mb-4">
             <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
               Country
             </label>
@@ -173,7 +238,7 @@ function AccountDetails() {
                 </option>
               ))}
             </select>
-          </div> */}
+          </div>
           <div className="flex justify-between w-[99%] mb-4">
             <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
               Pincode
@@ -186,6 +251,7 @@ function AccountDetails() {
               id="pincode"
               name="pincode"
               value={updatedState && updatedState.address.pincode}
+              onChange={handleChange}
             />
           </div>
 
@@ -201,6 +267,7 @@ function AccountDetails() {
               id="dob"
               name="dateOfBirth"
               value={updatedState && updatedState?.dateOfBirth?.substr(0, 10)}
+              onChange={handleChange}
             />
           </div>
           <div className="flex justify-between w-[99%] mb-4">
@@ -214,6 +281,7 @@ function AccountDetails() {
               id="status"
               name="status"
               value={updatedState && updatedState.status}
+              onChange={handleChange}
             >
               <option value="ACTIVE">ACTIVE</option>
               <option value="INACTIVE">INACTIVE</option>
@@ -229,16 +297,17 @@ function AccountDetails() {
               id="panNumber"
               name="panNumber"
               value={updatedState && updatedState.panNumber}
+              onChange={handleChange}
             />
           </div>
 
-          {/* <div className="flex justify-end pt-4">
+          <div className="flex justify-end pt-4">
             <Button type="submit" name="Update Account"></Button>
-          </div> */}
+          </div>
         </form>
       </section>
     </section>
   );
-}
+};
 
-export default AccountDetails;
+export default UpdateAccountC;

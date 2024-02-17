@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { findAllBeneficiarys } from "../../../../redux/services/CustomerThunk/AccountsThunk";
+import { DeleteBeneficiary, findAllBeneficiarys } from "../../../../redux/services/CustomerThunk/AccountsThunk";
 
 const ViewBeneficiary = () => {
   let [state, setState] = useState(null);
@@ -192,8 +192,7 @@ const ViewBeneficiary = () => {
                           <div className="flex">
                             <span className="px-2  text-red-500">
                               <NavLink
-                                to={`/bankmanager/account/update/${data?.accountNumber}`}
-                                state={"AllAccount"}
+                                to={`/customer/Manage Beneficiary/Modify Beneficiary/${data?.beneficiaryId}`}
                               >
                                 <BiSolidPencil />
                               </NavLink>
@@ -201,14 +200,14 @@ const ViewBeneficiary = () => {
                             <span className="px-2 ">
                               <MdDelete
                                 onClick={() => {
-                                  //   let deleteConfirm =
-                                  //     window.confirm("Are you sure");
-                                  //   if (deleteConfirm === true) {
-                                  //     console.log(data);
-                                  //     dispatch(
-                                  //       deleteBankAccount(data.accountNumber)
-                                  //     );
-                                  //   }
+                                    let deleteConfirm =
+                                      window.confirm("Are you sure");
+                                    if (deleteConfirm === true) {
+                                      console.log(data);
+                                      dispatch(
+                                        DeleteBeneficiary(data.beneficiaryId)
+                                      );
+                                    }
                                 }}
                               />
                             </span>
@@ -232,8 +231,7 @@ const ViewBeneficiary = () => {
                         <div className="flex">
                           <span className="px-2  text-red-500">
                             <NavLink
-                              to={`/bankmanager/account/update/${data?.accountNumber}`}
-                              state={"AllAccount"}
+                              to={`/customer/Manage Beneficiary/Modify Beneficiary/${data?.beneficiaryId}`}
                             >
                               <BiSolidPencil />
                             </NavLink>
@@ -245,7 +243,7 @@ const ViewBeneficiary = () => {
                                   window.confirm("Are you sure");
                                 if (deleteConfirm === true) {
                                   dispatch(
-                                    deleteBankAccount(data.accountNumber)
+                                    DeleteBeneficiary(data.beneficiaryId)
                                   );
                                 }
                               }}
