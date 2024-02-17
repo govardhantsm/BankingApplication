@@ -12,9 +12,10 @@ const ManagingDirector = () => {
         <p className="p-5 ">Loan Portfolio</p>
         <span className="absolute top-36 left-28">
           <MdOutlineConstruction className="text-8xl text-gray-600" />
+          <p>Comming Soon...!</p>
         </span>
 
-        <section className="h-[20%] w-[100%] flex justify-evenly">
+        {/* <section className="h-[20%] w-[100%] flex justify-evenly">
           <div className="flex flex-col items-center">
             <p className="text-[1.4rem] mb-2">48M</p>
             <p className="text-gray-400 text-sm">Total loan</p>
@@ -30,7 +31,7 @@ const ManagingDirector = () => {
         </section>
         <div className="h-[55%] w-[100%] flex justify-center items-center">
           <DoughnutChart />
-        </div>
+        </div> */}
       </div>
       <div className="h-[100%] w-[40%] bg-white rounded-md">
         <div className="flex w-[96%] justify-between ">
@@ -79,7 +80,7 @@ const ManagingDirector = () => {
         <div className="h-[60%] w-[100%] flex justify-center items-center">
           <PieChart />
         </div>
-        <section className="h-[20%] w-[100%] flex justify-around mt-5">
+        {/* <section className="h-[20%] w-[100%] flex justify-around mt-5">
           <div className="flex flex-col items-center">
             <p className="text-gray-400 text-sm mb-1">Target</p>
 
@@ -102,6 +103,12 @@ const ManagingDirector = () => {
               28k
             </p>
           </div>
+        </section> */}
+        <section className="h-[20%] w-[100%] flex flex-wrap justify-around mt-5">
+          <div> 1- SavingAccount</div>
+          <div> 2- CurrentAccount</div>
+          <div> 3- CreditAccount</div>
+          <div className="mr-4"> 4- LoanAccount</div>
         </section>
       </div>
     </section>

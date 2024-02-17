@@ -16,7 +16,7 @@ const LeftSection = () => {
   const data = JSON.parse(sessionStorage.getItem("myObject"));
   let dispatch = useDispatch();
   let [account, setAccount] = useState(false);
-  let dispatch = useDispatch();
+
   let [loan, setLoan] = useState(false);
   let [card, setCard] = useState(false);
 
@@ -130,7 +130,7 @@ const LeftSection = () => {
             </span>
           </div>
           {card &&
-            ["Credit Cards", "Debit Cards"].map(d => {
+            ["Credit Cards"].map(d => {
               return (
                 <div className="ms-4 p-1  text-[rgb(112,112,112)]">
                   <NavLink
