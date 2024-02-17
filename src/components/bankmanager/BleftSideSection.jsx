@@ -3,7 +3,6 @@ import { NavLink, useLocation } from "react-router-dom";
 import { RiArrowDropRightLine } from "react-icons/ri";
 import { RiArrowDropDownLine } from "react-icons/ri";
 
-
 import { RiDashboard3Fill } from "react-icons/ri";
 import { FaRegUserCircle } from "react-icons/fa";
 import { logout } from "../../redux/reducers/auth/authSlice";
@@ -32,7 +31,7 @@ const BleftSideSection = () => {
           />
           <p className="mt-3">{data?.branchManagerName}</p>
           <p className="mt-1 text-[rgb(112,112,112)]">
-            {data?.role == "BRANCH_MANAGER"?"BRANCH MANAGER":""}
+            {data?.role == "BRANCH_MANAGER" ? "BRANCH MANAGER" : ""}
           </p>
         </div>
       </section>
@@ -150,7 +149,7 @@ const BleftSideSection = () => {
             </span>
           </div>
           {card &&
-            ["All Cards", "Credit Cards", "Debit Cards"].map(d => {
+            ["Debit Cards"].map(d => {
               return (
                 <div className="ms-4 p-1  text-[rgb(112,112,112)]">
                   <NavLink

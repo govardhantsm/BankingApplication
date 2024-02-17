@@ -352,22 +352,22 @@ const MdLeftsideSection = () => {
           </div>
           {Cards && (
             <div className="ms-10 mt-2">
-              <li className="list-none text-[rgb(112,112,112)]">
+              {/* <li className="list-none text-[rgb(112,112,112)]">
                 <NavLink
                   to="/mdlayout/create-branchManager"
                   className={({ isActive }) => (isActive ? "active" : "")}
                 >
                   All Cards
                 </NavLink>
-              </li>
-              <li className="list-none mt-2 text-[rgb(112,112,112)]">
+              </li> */}
+              {/* <li className="list-none mt-2 text-[rgb(112,112,112)]">
                 <NavLink
                   to="/mdlayout/all-branchManager"
                   className={({ isActive }) => (isActive ? "active" : "")}
                 >
                   Credit Cards
                 </NavLink>
-              </li>
+              </li> */}
               <li className="list-none mt-2 text-[rgb(112,112,112)]">
                 <NavLink
                   to="/mdlayout/all-branchManager"

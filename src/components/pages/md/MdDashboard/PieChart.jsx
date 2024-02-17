@@ -4,7 +4,7 @@ import { Chart as ChartJS } from "chart.js/auto";
 
 function PieChart() {
   return <Pie data={{
-    labels:[1,2,3,4,5],
+    labels:[1,2,3,4],
     datasets:[
         {label:"revenue",
         data:[200,300,400,100],
