@@ -59,12 +59,12 @@ const Login = ({ name }) => {
       setEmailFormat(true);
     }
     if (email == "") {
-      setEmailVerify("Email is required");
+      setEmailVerify("Email is required*");
     } else {
       setEmailVerify("");
     }
     if (password === "") {
-      setPswdVerify("Password is required");
+      setPswdVerify("Password is required*");
     } else {
       setPswdVerify("");
     }
@@ -118,8 +118,6 @@ const Login = ({ name }) => {
         </p>
         <form onSubmit={handleSubmit}>
           <div className="form-group relative">
-            {/* <label htmlFor="email">email</label> */}
-
             <input
               type="email"
               className="form-control p-2 border-b-2 w-[88%] mx-6 mb-2"
@@ -134,13 +132,13 @@ const Login = ({ name }) => {
             </span>
           </div>
           <p className="text-red-600 text-xm mx-7">{emailVerify}</p>
-          {!emailFormat ? (
+          {/* {!emailFormat ? (
             <p className="text-red-600 text-xm mx-7">
-              Enter email in email format
+              Enter email in email format*
             </p>
           ) : (
             ""
-          )}
+          )} */}
 
           <div className="form-group relative">
             {/* <label htmlFor="password">password</label> */}

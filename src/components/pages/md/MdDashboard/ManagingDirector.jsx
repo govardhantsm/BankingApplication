@@ -5,6 +5,7 @@ import PieChart from "./PieChart";
 import DoughnutChart from "./DoughnutChart";
 import LineChart from "./LineChart";
 import { MdOutlineConstruction } from "react-icons/md";
+import CountUp from "react-countup";
 const ManagingDirector = () => {
   return (
     <section className="h-[100%] w-[100%] mt-8 flex justify-between relative ">
@@ -16,15 +17,24 @@ const ManagingDirector = () => {
 
         <section className="h-[20%] w-[100%] flex justify-evenly">
           <div className="flex flex-col items-center">
-            <p className="text-[1.4rem] mb-2">48M</p>
+            {/* <p className="text-[1.4rem] mb-2">48M</p> */}
+            <p className="text-[1.4rem] mb-2">
+              <CountUp start={0} end={48} duration={3} />M
+            </p>
             <p className="text-gray-400 text-sm">Total loan</p>
           </div>
           <div className="flex flex-col items-center">
-            <p className="text-[1.4rem] mb-2">23M</p>
+            {/* <p className="text-[1.4rem] mb-2">23M</p> */}
+            <p className="text-[1.4rem] mb-2">
+              <CountUp start={0} end={23} duration={3} />M
+            </p>
             <p className="text-gray-400 text-sm">Outstanding</p>
           </div>
           <div className="flex flex-col items-center">
-            <p className="text-[1.4rem] mb-2">7.3M</p>
+            <p className="text-[1.4rem] mb-2">
+              <CountUp start={0} end={7} M duration={3} />M
+            </p>
+            {/* <p className="text-[1.4rem] mb-2">7.3M</p> */}
             <p className="text-gray-400 text-sm">Interest Due</p>
           </div>
         </section>

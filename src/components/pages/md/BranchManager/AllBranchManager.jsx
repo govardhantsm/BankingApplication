@@ -9,7 +9,10 @@ import Spinner from "../../spinner/Spinner";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import useBranchState from "../../../../utils/useBranchState";
-import { deleteBranchManager, getBranchManager } from "../../../../redux/services/managingDirectorThunk/mdBranchManagerThunk/MdBranchManagerThunk";
+import {
+  deleteBranchManager,
+  getBranchManager,
+} from "../../../../redux/services/managingDirectorThunk/mdBranchManagerThunk/MdBranchManagerThunk";
 
 const AllBranchManager = () => {
   let dispatch = useDispatch();
@@ -71,7 +74,7 @@ const AllBranchManager = () => {
         <section className=" bg-white w-[100%] overflow-auto h-[95%] no-scrollbar">
           <header className="mx-10 my-2 w-[93%] flex justify-between items-center ">
             <div>
-              Show
+              <span className="mr-2">show</span>
               <select
                 className="px-2 rounded-[0.25rem] border-2"
                 onChange={e => {
@@ -83,7 +86,7 @@ const AllBranchManager = () => {
                 <option value="3">3</option>
                 <option value="4">4</option>
               </select>
-              entries
+              <span className="ml-2">entries</span>
             </div>
             <div>
               Search:
@@ -187,7 +190,9 @@ const AllBranchManager = () => {
                                 let deleteConfirm =
                                   window.confirm("Are you sure");
                                 if (deleteConfirm === true) {
-                                  dispatch(deleteBranchManager(data.employeeId));
+                                  dispatch(
+                                    deleteBranchManager(data.employeeId)
+                                  );
                                 }
                               }}
                             />
