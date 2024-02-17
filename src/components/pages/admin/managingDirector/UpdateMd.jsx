@@ -41,7 +41,7 @@ const UpdateMd = () => {
     if (isValidation()) {
       dispatch(updateMd(updatedState));
       navigate("/adminlayout/all-md");
-      toast.success("updated successfully");
+      // toast.success("updated successfully");
     } else {
       toast.error("Please enter all fields");
     }
@@ -61,9 +61,9 @@ const UpdateMd = () => {
         updatedState?.name &&
         updatedState?.phoneNumber &&
         updatedState?.address?.addressLine &&
-        updatedState.address.country &&
-        updatedState.address.state &&
-        updatedState.address.city &&
+        updatedState?.address?.country &&
+        updatedState?.address?.state &&
+        updatedState?.address?.city &&
         updatedState?.address?.pincode
       );
   };
@@ -93,7 +93,7 @@ const UpdateMd = () => {
                   value={updatedState && updatedState.name}
                   onChange={handleChange}
                 />
-                <p className="text-red-600 text-xs">Enter only string value</p>
+                <p className="text-red-600 text-xm">Enter only string value</p>
               </div>
             ) : (
               <input
@@ -138,7 +138,7 @@ const UpdateMd = () => {
                   value={updatedState && updatedState?.phoneNumber}
                   onChange={handleChange}
                 />
-                <p className="text-red-600 text-xs">Enter only numeric value</p>
+                <p className="text-red-600 text-xm">Enter only numeric value</p>
               </div>
             ) : (
               <input
@@ -218,7 +218,7 @@ const UpdateMd = () => {
                 setUpdatedState({
                   ...updatedState,
                   address: {
-                    ...updatedState.address,
+                    ...updatedState?.address,
                     [e.target.name]: e.target.value,
                   },
                 });
@@ -285,8 +285,8 @@ const UpdateMd = () => {
             <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
               Pincode
             </label>
-            {!/^[0-9]+$/.test(updatedState.address.pincode) &&
-            updatedState.address.pincode ? (
+            {!/^[0-9]+$/.test(updatedState?.address?.pincode) &&
+            updatedState?.address?.pincode ? (
               <div className="w-[80%]">
                 <input
                   className="w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
@@ -298,7 +298,7 @@ const UpdateMd = () => {
                   value={updatedState && updatedState.address.pincode}
                   onChange={handleChange}
                 />
-                <p className="text-red-600 text-xs">Enter only numeric value</p>
+                <p className="text-red-600 text-xm">Enter only numeric value</p>
               </div>
             ) : (
               <input

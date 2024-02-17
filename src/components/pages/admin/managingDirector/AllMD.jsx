@@ -24,7 +24,7 @@ const AllMD = () => {
 
   let [search, setSearch] = useState(null);
 
-  const [itemsPerPage, setItemsPerPage] = useState(2);
+  const [itemsPerPage, setItemsPerPage] = useState(8);
 
   const [currentPage, setCurrentPage] = useState(1);
   let [loading, setLoading] = useState(false);
