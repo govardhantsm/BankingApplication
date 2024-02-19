@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from "react";
-import comingSoon from "../../../images/coming-soon-background-with-three-focus-lights_1017-31450.jpg";
+import comingSoon from "../../../images/underConstruction.jpg";
 import { NavLink, useLocation } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
