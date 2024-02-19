@@ -25,10 +25,12 @@ const DocumentSection = () => {
 
     state.branchId = data?.branchId;
     dispatch(createAccount(state)).then(x => {
-      dispatch(createAccountWithFile(formData));
+      dispatch(createAccountWithFile(formData)).then(y => {
+        console.log(y.payload.message);
+        let a = y.payload;
+        navigate(`/bankmanager/Rest`, { state:a });
+      });
     });
-
-    navigate(`${localStorage.getItem("path")}`);
   };
   // Animation:
   useEffect(() => {
