@@ -29,7 +29,7 @@ const BleftSideSection = () => {
             alt=""
             className="h-[4rem] w-[4rem] rounded-full mt-5"
           />
-          <p className="mt-3">{data?.branchManagerName}</p>
+          <p className="mt-3">{data?.branchManagerName.toUpperCase()}</p>
           <p className="mt-1 text-[rgb(112,112,112)]">
             {data?.role == "BRANCH_MANAGER" ? "BRANCH MANAGER" : ""}
           </p>
@@ -117,10 +117,9 @@ const BleftSideSection = () => {
               return (
                 <div className="ms-4 p-1  text-[rgb(112,112,112)]">
                   <NavLink
-                    to={`/bankmanager/${d}`}
-                    className={({ isActive }) =>
-                      isActive ? "bg-gray-600" : ""
-                    }
+                    to="/bankmanager/comingSoon"
+                    state={"bankManegarSection"}
+                    className={({ isActive }) => (isActive ? "" : "")}
                   >
                     {d}
                   </NavLink>
@@ -153,7 +152,8 @@ const BleftSideSection = () => {
               return (
                 <div className="ms-4 p-1  text-[rgb(112,112,112)]">
                   <NavLink
-                    to={`/bankmanager/${d}`}
+                    to="/bankmanager/comingSoon"
+                    state={"bankManegarSection"}
                     className={({ isActive }) => (isActive ? "active" : "")}
                   >
                     {d}
@@ -165,7 +165,7 @@ const BleftSideSection = () => {
       </section>
       <div className="text-center">
         <button
-          className="text-white bg-gradient-to-r from-blue-500 via-blue-700 to-blue-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-3 py-1.5 text-center"
+          className="text-white bg-gradient-to-r from-blue-500 via-blue-700 to-blue-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-3 py-1.5 text-center mb-8"
           onClick={() => {
             dispatch(logout());
             window.location.assign("/");

@@ -4,6 +4,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import ManagingDirector from "./ManagingDirector";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import CountUp from "react-countup";
 
 const ManagingDirectorDashboard = ({ name }) => {
   // Animation:
@@ -24,7 +25,8 @@ const ManagingDirectorDashboard = ({ name }) => {
             </p> */}
           </div>
           <div className="font-[500] flex w-[100%] justify-center mt-3 tracking-widest text-[1.7rem] text-violet-600">
-            3,15,70,014
+            {/* 3,15,70,014 */}
+            <CountUp start={0} end={31570014} duration={3} />
           </div>
           <div className="flex w-[85%] justify-end mt-5">
             {/* <p className="flex items-center tracking-wider">
@@ -41,7 +43,8 @@ const ManagingDirectorDashboard = ({ name }) => {
             </p> */}
           </div>
           <div className="font-[500] flex w-[100%] justify-center mt-3 tracking-widest text-[1.7rem] text-violet-600">
-            1,22,02,155
+            {/* 1,22,02,155 */}
+            <CountUp start={0} end={12202155} duration={3} />
           </div>
           {/* <div className="flex w-[85%] justify-end mt-5">
             <p className="flex items-center tracking-wider">
@@ -58,7 +61,8 @@ const ManagingDirectorDashboard = ({ name }) => {
             </p> */}
           </div>
           <div className="font-[500] flex w-[100%] justify-center mt-3 tracking-widest text-[1.7rem] text-violet-600">
-            3.2M
+            {/* 3.2M */}
+            <CountUp start={0} end={4} duration={2} />M
           </div>
           {/* <div className="flex w-[85%] justify-end mt-5">
             <p className="flex items-center tracking-wider">
@@ -75,7 +79,8 @@ const ManagingDirectorDashboard = ({ name }) => {
             </p> */}
           </div>
           <div className="font-[500] flex w-[100%] justify-center mt-3 tracking-widest text-[1.7rem] text-violet-600">
-            2.8M
+            {/* 2.8M */}
+            <CountUp start={0} end={3} duration={2} />M
           </div>
           {/* <div className="flex w-[85%] justify-end mt-5">
             <p className="flex items-center tracking-wider">
@@ -92,7 +97,8 @@ const ManagingDirectorDashboard = ({ name }) => {
             </p> */}
           </div>
           <div className="font-[500] flex w-[100%] justify-center mt-3 tracking-widest text-[1.8rem] text-violet-600">
-            2.8M
+            {/* 2.8M */}
+            <CountUp start={0} end={3} duration={2} />M
           </div>
           {/* <div className="flex w-[85%] justify-end mt-5">
             <p className="flex items-center tracking-wider">
