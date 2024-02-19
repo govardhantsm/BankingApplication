@@ -22,6 +22,7 @@ import { FiEdit } from "react-icons/fi";
 import { MdOutlineRemoveCircle } from "react-icons/md";
 import { MdAccountBalanceWallet } from "react-icons/md";
 import { TbMoneybag } from "react-icons/tb";
+import { IoTrailSignOutline } from "react-icons/io5";
 
 const Navbar = () => {
   let [toggle, setToggle] = useState(false);
@@ -83,7 +84,7 @@ const Navbar = () => {
             </span>
             {toggle ? (
               <div
-                class="shadow-lg w-[auto] rounded-lg p-6 mx-auto my-6 max-w-md  absolute top-[40px] right-[0] z-20 bg-[#8eaefa] text-[#fff] mr-2"
+                class="shadow-lg w-[auto] rounded-lg p-6 mx-auto my-6 max-w-md  absolute top-[40px] right-[0] z-20 bg-[#707070] text-[#fff] mr-2"
                 data-aos="fade-down"
               >
                 <div class="flex items-center mb-4 text-[#fff]">
@@ -177,7 +178,7 @@ const Navbar = () => {
             {data.role == "ADMIN" ? (
               <div className="invisible bg-white border-orange-500 group-hover:visible p-2 h-[auto] w-[auto] border-[0.02rem] absolute z-10 right-0 mt-0 rounded">
                 <div className="flex flex-col gap-[.3rem] items-center ml-4 mt-3 justify-center h-[60%] w-[80%]">
-                  <div className="flex gap-2">
+                  <div className="flex gap-1">
                     <NavLink to="/adminlayout" title="Dashboard">
                       <RiDashboard3Fill className="" />
                     </NavLink>
@@ -217,8 +218,8 @@ const Navbar = () => {
               </div>
             ) : data.role == "MANAGING_DIRECTOR" ? (
               <div className="invisible bg-white border-orange-500 group-hover:visible p-2 h-[auto] w-[auto] border-[0.02rem] absolute z-10 right-0 mt-0 rounded">
-                <div className="flex gap-[.3rem] items-center ml-4 mt-3 justify-center h-[60%] w-[80%]">
-                  <div className="flex flex-col">
+                <div className="flex gap-3 items-center ml-4 mt-3 justify-center h-[60%] w-[80%] flex-col">
+                  <div className="flex gap-2">
                     <NavLink to="/mdlayout" title="Dashboard">
                       <RiDashboard3Fill className="" />
                     </NavLink>
@@ -238,7 +239,7 @@ const Navbar = () => {
                     </NavLink>
                   </div>
 
-                  <div className="flex flex-col gap-1">
+                  <div className="flex  gap-2">
                     <NavLink
                       title="CreateBranchManager"
                       to="/mdlayout/create-branchManager"
@@ -261,7 +262,7 @@ const Navbar = () => {
                       <MdAccountCircle className="me-3" />
                     </NavLink>
                   </div>
-                  <div className="flex gap-2 flex-col">
+                  <div className="flex ">
                     <NavLink
                       title="SavingAccounts"
                       to="/mdlayout/savings-accounts"
@@ -275,6 +276,13 @@ const Navbar = () => {
                       className={({ isActive }) => (isActive ? "active" : "")}
                     >
                       <TbMoneybag className="me-3" />
+                    </NavLink>
+                    <NavLink
+                      title="ComingSoon"
+                      // to="/mdlayout/current-accounts"
+                      // className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      <IoTrailSignOutline className="me-3" />
                     </NavLink>
                   </div>
                 </div>

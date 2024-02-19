@@ -155,7 +155,7 @@ const CreateBranch = () => {
                 setState({ ...state, country: e.target.value });
               }}
             >
-              <option disabled value="" className="text-gray-400">
+              <option disabled value="" className="text-[rgb(145,142,143)]">
                 -- Select The Country --
               </option>
 
@@ -209,7 +209,7 @@ const CreateBranch = () => {
                 setState({ ...state, city: e.target.value });
               }}
             >
-              <option disabled value="" className="text-gray-400">
+              <option disabled value="" className="text-[rgb(145,142,143)]">
                 -- Select The City --
               </option>
               {City.getCitiesOfState(cou, stat).map(city => {

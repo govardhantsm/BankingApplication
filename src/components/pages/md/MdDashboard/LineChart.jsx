@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // import { Line } from "react-chartjs-2";
 import { Chart as ChartJS, defaults } from "chart.js/auto";
 defaults.maintainAspectRatio = false;
@@ -7,8 +7,26 @@ defaults.plugins.title.display = true;
 defaults.plugins.title.align = "start";
 
 import { Bar } from "react-chartjs-2";
+import useGetMd from "../../../../utils/useGetMd";
+import { useDispatch } from "react-redux";
+import { getMdDashBoard } from "../../../../redux/services/managingDirectorThunk/mdBranchThunk/MdBranchThunk";
 
 function LineChart() {
+  let [mdDashBoard, setMdDashBoard] = useState();
+  let dispatch = useDispatch();
+  const user = useGetMd();
+  // console.log(user);
+
+
+  // useEffect(() => {
+  //   if (user?.data?.data?.managingDirectorId) {
+  //     let t = dispatch(getMdDashBoard(user?.data?.data?.managingDirectorId));
+  //     t.unwrap().then(x => {
+  //       setMdDashBoard(x.data);
+  //       console.log(x.data);
+  //     });
+  //   }
+  // }, [user?.data?.data?.managingDirectorId]);
   const data = {
     labels: ["January", "February", "March", "April", "May"],
     datasets: [
@@ -33,7 +51,6 @@ function LineChart() {
     scales: {
       y: {
         beginAtZero: true,
-        
       },
     },
   };
@@ -43,33 +60,4 @@ function LineChart() {
 
 export default LineChart;
 
-// function LineChart() {
-//   return (
-//     <Line
-//       data={{
-//         labels: [1, 2, 3, 4, 5],
-//         datasets: [
-//           {
-//             label: "revenue",
-//             data: [200, 300, 400, 100],
-//             backgroundColor: ["blue", "gray", "orange", "skyblue"],
-//           },
-//         ],
-//       }}
-//       options={{
-//         elements: {
-//           line: {
-//             tension: 0.5,
-//           },
-//         },
-//         // plugins: {
-//         //   title: {
-//         //     text: "Revenue",
-//         //   },
-//         // },
-//       }}
-//     />
-//   );
-// }
 
-// export default LineChart;

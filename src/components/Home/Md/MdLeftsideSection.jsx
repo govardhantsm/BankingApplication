@@ -44,7 +44,7 @@ const MdLeftsideSection = () => {
             alt=""
             className="h-[4rem] w-[4rem] rounded-full mt-5"
           />
-          <p className="mt-3">{data?.name}</p>
+          <p className="mt-3">{data?.name.toUpperCase()}</p>
           <p className="mt-1 text-[rgb(112,112,112)]">
             {data?.role == "MANAGING_DIRECTOR" ? "MANAGING DIRECTOR" : ""}
           </p>
@@ -61,7 +61,7 @@ const MdLeftsideSection = () => {
             </NavLink>
           </div>
           <div
-            className="flex mt-3 items-center justify-between w-[90%]"
+            className="flex mt-3 items-center justify-between w-[90%] cursor-pointer"
             onClick={() =>
               setBranch(e => {
                 setBankManager(false);
@@ -73,7 +73,7 @@ const MdLeftsideSection = () => {
               })
             }
           >
-            <p className="ms-8 flex">
+            <p className="ms-8 flex ">
               <CiBank className="me-3 text-[0.98rem]" />
               Branch
             </p>
@@ -106,7 +106,7 @@ const MdLeftsideSection = () => {
             </div>
           )}
           <div
-            className="flex mt-3 items-center justify-between w-[90%]"
+            className="flex mt-3 items-center justify-between w-[90%] cursor-pointer"
             onClick={() =>
               setBankManager(e => {
                 setBranch(false);
@@ -150,7 +150,7 @@ const MdLeftsideSection = () => {
             </div>
           )}
           <div
-            className="flex mt-3 items-center justify-between w-[90%]"
+            className="flex mt-3 items-center justify-between w-[90%] cursor-pointer"
             onClick={() =>
               setApprovals(e => {
                 setBranch(false);
@@ -197,7 +197,7 @@ const MdLeftsideSection = () => {
             </div>
           )}
           <div
-            className="flex mt-3 items-center justify-between w-[90%]"
+            className="flex mt-3 items-center justify-between w-[90%] cursor-pointer"
             onClick={() =>
               setAccounts(e => {
                 setBranch(false);
@@ -258,7 +258,7 @@ const MdLeftsideSection = () => {
             </div>
           )}
           <div
-            className="flex mt-3 items-center justify-between w-[90%]"
+            className="flex mt-3 items-center justify-between w-[90%] cursor-pointer"
             onClick={() =>
               setLoans(e => {
                 setBranch(false);
@@ -332,7 +332,7 @@ const MdLeftsideSection = () => {
             </div>
           )}
           <div
-            className="flex mt-3 items-center justify-between w-[90%]"
+            className="flex mt-3 items-center justify-between w-[90%] cursor-pointer"
             onClick={() =>
               setCards(e => {
                 setBranch(false);
