@@ -56,6 +56,7 @@ import ViewBeneficiary from "../components/pages/Customer/manageBeneficiary/View
 import AccountDetails from "../components/pages/Customer/AccountDetails";
 import UploadProfile from "../components/navbar/UploadProfile";
 import CommingSoon from "../components/pages/admin/CommingSoon";
+import RestingPage from "../components/bankmanager/RestingPage";
 // import LoanAccounts from './../components/pages/md/Accounts/LoanAccount';
 
 const router = createBrowserRouter([
@@ -227,6 +228,10 @@ const router = createBrowserRouter([
           {
             path: "/bankmanager/All Accounts",
             element: <BranchAllAccounts />,
+          },
+          {
+            path: "/bankmanager/Rest",
+            element: <RestingPage />,
           },
           {
             path: "/bankmanager/Savings Accounts",

@@ -17,7 +17,7 @@ const Bhome = () => {
           <BleftSideSection />
         </aside>
         <aside className="w-[83%] h-[100%]" data-aos="zoom-in">
-          <div className="h-[100%] w-[100%]">
+          <div className="h-[90%] w-[100%]">
             <Outlet />
           </div>
         </aside>

@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 
 const BleftSideSection = () => {
   const data = JSON.parse(sessionStorage.getItem("myObject"));
+
   let dispatch = useDispatch();
   let [account, setAccount] = useState(false);
   let [loan, setLoan] = useState(false);

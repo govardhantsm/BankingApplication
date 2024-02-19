@@ -86,6 +86,7 @@ const Login = ({ name }) => {
           });
         } else if (x.payload.role == "BRANCH_MANAGER") {
           dispatch(getBmProfile()).then(y => {
+            console.log(y.payload.data);
             sessionStorage.setItem("myObject", JSON.stringify(y.payload.data));
             navigate("/bankmanager");
           });

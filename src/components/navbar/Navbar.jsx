@@ -39,8 +39,8 @@ const Navbar = () => {
           {role === "MANAGING_DIRECTOR"
             ? bankName.toUpperCase()
             : role === "BRANCH_MANAGER"
-            ? branchName.toUpperCase()
-            : "BankLauncher"}
+            ? bankName.toUpperCase()
+            : bankName.toUpperCase()}
         </p>
       </div>
       <div className="flex justify-between w-[83%] h-[100%]">
