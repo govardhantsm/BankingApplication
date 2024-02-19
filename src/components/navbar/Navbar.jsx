@@ -20,6 +20,8 @@ import { FaUserCheck } from "react-icons/fa6";
 import { MdOutlineMail } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
 import { MdOutlineRemoveCircle } from "react-icons/md";
+import { MdAccountBalanceWallet } from "react-icons/md";
+import { TbMoneybag } from "react-icons/tb";
 
 const Navbar = () => {
   let [toggle, setToggle] = useState(false);
@@ -33,11 +35,11 @@ const Navbar = () => {
   return (
     <section className="bg-white h-[100%] w-[100%] flex">
       <div className="w-[17%] bg-orange-400 h-[100%] flex items-center justify-center">
-        <p className="ml-2 mr-2">
+        <p className="ml-2 mr-2 text-slate-950">
           {role === "MANAGING_DIRECTOR"
-            ? bankName
+            ? bankName.toUpperCase()
             : role === "BRANCH_MANAGER"
-            ? branchName
+            ? branchName.toUpperCase()
             : "BankLauncher"}
         </p>
       </div>
@@ -76,12 +78,12 @@ const Navbar = () => {
           /> */}
           {/* <FaUserTie /> */}
           <div>
-            <span onClick={() => setToggle(!toggle)}>
+            <span className="cursor-pointer" onClick={() => setToggle(!toggle)}>
               <FaUserTie />
             </span>
             {toggle ? (
               <div
-                class="shadow-lg w-[auto] rounded-lg p-6 mx-auto my-6 max-w-md  absolute top-[40px] right-[0] z-20 bg-[#89abfa] text-[#fff]"
+                class="shadow-lg w-[auto] rounded-lg p-6 mx-auto my-6 max-w-md  absolute top-[40px] right-[0] z-20 bg-[#8eaefa] text-[#fff] mr-2"
                 data-aos="fade-down"
               >
                 <div class="flex items-center mb-4 text-[#fff]">
@@ -91,16 +93,22 @@ const Navbar = () => {
                     </span>
                   </div>
                   <div>
-                    <h3 class="font-semibold text-lg	">{data?.name || "NA"}</h3>
+                    <h3 class="font-semibold text-lg	">
+                      {data?.name || data?.branchManagerName || "NA"}
+                    </h3>
                     <p class="text-base	">
                       {data.role === "MANAGING_DIRECTOR"
                         ? "MANAGING DIRECTOR"
+                        : data.role === "BRANCH_MANAGER"
+                        ? "BRANCH MANAGER"
+                        : data.role == "ADMIN"
+                        ? "ADMIN"
                         : "" || "NA"}
                     </p>
                   </div>
                 </div>
 
-                <div class="">
+                <div>
                   <div>
                     <p class="flex">
                       <span className="mr-[10px] mt-1 text-xl">
@@ -109,7 +117,10 @@ const Navbar = () => {
                       <span class="text-base	">
                         Employee ID:{" "}
                         <span className="ml-2">
-                          {data?.managingDirectorId || "NA"}
+                          {data?.managingDirectorId ||
+                            data?.branchId ||
+                            data?.employeeId ||
+                            "NA"}
                         </span>
                       </span>
                     </p>
@@ -122,18 +133,37 @@ const Navbar = () => {
                         <span className="ml-2">{data?.email || "NA"}</span>
                       </span>
                     </p>
-                    <p class="flex">
-                      <span className="mr-[10px] mt-1 text-xl">
-                        <FiEdit />
-                      </span>
-                      <span class="text-base	">Update Profile Picture</span>
-                    </p>
-                    <p class="flex">
-                      <span className="mr-[10px] mt-1 text-xl">
-                        <MdOutlineRemoveCircle />
-                      </span>
-                      <span class="text-base	">Remove Profile Picture</span>
-                    </p>
+                    <div>
+                      <p class="flex">
+                        <span className="pt-2 mr-[10px] mt-1 text-xl">
+                          <FiEdit />
+                        </span>
+                        <span class="text-base bg-slate-500 w-auto p-2 rounded">
+                          <NavLink
+                            to={
+                              data.role == "ADMIN"
+                                ? "/adminlayout/uploadProfile"
+                                : data.role == "MANAGING_DIRECTOR"
+                                ? "/mdlayout/uploadProfile"
+                                : data.role == "BRANCH_MANAGER"
+                                ? "/bankmanager/uploadProfile"
+                                : ""
+                            }
+                          >
+                            Update Profile Picture
+                          </NavLink>
+                        </span>
+                      </p>
+
+                      <p class="flex">
+                        <span className="pt-3 mr-[10px] mt-1 text-xl">
+                          <MdOutlineRemoveCircle />
+                        </span>
+                        <span class="text-base bg-red-400 w-auto p-2 rounded mt-2">
+                          <NavLink>Remove Profile Picture</NavLink>
+                        </span>
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -144,44 +174,162 @@ const Navbar = () => {
 
           <button className="group relative">
             <PiDotsNineBold className="me-2" />
-            <div className="invisible bg-white border-orange-500 group-hover:visible h-[6rem] w-[10rem] border-[0.02rem] absolute z-10 right-0 mt-0 rounded ">
-              <div  className="flex flex-wrap gap-[.3rem] items-center ml-4 mt-3 justify-center h-[60%] w-[80%]">
-                <NavLink to="/mdlayout">
-                  <RiDashboard3Fill className="me-3 mt-[0.15rem]" />
-                </NavLink>
-                <NavLink
-                  to="/mdlayout/all-branches"
-                  className={({ isActive }) => (isActive ? "active" : "")}
-                >
-                  <CiBank className="me-3 text-[2rem]" />
-                </NavLink>
-                <NavLink
-                  to="/mdlayout/create-branchManager"
-                  className={({ isActive }) => (isActive ? "active" : "")}
-                >
-                  <MdApproval className="me-3" />
-                </NavLink>
-                <NavLink
-                  to="/mdlayout/all-accounts"
-                  className={({ isActive }) => (isActive ? "active" : "")}
-                >
-                  <MdAccountCircle className="me-3" />
-                </NavLink>
+            {data.role == "ADMIN" ? (
+              <div className="invisible bg-white border-orange-500 group-hover:visible p-2 h-[auto] w-[auto] border-[0.02rem] absolute z-10 right-0 mt-0 rounded">
+                <div className="flex flex-col gap-[.3rem] items-center ml-4 mt-3 justify-center h-[60%] w-[80%]">
+                  <div className="flex gap-2">
+                    <NavLink to="/adminlayout" title="Dashboard">
+                      <RiDashboard3Fill className="" />
+                    </NavLink>
+                    <NavLink
+                      title="CreateBank"
+                      to="/adminlayout/create-bank"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      <MdApproval className="" />
+                    </NavLink>
+                    <NavLink
+                      title="AllBank"
+                      to="/adminlayout/all-bank"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      <CiBank className="me-3 text-[2rem]" />
+                    </NavLink>
+                  </div>
 
-                <NavLink
-                  to="/mdlayout/create-branchManager"
-                  className={({ isActive }) => (isActive ? "active" : "")}
-                >
-                  <FaHandHoldingDollar className="ms-3" />
-                </NavLink>
-                <NavLink
-                  to="/mdlayout/all-branchManager"
-                  className={({ isActive }) => (isActive ? "active" : "")}
-                >
-                  <LiaIdCardSolid className="ms-3 mt-[0.15rem] text-[2rem]" />
-                </NavLink>
+                  <div className="flex gap-2">
+                    <NavLink
+                      title="CreateMD"
+                      to="/adminlayout/create-md"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      <FaHandHoldingDollar className="" />
+                    </NavLink>
+                    <NavLink
+                      title="AllMD"
+                      to="/adminlayout/all-md"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      <LiaIdCardSolid className="" />
+                    </NavLink>
+                  </div>
+                </div>
               </div>
-            </div>
+            ) : data.role == "MANAGING_DIRECTOR" ? (
+              <div className="invisible bg-white border-orange-500 group-hover:visible p-2 h-[auto] w-[auto] border-[0.02rem] absolute z-10 right-0 mt-0 rounded">
+                <div className="flex gap-[.3rem] items-center ml-4 mt-3 justify-center h-[60%] w-[80%]">
+                  <div className="flex flex-col">
+                    <NavLink to="/mdlayout" title="Dashboard">
+                      <RiDashboard3Fill className="" />
+                    </NavLink>
+                    <NavLink
+                      title="CreateBranch"
+                      to="/mdlayout/create-branch"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      <MdApproval className="" />
+                    </NavLink>
+                    <NavLink
+                      title="AllBranch"
+                      to="/mdlayout/all-branches"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      <CiBank className="me-3 text-[2rem]" />
+                    </NavLink>
+                  </div>
+
+                  <div className="flex flex-col gap-1">
+                    <NavLink
+                      title="CreateBranchManager"
+                      to="/mdlayout/create-branchManager"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      <FaHandHoldingDollar className="" />
+                    </NavLink>
+                    <NavLink
+                      title="AllBranchManager"
+                      to="/mdlayout/all-branchManager"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      <LiaIdCardSolid className="" />
+                    </NavLink>
+                    <NavLink
+                      title="AllAccounts"
+                      to="/mdlayout/all-accounts"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      <MdAccountCircle className="me-3" />
+                    </NavLink>
+                  </div>
+                  <div className="flex gap-2 flex-col">
+                    <NavLink
+                      title="SavingAccounts"
+                      to="/mdlayout/savings-accounts"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      <MdAccountBalanceWallet className="me-3" />
+                    </NavLink>
+                    <NavLink
+                      title="CurrentAccounts"
+                      to="/mdlayout/current-accounts"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      <TbMoneybag className="me-3" />
+                    </NavLink>
+                  </div>
+                </div>
+              </div>
+            ) : data.role == "BRANCH_MANAGER" ? (
+              <div className="invisible bg-white border-orange-500 group-hover:visible p-2 h-[auto] w-[auto] border-[0.02rem] absolute z-10 right-0 mt-0 rounded">
+                <div className="flex gap-[.3rem] flex-col items-center ml-4 mt-3 justify-center h-[60%] w-[80%]">
+                  <div className="flex gap-3">
+                    <NavLink to="/bankmanager" title="Dashboard">
+                      <RiDashboard3Fill className="" />
+                    </NavLink>
+                    <NavLink
+                      title="CreateAccount"
+                      to="/bankmanager/create-account"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      <MdApproval className="" />
+                    </NavLink>
+                    <NavLink
+                      title="AllAccounts"
+                      to="/bankmanager/All Accounts"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      <CiBank className="me-3 text-[2rem]" />
+                    </NavLink>
+                  </div>
+
+                  <div className="flex gap-3">
+                    <NavLink
+                      title="SavingAccounts"
+                      to="/bankmanager/Savings Accounts"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      <FaHandHoldingDollar className="" />
+                    </NavLink>
+                    <NavLink
+                      title="CurrentAccounts"
+                      to="/bankmanager/Current Accounts"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      <LiaIdCardSolid className="" />
+                    </NavLink>
+                    <NavLink
+                      title="LoanAccounts"
+                      to="/bankmanager/Loan Accounts"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      <MdAccountCircle className="me-3" />
+                    </NavLink>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
           </button>
         </section>
       </div>
