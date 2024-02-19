@@ -89,6 +89,7 @@ const PersonalDetails = () => {
 
   return (
     <section>
+    
       <section className=" flex w-[100%] flex-wrap gap-y-3 gap-x-4 h-[21rem] overflow-auto no-scrollbar">
         <div className=" flex flex-col basis-[19rem] ">
           <label htmlFor="firstname" className="text-[15px] pb-2 text-gray-400">

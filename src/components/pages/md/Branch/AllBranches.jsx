@@ -69,7 +69,7 @@ const AllBranches = () => {
 
                     <div className="flex">
                       <span className="p-3 pl-4 font-bold w-48">
-                        Branch Manager
+                        Branch Manager:
                       </span>
                       <span className="p-2 font-font-semibold text-[rgba(136,136,136)]">
                         {user.branchManagerName}

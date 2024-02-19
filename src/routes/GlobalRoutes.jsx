@@ -54,6 +54,8 @@ import PassBook from "../components/pages/Customer/PassBook";
 import UpdateBeneficiary from "../components/pages/Customer/manageBeneficiary/UpdateBeneficiary";
 import ViewBeneficiary from "../components/pages/Customer/manageBeneficiary/ViewBeneficiary";
 import AccountDetails from "../components/pages/Customer/AccountDetails";
+import UploadProfile from "../components/navbar/UploadProfile";
+import CommingSoon from "../components/pages/admin/CommingSoon";
 // import LoanAccounts from './../components/pages/md/Accounts/LoanAccount';
 
 const router = createBrowserRouter([
@@ -93,6 +95,10 @@ const router = createBrowserRouter([
           {
             path: "/adminlayout/all-md",
             element: <AllMD />,
+          },
+          {
+            path: "/adminlayout/uploadProfile",
+            element: <UploadProfile />,
           },
         ],
       },
@@ -168,6 +174,14 @@ const router = createBrowserRouter([
           //   path: "/mdlayout/loan-accounts",
           //   element: <LoanAccounts />,
           // },
+          {
+            path: "/mdlayout/uploadProfile",
+            element: <UploadProfile />,
+          },
+          {
+            path: "/mdlayout/comingSoon",
+            element: <CommingSoon />,
+          },
         ],
       },
     ],
@@ -241,6 +255,14 @@ const router = createBrowserRouter([
           {
             path: "/bankmanager/all-md",
             element: <AllMD />,
+          },
+          {
+            path: "/bankmanager/uploadProfile",
+            element: <UploadProfile />,
+          },
+          {
+            path: "/bankmanager/comingSoon",
+            element: <CommingSoon />,
           },
         ],
       },
