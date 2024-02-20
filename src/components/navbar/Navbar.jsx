@@ -42,7 +42,9 @@ const Navbar = () => {
             ? bankName
             : role === "BRANCH_MANAGER"
             ? bankName
-            : bankName}
+            : bankName || data.userType == "ACCOUNT_HOLDER"
+            ? bankName || "punjab national bank"
+            : ""}
         </p>
       </div>
       <div className="flex justify-between w-[83%] h-[100%]">
@@ -85,7 +87,7 @@ const Navbar = () => {
             </span>
             {toggle ? (
               <div
-                class="shadow-lg w-[auto] rounded-lg p-6 mx-auto my-6 max-w-md  absolute top-[40px] right-[0] z-20 bg-[#707070] text-[#fff] mr-2"
+                class="shadow-lg w-[auto] rounded-lg p-6 mx-auto my-6 max-w-md  absolute top-[30px] right-[0] z-20 bg-orange-400 text-[#fff] mr-2"
                 data-aos="fade-down"
               >
                 <div class="flex items-center mb-4 text-[#fff]">
@@ -98,14 +100,16 @@ const Navbar = () => {
                     <h3 class="font-semibold text-lg	">
                       {data?.name || data?.branchManagerName || "NA"}
                     </h3>
-                    <p class="text-base	">
+                    <p class="text-base	font-light	">
                       {data.role === "MANAGING_DIRECTOR"
                         ? "MANAGING DIRECTOR"
                         : data.role === "BRANCH_MANAGER"
                         ? "BRANCH MANAGER"
                         : data.role == "ADMIN"
                         ? "ADMIN"
-                        : "" || "NA"}
+                        : data.role == "CUSTOMER"
+                        ? "Customer"
+                        : ""}
                     </p>
                   </div>
                 </div>
@@ -116,12 +120,13 @@ const Navbar = () => {
                       <span className="mr-[10px] mt-1 text-xl">
                         <FaUserCheck />
                       </span>
-                      <span class="text-base	">
-                        Employee ID:{" "}
+                      <span class="text-base">
+                        <span className="font-semibold"> Employee ID: </span>
                         <span className="ml-2">
                           {data?.managingDirectorId ||
                             data?.branchId ||
                             data?.employeeId ||
+                            data?.userId ||
                             "NA"}
                         </span>
                       </span>
@@ -131,7 +136,7 @@ const Navbar = () => {
                         <MdOutlineMail />
                       </span>
                       <span class="text-base">
-                        Email:{" "}
+                        <span className="font-semibold"> Email: : </span>
                         <span className="ml-2">{data?.email || "NA"}</span>
                       </span>
                     </p>
@@ -216,7 +221,7 @@ const Navbar = () => {
                     </NavLink>
                     <NavLink
                       title="ComingSoon"
-                      // to="/adminlayout/all-md"
+                      to="#"
                       // className={({ isActive }) => (isActive ? "active" : "")}
                     >
                       <MdEmojiObjects className="" />
@@ -339,6 +344,77 @@ const Navbar = () => {
                       className={({ isActive }) => (isActive ? "active" : "")}
                     >
                       <MdAccountCircle className="me-3" />
+                    </NavLink>
+                  </div>
+                </div>
+              </div>
+            ) : data.userType == "ACCOUNT_HOLDER" ? (
+              <div className="invisible bg-white border-orange-500 group-hover:visible p-2 h-[auto] w-[auto] border-[0.02rem] absolute z-10 right-0 mt-0 rounded">
+                <div className="flex gap-[.3rem] flex-col items-center ml-4 mt-3 justify-center h-[60%] w-[80%]">
+                  <div className="flex gap-3">
+                    <NavLink to="/customer" title="Dashboard">
+                      <RiDashboard3Fill className="" />
+                    </NavLink>
+                    <NavLink
+                      title="ManageBeneficiary"
+                      to="/customer/Manage Beneficiary"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      <MdApproval className="" />
+                    </NavLink>
+                    <NavLink
+                      title="AddBeneficiary"
+                      to="/customer/Manage Beneficiary/add Beneficiary"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      <CiBank className="me-3 text-[2rem]" />
+                    </NavLink>
+                  </div>
+
+                  <div className="flex gap-3">
+                    <NavLink
+                      title="ViewBeneficiary"
+                      to="/customer/Manage Beneficiary/View Beneficiary"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      <FaHandHoldingDollar className="" />
+                    </NavLink>
+                    <NavLink
+                      title="AmountTransfer"
+                      to="/customer/Amount Transfer"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      <LiaIdCardSolid className="" />
+                    </NavLink>
+                    <NavLink
+                      title="PassBook"
+                      to="/customer/Passbook"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      <MdAccountCircle className="me-3" />
+                    </NavLink>
+                  </div>
+                  <div className="flex ">
+                    <NavLink
+                      title="AccountStatement"
+                      to="/customer/Account Statement"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      <MdAccountBalanceWallet className="me-3" />
+                    </NavLink>
+                    <NavLink
+                      title="CreditCard"
+                      to="/customer/Credit Cards"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      <TbMoneybag className="me-3" />
+                    </NavLink>
+                    <NavLink
+                      title="ComingSoon"
+                      to="#"
+                      // className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      <IoTrailSignOutline className="me-3" />
                     </NavLink>
                   </div>
                 </div>

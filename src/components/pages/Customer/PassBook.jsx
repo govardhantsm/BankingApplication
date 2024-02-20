@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getStatement } from "../../../redux/services/CustomerThunk/AccountsThunk";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const PassBook = () => {
   let dispatch = useDispatch();
@@ -14,8 +16,13 @@ const PassBook = () => {
     });
   }, []);
 
+  // Animation:
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
   return (
-    <section>
+    <section data-aos="zoom-in">
       <div className="m-4 mx-6 font-semibold">
         <h2>PassBook</h2>
       </div>
@@ -59,7 +66,7 @@ const PassBook = () => {
             {statement?.map(st => {
               return (
                 <tr className="bg-gray-50">
-                  <td className="p-[10px] border-r">{st.date?.slice(0,10)}</td>
+                  <td className="p-[10px] border-r">{st.date?.slice(0, 10)}</td>
                   <td className="p-[10px] border-r  ">
                     To Transfer <br />
                     {st.narration}

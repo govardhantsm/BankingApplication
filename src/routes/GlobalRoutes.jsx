@@ -58,9 +58,7 @@ import UploadProfile from "../components/navbar/UploadProfile";
 import CommingSoon from "../components/pages/admin/CommingSoon";
 import RestingPage from "../components/bankmanager/RestingPage";
 import CustomerDashBoard from "../components/pages/Customer/CustomerDashBoard";
-// import LoanAccounts from './../components/pages/md/Accounts/LoanAccount';
 import BMDashboard from "./../components/bankmanager/bankManagerDashboard/BMDashboard";
-import CustomerDashBoard from "../components/pages/Customer/CustomerDashBoard";
 
 const router = createBrowserRouter([
   { path: "/", element: <Landingpage /> },
@@ -382,6 +380,10 @@ const router = createBrowserRouter([
           {
             path: "/customer/Debit Cards",
             element: <DebitCard />,
+          },
+          {
+            path: "/customer/comingSoon",
+            element: <CommingSoon />,
           },
         ],
       },

@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const ApplyCreditCard = () => {
+  // Animation:
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
-    <div className="bg-gray-50">
+    <div className="bg-gray-50" data-aos="zoom-in">
       <div className="middle font-semibold text-lg p-2 m-2">Credit Card</div>
       <div className="bottom p-4 bg-white ms-4 shadow-md ">
         <p className="text-sm font-semibold ps-2 pb-4">APPLY CREDIT CARD</p>
