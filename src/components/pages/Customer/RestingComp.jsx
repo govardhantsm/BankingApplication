@@ -7,7 +7,7 @@ const RestingComp = () => {
   return (
     <div className="flex justify-center items-center h-[90%] w-[100%]">
       <section className="border h-[50%] w-[50%] bg-white rounded-lg shadow-lg">
-        <p className="text-4xl font-bold text-center animate-bounce mt-[5rem]  text-orange-400">
+        <p className="text-4xl font-bold text-center mt-[5rem]  text-gray-700">
           Amount Transfered Sucessfully
         </p>
         <div className="text-center mt-[5rem]">

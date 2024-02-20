@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useDispatch } from "react-redux";
+import { getCustomerProfile } from "../../../redux/reducers/customer/customerSlice";
 
 const CustomerDashBoard = () => {
+  let dispatch = useDispatch();
   let [showDebitCard, setShowDebitCard] = useState(false);
-  const data = JSON.parse(sessionStorage.getItem("myObject"));
+  const [data, SetData] = useState();
+  useEffect(() => {}, []);
+  dispatch(getCustomerProfile()).then(y => {
+    SetData(y.payload.data);
+  });
+
   console.log(data);
 
   // Animation:
