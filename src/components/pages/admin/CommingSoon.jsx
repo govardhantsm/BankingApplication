@@ -33,6 +33,8 @@ const CommingSoon = () => {
             ? "/mdlayout"
             : state == "bankManegarSection"
             ? "/bankmanager"
+            : "mdSection"
+            ? "/customer"
             : ""
         }
       >

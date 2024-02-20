@@ -1,18 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const CustomerDashBoard = () => {
+  let [showDebitCard, setShowDebitCard] = useState(false);
   const data = JSON.parse(sessionStorage.getItem("myObject"));
   console.log(data);
+
+  // Animation:
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
-    <section className="m-6 bg-white border-2 h-[87vh]">
-      <div className="h-[20vh] border w-[100%] flex justify-center items-center text-3xl font-semibold text-slate-800">
+    <section className="m-6 bg-white  h-[87vh]" data-aos="zoom-in">
+      <div className="h-[20vh]  w-[100%] flex justify-center items-center text-3xl font-semibold text-slate-800">
         {" "}
         <p>Customer Dashboard</p>
       </div>
-      <article className="flex border h-[67vh]">
-        <div className=" flex flex-col items-center justify-center gap-4 border-2 w-[50%]">
+      <article className="flex  h-[67vh]">
+        <div className=" flex flex-col items-center justify-center gap-4 w-[50%]">
           <p className="font-semibold"> Account Details</p>
-          <section className=" h-[30vh] w-[70%] p-10 rounded shadow-md shadow-slate-300	">
+          <section className=" h-[30vh] w-[70%] p-10 rounded shadow-md shadow-slate-400	">
             <div className="w-[100%] h-[100%] flex flex-col gap-3 basis-[19rem] justify-evenly border-neutral-700 rounded">
               <p>
                 <span className="w-[170px]  inline-block font-semibold text-[#6e6e6e]">
@@ -45,17 +53,32 @@ const CustomerDashBoard = () => {
           <p>Card Details</p>
           <section className="bg-gray-300 h-[30vh] w-[80%] "></section>
         </div> */}
-        <div className=" flex flex-col items-center justify-center gap-4 border-2 w-[50%]">
+        <div className=" flex flex-col items-center justify-center gap-4 w-[50%]">
           <p className="font-semibold"> DebitCard Details</p>
-          <section className=" h-[30vh] w-[65%] p-10 rounded shadow-md shadow-slate-300	">
+          <section className=" h-[30vh] w-[72%] p-10 rounded shadow-md shadow-slate-400	">
             <div className="w-[100%] h-[100%] flex flex-col gap-3 basis-[19rem] justify-evenly border-neutral-700 rounded">
               <p className="w-[100%] ">
                 <span className="w-[170px] font-semibold inline-block text-[#6e6e6e]">
                   CardNumber:
                 </span>
-                <span className="text-[#6e6e6e]">
-                  {data?.accounts[0]?.debitCard?.cardNumber || "NA"}
-                </span>
+                {!showDebitCard ? (
+                  <span className="text-[#6e6e6e]">
+                    {data?.accounts[0]?.debitCard?.cardNumber || "NA"}
+                  </span>
+                ) : (
+                  <span className="text-[#6e6e6e]">
+                    XXXXXXXX
+                    {data?.accounts[0]?.debitCard?.cardNumber.slice(8, 13) ||
+                      "NA"}
+                  </span>
+                )}
+                <button
+                  onClick={() => setShowDebitCard(!showDebitCard)}
+                  className="text-sm p-1 bg-orange-400 rounded ml-2 text-white"
+                >
+                  {showDebitCard ? "Show" : "Hide"}
+                </button>
+                {console.log(showDebitCard)}
               </p>
               <p>
                 <span className="w-[170px]  inline-block font-semibold text-[#6e6e6e]">
