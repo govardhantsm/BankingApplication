@@ -9,13 +9,11 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import useGetMd from "../../../../utils/useGetMd";
 import { getAllcurrentAccounts } from "../../../../redux/services/managingDirectorThunk/mdAccountThunk/MdAccountThunk";
-import { MdOutlineCreditCard } from "react-icons/md";
-import { MdOutlineCreditCardOff } from "react-icons/md";
-import { MdOutlineCreditScore } from "react-icons/md";
-const BCurrentAccounts = () => {
-const dat = JSON.parse(sessionStorage.getItem("myObject"));
 
-let bankId = dat.bankId;
+const BCurrentAccounts = () => {
+  const user = useGetMd();
+
+  let bankId = user?.data?.data?.bankId;
 
   let [state, setState] = useState(null);
   let dispatch = useDispatch();
@@ -106,18 +104,18 @@ let bankId = dat.bankId;
                         ?.toLowerCase()
                         .includes(e.target.value.toLowerCase())
                   );
-                  // for (let i = 0; i < data.length; i++) {
-                  //   for (let j = 0; j < currentItems.length; j++) {
-                  //     if (
-                  //       data[i]?.email?.toLowerCase() ==
-                  //         currentItems[j]?.email?.toLowerCase() ||
-                  //       data[i]?.name?.toLowerCase() ==
-                  //         currentItems[j]?.name?.toLowerCase()
-                  //     ) {
-                  //       data = data.toSpliced(i, 1);
-                  //     }
-                  //   }
-                  // }
+                  for (let i = 0; i < data.length; i++) {
+                    for (let j = 0; j < currentItems.length; j++) {
+                      if (
+                        data[i]?.email?.toLowerCase() ==
+                          currentItems[j]?.email?.toLowerCase() ||
+                        data[i]?.name?.toLowerCase() ==
+                          currentItems[j]?.name?.toLowerCase()
+                      ) {
+                        data = data.toSpliced(i, 1);
+                      }
+                    }
+                  }
                   e.target.value && true ? setSearch(data) : setSearch(null);
                 }}
               />
@@ -183,65 +181,15 @@ let bankId = dat.bankId;
                     <tr className="text-xs border-b-2">
                       <td className="px-2 py-3 ">{data.name}</td>
                       <td className="px-2">{data.emailID}</td>
-
-                      <td className="px-2">{data.accountType}</td>
+                      <td className="px-2">{data.phoneNumber}</td>
                       <td className="px-2">{data?.accountNumber}</td>
                       <td className="px-2">{data.status}</td>
-
-                      <td className="px-2">
-                        {data.debitCardDto.approval == "APPROVED" ? (
-                          <button className="group relative">
-                            <MdOutlineCreditScore className="text-[2rem] pl-2" />
-                            <div className="invisible bg-white border-orange-500 group-hover:visible h-[5rem] w-[10rem] border-[0.02rem] absolute z-10 -right-40 -mt-10 rounded pt-4 ">
-                              <p className="text-left pl-2">
-                                Name : {data.name}
-                              </p>{" "}
-                              <p className="text-left pl-2">
-                                Date : {data.debitCardDto.issueDate}{" "}
-                              </p>
-                              <p className="text-left pl-2">
-                                Number:{data.debitCardDto.debitCardNumber}
-                              </p>
-                            </div>
-                          </button>
-                        ) : data.debitCardDto.approval == "REJECTED" ? (
-                          <button className="group relative">
-                            <MdOutlineCreditCardOff className="text-[2rem] pl-2" />
-                            <div className="invisible bg-white border-orange-500 group-hover:visible h-[5rem] w-[10rem] border-[0.02rem] absolute z-10 -right-40 -mt-10 rounded pt-4 ">
-                              <p className="text-left pl-2">
-                                Name : {data.name}
-                              </p>{" "}
-                              <p className="text-left pl-2">
-                                Date : {data.debitCardDto.issueDate}{" "}
-                              </p>
-                              <p className="text-left pl-2">
-                                Number:{data.debitCardDto.debitCardNumber}
-                              </p>
-                            </div>
-                          </button>
-                        ) : (
-                          <button className="group relative">
-                            <MdOutlineCreditCard className="text-[2rem] pl-2" />
-                            <div className="invisible bg-white border-orange-500 group-hover:visible h-[5rem] w-[10rem] border-[0.02rem] absolute z-10 -right-40 -mt-10 rounded pt-4 ">
-                              <p className="text-left pl-2">
-                                Name : {data.name}
-                              </p>{" "}
-                              <p className="text-left pl-2">
-                                Date : {data.debitCardDto.issueDate}{" "}
-                              </p>
-                              <p className="text-left pl-2">
-                                Number:{data.debitCardDto.debitCardNumber}
-                              </p>
-                            </div>
-                          </button>
-                        )}
-                      </td>
+                      <td className="px-2">{data?.accountNumber}</td>
                       <td className="px-2">
                         <div className="flex">
                           <span className="px-2  text-red-500">
                             <NavLink
-                              to={`/mdlayout/account/update/${data?.accountNumber}`}
-                              state={"AllAccount"}
+                              to={`/adminlayout/update-md/${data.employeeId}`}
                             >
                               <BiSolidPencil />
                             </NavLink>{" "}
@@ -266,92 +214,41 @@ let bankId = dat.bankId;
                   );
                 })}
 
-                {search == null &&
-                  currentItems?.map(data => {
-                    return (
-                      <tr className="text-xs border-b-2">
-                        <td className="px-2 py-3 ">{data.name}</td>
-                        <td className="px-2">{data.emailID}</td>
-
-                        <td className="px-2">{data.accountType}</td>
-                        <td className="px-2">{data?.accountNumber}</td>
-                        <td className="px-2">{data.status}</td>
-                        <td className="px-2">
-                          {data.debitCardDto.approval == "APPROVED" ? (
-                            <button className="group relative">
-                              <MdOutlineCreditScore className="text-[2rem] pl-2" />
-                              <div className="invisible bg-white border-orange-500 group-hover:visible h-[5rem] w-[10rem] border-[0.02rem] absolute z-10 -right-40 -mt-10 rounded pt-4 ">
-                                <p className="text-left pl-2">
-                                  Name : {data.name}
-                                </p>{" "}
-                                <p className="text-left pl-2">
-                                  Date : {data.debitCardDto.issueDate}{" "}
-                                </p>
-                                <p className="text-left pl-2">
-                                  Number:{data.debitCardDto.debitCardNumber}
-                                </p>
-                              </div>
-                            </button>
-                          ) : data.debitCardDto.approval == "REJECTED" ? (
-                            <button className="group relative">
-                              <MdOutlineCreditCardOff className="text-[2rem] pl-2" />
-                              <div className="invisible bg-white border-orange-500 group-hover:visible h-[5rem] w-[10rem] border-[0.02rem] absolute z-10 -right-40 -mt-10 rounded pt-4 ">
-                                <p className="text-left pl-2">
-                                  Name : {data.name}
-                                </p>{" "}
-                                <p className="text-left pl-2">
-                                  Date : {data.debitCardDto.issueDate}{" "}
-                                </p>
-                                <p className="text-left pl-2">
-                                  Number:{data.debitCardDto.debitCardNumber}
-                                </p>
-                              </div>
-                            </button>
-                          ) : (
-                            <button className="group relative">
-                              <MdOutlineCreditCard className="text-[2rem] pl-2" />
-                              <div className="invisible bg-white border-orange-500 group-hover:visible h-[5rem] w-[10rem] border-[0.02rem] absolute z-10 -right-40 -mt-10 rounded pt-4 ">
-                                <p className="text-left pl-2">
-                                  Name : {data.name}
-                                </p>{" "}
-                                <p className="text-left pl-2">
-                                  Date : {data.debitCardDto.issueDate}{" "}
-                                </p>
-                                <p className="text-left pl-2">
-                                  Number:{data.debitCardDto.debitCardNumber}
-                                </p>
-                              </div>
-                            </button>
-                          )}
-                        </td>
-                        <td className="px-2">
-                          <div className="flex">
-                            <span className="px-2  text-red-500">
-                              <NavLink
-                                to={`/mdlayout/account/update/${data?.accountNumber}`}
-                                state={"AllAccount"}
-                              >
-                                <BiSolidPencil />
-                              </NavLink>
-                            </span>
-                            <span className="px-2 ">
-                              <MdDelete
-                                onClick={() => {
-                                  let deleteConfirm =
-                                    window.confirm("Are you sure");
-                                  if (deleteConfirm === true) {
-                                    dispatch(
-                                      DeleteAccountThunk(data.accountNumber)
-                                    );
-                                  }
-                                }}
-                              />
-                            </span>
-                          </div>
-                        </td>
-                      </tr>
-                    );
-                  })}
+                {currentItems?.map(data => {
+                  return (
+                    <tr className="text-xs border-b-2">
+                      <td className="px-2 py-3 ">{data.name}</td>
+                      <td className="px-2">{data.emailID}</td>
+                      <td className="px-2">{data.phoneNumber}</td>
+                      <td className="px-2">{data?.accountNumber}</td>
+                      <td className="px-2">{data.status}</td>
+                      <td className="px-2">
+                        <div className="flex">
+                          <span className="px-2  text-red-500">
+                            <NavLink
+                              to={`/mdlayout/account/update/${data?.accountNumber}`}
+                            >
+                              <BiSolidPencil />
+                            </NavLink>
+                          </span>
+                          <span className="px-2 ">
+                            <MdDelete
+                              onClick={() => {
+                                let deleteConfirm =
+                                  window.confirm("Are you sure");
+                                if (deleteConfirm === true) {
+                                  dispatch(
+                                    DeleteAccountThunk(data?.accountNumber)
+                                  );
+                                }
+                              }}
+                            />
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

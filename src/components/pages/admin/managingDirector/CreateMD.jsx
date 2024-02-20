@@ -7,10 +7,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import toast from "react-hot-toast";
 import { Country, State, City } from "country-state-city";
-import {
-  createMd,
-  getAllUnassigned,
-} from "../../../../redux/services/adminThunk/adminMdThunk/AdminMdThunk";
+import { createMd, getAllUnassigned } from "../../../../redux/services/adminThunk/adminMdThunk/AdminMdThunk";
 const CreateMD = () => {
   let dispatch = useDispatch();
   const navigate = useNavigate();
@@ -45,49 +42,26 @@ const CreateMD = () => {
     address: {
       addressId: "",
       addressLine: state.addressLine,
-      pincode: state.pincode,
+      pincode: "qsp5160003",
       state: state.state,
-      country: state.country,
-      city: state.city,
+      country: "India",
+      city: "Banglore",
     },
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (isValidation()) {
-      dispatch(createMd(payload));
-      navigate("/adminlayout/all-md");
-      // toast.success("MD Created successfully");
-    } else {
-      toast.error("Please enter all fields");
-    }
+    console.log(payload)
+    dispatch(createMd(payload));
+    navigate("/adminlayout/all-md");
+    // 
+    toast.success("MD Created successfully");
   };
 
   // Animation:
   useEffect(() => {
     AOS.init();
   }, []);
-
-  let isValidation = () => {
-    if (
-      /^[0-9]+$/.test(state.pincode) &&
-      /^[A-Za-z\s]+$/.test(state.name) &&
-      /^[0-9]+$/.test(state.phoneNumber)
-    )
-      return (
-        state.name &&
-        state.phoneNumber &&
-        state.email &&
-        state.gender &&
-        state.dateOfBirth &&
-        state.bankId &&
-        state.addressLine &&
-        state.pincode &&
-        state.state &&
-        state.country &&
-        state.city
-      );
-  };
 
   return (
     <section className="h-[99%] w-[100%] relative" data-aos="zoom-in">
@@ -100,36 +74,17 @@ const CreateMD = () => {
             <label htmlFor="name" className="text-[rgb(145,142,143)]">
               Name
             </label>
-            {!/^[A-Za-z\s]+$/.test(state.name) && state.name ? (
-              <div className="w-[80%]">
-                <input
-                  className="w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-                  type="text"
-                  pattern="[A-Za-z\s]+"
-                  placeholder="Enter Name"
-                  id="name"
-                  name="name"
-                  value={state.name}
-                  onChange={e => {
-                    setState({ ...state, name: e.target.value });
-                  }}
-                />
-                <p className="text-red-600 text-xm">Enter only string value</p>
-              </div>
-            ) : (
-              <input
-                className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-                type="text"
-                pattern="[A-Za-z\s]+"
-                placeholder="Enter Name"
-                id="name"
-                name="name"
-                value={state.name}
-                onChange={e => {
-                  setState({ ...state, name: e.target.value });
-                }}
-              />
-            )}
+            <input
+              className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+              type="text"
+              placeholder="Enter Name"
+              id="name"
+              name="name"
+              value={state.name}
+              onChange={e => {
+                setState({ ...state, name: e.target.value });
+              }}
+            />
           </div>
           <div className="flex justify-between w-[99%] mb-4">
             <label htmlFor="email" className="text-[rgb(145,142,143)]">
@@ -151,36 +106,18 @@ const CreateMD = () => {
             <label htmlFor="name" className="text-[rgb(145,142,143)]">
               Phone number
             </label>
-            {!/^[0-9]+$/.test(state.phoneNumber) && state.phoneNumber ? (
-              <div className="w-[80%]">
-                <input
-                  className=" w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-                  type="tel"
-                  pattern="[0-9]{10}"
-                  placeholder="Enter Phonenumber"
-                  id="phonenumber"
-                  name="phonenumber"
-                  value={state.phoneNumber}
-                  onChange={e => {
-                    setState({ ...state, phoneNumber: e.target.value });
-                  }}
-                />
-                <p className="text-red-600 text-xm">Enter only numeric value</p>
-              </div>
-            ) : (
-              <input
-                className=" w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-                type="tel"
-                pattern="[0-9]{10}"
-                placeholder="Enter Phonenumber"
-                id="phonenumber"
-                name="phonenumber"
-                value={state.phoneNumber}
-                onChange={e => {
-                  setState({ ...state, phoneNumber: e.target.value });
-                }}
-              />
-            )}
+            <input
+              className=" w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+              type="tel"
+              pattern="[0-9]{10}"
+              placeholder="Enter Phonenumber"
+              id="phonenumber"
+              name="phonenumber"
+              value={state.phoneNumber}
+              onChange={e => {
+                setState({ ...state, phoneNumber: e.target.value });
+              }}
+            />
           </div>
           <div className="flex justify-between w-[99%] mb-4">
             <label htmlFor="branchaddress" className="text-[rgb(145,142,143)]">
@@ -271,7 +208,7 @@ const CreateMD = () => {
                 setState({ ...state, city: e.target.value });
               }}
             >
-              <option disabled className="text-gray-400">
+              <option disabled value="" className="text-gray-400">
                 -- Select The City --
               </option>
 
@@ -287,36 +224,18 @@ const CreateMD = () => {
             <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
               Pincode
             </label>
-            {!/^[0-9]+$/.test(state.pincode) && state.pincode ? (
-              <div className="w-[80%]">
-                <input
-                  className="w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-                  type="tel"
-                  pattern="[0-9]{6}"
-                  placeholder="Enter pincode"
-                  id="pincode"
-                  name="pincode"
-                  value={state.pincode}
-                  onChange={e => {
-                    setState({ ...state, pincode: e.target.value });
-                  }}
-                />
-                <p className="text-red-600 text-xm">Enter only numeric value</p>
-              </div>
-            ) : (
-              <input
-                className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-                type="tel"
-                pattern="[0-9]{6}"
-                placeholder="Enter pincode"
-                id="pincode"
-                name="pincode"
-                value={state.pincode}
-                onChange={e => {
-                  setState({ ...state, pincode: e.target.value });
-                }}
-              />
-            )}
+            <input
+              className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+              type="tel"
+              pattern="[0-9]{6}"
+              placeholder="Enter Pincode"
+              id="pincode"
+              name="pincode"
+              value={state.pincode}
+              onChange={e => {
+                setState({ ...state, pincode: e.target.value });
+              }}
+            />
           </div>
           <section className="w-[80%] flex ms-64">
             <div className="text-[rgb(145,142,143)] w-[60%]">
@@ -406,16 +325,7 @@ const CreateMD = () => {
           </div>
 
           <div className="flex justify-end pt-4">
-            {/* <Button type="submit" name="Create MD"></Button> */}
-            {isValidation() ? (
-              <button className="p-[10px] m-3 bg-blue-500 text-white rounded">
-                Create MD
-              </button>
-            ) : (
-              <button className="p-[10px] m-3 bg-gray-400 text-white rounded cursor-not-allowed">
-                Create MD
-              </button>
-            )}
+            <Button type="submit" name="Create MD"></Button>
           </div>
         </form>
       </section>

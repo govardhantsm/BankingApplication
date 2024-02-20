@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { CiBank } from "react-icons/ci";
 import { RiArrowDropRightLine, RiDashboard2Fill } from "react-icons/ri";
-import { FaRegUserCircle } from "react-icons/fa";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { IoMail } from "react-icons/io5";
 import { useDispatch } from "react-redux";
@@ -17,11 +16,13 @@ import { LiaIdCardSolid } from "react-icons/lia";
 import useGetMd from "../../../utils/useGetMd";
 
 const MdLeftsideSection = () => {
-  const data = JSON.parse(sessionStorage.getItem("myObject"));
-  // In another file
-  let storedFile = localStorage.getItem("profilePicMd");
-  console.log(storedFile);
+  //const user = useGetProfile();
 
+  const user = useGetMd();
+
+  let bankId = user?.data?.data?.bankId;
+
+  localStorage.setItem("bankId", bankId);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -35,22 +36,25 @@ const MdLeftsideSection = () => {
   return (
     <>
       <section className="text-sm h-[100%] w-[100%] bg-black flex justify-between flex-col">
-        <div className="flex flex-col items-center h-[20%]">
-          <img
-            src={
-              // user?.avatar ||
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAK2Ud4gQr9pQFT6rc3xbeq74MhZe7bOdvQ&usqp=CAU"
-            }
-            alt=""
-            className="h-[4rem] w-[4rem] rounded-full mt-5"
-          />
-          <p className="mt-3">{data?.name.toUpperCase()}</p>
-          <p className="mt-1 text-[rgb(112,112,112)]">
-            {data?.role == "MANAGING_DIRECTOR" ? "MANAGING DIRECTOR" : ""}
-          </p>
-          <p className="mt-1 text-[rgb(112,112,112)]"></p>
-        </div>
-
+        {user.status === true ? (
+          <Spinner />
+        ) : (
+          <div className="flex flex-col items-center h-[20%]">
+            <img
+              src={
+                // user?.avatar ||
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAK2Ud4gQr9pQFT6rc3xbeq74MhZe7bOdvQ&usqp=CAU"
+              }
+              alt=""
+              className="h-[4rem] w-[4rem] rounded-full mt-5"
+            />
+            <p className="mt-3">{user?.data?.data?.name}</p>
+            <p className="mt-1 text-[rgb(112,112,112)]">
+              {user?.data?.data?.role}
+            </p>
+            <p className="mt-1 text-[rgb(112,112,112)]"></p>
+          </div>
+        )}
         <section className="h-[70%]">
           <div className="flex mt-8 ms-8">
             <NavLink to="/mdlayout">
@@ -61,7 +65,7 @@ const MdLeftsideSection = () => {
             </NavLink>
           </div>
           <div
-            className="flex mt-3 items-center justify-between w-[90%] cursor-pointer"
+            className="flex mt-3 items-center justify-between w-[90%]"
             onClick={() =>
               setBranch(e => {
                 setBankManager(false);
@@ -73,7 +77,7 @@ const MdLeftsideSection = () => {
               })
             }
           >
-            <p className="ms-8 flex ">
+            <p className="ms-8 flex">
               <CiBank className="me-3 text-[0.98rem]" />
               Branch
             </p>
@@ -106,7 +110,7 @@ const MdLeftsideSection = () => {
             </div>
           )}
           <div
-            className="flex mt-3 items-center justify-between w-[90%] cursor-pointer"
+            className="flex mt-3 items-center justify-between w-[90%]"
             onClick={() =>
               setBankManager(e => {
                 setBranch(false);
@@ -150,7 +154,7 @@ const MdLeftsideSection = () => {
             </div>
           )}
           <div
-            className="flex mt-3 items-center justify-between w-[90%] cursor-pointer"
+            className="flex mt-3 items-center justify-between w-[90%]"
             onClick={() =>
               setApprovals(e => {
                 setBranch(false);
@@ -178,8 +182,7 @@ const MdLeftsideSection = () => {
             <div className="ms-10 mt-2">
               <li className="list-none text-[rgb(112,112,112)]">
                 <NavLink
-                  state={"mdSection"}
-                  to="/mdlayout/comingSoon"
+                  to="/mdlayout/create-branchManager"
                   className={({ isActive }) => (isActive ? "active" : "")}
                 >
                   Loan Approvals
@@ -187,8 +190,7 @@ const MdLeftsideSection = () => {
               </li>
               <li className="list-none mt-2 text-[rgb(112,112,112)]">
                 <NavLink
-                  state={"mdSection"}
-                  to="/mdlayout/comingSoon"
+                  to="/mdlayout/all-branchManager"
                   className={({ isActive }) => (isActive ? "active" : "")}
                 >
                   Card Approvals
@@ -197,7 +199,7 @@ const MdLeftsideSection = () => {
             </div>
           )}
           <div
-            className="flex mt-3 items-center justify-between w-[90%] cursor-pointer"
+            className="flex mt-3 items-center justify-between w-[90%]"
             onClick={() =>
               setAccounts(e => {
                 setBranch(false);
@@ -258,7 +260,7 @@ const MdLeftsideSection = () => {
             </div>
           )}
           <div
-            className="flex mt-3 items-center justify-between w-[90%] cursor-pointer"
+            className="flex mt-3 items-center justify-between w-[90%]"
             onClick={() =>
               setLoans(e => {
                 setBranch(false);
@@ -286,8 +288,7 @@ const MdLeftsideSection = () => {
             <div className="ms-10 mt-2">
               <li className="list-none text-[rgb(112,112,112)]">
                 <NavLink
-                  state={"mdSection"}
-                  to="/mdlayout/comingSoon"
+                  to="/mdlayout/create-branchManager"
                   className={({ isActive }) => (isActive ? "active" : "")}
                 >
                   All Loans
@@ -295,8 +296,7 @@ const MdLeftsideSection = () => {
               </li>
               <li className="list-none mt-2 text-[rgb(112,112,112)]">
                 <NavLink
-                  state={"mdSection"}
-                  to="/mdlayout/comingSoon"
+                  to="/mdlayout/all-branchManager"
                   className={({ isActive }) => (isActive ? "active" : "")}
                 >
                   Personal Loans
@@ -304,8 +304,7 @@ const MdLeftsideSection = () => {
               </li>
               <li className="list-none mt-2 text-[rgb(112,112,112)]">
                 <NavLink
-                  state={"mdSection"}
-                  to="/mdlayout/comingSoon"
+                  to="/mdlayout/all-branchManager"
                   className={({ isActive }) => (isActive ? "active" : "")}
                 >
                   Home Loans
@@ -313,8 +312,7 @@ const MdLeftsideSection = () => {
               </li>
               <li className="list-none mt-2 text-[rgb(112,112,112)]">
                 <NavLink
-                  state={"mdSection"}
-                  to="/mdlayout/comingSoon"
+                  to="/mdlayout/all-branchManager"
                   className={({ isActive }) => (isActive ? "active" : "")}
                 >
                   Educational Loans
@@ -322,8 +320,7 @@ const MdLeftsideSection = () => {
               </li>
               <li className="list-none mt-2 text-[rgb(112,112,112)]">
                 <NavLink
-                  state={"mdSection"}
-                  to="/mdlayout/comingSoon"
+                  to="/mdlayout/all-branchManager"
                   className={({ isActive }) => (isActive ? "active" : "")}
                 >
                   Vehicle Loans
@@ -332,7 +329,7 @@ const MdLeftsideSection = () => {
             </div>
           )}
           <div
-            className="flex mt-3 items-center justify-between w-[90%] cursor-pointer"
+            className="flex mt-3 items-center justify-between w-[90%]"
             onClick={() =>
               setCards(e => {
                 setBranch(false);
@@ -359,29 +356,28 @@ const MdLeftsideSection = () => {
           </div>
           {Cards && (
             <div className="ms-10 mt-2">
-              {/* <li className="list-none text-[rgb(112,112,112)]">
+              <li className="list-none text-[rgb(112,112,112)]">
                 <NavLink
                   to="/mdlayout/create-branchManager"
                   className={({ isActive }) => (isActive ? "active" : "")}
                 >
                   All Cards
                 </NavLink>
-              </li> */}
-              {/* <li className="list-none mt-2 text-[rgb(112,112,112)]">
+              </li>
+              <li className="list-none mt-2 text-[rgb(112,112,112)]">
                 <NavLink
                   to="/mdlayout/all-branchManager"
                   className={({ isActive }) => (isActive ? "active" : "")}
                 >
                   Credit Cards
                 </NavLink>
-              </li> */}
+              </li>
               <li className="list-none mt-2 text-[rgb(112,112,112)]">
                 <NavLink
-                  state={"mdSection"}
-                  to="/mdlayout/comingSoon"
+                  to="/mdlayout/all-branchManager"
                   className={({ isActive }) => (isActive ? "active" : "")}
                 >
-                  Credit Cards
+                  Debit Cards
                 </NavLink>
               </li>
             </div>
@@ -389,7 +385,7 @@ const MdLeftsideSection = () => {
         </section>
         <div className="text-center">
           <button
-            className=" text-white bg-gradient-to-r from-blue-500 via-blue-700 to-blue-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-3 py-1.5 text-center mb-8"
+            className=" text-white bg-gradient-to-r from-blue-500 via-blue-700 to-blue-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-3 py-1.5 text-center"
             onClick={() => {
               dispatch(logout());
               navigate("/");

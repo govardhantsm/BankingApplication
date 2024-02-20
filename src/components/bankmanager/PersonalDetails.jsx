@@ -82,7 +82,6 @@ const PersonalDetails = () => {
       state.addressLine &&
       state.pincode &&
       state.country &&
-      state.State &&
       state.city
     );
   };
@@ -276,7 +275,7 @@ const PersonalDetails = () => {
             <option value="MARRIED">MARRIED</option>
             <option value="WIDOWED">WIDOWED</option>
             <option value="DIVORCED">DIVORCED</option>
-            <option value="SEPARTED">SEPARATED</option>
+            <option value="SEPARATED">SEPARATED</option>
           </select>
         </div>
         <div className=" flex flex-col basis-[19rem]">
@@ -421,21 +420,21 @@ const PersonalDetails = () => {
             <option disabled value="" className="text-gray-400">
               -- Select The Country --
             </option>
-            {Country.getAllCountries().map(countary => {
-              return <option value={countary.name}>{countary.name}</option>;
+            {Country.getAllCountries().map(city => {
+              return <option value={city.name}>{city.name}</option>;
             })}
           </select>
         </div>
 
         <div className="flex flex-col basis-[19rem]">
-          <label htmlFor="State" className="text-[15px] pb-2 text-gray-400">
+          <label htmlFor="region" className="text-[15px] pb-2 text-gray-400">
             State
           </label>
           <select
             className="border-2 rounded-md focus:outline-none pl-3 p-[0.38rem] text-[rgb(145,142,143)] sm:text-sm sm:leading-6"
-            name="State"
-            id="State"
-            value={state.State}
+            name="region"
+            id="region"
+            value={state.region}
             onChange={e => {
               const selectedState = e.target.value;
               setStat(
@@ -443,15 +442,15 @@ const PersonalDetails = () => {
                   ele => ele.name === selectedState
                 )?.isoCode
               );
-              setState({ ...state, State: selectedState });
+              setState({ ...state, region: selectedState });
             }}
           >
             <option disabled value="" selected className="text-gray-400">
               -- Select The State --
             </option>
-            {State.getStatesOfCountry(cou).map(State => (
-              <option key={State.isoCode} value={State.name}>
-                {State.name}
+            {State.getStatesOfCountry(cou).map(region => (
+              <option key={region.isoCode} value={region.name}>
+                {region.name}
               </option>
             ))}
           </select>

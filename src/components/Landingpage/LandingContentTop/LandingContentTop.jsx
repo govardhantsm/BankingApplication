@@ -5,7 +5,7 @@ import basicimg from "../../../images/basicimg.png";
 const LandingTopMain = () => {
   return (
     <section className="w-[100%] h-[92%] flex justify-center">
-     <LandingTopNav/>
+     <LandingTopNav/>   
     <img
     src={basicimg}
       alt=""

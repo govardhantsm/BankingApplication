@@ -8,7 +8,7 @@ import axios from "axios";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import toast from "react-hot-toast";
-import { createBank } from "./../../../../redux/services/adminThunk/adminBankThunk/AdminBankThunk";
+import { createBank } from './../../../../redux/services/adminThunk/adminBankThunk/AdminBankThunk';
 
 const CreateBank = () => {
   let dispatch = useDispatch();
@@ -36,34 +36,21 @@ const CreateBank = () => {
       city: state.city,
     },
   };
-  const handleSubmit = async e => {
+const handleSubmit = async e => {
     e.preventDefault();
-    if (isValidation()) {
-      dispatch(createBank(payload));
-    } else {
-      toast.error("Please enter all fields");
-    }
+    console.log("clicked");
+    dispatch(createBank(payload));
+    navigate("/adminlayout/all-bank");
+    toast.success("Bank created successfully");
   };
 
-  // Animation:
-  useEffect(() => {
-    AOS.init();
-  }, []);
-
-  let isValidation = () => {
-    if (/^[A-Za-z\s]+$/.test(state.bankName) && /^[0-9]+$/.test(state.pincode))
-      return (
-        state.bankName &&
-        state.addressLine &&
-        state.pincode &&
-        state.country &&
-        state.state &&
-        state.city
-      );
-  };
+  // // Animation:
+  // useEffect(() => {
+  //   AOS.init();
+  // }, []);
 
   return (
-    <section className="h-[100%] w-[100%] relative" data-aos="zoom-in">
+    <section className="h-[100%] w-[100%] relative">
       <section className="rounded-md border-2 py-1.5 w-[97%] bg-white absolute top-4 left-3">
         <div className="ps-4 py-3 uppercase font-semibold">Create Bank</div>
         <form onSubmit={handleSubmit} className="p-2 ps-4">
@@ -71,38 +58,17 @@ const CreateBank = () => {
             <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
               Bank Name
             </label>
-            {!/^[A-Za-z\s]+$/.test(state.bankName) && state.bankName ? (
-              <div className="w-[80%]">
-                <input
-                  className="border-red-600 rounded-md py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6 w-[100%] "
-                  type="text"
-                  pattern="[A-Za-z\s]+"
-                  placeholder="Enter bankname"
-                  id="bankname"
-                  name="bankname"
-                  value={state.bankName}
-                  onChange={e => {
-                    setState({ ...state, bankName: e.target.value });
-                  }}
-                />
-                <p className="text-red-600 text-xm">Enter only string value</p>
-              </div>
-            ) : (
-              <div className="w-[80%]">
-                <input
-                  className="w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-                  type="text"
-                  pattern="[A-Za-z\s]{4,}"
-                  placeholder="Enter bankname"
-                  id="bankname"
-                  name="bankname"
-                  value={state.bankName}
-                  onChange={e => {
-                    setState({ ...state, bankName: e.target.value });
-                  }}
-                />
-              </div>
-            )}
+            <input
+              className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+              type="text"
+              placeholder="Enter bankname"
+              id="bankname"
+              name="bankname"
+              value={state.bankName}
+              onChange={e => {
+                setState({ ...state, bankName: e.target.value });
+              }}
+            />
           </div>
           <div className="flex justify-between w-[99%] mb-4">
             <label htmlFor="branchaddress" className="text-[rgb(145,142,143)]">
@@ -145,11 +111,7 @@ const CreateBank = () => {
               </option>
               {/* {Country.getAllCountries().map(li => console.log(li))} */}
               {Country.getAllCountries().map(city => {
-                return (
-                  <option key={city.name} value={city.name}>
-                    {city.name}
-                  </option>
-                );
+                return <option value={city.name}>{city.name}</option>;
               })}
               {/* {console.log(Country.getAllCountries())} */}
             </select>
@@ -179,7 +141,7 @@ const CreateBank = () => {
                 -- Select The State --
               </option>
               {State.getStatesOfCountry(cou).map(state => (
-                <option key={state.isoCode} value={state.name}>
+                <option key={state.isoCode} value={state.name} >
                   {state.name}
                 </option>
               ))}
@@ -215,55 +177,22 @@ const CreateBank = () => {
             <label htmlFor="pincode" className="text-[rgb(145,142,143)]">
               Pincode
             </label>
-            {!/^[0-9]+$/.test(state.pincode) && state.pincode ? (
-              <div className="w-[80%]">
-                <input
-                  className="w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-                  type="tel"
-                  pattern="[0-9]{6}"
-                  placeholder="Enter pincode"
-                  id="pincode"
-                  name="pincode"
-                  value={state.pincode}
-                  onChange={e => {
-                    setState({ ...state, pincode: e.target.value });
-                  }}
-                />
-                <p className="text-red-600 text-xm">Enter only numeric value</p>
-              </div>
-            ) : (
-              <input
-                className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-                type="tel"
-                pattern="[0-9]{6}"
-                placeholder="Enter pincode"
-                id="pincode"
-                name="pincode"
-                value={state.pincode}
-                onChange={e => {
-                  setState({ ...state, pincode: e.target.value });
-                }}
-              />
-            )}
+            <input
+              className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+              type="tel"
+              pattern="[0-9]{6}"
+              placeholder="Enter pincode"
+              id="pincode"
+              name="pincode"
+              value={state.pincode}
+              onChange={e => {
+                setState({ ...state, pincode: e.target.value });
+              }}
+            />
           </div>
 
           <div className="flex justify-end pt-4">
-            {/* <Button type="submit" name="Create Bank"></Button> */}
-            {/* <Button
-              type="submit"
-              name="Create Bank"
-              disabled={!isValidation()}
-              style={{ cursor: !isValidation() ? "not-allowed" : "pointer" }}
-            ></Button> */}
-            {isValidation() ? (
-              <button className="p-[10px] m-3 bg-blue-500 text-white rounded">
-                Create Bank
-              </button>
-            ) : (
-              <button className="p-[10px] m-3 bg-gray-400 text-white rounded cursor-not-allowed">
-                Create Bank
-              </button>
-            )}
+            <Button type="submit" name="Create Bank"></Button>
           </div>
         </form>
       </section>

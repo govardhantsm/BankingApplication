@@ -5,7 +5,7 @@ import { BiSolidPencil } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 // import { deleteMd } from "../../../../redux/reducers/md/mdSlice";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Spinner from "../pages/spinner/Spinner";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -13,26 +13,18 @@ import useGetBm from "../../utils/useGetBm";
 import {
   deleteBankAccount,
   getAllCurrentAccount,
-  getApprove,
 } from "../../redux/reducers/bankmanager/bankManagerSlice";
-import { MdOutlineCreditCardOff } from "react-icons/md";
-import { MdOutlineCreditScore } from "react-icons/md";
-import { MdOutlineCreditCard } from "react-icons/md";
-import { MdCreditScore } from "react-icons/md";
+
 const BranchCurrentAccount = () => {
-  // localStorage.setItem("path", "/bankmanager/Current Accounts");  
-  let [accountNumber, SetAccountNumber] = useState();
+  localStorage.setItem("path", "/bankmanager/Current Accounts");
   let [state, setState] = useState(null);
-  let [toggle, SetToggle] = useState(false);
-  let navigate = useNavigate();
-  let [approval, SetApproval] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(2);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = state?.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(state?.length / itemsPerPage);
-  let [search, setSearch] = useState(null);
+ let [search, setSearch] = useState("");
   let dispatch = useDispatch();
 
   const handlePageChange = pageNumber => {
@@ -129,20 +121,20 @@ const BranchCurrentAccount = () => {
                         ?.toLowerCase()
                         .includes(e.target.value.toLowerCase())
                   );
-                  // console.log(currentItems, "currentitems");
-                  // for (let i = 0; i < data.length; i++) {
-                  //   for (let j = 0; j < currentItems.length; j++) {
-                  //     if (
-                  //       data[i]?.emailID?.toLowerCase() ==
-                  //         currentItems[j]?.emailID?.toLowerCase() ||
-                  //       data[i]?.name?.toLowerCase() ==
-                  //         currentItems[j]?.name?.toLowerCase()
-                  //     ) {
-                  //       data = data.toSpliced(i, 1);
-                  //     }
-                  //   }
-                  // }
-                  // console.log(data);
+                  console.log(currentItems, "currentitems");
+                  for (let i = 0; i < data.length; i++) {
+                    for (let j = 0; j < currentItems.length; j++) {
+                      if (
+                        data[i]?.emailID?.toLowerCase() ==
+                          currentItems[j]?.emailID?.toLowerCase() ||
+                        data[i]?.name?.toLowerCase() ==
+                          currentItems[j]?.name?.toLowerCase()
+                      ) {
+                        data = data.toSpliced(i, 1);
+                      }
+                    }
+                  }
+                  console.log(data);
                   e.target.value && true ? setSearch(data) : setSearch(null);
                 }}
               />
@@ -160,10 +152,25 @@ const BranchCurrentAccount = () => {
                       </span>
                     </div>
                   </th>
-
+                  <th className="py-2">
+                    <div className="w-18% flex justify-between align-center px-2 text-sm">
+                      <span>Phone_Number</span>
+                      <span>
+                        <TbArrowsDownUp />
+                      </span>
+                    </div>
+                  </th>
                   <th>
                     <div className="w-18% flex justify-between align-center px-2 text-sm">
                       <span>Email-Id</span>
+                      <span>
+                        <TbArrowsDownUp />
+                      </span>
+                    </div>
+                  </th>
+                  <th>
+                    <div className="w-18% flex justify-between align-center px-2 text-sm">
+                      <span>Account Type</span>
                       <span>
                         <TbArrowsDownUp />
                       </span>
@@ -185,11 +192,6 @@ const BranchCurrentAccount = () => {
                       </span>
                     </div>
                   </th>
-                  <th className="py-2">
-                    <div className="w-18% flex justify-between align-center px-2 text-sm">
-                      <span>Debit Card</span>
-                    </div>
-                  </th>
                   <th>
                     <div className="w-18% flex justify-between align-center px-2 text-sm">
                       <span> Actions</span>
@@ -206,95 +208,16 @@ const BranchCurrentAccount = () => {
                     return (
                       <tr className="text-xs border-b-2" key={ind}>
                         <td className="px-2 py-3 ">{data.name}</td>
-
+                        <td className="px-2">{data.phoneNumber}</td>
                         <td className="px-2">{data.emailID}</td>
+                        <td className="px-2">{data.accountType}</td>
                         <td className="px-2">{data.accountNumber}</td>
                         <td className="px-2">{data.status}</td>
-                        <td className="px-2">
-                          <>
-                            <button
-                              className="group relative"
-                              onClick={() => {
-                                SetAccountNumber(data.accountNumber);
-                                SetToggle(t => !t);
-                              }}
-                            >
-                              {data.debitCardDto.approval === "APPROVED" ? (
-                                <MdCreditScore className="text-[2rem] pl-2" />
-                              ) : data.debitCardDto.approval === "REJECT" ? (
-                                <MdOutlineCreditCardOff className="text-[2rem] pl-2" />
-                              ) : (
-                                <MdOutlineCreditCard className="text-[2rem] pl-2" />
-                              )}
-
-                              <div className="invisible bg-white border-orange-500 group-hover:visible h-[5rem] w-[10rem] border-[0.02rem] absolute z-10 -right-40 -mt-10 rounded pt-4 ">
-                                <p className="text-left pl-2">
-                                  Name : {data.name}
-                                </p>{" "}
-                                <p className="text-left pl-2">
-                                  Date : {data.debitCardDto.issueDate}{" "}
-                                </p>
-                                <p className="text-left pl-2">
-                                  Number:{data.debitCardDto.debitCardNumber}
-                                </p>
-                              </div>
-                            </button>
-                            {toggle ? (
-                              <div
-                                class="shadow-lg w-[20rem] h-[12rem] rounded-lg p-6 mx-auto my-6 max-w-md  absolute top-[100px] right-[400px] z-20 bg-[#ecc7bd] text-[#2a2929] mr-2"
-                                data-aos="fade-down"
-                              >
-                                <div class="flex flex-col items-center mb-4 p-2 pt-6 ">
-                                  <div className="pb-6">
-                                    <label className="text-[20px] pb-2 text-black font-bold ">
-                                      Approval :{" "}
-                                    </label>
-                                    <select
-                                      className="border-2 rounded-md focus:outline-none pl-3 p-[0.36rem] text-[rgb(145,142,143)] sm:text-sm sm:leading-6"
-                                      onChange={e => {
-                                        SetApproval(e.target.value);
-                                      }}
-                                    >
-                                      <option>-----Select Status----</option>
-                                      <option value="APPROVED">Approved</option>
-                                      <option value="REJECT">Rejected</option>
-                                      <option value="HOLD">Hold</option>
-                                      <option value="IN_PROCESS">
-                                        In-Progress
-                                      </option>
-                                    </select>
-                                  </div>
-                                  <button
-                                    className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-                                    onClick={e => {
-                                      e.preventDefault();
-
-                                      dispatch(
-                                        getApprove({
-                                          approval,
-                                          accountNumber,
-                                        })
-                                      ).then(x => {
-                                        SetToggle(t => !t);
-                                        window.location.reload();
-                                      });
-                                    }}
-                                  >
-                                    Submit
-                                  </button>
-                                </div>
-                              </div>
-                            ) : (
-                              ""
-                            )}
-                          </>
-                        </td>
                         <td className="px-2">
                           <div className="flex">
                             <span className="px-2  text-red-500">
                               <NavLink
                                 to={`/bankmanager/account/update/${data?.accountNumber}`}
-                                state={"CurrentAccount"}
                               >
                                 <BiSolidPencil />
                               </NavLink>
@@ -318,123 +241,43 @@ const BranchCurrentAccount = () => {
                       </tr>
                     );
                   })}
-                {search == null &&
-                  currentItems?.map((data, ind) => {
-                    return (
-                      <tr className="text-xs border-b-2" key={ind}>
-                        <td className="px-2 py-3 ">{data.name}</td>
-
-                        <td className="px-2">{data.emailID}</td>
-                        <td className="px-2">{data.accountNumber}</td>
-                        <td className="px-2">{data.status}</td>
-                        <td className="px-2">
-                          <>
-                            <button
-                              className="group relative"
-                              onClick={() => {
-                                SetAccountNumber(data.accountNumber);
-                                SetToggle(t => !t);
-                              }}
+                {currentItems?.map((data, ind) => {
+                  return (
+                    <tr className="text-xs border-b-2" key={ind}>
+                      <td className="px-2 py-3 ">{data.name}</td>
+                      <td className="px-2">{data.phoneNumber}</td>
+                      <td className="px-2">{data.emailID}</td>
+                      <td className="px-2">{data.accountType}</td>
+                      <td className="px-2">{data.accountNumber}</td>
+                      <td className="px-2">{data.status}</td>
+                      <td className="px-2">
+                        <div className="flex">
+                          <span className="px-2  text-red-500">
+                            <NavLink
+                              to={`/bankmanager/account/update/${data?.accountNumber}`}
                             >
-                              {data.debitCardDto.approval === "APPROVED" ? (
-                                <MdCreditScore className="text-[2rem] pl-2" />
-                              ) : data.debitCardDto.approval === "REJECT" ? (
-                                <MdOutlineCreditCardOff className="text-[2rem] pl-2" />
-                              ) : (
-                                <MdOutlineCreditCard className="text-[2rem] pl-2" />
-                              )}
-
-                              <div className="invisible bg-white border-orange-500 group-hover:visible h-[5rem] w-[10rem] border-[0.02rem] absolute z-10 -right-40 -mt-10 rounded pt-4 ">
-                                <p className="text-left pl-2">
-                                  Name : {data.name}
-                                </p>{" "}
-                                <p className="text-left pl-2">
-                                  Date : {data.debitCardDto.issueDate}{" "}
-                                </p>
-                                <p className="text-left pl-2">
-                                  Number:{data.debitCardDto.debitCardNumber}
-                                </p>
-                              </div>
-                            </button>
-                            {toggle ? (
-                              <div
-                                class="shadow-lg w-[20rem] h-[12rem] rounded-lg p-6 mx-auto my-6 max-w-md  absolute top-[100px] right-[400px] z-20 bg-[#ecc7bd] text-[#2a2929] mr-2"
-                                data-aos="fade-down"
-                              >
-                                <div class="flex flex-col items-center mb-4 p-2 pt-6 ">
-                                  <div className="pb-6">
-                                    <label className="text-[20px] pb-2 text-black font-bold ">
-                                      Approval :{" "}
-                                    </label>
-                                    <select
-                                      className="border-2 rounded-md focus:outline-none pl-3 p-[0.36rem] text-[rgb(145,142,143)] sm:text-sm sm:leading-6"
-                                      onChange={e => {
-                                        SetApproval(e.target.value);
-                                      }}
-                                    >
-                                      <option>-----Select Status----</option>
-                                      <option value="APPROVED">Approved</option>
-                                      <option value="REJECT">Rejected</option>
-                                      <option value="HOLD">Hold</option>
-                                      <option value="IN_PROCESS">
-                                        In-Progress
-                                      </option>
-                                    </select>
-                                  </div>
-                                  <button
-                                    className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-                                    onClick={e => {
-                                      e.preventDefault();
-
-                                      dispatch(
-                                        getApprove({
-                                          approval,
-                                          accountNumber,
-                                        })
-                                      ).then(x => {
-                                        SetToggle(t => !t);
-                                        window.location.reload();
-                                      });
-                                    }}
-                                  >
-                                    Submit
-                                  </button>
-                                </div>
-                              </div>
-                            ) : (
-                              ""
-                            )}
-                          </>
-                        </td>
-                        <td className="px-2">
-                          <div className="flex">
-                            <span className="px-2  text-red-500">
-                              <NavLink
-                                to={`/bankmanager/account/update/${data?.accountNumber}`}
-                                state={"CurrentAccount"}
-                              >
-                                <BiSolidPencil />
-                              </NavLink>
-                            </span>
-                            <span className="px-2 ">
-                              <MdDelete
-                                onClick={() => {
-                                  let deleteConfirm =
-                                    window.confirm("Are you sure");
-                                  if (deleteConfirm === true) {
-                                    console.log(data);
-                                    dispatch(
-                                      deleteBankAccount(data.accountNumber)
-                                    );
-                                  }
-                                }}
-                              />
-                            </span>
-                          </div>
-                        </td>
-                      </tr>
-                    );
-                  })}
+                              <BiSolidPencil />
+                            </NavLink>
+                          </span>
+                          <span className="px-2 ">
+                            <MdDelete
+                              onClick={() => {
+                                let deleteConfirm =
+                                  window.confirm("Are you sure");
+                                if (deleteConfirm === true) {
+                                  console.log(data);
+                                  dispatch(
+                                    deleteBankAccount(data.accountNumber)
+                                  );
+                                }
+                              }}
+                            />
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
