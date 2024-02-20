@@ -351,41 +351,20 @@ const Navbar = () => {
             ) : data.userType == "ACCOUNT_HOLDER" ? (
               <div className="invisible bg-white border-orange-500 group-hover:visible p-2 h-[auto] w-[auto] border-[0.02rem] absolute z-10 right-0 mt-0 rounded">
                 <div className="flex gap-[.3rem] flex-col items-center ml-4 mt-3 justify-center h-[60%] w-[80%]">
-                  <div className="flex gap-3">
+                  <div className="flex gap-5">
                     <NavLink to="/customer" title="Dashboard">
                       <RiDashboard3Fill className="" />
                     </NavLink>
                     <NavLink
-                      title="ManageBeneficiary"
-                      to="/customer/Manage Beneficiary"
+                      title="ApplyLoans"
+                      to="#"
                       className={({ isActive }) => (isActive ? "active" : "")}
                     >
-                      <MdApproval className="" />
-                    </NavLink>
-                    <NavLink
-                      title="AddBeneficiary"
-                      to="/customer/Manage Beneficiary/add Beneficiary"
-                      className={({ isActive }) => (isActive ? "active" : "")}
-                    >
-                      <CiBank className="me-3 text-[2rem]" />
+                      <FaHandHoldingDollar className="me-3" />
                     </NavLink>
                   </div>
 
                   <div className="flex gap-3">
-                    <NavLink
-                      title="ViewBeneficiary"
-                      to="/customer/Manage Beneficiary/View Beneficiary"
-                      className={({ isActive }) => (isActive ? "active" : "")}
-                    >
-                      <FaHandHoldingDollar className="" />
-                    </NavLink>
-                    <NavLink
-                      title="AmountTransfer"
-                      to="/customer/Amount Transfer"
-                      className={({ isActive }) => (isActive ? "active" : "")}
-                    >
-                      <LiaIdCardSolid className="" />
-                    </NavLink>
                     <NavLink
                       title="PassBook"
                       to="/customer/Passbook"
@@ -393,28 +372,12 @@ const Navbar = () => {
                     >
                       <MdAccountCircle className="me-3" />
                     </NavLink>
-                  </div>
-                  <div className="flex ">
-                    <NavLink
-                      title="AccountStatement"
-                      to="/customer/Account Statement"
-                      className={({ isActive }) => (isActive ? "active" : "")}
-                    >
-                      <MdAccountBalanceWallet className="me-3" />
-                    </NavLink>
                     <NavLink
                       title="CreditCard"
                       to="/customer/Credit Cards"
                       className={({ isActive }) => (isActive ? "active" : "")}
                     >
                       <TbMoneybag className="me-3" />
-                    </NavLink>
-                    <NavLink
-                      title="ComingSoon"
-                      to="#"
-                      // className={({ isActive }) => (isActive ? "active" : "")}
-                    >
-                      <IoTrailSignOutline className="me-3" />
                     </NavLink>
                   </div>
                 </div>

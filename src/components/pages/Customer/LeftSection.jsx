@@ -133,7 +133,8 @@ const LeftSection = () => {
               return (
                 <div className="ms-4 p-1  text-[rgb(112,112,112)]">
                   <NavLink
-                    to={`/customer/${d}`}
+                    state={"customerSection"}
+                    to="/customer/comingSoon"
                     className={({ isActive }) => (isActive ? "active" : "")}
                   >
                     {d}
