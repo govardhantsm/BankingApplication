@@ -4,7 +4,7 @@ import {
   AxiosInstanceProtected,
   AxiosInstancePublic,
 } from "../../../axios/AxiosInstance";
-import { data } from "autoprefixer";
+
 import axios from "axios";
 
 const initialState = {
@@ -23,6 +23,7 @@ export const createAccount = createAsyncThunk(
         `/users?branchId=${payload.branchId}`,
         payload
       );
+
       let userId = data?.data?.data?.userId;
       localStorage.setItem("userId", userId);
       return data;
@@ -37,7 +38,7 @@ export const createAccountWithFile = createAsyncThunk(
   "createAccountWithFile",
   async payload => {
     let userId = localStorage.getItem("userId");
-  
+
     if (userId) {
       try {
         const { data } = await axios.post(
@@ -54,6 +55,7 @@ export const createAccountWithFile = createAsyncThunk(
             },
           }
         );
+
         return data;
       } catch (error) {
         return error.message;
@@ -132,6 +134,33 @@ export const getBmProfile = createAsyncThunk("getBmProfile", async () => {
   }
 });
 
+// ============getBmDasBoard==============/
+export const getBmDasBoard = createAsyncThunk(
+  "getBmDashBoard",
+  async branchId => {
+    try {
+      const { data } = await AxiosInstanceProtected.get(
+        `/branchManagers/getBranchManagerDashBoard?branchId=${branchId}`
+      );
+      return data;
+    } catch (error) {
+      return error.message;
+    }
+  }
+);
+//=================Fetch Bm==============/
+export const getApprove = createAsyncThunk("getApprove", async payload => {
+  try {
+    const { data } = await AxiosInstanceProtected.patch(
+      `/accounts/debitCard/changeApproval`,
+      payload
+    );
+    return data;
+  } catch (error) {
+    return error.message;
+  }
+});
+
 // //=================Fetch all unassigned==============/
 // export const getAllUnassigned = createAsyncThunk(
 //   "getAllUnassigned",
@@ -196,6 +225,22 @@ export const bankManagerSlice = createSlice({
         state.data = action.payload;
       })
       .addCase(createAccount.rejected, (state, action) => {
+        state.status = false;
+        state.error = action.error.message;
+        state.success = false;
+      });
+    //getApprove
+    builder
+      .addCase(getApprove.pending, state => {
+        state.status = true;
+        state.success = false;
+      })
+      .addCase(getApprove.fulfilled, (state, action) => {
+        state.status = false;
+        state.success = true;
+        state.data = action.payload;
+      })
+      .addCase(getApprove.rejected, (state, action) => {
         state.status = false;
         state.error = action.error.message;
         state.success = false;
