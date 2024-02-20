@@ -14,21 +14,26 @@ import DeleteAccountThunk, {
 } from "../../../../redux/services/managingDirectorThunk/mdAccountThunk/MdAccountThunk";
 import { MdOutlineCreditCard } from "react-icons/md";
 
+import { MdOutlineCreditScore } from "react-icons/md";
+import { MdOutlineCreditCardOff } from "react-icons/md";
 const AllAccounts = () => {
-  const user = useGetMd();
+  const dat = JSON.parse(sessionStorage.getItem("myObject"));
 
-  let bankId = user?.data?.data?.bankId;
+  let bankId = dat.bankId;
 
   let [state, setState] = useState(null);
   let dispatch = useDispatch();
   useEffect(() => {
     if (bankId) {
       let t = dispatch(getAllAccountsMd(bankId));
-      t.unwrap().then(x => setState(x.data));
+      t.unwrap().then(x => {
+        console.log(x.data);
+        setState(x.data);
+      });
     }
   }, [bankId]);
   //GetMds();
-  console.log(state);
+
   let [search, setSearch] = useState(null);
 
   const [itemsPerPage, setItemsPerPage] = useState(2);
@@ -188,7 +193,54 @@ const AllAccounts = () => {
                       <td className="px-2">{data?.accountNumber}</td>
                       <td className="px-2">{data.status}</td>
 
-                      <td className="px-2">{""}</td>
+                      <td className="px-2">
+                        {data.debitCardDto.approval == "APPROVED" ? (
+                          <button className="group relative">
+                            <MdOutlineCreditScore className="text-[2rem] pl-2" />
+                            <div className="invisible bg-white border-orange-500 group-hover:visible h-[5rem] w-[10rem] border-[0.02rem] absolute z-10 -right-40 -mt-10 rounded pt-4 ">
+                              <p className="text-left pl-2">
+                                Name : {data.name}
+                              </p>{" "}
+                              <p className="text-left pl-2">
+                                Date : {data.debitCardDto.issueDate}{" "}
+                              </p>
+                              <p className="text-left pl-2">
+                                Number:{data.debitCardDto.debitCardNumber}
+                              </p>
+                            </div>
+                          </button>
+                        ) : data.debitCardDto.approval == "REJECTED" ? (
+                          <button className="group relative">
+                            <MdOutlineCreditCardOff className="text-[2rem] pl-2" />
+                            <div className="invisible bg-white border-orange-500 group-hover:visible h-[5rem] w-[10rem] border-[0.02rem] absolute z-10 -right-40 -mt-10 rounded pt-4 ">
+                              <p className="text-left pl-2">
+                                Name : {data.name}
+                              </p>{" "}
+                              <p className="text-left pl-2">
+                                Date : {data.debitCardDto.issueDate}{" "}
+                              </p>
+                              <p className="text-left pl-2">
+                                Number:{data.debitCardDto.debitCardNumber}
+                              </p>
+                            </div>
+                          </button>
+                        ) : (
+                          <button className="group relative">
+                            <MdOutlineCreditCard className="text-[2rem] pl-2" />
+                            <div className="invisible bg-white border-orange-500 group-hover:visible h-[5rem] w-[10rem] border-[0.02rem] absolute z-10 -right-40 -mt-10 rounded pt-4 ">
+                              <p className="text-left pl-2">
+                                Name : {data.name}
+                              </p>{" "}
+                              <p className="text-left pl-2">
+                                Date : {data.debitCardDto.issueDate}{" "}
+                              </p>
+                              <p className="text-left pl-2">
+                                Number:{data.debitCardDto.debitCardNumber}
+                              </p>
+                            </div>
+                          </button>
+                        )}
+                      </td>
                       <td className="px-2">
                         <div className="flex">
                           <span className="px-2  text-red-500">
@@ -230,20 +282,52 @@ const AllAccounts = () => {
                         <td className="px-2">{data?.accountNumber}</td>
                         <td className="px-2">{data.status}</td>
                         <td className="px-2">
-                          {
+                          {data.debitCardDto.approval == "APPROVED" ? (
+                            <button className="group relative">
+                              <MdOutlineCreditScore className="text-[2rem] pl-2" />
+                              <div className="invisible bg-white border-orange-500 group-hover:visible h-[5rem] w-[10rem] border-[0.02rem] absolute z-10 -right-40 -mt-10 rounded pt-4 ">
+                                <p className="text-left pl-2">
+                                  Name : {data.name}
+                                </p>{" "}
+                                <p className="text-left pl-2">
+                                  Date : {data.debitCardDto.issueDate}{" "}
+                                </p>
+                                <p className="text-left pl-2">
+                                  Number:{data.debitCardDto.debitCardNumber}
+                                </p>
+                              </div>
+                            </button>
+                          ) : data.debitCardDto.approval == "REJECTED" ? (
+                            <button className="group relative">
+                              <MdOutlineCreditCardOff className="text-[2rem] pl-2" />
+                              <div className="invisible bg-white border-orange-500 group-hover:visible h-[5rem] w-[10rem] border-[0.02rem] absolute z-10 -right-40 -mt-10 rounded pt-4 ">
+                                <p className="text-left pl-2">
+                                  Name : {data.name}
+                                </p>{" "}
+                                <p className="text-left pl-2">
+                                  Date : {data.debitCardDto.issueDate}{" "}
+                                </p>
+                                <p className="text-left pl-2">
+                                  Number:{data.debitCardDto.debitCardNumber}
+                                </p>
+                              </div>
+                            </button>
+                          ) : (
                             <button className="group relative">
                               <MdOutlineCreditCard className="text-[2rem] pl-2" />
                               <div className="invisible bg-white border-orange-500 group-hover:visible h-[5rem] w-[10rem] border-[0.02rem] absolute z-10 -right-40 -mt-10 rounded pt-4 ">
                                 <p className="text-left pl-2">
                                   Name : {data.name}
                                 </p>{" "}
-                                <p className="text-left pl-2">Date : {} </p>
                                 <p className="text-left pl-2">
-                                  Number:{"XXXX XXXX XXX"}
+                                  Date : {data.debitCardDto.issueDate}{" "}
+                                </p>
+                                <p className="text-left pl-2">
+                                  Number:{data.debitCardDto.debitCardNumber}
                                 </p>
                               </div>
                             </button>
-                          }
+                          )}
                         </td>
                         <td className="px-2">
                           <div className="flex">

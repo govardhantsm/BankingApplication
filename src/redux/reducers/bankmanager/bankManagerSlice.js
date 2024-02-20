@@ -54,7 +54,7 @@ export const createAccountWithFile = createAsyncThunk(
             },
           }
         );
-        window.location.reload();
+
         return data;
       } catch (error) {
         return error.message;
@@ -147,6 +147,18 @@ export const getBmDasBoard = createAsyncThunk(
     }
   }
 );
+//=================Fetch Bm==============/
+export const getApprove = createAsyncThunk("getApprove", async payload => {
+  try {
+    const { data } = await AxiosInstanceProtected.patch(
+      `/accounts/debitCard/changeApproval`,
+      payload
+    );
+    return data;
+  } catch (error) {
+    return error.message;
+  }
+});
 
 // //=================Fetch all unassigned==============/
 // export const getAllUnassigned = createAsyncThunk(
@@ -212,6 +224,22 @@ export const bankManagerSlice = createSlice({
         state.data = action.payload;
       })
       .addCase(createAccount.rejected, (state, action) => {
+        state.status = false;
+        state.error = action.error.message;
+        state.success = false;
+      });
+    //getApprove
+    builder
+      .addCase(getApprove.pending, state => {
+        state.status = true;
+        state.success = false;
+      })
+      .addCase(getApprove.fulfilled, (state, action) => {
+        state.status = false;
+        state.success = true;
+        state.data = action.payload;
+      })
+      .addCase(getApprove.rejected, (state, action) => {
         state.status = false;
         state.error = action.error.message;
         state.success = false;
