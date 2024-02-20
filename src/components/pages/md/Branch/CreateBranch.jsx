@@ -7,8 +7,8 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import toast from "react-hot-toast";
 import { Country, State, City } from "country-state-city";
-import useGetMd from "../../../../utils/useGetMd";
-import { createBranch } from "./../../../../redux/services/managingDirectorThunk/mdBranchThunk/MdBranchThunk";
+import useGetMd from "../../../../utils/useGetMd"
+import { createBranch } from './../../../../redux/services/managingDirectorThunk/mdBranchThunk/MdBranchThunk';
 
 const CreateBranch = () => {
   const dispatch = useDispatch();
@@ -40,14 +40,14 @@ const CreateBranch = () => {
       pincode: state.pincode,
       country: state.country,
       city: state.city,
-      state: state.state,
+      state:state.state
     },
   };
 
   const handleSubmit = e => {
     e.preventDefault();
     payload.bankId = bankId;
-    dispatch(createBranch(payload));
+    dispatch(createBranch(payload)); 
     navigate("/mdlayout/all-branches");
     toast.success("created successfully");
   };
@@ -56,12 +56,6 @@ const CreateBranch = () => {
   useEffect(() => {
     AOS.init();
   }, []);
-
-  // let isValidation = () => {
-  //   return (
-
-  //   )
-  // }
   return (
     <section className="h-[100%] w-[100%] relative" data-aos="zoom-in">
       <section className="rounded-md border-2 py-1.5 w-[97%] bg-white absolute top-4 left-3">
@@ -155,7 +149,7 @@ const CreateBranch = () => {
                 setState({ ...state, country: e.target.value });
               }}
             >
-              <option disabled value="" className="text-[rgb(145,142,143)]">
+              <option disabled value="" className="text-gray-400">
                 -- Select The Country --
               </option>
 
@@ -209,7 +203,7 @@ const CreateBranch = () => {
                 setState({ ...state, city: e.target.value });
               }}
             >
-              <option disabled value="" className="text-[rgb(145,142,143)]">
+              <option disabled value="" className="text-gray-400">
                 -- Select The City --
               </option>
               {City.getCitiesOfState(cou, stat).map(city => {

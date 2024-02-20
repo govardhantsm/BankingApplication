@@ -3,16 +3,17 @@ import { FaEdit } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { RxCross2 } from "react-icons/rx";
 import Spinner from "../../spinner/Spinner";
-import { NavLink, useNavigate } from "react-router-dom";
+import {NavLink, useNavigate } from "react-router-dom";
 import useGetBank from "../../../../utils/useGetAllBanks";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { deleteBank } from "./../../../../redux/services/adminThunk/adminBankThunk/AdminBankThunk";
+import { deleteBank } from './../../../../redux/services/adminThunk/adminBankThunk/AdminBankThunk';
 
 const AllBank = () => {
   let dispatch = useDispatch();
   let navigate = useNavigate();
   let state = useGetBank();
+  let data = state?.data?.data;
 
   // Animation:
   useEffect(() => {
@@ -28,6 +29,7 @@ const AllBank = () => {
         <section className="w-full overflow-auto h-[95%] no-scrollbar">
           {Array.isArray(state?.data?.data) &&
             state?.data?.data?.map((user, index) => {
+              console.log(user);
               return (
                 <div
                   className="flex w-[100%] bg-white px-3 pt-3 mb-6"
@@ -35,11 +37,11 @@ const AllBank = () => {
                 >
                   <div className="w-1/3 flex flex-col">
                     <div className="p-3 pl-4 font-medium">
-                      Bank Name : <strong>{user.bankName}</strong>
+                    Bank Name : <strong>{user.bankName}</strong> 
                     </div>
 
                     <div className="p-3 pl-4 font-medium">
-                      Bank Location : <strong>{user?.address?.city}</strong>
+                      Bank Location : <strong>{user?.address?.city}</strong> 
                     </div>
                     <div className="p-3 pl-4 font-medium">
                       MD Name : <strong>{user.managingDirectorName}</strong>
@@ -74,7 +76,7 @@ const AllBank = () => {
                             let deleteConfirm = window.confirm("Are you sure");
                             if (deleteConfirm === true) {
                               dispatch(deleteBank(user?.bankId));
-                              // navigate("/adminlayout/all-bank");
+                              navigate("/adminlayout/all-bank");
                             }
                           }}
                         />
@@ -85,9 +87,8 @@ const AllBank = () => {
                         Main Branch Address :
                       </div>
                       <div className="ms-2  font-semibold text-gray w-[98%] h-[7vh] pt-2 ps-1">
-                        {user?.address?.addressLine} ,{user?.address?.state},{" "}
-                        {user?.address?.city} ,{user?.address?.country} ,{" "}
-                        {user?.address?.pincode}
+                        {user?.address?.addressLine} , {user?.address?.city} ,
+                        {user?.address?.country} , {user?.address?.pincode}
                       </div>
                     </div>
                   </div>

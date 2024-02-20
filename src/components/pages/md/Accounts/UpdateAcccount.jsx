@@ -1,23 +1,17 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import toast from "react-hot-toast";
 import { Country, State, City } from "country-state-city";
 import Button from "../../../../utilities/Button";
-import {
-  getAccountById,
-  getUpdateAccount,
-} from "./../../../../redux/services/managingDirectorThunk/mdAccountThunk/MdAccountThunk";
+import { getAccountById, getUpdateAccount } from './../../../../redux/services/managingDirectorThunk/mdAccountThunk/MdAccountThunk';
 
 const UpdateAccount = () => {
   let [cou, setCon] = useState(null);
   let [stat, setStat] = useState(null);
-  const location = useLocation();
-  console.log(location);
-  let { state } = location;
-  console.log(state);
+
   let { accountNumber } = useParams();
   let navigate = useNavigate();
   let dispatch = useDispatch();
@@ -47,16 +41,8 @@ const UpdateAccount = () => {
   let handleSubmit = e => {
     e.preventDefault();
     dispatch(getUpdateAccount(updatedState));
-    if (state == "AllAccount") {
-      navigate("/mdlayout/all-accounts");
-      toast.success("Account updated successfully");
-    } else if (state == "SavingAccount") {
-      navigate("/mdlayout/savings-accounts");
-      toast.success("saving Account updated successfully");
-    } else if (state == "CurrentAccount") {
-      navigate("/mdlayout/current-accounts");
-      toast.success("CurrentAccount updated successfully");
-    }
+    navigate("/mdlayout/all-accounts");
+    toast.success("updated successfully");
   };
 
   // Animation:

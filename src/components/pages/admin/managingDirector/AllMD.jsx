@@ -8,41 +8,36 @@ import { NavLink } from "react-router-dom";
 import Spinner from "../../spinner/Spinner";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import {
-  deleteMd,
-  getMd,
-} from "../../../../redux/services/adminThunk/adminMdThunk/AdminMdThunk";
+import { deleteMd } from "../../../../redux/services/adminThunk/adminMdThunk/AdminMdThunk";
 
 const AllMD = () => {
-  let [state, SetState] = useState(null);
+  let state = GetMds();
   let dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getMd()).then(x => {
-      SetState(x.payload.data);
-    });
-  }, []);
-
   let [search, setSearch] = useState(null);
 
-  const [itemsPerPage, setItemsPerPage] = useState(3);
+  const [itemsPerPage, setItemsPerPage] = useState(2);
 
   const [currentPage, setCurrentPage] = useState(1);
   let [loading, setLoading] = useState(false);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = state?.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = state?.data?.data?.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
   const [data, setData] = useState([{ currentItems }]); // Your initial data
   console.log(data);
   const [isAscending, setIsAscending] = useState(true);
-  const totalPages = Math.ceil(state?.length / itemsPerPage);
+  const totalPages = Math.ceil(state?.data?.data?.length / itemsPerPage);
 
   const handleToggleSort = () => {
     setIsAscending(!isAscending);
     setData(data.sort((a, b) => (isAscending ? a - b : b - a)));
+    console.log("currentItems:", currentItems);
   };
 
-  const handlePageChange = pageNumber => {
+  const handlePageChange = (pageNumber) => {
     setLoading(true);
     setTimeout(() => {
       setCurrentPage(pageNumber);
@@ -55,7 +50,7 @@ const AllMD = () => {
     }
   }
   function nextPage() {
-    setCurrentPage(cur => {
+    setCurrentPage((cur) => {
       return cur < totalPages ? cur + 1 : cur;
     });
   }
@@ -68,7 +63,7 @@ const AllMD = () => {
   return (
     <div className="w-[100%] p-5 h-[100%]" data-aos="zoom-in">
       <div className="pb-3 font-semibold">All MD</div>
-      {state?.status === true ? (
+      {state.status === true ? (
         <Spinner />
       ) : (
         <section className=" bg-white w-[100%] overflow-auto h-[95%] no-scrollbar">
@@ -77,7 +72,7 @@ const AllMD = () => {
               Show
               <select
                 className="px-2 rounded-[0.25rem] border-2"
-                onChange={e => {
+                onChange={(e) => {
                   setItemsPerPage(e.target.value);
                 }}
               >
@@ -93,9 +88,9 @@ const AllMD = () => {
               <input
                 className=" mx-1 px-2 border-2 rounded-[0.25rem]"
                 type="text"
-                onChange={e => {
-                  let data = state?.filter(
-                    ele =>
+                onChange={(e) => {
+                  let data = state?.data?.data?.filter(
+                    (ele) =>
                       ele.email
                         .toLowerCase()
                         .includes(e.target.value.toLowerCase()) ||
@@ -106,10 +101,10 @@ const AllMD = () => {
                   for (let i = 0; i < data.length; i++) {
                     for (let j = 0; j < currentItems.length; j++) {
                       if (
-                        data[i]?.email.toLowerCase() ==
-                          currentItems[j]?.email.toLowerCase() ||
-                        data[i]?.name.toLowerCase() ==
-                          currentItems[j]?.name.toLowerCase()
+                        data[i].email.toLowerCase() ==
+                          currentItems[j].email.toLowerCase() ||
+                        data[i].name.toLowerCase() ==
+                          currentItems[j].name.toLowerCase()
                       ) {
                         data = data.toSpliced(i, 1);
                       }
@@ -168,7 +163,7 @@ const AllMD = () => {
                 </tr>
               </thead>
               <tbody>
-                {search?.map(data => {
+                {search?.map((data) => {
                   return (
                     <tr className="text-xs border-b-2">
                       <td className="px-2 py-3 ">{data.name}</td>
@@ -179,10 +174,10 @@ const AllMD = () => {
                         <div className="flex">
                           <span className="px-2  text-red-500">
                             <NavLink
-                              to={`/adminlayout/update-md/${data.managingDirectorId}`}
+                              to={`/adminlayout/update-md/${data.employeeId}`}
                             >
                               <BiSolidPencil />
-                            </NavLink>
+                            </NavLink>{" "}
                           </span>
 
                           <span className="px-2 ">
@@ -202,7 +197,7 @@ const AllMD = () => {
                   );
                 })}
 
-                {currentItems?.map(data => {
+                {currentItems?.map((data) => {
                   return (
                     <tr className="text-xs border-b-2">
                       <td className="px-2 py-3 ">{data.name}</td>
@@ -240,11 +235,11 @@ const AllMD = () => {
           <footer className="mx-10 my-2 w-[93%]  flex justify-between items-center">
             <p>
               Showing {indexOfFirstItem + 1} to{" "}
-              {indexOfLastItem < state?.length
+              {indexOfLastItem < state?.data?.data?.length
                 ? indexOfLastItem
-                : state?.length}{" "}
+                : state?.data?.data?.length}{" "}
               of
-              {state?.length} entries
+              {state?.data?.data?.length} entries
             </p>
             <div className="mt-4 flex  items-center justify-center">
               <ul className="flex ">

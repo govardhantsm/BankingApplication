@@ -1,6 +1,5 @@
 import React from "react";
 
-
 function CCardDetail() {
   return (
     <div className="bg-gray-50 ">
