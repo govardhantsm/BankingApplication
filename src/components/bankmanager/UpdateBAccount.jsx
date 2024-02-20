@@ -12,8 +12,8 @@ import {
 } from "../../redux/services/managingDirectorThunk/mdAccountThunk/MdAccountThunk";
 
 const UpdateBAccount = () => {
-  let location = useLocation();
-  console.log(location);
+  const location = useLocation();
+  let { state } = location;
   let [cou, setCon] = useState(null);
   let [stat, setStat] = useState(null);
 
@@ -45,8 +45,18 @@ const UpdateBAccount = () => {
   let handleSubmit = e => {
     e.preventDefault();
     dispatch(getUpdateAccount(updatedState));
-    navigate(`${localStorage.getItem("path")}`);
-    toast.success("updated successfully");
+    // navigate(`${localStorage.getItem("path")}`);
+    // toast.success("updated successfully");
+    if (state == "AllAccount") {
+      navigate("/bankmanager/All Accounts");
+      toast.success("Account updated successfully");
+    } else if (state == "SavingAccount") {
+      navigate("/bankmanager/Savings Accounts");
+      toast.success("saving Account updated successfully");
+    } else if (state == "CurrentAccount") {
+      navigate("/bankmanager/Current Accounts");
+      toast.success("CurrentAccount updated successfully");
+    }
   };
 
   // Animation:
@@ -139,8 +149,8 @@ const UpdateBAccount = () => {
               <option disabled value="" className="text-gray-400">
                 -- Select The Country --
               </option>
-              {Country.getAllCountries().map(city => {
-                return <option value={city.name}>{city.name}</option>;
+              {Country.getAllCountries().map(country => {
+                return <option value={country.name}>{country.name}</option>;
               })}
             </select>
           </div>
@@ -156,9 +166,9 @@ const UpdateBAccount = () => {
               value={updatedState && updatedState?.address?.state}
               onChange={e => {
                 setStat(
-                  State.getStatesOfCountry(cou).find(
-                    ele => ele.name === e.target.value
-                  )?.isoCode
+                  State.getStatesOfCountry(cou).find(ele => {
+                    return ele.name === e.target.value;
+                  })?.isoCode
                 );
                 setStat(e => {
                   console.log(e);
@@ -257,6 +267,20 @@ const UpdateBAccount = () => {
               id="dob"
               name="dateOfBirth"
               value={updatedState && updatedState?.dateOfBirth?.substr(0, 10)}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="flex justify-between w-[99%] mb-4">
+            <label htmlFor="name" className="text-[rgb(145,142,143)]">
+              Account Balance
+            </label>
+            <input
+              className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+              type="text"
+              placeholder="Enter Account Balance"
+              id="accountBalance"
+              name="accountBalance"
+              value={updatedState && updatedState.accountBalance}
               onChange={handleChange}
             />
           </div>

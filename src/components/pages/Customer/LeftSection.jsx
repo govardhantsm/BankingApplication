@@ -13,51 +13,35 @@ import Spinner from "./../spinner/Spinner";
 import { getCustomerProfile } from "../../../redux/reducers/customer/customerSlice";
 
 const LeftSection = () => {
-  //fetch customer
-  const [user, setUser] = useState(null);
-
-  // console.log("branchId", user?.data?.data?.branchId);
-  // localStorage.setItem("branchId", user?.data?.data?.branchId);
+  const data = JSON.parse(sessionStorage.getItem("myObject"));
+  let dispatch = useDispatch();
   let [account, setAccount] = useState(false);
+
   let [loan, setLoan] = useState(false);
   let [card, setCard] = useState(false);
-  let dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getCustomerProfile()).then(x => {
-      localStorage.setItem(
-        "branchId",
-        x.payload.data.accounts[0].branch.branchId
-      );
-      setUser(x.payload.data);
-    });
-  }, []);
 
   return (
     <div className="flex items-center justify-between flex-col h-[100%]">
       <section className="text-sm h-[10%] w-[100%] bg-black">
-        {user === null ? (
-          <Spinner />
-        ) : (
-          <div className="flex flex-col items-center">
-            <img
-              src={
-                // user?.avatar ||
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAK2Ud4gQr9pQFT6rc3xbeq74MhZe7bOdvQ&usqp=CAU"
-              }
-              alt=""
-              className="h-[4rem] w-[4rem] rounded-full mt-5"
-            />
-            <p className="mt-3">{user?.name}</p>
-            <p className="mt-1 text-[rgb(112,112,112)]">Customer</p>
-          </div>
-        )}
+        <div className="flex flex-col items-center">
+          <img
+            src={
+              // user?.avatar ||
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAK2Ud4gQr9pQFT6rc3xbeq74MhZe7bOdvQ&usqp=CAU"
+            }
+            alt=""
+            className="h-[4rem] w-[4rem] rounded-full mt-5"
+          />
+          <p className="mt-3">{data?.name}</p>
+          <p className="mt-1 text-[rgb(112,112,112)]">Customer</p>
+        </div>
       </section>
       <section className="h-[65%]">
         <div className="ms-8 mt-6">
           <div className="p-1 flex items-center ">
             <RiDashboard3Fill className="mr-2" />
             <NavLink
-              to="#"
+              to="/customer"
               className={({ isActive }) => (isActive ? "active" : "")}
             >
               DashBoard
@@ -119,10 +103,9 @@ const LeftSection = () => {
               return (
                 <div className="ms-4 p-1  text-[rgb(112,112,112)]">
                   <NavLink
-                    to={`/customer/${d}`}
-                    className={({ isActive }) =>
-                      isActive ? "bg-gray-600" : ""
-                    }
+                    state={"customerSection"}
+                    to="/customer/comingSoon"
+                    className={({ isActive }) => (isActive ? "" : "")}
                   >
                     {d}
                   </NavLink>
@@ -146,11 +129,12 @@ const LeftSection = () => {
             </span>
           </div>
           {card &&
-            ["Credit Cards", "Debit Cards"].map(d => {
+            ["Credit Cards"].map(d => {
               return (
                 <div className="ms-4 p-1  text-[rgb(112,112,112)]">
                   <NavLink
-                    to={`/customer/${d}`}
+                    state={"customerSection"}
+                    to="/customer/comingSoon"
                     className={({ isActive }) => (isActive ? "active" : "")}
                   >
                     {d}
@@ -162,7 +146,7 @@ const LeftSection = () => {
       </section>
       <div className="text-center">
         <button
-          className="text-white bg-gradient-to-r from-blue-500 via-blue-700 to-blue-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-3 py-1.5 text-center"
+          className="text-white bg-gradient-to-r from-blue-500 via-blue-700 to-blue-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-3 py-1.5 text-center mb-8"
           onClick={() => {
             dispatch(logout());
             window.location.assign("/");

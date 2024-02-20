@@ -5,7 +5,7 @@ import MdReducer from "./reducers/admin/adminMd/mdSlice";
 import BranchReducer from "./reducers/managingDirector/mdBranch/branchSlice";
 import BranchManagerReducer from "./reducers/managingDirector/mdBranchmanager/branchManagerSlice";
 import BankManagerReducer from "./reducers/bankmanager/bankManagerSlice";
-
+import loginReducer from "./reducers/login/loginSlice";
 
 const store = configureStore({
   reducer: {
@@ -15,6 +15,7 @@ const store = configureStore({
     branch: BranchReducer,
     branchManager: BranchManagerReducer,
     bankManager: BankManagerReducer,
+    login: loginReducer,
   },
   // middleware: getDefaultMiddleware => getDefaultMiddleware(),
 });

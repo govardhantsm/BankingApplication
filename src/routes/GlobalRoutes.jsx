@@ -21,7 +21,7 @@ import CreateBranchManager from "../components/pages/md/BranchManager/CreateBran
 import AllBranchManager from "../components/pages/md/BranchManager/AllBranchManager";
 import ManagingDirectorDashboard from "../components/pages/md/MdDashboard/ManagingDirectorDashboard";
 import Bhome from "../components/BankManager/Bhome";
-import CreateAccount from "../components/BankManager/CreateAccount";
+import CreateAccount from "../components/bankmanager/CreateAccount";
 import PersonalDetails from "../components/BankManager/PersonalDetails";
 import ServiceSection from "../components/BankManager/ServiceSection";
 import DocumentSection from "../components/bankmanager/DocumentSection";
@@ -48,7 +48,17 @@ import BCurrentAccounts from "../components/pages/md/Accounts/CurrentAccounts";
 import BranchAllAccounts from "../components/bankmanager/BranchAllAccounts";
 import BranchSavingsAccount from "../components/bankmanager/BranchSavingsAccount";
 import BranchCurrentAccount from "../components/bankmanager/CurrentAccount";
-// import LoanAccounts from './../components/pages/md/Accounts/LoanAccount';
+import ManageBeneficiary from "../components/pages/Customer/manageBeneficiary/ManageBeneficiary";
+import AddBeneficiary from "../components/pages/Customer/manageBeneficiary/AddBeneficiary";
+import PassBook from "../components/pages/Customer/PassBook";
+import UpdateBeneficiary from "../components/pages/Customer/manageBeneficiary/UpdateBeneficiary";
+import ViewBeneficiary from "../components/pages/Customer/manageBeneficiary/ViewBeneficiary";
+import AccountDetails from "../components/pages/Customer/AccountDetails";
+import UploadProfile from "../components/navbar/UploadProfile";
+import CommingSoon from "../components/pages/admin/CommingSoon";
+import RestingPage from "../components/bankmanager/RestingPage";
+import CustomerDashBoard from "../components/pages/Customer/CustomerDashBoard";
+import BMDashboard from "./../components/bankmanager/bankManagerDashboard/BMDashboard";
 
 const router = createBrowserRouter([
   { path: "/", element: <Landingpage /> },
@@ -87,6 +97,10 @@ const router = createBrowserRouter([
           {
             path: "/adminlayout/all-md",
             element: <AllMD />,
+          },
+          {
+            path: "/adminlayout/uploadProfile",
+            element: <UploadProfile />,
           },
         ],
       },
@@ -162,6 +176,14 @@ const router = createBrowserRouter([
           //   path: "/mdlayout/loan-accounts",
           //   element: <LoanAccounts />,
           // },
+          {
+            path: "/mdlayout/uploadProfile",
+            element: <UploadProfile />,
+          },
+          {
+            path: "/mdlayout/comingSoon",
+            element: <CommingSoon />,
+          },
         ],
       },
     ],
@@ -177,9 +199,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: (
-              <ManagingDirectorDashboard name="Bank Manager DashBoard" />
-            ),
+            element: <BMDashboard name="Bank Manager DashBoard" />,
           },
           {
             path: "/bankmanager/create-account",
@@ -205,8 +225,35 @@ const router = createBrowserRouter([
             ],
           },
           {
+            path: "/bankmanager/Create Account",
+            element: <CreateAccount />,
+            children: [
+              {
+                index: true,
+                element: <PersonalDetails />,
+              },
+              {
+                path: "/bankmanager/Create Account/PersonalDetails",
+                element: <PersonalDetails />,
+              },
+
+              {
+                path: "/bankmanager/Create Account/ServiceDetails",
+                element: <ServiceSection />,
+              },
+              {
+                path: "/bankmanager/Create Account/DocumentSection",
+                element: <DocumentSection />,
+              },
+            ],
+          },
+          {
             path: "/bankmanager/All Accounts",
             element: <BranchAllAccounts />,
+          },
+          {
+            path: "/bankmanager/Rest",
+            element: <RestingPage />,
           },
           {
             path: "/bankmanager/Savings Accounts",
@@ -236,6 +283,14 @@ const router = createBrowserRouter([
             path: "/bankmanager/all-md",
             element: <AllMD />,
           },
+          {
+            path: "/bankmanager/uploadProfile",
+            element: <UploadProfile />,
+          },
+          {
+            path: "/bankmanager/comingSoon",
+            element: <CommingSoon />,
+          },
         ],
       },
 
@@ -253,11 +308,44 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <AdminDashboard name="Customer DashBoard" />,
+            element: <CustomerDashBoard name="Customer DashBoard" />,
           },
           {
             path: "/customer/Manage Beneficiary",
-            element: <PersonalDetails />,
+            element: <ManageBeneficiary />,
+            children: [
+              {
+                path: "/customer/Manage Beneficiary/add Beneficiary",
+                element: <AddBeneficiary />,
+              },
+            ],
+          },
+          {
+            path: "/customer/Manage Beneficiary",
+            element: <ManageBeneficiary />,
+            children: [
+              {
+                index: true,
+                element: <AddBeneficiary />,
+              },
+              {
+                path: "/customer/Manage Beneficiary/add Beneficiary",
+                element: <AddBeneficiary />,
+              },
+
+              {
+                path: "/customer/Manage Beneficiary/Modify Beneficiary/:beneficiaryId",
+                element: <UpdateBeneficiary />,
+              },
+              {
+                path: "/customer/Manage Beneficiary/Delete Beneficiary",
+                element: <DocumentSection />,
+              },
+              {
+                path: "/customer/Manage Beneficiary/View Beneficiary",
+                element: <ViewBeneficiary />,
+              },
+            ],
           },
           {
             path: "/customer/Amount Transfer",
@@ -266,17 +354,17 @@ const router = createBrowserRouter([
 
           {
             path: "/customer/Passbook",
-            element: <ServiceSection />,
+            element: <PassBook />,
           },
           {
             path: "/customer/Account Statement",
             element: <AccountStatement />,
           },
 
-          // {
-          //   path: "/customer/Account Details",
-          //   element: <AccountDetails />,
-          // },
+          {
+            path: "/customer/Account Details",
+            element: <AccountDetails />,
+          },
           // {
           //   path: "/customer/Apply Loans",
           //   element: <SavingsAccount />,
@@ -292,6 +380,10 @@ const router = createBrowserRouter([
           {
             path: "/customer/Debit Cards",
             element: <DebitCard />,
+          },
+          {
+            path: "/customer/comingSoon",
+            element: <CommingSoon />,
           },
         ],
       },

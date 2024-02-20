@@ -7,17 +7,22 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import useBranchState from "./../../../../utils/useBranchState";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { deleteBranch, getBranch } from "../../../../redux/services/managingDirectorThunk/mdBranchThunk/MdBranchThunk";
+import {
+  deleteBranch,
+  getBranch,
+} from "../../../../redux/services/managingDirectorThunk/mdBranchThunk/MdBranchThunk";
 
 const AllBranches = () => {
   let dispatch = useDispatch();
-  let state = useBranchState();
-  console.log(state);
-  let [bankId, setBankId] = useState(null);
+  // let state = useBranchState();
+  // console.log(state);
+  const dat = JSON.parse(sessionStorage.getItem("myObject"));
+
+  let [bankId, setBankId] = useState(dat.bankId);
   let [branch, setBranch] = useState(null);
-  useEffect(() => {
-    setBankId(state && state?.data?.data?.bankId);
-  }, [state, bankId]);
+  // useEffect(() => {
+  //   setBankId(state && state?.data?.data?.bankId);
+  // }, [state, bankId]);
 
   useLayoutEffect(() => {
     if (bankId) {
@@ -27,16 +32,14 @@ const AllBranches = () => {
   }, [bankId]);
 
   // Animation:
-useLayoutEffect(() => {
+  useLayoutEffect(() => {
     AOS.init();
   }, []);
 
   return (
     <div className="w-[100%] p-5 h-[100%]" data-aos="zoom-in">
       <div className="pb-3 font-semibold">All Branches</div>
-      {state?.status === true ? (
-        <Spinner />
-      ) : (
+      { (
         <section className="w-full overflow-auto h-[95%] no-scrollbar">
           {branch?.length > 0 &&
             branch?.map((user, index) => {
@@ -45,34 +48,72 @@ useLayoutEffect(() => {
                   className="flex w-[100%] bg-white px-3 pt-3 mb-6"
                   key={index + 1}
                 >
-                  <div className="w-1/3 flex flex-col">
-                    <div className="p-3 pl-4 font-bold">
-                      Branch Name: {user.branchName}
+                  <div className="w-1/3 ">
+                    <div className="flex">
+                      <span className="p-3 pl-4 font-bold w-48">
+                        Branch Name:{" "}
+                      </span>
+                      <span className="p-2 font-font-semibold text-[rgba(136,136,136)]">
+                        {user.branchName}
+                      </span>
                     </div>
-                    {/* <div className="p-3 pl-4 font-bold">Branch Location: {user.address.city} </div> */}
-                    <div className="p-3 pl-4 font-bold">
-                      IFSC Code: {user.ifsccode}{" "}
+
+                    <div className="flex">
+                      <span className="p-3 pl-4 font-bold w-48">
+                        IFSC Code:{" "}
+                      </span>
+                      <span className="p-2 font-font-semibold text-[rgba(136,136,136)]">
+                        {user.ifsccode}
+                      </span>
                     </div>
-                    <div className="p-3 pl-4 font-bold">
-                      Branch Manager:{user.branchManagerName}
+
+                    <div className="flex">
+                      <span className="p-3 pl-4 font-bold w-48">
+                        Branch Manager:
+                      </span>
+                      <span className="p-2 font-font-semibold text-[rgba(136,136,136)]">
+                        {user.branchManagerName}
+                      </span>
                     </div>
                   </div>
                   <div className="w-2/3 border-s-[1px]">
                     <div className="flex justify-between pl-4">
                       <section>
-                        <div className="p-2 font-font-semibold text-[rgba(136,136,136)]">
-                          Total Debit Card Holders :
+                        <div className="p-2 font-font-semibold ">
+                          <span className="p-3 pl-4 font-bold w-48">
+                            Total Debit Card Holders :
+                          </span>
+                          <span className="p-2 font-font-semibold text-[rgba(136,136,136)]">
+                            {user.card || "NA"}
+                          </span>
                         </div>
-                        <div className="p-2 font-font-semibold text-[rgba(136,136,136)]">
-                          Total Credit Card Holders :{" "}
+
+                        <div className="p-2 font-font-semibold ">
+                          <span className="p-3 pl-4 font-bold w-48">
+                            Total Credit Card Holders :
+                          </span>
+                          <span className="p-2 font-font-semibold text-[rgba(136,136,136)]">
+                            {user.card || "NA"}
+                          </span>
                         </div>
                       </section>
                       <section>
-                        <div className="p-2 font-font-semibold text-[rgba(136,136,136)]">
-                          Total Loan Card Holders :{" "}
+                        <div className="p-2 font-font-semibold ">
+                          <span className="p-3 pl-4 font-bold w-48">
+                            Total Loan Card Holders :
+                          </span>
+                          <span className="p-2 font-font-semibold text-[rgba(136,136,136)]">
+                            {user.card || "NA"}
+                          </span>
                         </div>
-                        <div className="p-2 font-font-semibold text-[rgba(136,136,136)]">
-                          Total Accounts :
+
+                        <div className="p-2 font-font-semibold ">
+                          <span className="p-3 pl-4 font-bold w-48">
+                            Total Accounts :
+                          </span>
+                          <span className="p-2 font-font-semibold text-[rgba(136,136,136)]">
+                            {user.card || "NA"}
+                          </span>
                         </div>
                       </section>
                       <div className="p-2 font-semibold text-[rgba(136,136,136)]">
@@ -94,10 +135,22 @@ useLayoutEffect(() => {
                       </div>
                     </div>
                     <div className="pl-4">
-                      <div className="pt-2 px-2 font-semibold text-[rgba(136,136,136)]">
-                        Branch Address:
-                       <div className="text-black-900"> {` ${user.address.addressLine}, ${user.address.city}, ${user.address.state}, ${user.address.country}`}</div>
+                      <div className="p-2 font-font-semibold ">
+                        <span className="p-3 pl-4 font-bold w-48">
+                          Branch Address:
+                        </span>
+                        <span className="p-2 font-font-semibold text-[rgba(136,136,136)]">
+                          {` ${user.address.addressLine}, ${user.address.city}, ${user.address.state}, ${user.address.country}` ||
+                            "NA"}
+                        </span>
                       </div>
+                      {/* <div className="pt-2 px-2 font-semibold text-[rgba(136,136,136)]">
+                        Branch Address:
+                        <div className="text-black-900">
+                          {" "}
+                          {` ${user.address.addressLine}, ${user.address.city}, ${user.address.state}, ${user.address.country}`}
+                        </div>
+                      </div> */}
                       <div className="ms-2 font-semibold text-[rgba(136,136,136) w-[98%] h-[10vh]">
                         {/* {user.address.addressLine} , {user.address.country}, {user.address.pincode}  */}
                       </div>
