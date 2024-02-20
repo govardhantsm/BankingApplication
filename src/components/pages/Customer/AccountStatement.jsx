@@ -262,7 +262,7 @@ const AccountStatement = () => {
             <div className=" text-slate-600 w-[96%] mx-6 bg-white p-8 text-sm">
               <div className="flex w-[100%] justify-between">
                 <div>
-                  <span>Show</span>
+                  {/* <span>Show</span>
                   <select
                     name=""
                     id=""
@@ -273,9 +273,9 @@ const AccountStatement = () => {
                     <option value="">3</option>
                     <option value="">4</option>
                   </select>
-                  <span>entries</span>
+                  <span>entries</span> */}
                 </div>
-                <div>
+                {/* <div>
                   <label htmlFor="search">Search</label>
                   <input
                     type="text"
@@ -283,7 +283,7 @@ const AccountStatement = () => {
                     id="search"
                     className="border ml-2 rounded"
                   />
-                </div>
+                </div> */}
               </div>
               <table className="w-[100%] text-left border mt-3">
                 <thead className="border">

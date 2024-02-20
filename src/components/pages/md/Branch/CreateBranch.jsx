@@ -49,6 +49,7 @@ const CreateBranch = () => {
     payload.bankId = bankId;
     dispatch(createBranch(payload));
     navigate("/mdlayout/all-branches");
+    window.location.reload();
     toast.success("created successfully");
   };
 

@@ -28,7 +28,7 @@ const PassBook = () => {
       </div>
       <div className=" text-slate-600 w-[96%] mx-6 bg-white p-8 text-sm">
         <div className="flex w-[100%] justify-between">
-          <div>
+          {/* <div>
             <span>Show</span>
             <select
               name=""
@@ -41,8 +41,8 @@ const PassBook = () => {
               <option value="">4</option>
             </select>
             <span>entries</span>
-          </div>
-          <div>
+          </div> */}
+          {/* <div>
             <label htmlFor="search">Search</label>
             <input
               type="text"
@@ -50,7 +50,7 @@ const PassBook = () => {
               id="search"
               className="border ml-2 rounded"
             />
-          </div>
+          </div> */}
         </div>
         <table className="w-[100%] text-left border mt-3">
           <thead className="border">

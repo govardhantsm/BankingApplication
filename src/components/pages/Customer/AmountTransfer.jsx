@@ -4,9 +4,11 @@ import {
   amountTransfer,
   findAllBeneficiarys,
 } from "../../../redux/services/CustomerThunk/AccountsThunk";
+import { useNavigate } from "react-router";
 
 const AmountTransfer = () => {
   const data = JSON.parse(sessionStorage.getItem("myObject"));
+  let navigate = useNavigate();
   let account = data.accounts;
   let dispatch = useDispatch();
   let [flag, SetFlag] = useState(false);
@@ -29,7 +31,7 @@ const AmountTransfer = () => {
 
   return (
     <div className="bg-gray-50" data-aos="zoom-in">
-      <div key={`001`} className="middle font-semibold text-lg p-2 m-2 ">
+      <div className="middle font-semibold text-lg p-2 m-2 ">
         Amount Transfer
       </div>
       <section className="bottom p-4 bg-white  shadow-md me-10 ms-10 ">
@@ -37,7 +39,7 @@ const AmountTransfer = () => {
           Select the account from which you wish to transfer funds
         </p>
         <div
-          key={`003`}
+         
           className="flex justify-between text-sm font-semibold text-gray-400 border-b-[1px] pb-3 ms-3 me-8"
         >
           <label htmlFor="account" className="basis-[25%]">
@@ -139,7 +141,8 @@ const AmountTransfer = () => {
                 <input
                   type="radio"
                   name="rc"
-                  checked={receiverAccountNumber}
+                  checked={receiverAccountNumber == ben.reciverAccountNumber}
+                  value={ben.reciverAccountNumber}
                   onChange={() => {
                     SetName(ben.beneficiaryName);
                     SetReceiverAccountNumber(ben.reciverAccountNumber);
@@ -193,19 +196,31 @@ const AmountTransfer = () => {
             onClick={e => {
               e.preventDefault();
               if (flag) {
-                 dispatch(amountTransfer({senderAccountNumber,receiverAccountNumber,amount,purpose}));
+                dispatch(
+                  amountTransfer({
+                    senderAccountNumber,
+                    receiverAccountNumber,
+                    amount,
+                    purpose,
+                  })
+                );
+
+                navigate("/customer/RestComp");
               }
             }}
           >
             Submit
           </button>
-          <button onClick={(e) => {
-            e.preventDefault();
-            SetName("");
-            SetAmount(0);
-            SetPurpose("");
-            SetReceiverAccountNumber("")
-          }} className="border-[1px] bg-gray-400 rounded text-white p-1 px-2">
+          <button
+            onClick={e => {
+              e.preventDefault();
+              SetName("");
+              SetAmount(0);
+              SetPurpose("");
+              SetReceiverAccountNumber("");
+            }}
+            className="border-[1px] bg-gray-400 rounded text-white p-1 px-2"
+          >
             Cancel
           </button>
         </div>

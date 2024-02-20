@@ -5,7 +5,10 @@ import Button from "../../../../utilities/Button";
 import { Country, State, City } from "country-state-city";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { getBranchManagerById, updateBranchManager } from "../../../../redux/services/managingDirectorThunk/mdBranchManagerThunk/MdBranchManagerThunk";
+import {
+  getBranchManagerById,
+  updateBranchManager,
+} from "../../../../redux/services/managingDirectorThunk/mdBranchManagerThunk/MdBranchManagerThunk";
 
 const UpdateBranchManager = () => {
   let { employeeId } = useParams();
@@ -38,6 +41,7 @@ const UpdateBranchManager = () => {
     e.preventDefault();
     dispatch(updateBranchManager(updatedState));
     navigate("/mdlayout/all-branchManager");
+    window.location.reload();
     toast.success("updated successfully");
   };
 

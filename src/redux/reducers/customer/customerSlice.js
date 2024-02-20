@@ -6,6 +6,7 @@ import {
 } from "../../../axios/AxiosInstance";
 import { data } from "autoprefixer";
 import {
+  ChangeStatus,
   SaveBeneficiary,
   findAllBeneficiarys,
   findBeneficiary,
@@ -218,6 +219,23 @@ export const customerSlice = createSlice({
         state.data = action.payload;
       })
       .addCase(DeleteBeneficiary.rejected, (state, action) => {
+        state.status = false;
+        state.error = action.error.message;
+        state.success = false;
+      });
+
+    //ChangeStatus
+    builder
+      .addCase(ChangeStatus.pending, state => {
+        state.status = true;
+        state.success = false;
+      })
+      .addCase(ChangeStatus.fulfilled, (state, action) => {
+        state.status = false;
+        state.success = true;
+        state.data = action.payload;
+      })
+      .addCase(ChangeStatus.rejected, (state, action) => {
         state.status = false;
         state.error = action.error.message;
         state.success = false;

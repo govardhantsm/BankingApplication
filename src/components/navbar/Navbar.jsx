@@ -43,7 +43,7 @@ const Navbar = () => {
             : role === "BRANCH_MANAGER"
             ? bankName
             : bankName || data.userType == "ACCOUNT_HOLDER"
-            ? bankName || "punjab national bank"
+            ? data?.bank?.bankName
             : ""}
         </p>
       </div>

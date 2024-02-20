@@ -59,6 +59,7 @@ import CommingSoon from "../components/pages/admin/CommingSoon";
 import RestingPage from "../components/bankmanager/RestingPage";
 import CustomerDashBoard from "../components/pages/Customer/CustomerDashBoard";
 import BMDashboard from "./../components/bankmanager/bankManagerDashboard/BMDashboard";
+import RestingComp from "../components/pages/Customer/RestingComp";
 
 const router = createBrowserRouter([
   { path: "/", element: <Landingpage /> },
@@ -348,8 +349,16 @@ const router = createBrowserRouter([
             ],
           },
           {
+            path: "/customer/dashboard",
+            element: <CustomerDashBoard name="Customer DashBoard" />,
+          },
+          {
             path: "/customer/Amount Transfer",
             element: <AmountTransfer />,
+          },
+          {
+            path: "/customer/RestComp",
+            element: <RestingComp />,
           },
 
           {

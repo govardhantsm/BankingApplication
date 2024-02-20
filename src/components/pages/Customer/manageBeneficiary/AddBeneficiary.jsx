@@ -4,11 +4,15 @@ import { savebeneficiary } from "../../../../redux/services/CustomerThunk/Accoun
 import { getCustomerProfile } from "../../../../redux/reducers/customer/customerSlice";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useNavigate } from "react-router";
 
 const AddBeneficiary = () => {
+  const data = JSON.parse(sessionStorage.getItem("myObject"));
+
   let dispatch = useDispatch();
+  let navigate = useNavigate();
   let [payload, SetPayload] = useState({
-    senderAccountNumber: "",
+    senderAccountNumber: data.accounts[0].accountNumber,
     reciverAccountNumber: "",
     beneficiaryTransferLimit: "",
     beneficiaryName: "",
@@ -23,15 +27,13 @@ const AddBeneficiary = () => {
 
   let handleSubmit = e => {
     e.preventDefault();
-    dispatch(getCustomerProfile()).then(x => {
-      SetPayload({
-        ...payload,
-        senderAccountNumber: x.payload.data.accounts[0].accountNumber,
-      });
-    });
 
     if (payload.reciverAccountNumber == payload.cnumber)
       dispatch(savebeneficiary(payload));
+     setTimeout(() => {
+      navigate("/customer/Manage Beneficiary/View Beneficiary");
+     }, 1000);
+    
   };
   // Animation:
   useEffect(() => {
