@@ -10,6 +10,7 @@ import {
   createAccount,
   createAccountWithFile,
 } from "../../redux/reducers/bankmanager/bankManagerSlice";
+
 const DocumentSection = () => {
   const data = JSON.parse(sessionStorage.getItem("myObject"));
   let { state } = useLocation();
@@ -25,11 +26,11 @@ const DocumentSection = () => {
 
     state.branchId = data?.branchId;
     dispatch(createAccount(state)).then(x => {
-      dispatch(createAccountWithFile(formData)).then(y => {
-        console.log(y.payload.message);
-        let a = y.payload;
-        navigate(`/bankmanager/Rest`, { state:a });
-      });
+      let a = x.payload.data;
+      if (x.payload.data)
+        dispatch(createAccountWithFile(formData)).then(y => {
+          navigate(`/bankmanager/Rest`, { state: a });
+        });
     });
   };
   // Animation:

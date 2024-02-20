@@ -14,13 +14,15 @@ import {
 
 const AllBranches = () => {
   let dispatch = useDispatch();
-  let state = useBranchState();
-  console.log(state);
-  let [bankId, setBankId] = useState(null);
+  // let state = useBranchState();
+  // console.log(state);
+  const dat = JSON.parse(sessionStorage.getItem("myObject"));
+
+  let [bankId, setBankId] = useState(dat.bankId);
   let [branch, setBranch] = useState(null);
-  useEffect(() => {
-    setBankId(state && state?.data?.data?.bankId);
-  }, [state, bankId]);
+  // useEffect(() => {
+  //   setBankId(state && state?.data?.data?.bankId);
+  // }, [state, bankId]);
 
   useLayoutEffect(() => {
     if (bankId) {
@@ -37,9 +39,7 @@ const AllBranches = () => {
   return (
     <div className="w-[100%] p-5 h-[100%]" data-aos="zoom-in">
       <div className="pb-3 font-semibold">All Branches</div>
-      {state?.status === true ? (
-        <Spinner />
-      ) : (
+      { (
         <section className="w-full overflow-auto h-[95%] no-scrollbar">
           {branch?.length > 0 &&
             branch?.map((user, index) => {

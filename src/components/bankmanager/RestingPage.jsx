@@ -11,7 +11,7 @@ const RestingPage = () => {
         <p>Created Succesfully</p>
         <NavLink
           to="/bankmanager/All Accounts"
-          className="text-xl p-5 bg-red-500 mt-4 rounded-md text-white"
+          className="text-xl p-5 bg-orange-400 mt-4 rounded-md text-white"
           onCl
         >
           All Account

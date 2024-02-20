@@ -57,6 +57,7 @@ import AccountDetails from "../components/pages/Customer/AccountDetails";
 import UploadProfile from "../components/navbar/UploadProfile";
 import CommingSoon from "../components/pages/admin/CommingSoon";
 import RestingPage from "../components/bankmanager/RestingPage";
+import CustomerDashBoard from "../components/pages/Customer/CustomerDashBoard";
 // import LoanAccounts from './../components/pages/md/Accounts/LoanAccount';
 import BMDashboard from "./../components/bankmanager/bankManagerDashboard/BMDashboard";
 import CustomerDashBoard from "../components/pages/Customer/CustomerDashBoard";
@@ -221,6 +222,29 @@ const router = createBrowserRouter([
               },
               {
                 path: "/bankmanager/create-account/DocumentSection",
+                element: <DocumentSection />,
+              },
+            ],
+          },
+          {
+            path: "/bankmanager/Create Account",
+            element: <CreateAccount />,
+            children: [
+              {
+                index: true,
+                element: <PersonalDetails />,
+              },
+              {
+                path: "/bankmanager/Create Account/PersonalDetails",
+                element: <PersonalDetails />,
+              },
+
+              {
+                path: "/bankmanager/Create Account/ServiceDetails",
+                element: <ServiceSection />,
+              },
+              {
+                path: "/bankmanager/Create Account/DocumentSection",
                 element: <DocumentSection />,
               },
             ],
