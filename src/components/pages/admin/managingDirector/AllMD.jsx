@@ -24,7 +24,7 @@ const AllMD = () => {
 
   let [search, setSearch] = useState(null);
 
-  const [itemsPerPage, setItemsPerPage] = useState(3);
+  const [itemsPerPage, setItemsPerPage] = useState(2);
 
   const [currentPage, setCurrentPage] = useState(1);
   let [loading, setLoading] = useState(false);
@@ -74,7 +74,7 @@ const AllMD = () => {
         <section className=" bg-white w-[100%] overflow-auto h-[95%] no-scrollbar">
           <header className="mx-10 my-2 w-[93%] flex justify-between items-center ">
             <div>
-              Show
+              Show{"  "}
               <select
                 className="px-2 rounded-[0.25rem] border-2"
                 onChange={e => {
@@ -85,7 +85,7 @@ const AllMD = () => {
                 <option value="4">4</option>
                 <option value="6">6</option>
                 <option value="8">8</option>
-              </select>
+              </select>{" "}
               entries
             </div>
             <div>

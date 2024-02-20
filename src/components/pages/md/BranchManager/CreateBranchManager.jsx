@@ -8,7 +8,10 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import useGetMd from "../../../../utils/useGetMd";
 import toast from "react-hot-toast";
-import { createBranchManager, getAllUnassignedBranch } from './../../../../redux/services/managingDirectorThunk/mdBranchManagerThunk/MdBranchManagerThunk';
+import {
+  createBranchManager,
+  getAllUnassignedBranch,
+} from "./../../../../redux/services/managingDirectorThunk/mdBranchManagerThunk/MdBranchManagerThunk";
 const CreateBranchManager = () => {
   let dispatch = useDispatch();
   const navigate = useNavigate();
@@ -27,7 +30,7 @@ const CreateBranchManager = () => {
     pincode: "",
     branchId: "",
     country: "",
-  state: "",
+    state: "",
     city: "",
   });
   useEffect(() => {
@@ -37,7 +40,7 @@ const CreateBranchManager = () => {
   useEffect(() => {
     if (bankId) {
       let test = dispatch(getAllUnassignedBranch(bankId));
-      test.unwrap().then((x) => setBranch(x.data));
+      test.unwrap().then(x => setBranch(x.data));
     }
   }, [bankId]);
 
@@ -56,12 +59,12 @@ const CreateBranchManager = () => {
       city: state.city,
     },
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     dispatch(createBranchManager(payload));
     navigate("/mdlayout/all-branchManager");
+    window.location.reload();
     toast.success("created successfully");
-    // window.location.reload()
   };
 
   // Animation:
@@ -87,7 +90,7 @@ const CreateBranchManager = () => {
               id="name"
               name="name"
               value={state.name}
-              onChange={(e) => {
+              onChange={e => {
                 setState({ ...state, name: e.target.value });
               }}
             />
@@ -103,7 +106,7 @@ const CreateBranchManager = () => {
               id="email"
               name="email"
               value={state.email}
-              onChange={(e) => {
+              onChange={e => {
                 setState({ ...state, email: e.target.value });
               }}
             />
@@ -120,7 +123,7 @@ const CreateBranchManager = () => {
               id="phonenumber"
               name="phonenumber"
               value={state.phoneNumber}
-              onChange={(e) => {
+              onChange={e => {
                 setState({ ...state, phoneNumber: e.target.value });
               }}
             />
@@ -134,7 +137,7 @@ const CreateBranchManager = () => {
               id="branchaddress"
               type="text"
               value={state.addressLine}
-              onChange={(e) => {
+              onChange={e => {
                 setState({ ...state, addressLine: e.target.value });
               }}
               cols={30}
@@ -150,10 +153,10 @@ const CreateBranchManager = () => {
               name="country"
               id="country"
               value={state.country}
-              onChange={(e) => {
+              onChange={e => {
                 console.log(e.target.value);
                 setCon(
-                  Country.getAllCountries().filter((ele) => {
+                  Country.getAllCountries().filter(ele => {
                     return ele.name == e.target.value;
                   })[0].isoCode
                 );
@@ -163,7 +166,7 @@ const CreateBranchManager = () => {
               <option disabled value="" className="text-gray-400">
                 -- Select The Country --
               </option>
-              {Country.getAllCountries().map((city) => {
+              {Country.getAllCountries().map(city => {
                 return <option value={city.name}>{city.name}</option>;
               })}
             </select>
@@ -177,11 +180,11 @@ const CreateBranchManager = () => {
               name="state"
               id="state"
               value={state.state}
-              onChange={(e) => {
+              onChange={e => {
                 const selectedState = e.target.value;
                 setStat(
                   State.getStatesOfCountry(cou).find(
-                    (ele) => ele.name === selectedState
+                    ele => ele.name === selectedState
                   )?.isoCode
                 );
                 setState({ ...state, state: selectedState });
@@ -190,7 +193,7 @@ const CreateBranchManager = () => {
               <option disabled value="" className="text-gray-400">
                 -- Select The State --
               </option>
-              {State.getStatesOfCountry(cou).map((region) => (
+              {State.getStatesOfCountry(cou).map(region => (
                 <option key={region.isoCode} value={region.name}>
                   {region.name}
                 </option>
@@ -206,14 +209,14 @@ const CreateBranchManager = () => {
               name="city"
               id="city"
               value={state.city}
-              onChange={(e) => {
+              onChange={e => {
                 setState({ ...state, city: e.target.value });
               }}
             >
               <option disabled value="" className="text-gray-400">
                 -- Select The City --
               </option>
-              {City.getCitiesOfState(cou, stat).map((city) => {
+              {City.getCitiesOfState(cou, stat).map(city => {
                 return <option value={city.name}>{city.name}</option>;
               })}
             </select>
@@ -230,7 +233,7 @@ const CreateBranchManager = () => {
               id="pincode"
               name="pincode"
               value={state.pincode}
-              onChange={(e) => {
+              onChange={e => {
                 setState({ ...state, pincode: e.target.value });
               }}
             />
@@ -246,7 +249,7 @@ const CreateBranchManager = () => {
                 name="gender"
                 value="male"
                 className=" w-4 h-4"
-                onChange={(e) => {
+                onChange={e => {
                   setState({ ...state, gender: e.target.value });
                 }}
               />
@@ -259,7 +262,7 @@ const CreateBranchManager = () => {
                 name="gender"
                 value="female"
                 className="ms-4 w-4 h-4"
-                onChange={(e) => {
+                onChange={e => {
                   setState({ ...state, gender: e.target.value });
                 }}
               />
@@ -272,7 +275,7 @@ const CreateBranchManager = () => {
                 name="gender"
                 value="others"
                 className="ms-4 w-4 h-4"
-                onChange={(e) => {
+                onChange={e => {
                   setState({ ...state, gender: e.target.value });
                 }}
               />
@@ -289,7 +292,7 @@ const CreateBranchManager = () => {
                 id="dob"
                 name="dob"
                 value={state.dateOfBirth}
-                onChange={(e) => {
+                onChange={e => {
                   setState({ ...state, dateOfBirth: e.target.value });
                 }}
                 className="text-base border-2 px-2 py-1 rounded-md w-[50%] "
@@ -307,13 +310,13 @@ const CreateBranchManager = () => {
               // value={query}
               // onChange={handleQueryChange}
 
-              onChange={(e) => {
+              onChange={e => {
                 setState({ ...state, branchId: e.target.value });
               }}
             >
               <option>select branch</option>
               {branch?.length >= 0 &&
-                branch?.map((branch) => (
+                branch?.map(branch => (
                   <Fragment key={branch.branchId}>
                     <option value={branch.branchId}>{branch.branchName}</option>
                   </Fragment>

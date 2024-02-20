@@ -41,7 +41,7 @@ const Navbar = () => {
           {role === "MANAGING_DIRECTOR"
             ? bankName
             : role === "BRANCH_MANAGER"
-            ? bankName
+            ? bankName:role=="ADMIN"?"BankLauncher"
             : bankName}
         </p>
       </div>

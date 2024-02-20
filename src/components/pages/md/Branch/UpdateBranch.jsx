@@ -38,6 +38,7 @@ const UpdateBranch = () => {
     e.preventDefault();
     dispatch(updateBranch(updatedState));
     navigate("/mdlayout/all-branches");
+    window.location.reload();
     toast.success("updated successfully");
   };
   // Animation:
