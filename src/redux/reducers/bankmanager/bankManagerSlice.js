@@ -4,7 +4,7 @@ import {
   AxiosInstanceProtected,
   AxiosInstancePublic,
 } from "../../../axios/AxiosInstance";
-import { data } from "autoprefixer";
+
 import axios from "axios";
 
 const initialState = {
@@ -23,6 +23,7 @@ export const createAccount = createAsyncThunk(
         `/users?branchId=${payload.branchId}`,
         payload
       );
+
       let userId = data?.data?.data?.userId;
       localStorage.setItem("userId", userId);
       return data;

@@ -381,7 +381,7 @@ const MdLeftsideSection = () => {
                   to="/mdlayout/comingSoon"
                   className={({ isActive }) => (isActive ? "active" : "")}
                 >
-                  Debit Cards
+                  Credit Cards
                 </NavLink>
               </li>
             </div>
