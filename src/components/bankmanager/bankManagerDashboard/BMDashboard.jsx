@@ -1,27 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { IoMdArrowDropup } from "react-icons/io";
-import { IoMdArrowDropdown } from "react-icons/io";
+
 import ManagingDirector from "./ManagingDirector";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import CountUp from "react-countup";
-import useGetMd from "../../../../utils/useGetMd";
-import { useDispatch } from "react-redux";
-import { getMdDashBoard } from "../../../../redux/services/managingDirectorThunk/mdBranchThunk/MdBranchThunk";
 
-const ManagingDirectorDashboard = ({ name }) => {
-  let [mdDashBoard, setMdDashBoard] = useState();
+import { useDispatch } from "react-redux";
+
+import useGetBm from "../../../utils/useGetBm";
+import { getBmDasBoard } from "../../../redux/reducers/bankmanager/bankManagerSlice";
+
+const BMDashboard = ({ name }) => {
+  let [bmDashBoard, setBmDashBoard] = useState();
   let dispatch = useDispatch();
-  const user = useGetMd();
+  const user = useGetBm();
+  console.log(user?.data?.data?.branchId);
 
   useEffect(() => {
-    if (user?.data?.data?.managingDirectorId) {
-      let t = dispatch(getMdDashBoard(user?.data?.data?.managingDirectorId));
+    if (user?.data?.data?.branchId) {
+      let t = dispatch(getBmDasBoard(user?.data?.data?.branchId));
       t.unwrap().then(x => {
-        setMdDashBoard(x.data);
+        setBmDashBoard(x.data);
+        console.log(x.data);
       });
     }
-  }, [user?.data?.data?.managingDirectorId]);
+  }, [user?.data?.data?.branchId]);
 
   // Animation:
   useEffect(() => {
@@ -34,15 +37,19 @@ const ManagingDirectorDashboard = ({ name }) => {
     >
       <section className="h-[25%] w-[97%] mt-8 flex justify-between">
         <div className="h-[100%] w-[19%] bg-white flex flex-col items-center rounded-md">
-          <div className="flex w-[85%] justify-between mt-5">
-            <p>Total Branches</p>
+          <div className="flex w-[85%] justify-between mt-5 text-center">
+            <p>Total Saving Accounts in Branch</p>
             {/* <p className="p-2 bg-gray-400 h-[1.1rem] w-[1.1rem] text-[0.7rem] flex items-center justify-center text-white rounded-full">
               i
             </p> */}
           </div>
           <div className="font-[500] flex w-[100%] justify-center mt-3 tracking-widest text-[1.7rem] text-violet-600">
             {/* {mdDashBoard?.totalBranches} */}
-            <CountUp start={0} end={mdDashBoard?.totalBranches} duration={2} />
+            <CountUp
+              start={0}
+              end={bmDashBoard?.totalSavingAccountNumber}
+              duration={2}
+            />
           </div>
           <div className="flex w-[85%] justify-end mt-5">
             {/* <p className="flex items-center tracking-wider">
@@ -52,15 +59,19 @@ const ManagingDirectorDashboard = ({ name }) => {
           </div>
         </div>
         <div className="h-[100%] w-[19%] bg-white flex flex-col items-center rounded-md">
-          <div className="flex w-[85%] justify-between mt-5">
-            <p>Total Accounts</p>
+          <div className="flex w-[85%] justify-between mt-5 text-center">
+            <p>Total Current Accounts in Branch</p>
             {/* <p className="p-2 bg-gray-400 h-[1.1rem] w-[1.1rem] text-[0.7rem] flex items-center justify-center text-white rounded-full">
               i
             </p> */}
           </div>
           <div className="font-[500] flex w-[100%] justify-center mt-3 tracking-widest text-[1.7rem] text-violet-600">
             {/* 1,22,02,155 */}
-            <CountUp start={0} end={mdDashBoard?.totalAccounts} duration={3} />
+            <CountUp
+              start={0}
+              end={bmDashBoard?.totalCurrentAccount}
+              duration={3}
+            />
           </div>
           {/* <div className="flex w-[85%] justify-end mt-5">
             <p className="flex items-center tracking-wider">
@@ -70,15 +81,19 @@ const ManagingDirectorDashboard = ({ name }) => {
           </div> */}
         </div>
         <div className="h-[100%] w-[19%] bg-white flex flex-col items-center rounded-md">
-          <div className="flex w-[85%] justify-between mt-5">
-            <p>Total Employees</p>
+          <div className="flex w-[85%] justify-between mt-5 text-center">
+            <p>Total Credit Card in Branch</p>
             {/* <p className="p-2 bg-gray-400 h-[1.1rem] w-[1.1rem] text-[0.7rem] flex items-center justify-center text-white rounded-full">
               i
             </p> */}
           </div>
           <div className="font-[500] flex w-[100%] justify-center mt-3 tracking-widest text-[1.7rem] text-violet-600">
             {/* 3.2M */}
-            <CountUp start={0} end={mdDashBoard?.totalemployees} duration={2} />
+            <CountUp
+              start={0}
+              end={bmDashBoard?.totalCreditCardAccount}
+              duration={2}
+            />
           </div>
           {/* <div className="flex w-[85%] justify-end mt-5">
             <p className="flex items-center tracking-wider">
@@ -88,15 +103,15 @@ const ManagingDirectorDashboard = ({ name }) => {
           </div> */}
         </div>
         <div className="h-[100%] w-[19%] bg-white flex flex-col items-center rounded-md">
-          <div className="flex w-[85%] justify-between mt-5">
-            <p>Today Deposits</p>
+          <div className="flex w-[85%] justify-between mt-5 text-center">
+            <p>Total Today Deposits in Branch</p>
             {/* <p className="p-2 bg-gray-400 h-[1.1rem] w-[1.1rem] text-[0.7rem] flex items-center justify-center text-white rounded-full">
               i
             </p> */}
           </div>
           <div className="font-[500] flex w-[100%] justify-center mt-3 tracking-widest text-[1.7rem] text-violet-600">
             {/* 2.8M */}
-            <CountUp start={0} end={mdDashBoard?.totalDeposits} duration={2} />
+            <CountUp start={0} end={bmDashBoard?.totalDeposits} duration={2} />
           </div>
           {/* <div className="flex w-[85%] justify-end mt-5">
             <p className="flex items-center tracking-wider">
@@ -106,8 +121,8 @@ const ManagingDirectorDashboard = ({ name }) => {
           </div> */}
         </div>
         <div className="h-[100%] w-[19%] bg-white flex flex-col items-center rounded-md">
-          <div className="flex w-[85%] justify-between mt-5">
-            <p>Today Fund Transfer</p>
+          <div className="flex w-[85%] justify-between mt-5 text-center">
+            <p>Today Fund Transfer in Branch</p>
             {/* <p className="p-2 bg-gray-400 h-[1.1rem] w-[1.1rem] text-[0.7rem] flex items-center justify-center text-white rounded-full">
               i
             </p> */}
@@ -116,7 +131,7 @@ const ManagingDirectorDashboard = ({ name }) => {
             {/* 2.8M */}
             <CountUp
               start={0}
-              end={mdDashBoard?.totalFundTransfer}
+              end={bmDashBoard?.totalFundTransfer}
               duration={2}
             />
           </div>
@@ -135,4 +150,4 @@ const ManagingDirectorDashboard = ({ name }) => {
   );
 };
 
-export default ManagingDirectorDashboard;
+export default BMDashboard;

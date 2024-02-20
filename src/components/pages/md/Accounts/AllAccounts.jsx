@@ -108,26 +108,15 @@ const AllAccounts = () => {
                 onChange={e => {
                   let data = state?.filter(
                     ele =>
-                      ele.email
+                      ele?.email
                         ?.toLowerCase()
                         ?.includes(e.target.value.toLowerCase()) ||
-                      ele.name
+                      ele?.name
                         ?.toLowerCase()
                         .includes(e.target.value.toLowerCase())
                   );
                   console.log(data);
-                  // for (let i = 0; i < data.length; i++) {
-                  //   for (let j = 0; j < currentItems.length; j++) {
-                  //     if (
-                  //       data[i]?.email?.toLowerCase() ==
-                  //         currentItems[j]?.email?.toLowerCase() ||
-                  //       data[i]?.name?.toLowerCase() ==
-                  //         currentItems[j]?.name?.toLowerCase()
-                  //     ) {
-                  //       data = data.toSpliced(i, 1);
-                  //     }
-                  //   }
-                  // }
+
                   e.target.value && true ? setSearch(data) : setSearch(null);
                 }}
               />

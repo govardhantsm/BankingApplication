@@ -23,6 +23,7 @@ import { MdOutlineRemoveCircle } from "react-icons/md";
 import { MdAccountBalanceWallet } from "react-icons/md";
 import { TbMoneybag } from "react-icons/tb";
 import { IoTrailSignOutline } from "react-icons/io5";
+import { MdEmojiObjects } from "react-icons/md";
 
 const Navbar = () => {
   let [toggle, setToggle] = useState(false);
@@ -36,7 +37,7 @@ const Navbar = () => {
   return (
     <section className="bg-white h-[100%] w-[100%] flex">
       <div className="w-[17%] bg-orange-400 h-[100%] flex items-center justify-center">
-        <p className="ml-2 mr-2 text-slate-950">
+        <p className="ml-2 mr-2 text-slate-950 text-center">
           {role === "MANAGING_DIRECTOR"
             ? bankName
             : role === "BRANCH_MANAGER"
@@ -212,6 +213,13 @@ const Navbar = () => {
                       className={({ isActive }) => (isActive ? "active" : "")}
                     >
                       <LiaIdCardSolid className="" />
+                    </NavLink>
+                    <NavLink
+                      title="ComingSoon"
+                      // to="/adminlayout/all-md"
+                      // className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      <MdEmojiObjects className="" />
                     </NavLink>
                   </div>
                 </div>

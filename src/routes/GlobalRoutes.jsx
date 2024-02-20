@@ -59,6 +59,8 @@ import CommingSoon from "../components/pages/admin/CommingSoon";
 import RestingPage from "../components/bankmanager/RestingPage";
 import CustomerDashBoard from "../components/pages/Customer/CustomerDashBoard";
 // import LoanAccounts from './../components/pages/md/Accounts/LoanAccount';
+import BMDashboard from "./../components/bankmanager/bankManagerDashboard/BMDashboard";
+import CustomerDashBoard from "../components/pages/Customer/CustomerDashBoard";
 
 const router = createBrowserRouter([
   { path: "/", element: <Landingpage /> },
@@ -199,9 +201,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: (
-              <ManagingDirectorDashboard name="Bank Manager DashBoard" />
-            ),
+            element: <BMDashboard name="Bank Manager DashBoard" />,
           },
           {
             path: "/bankmanager/create-account",
