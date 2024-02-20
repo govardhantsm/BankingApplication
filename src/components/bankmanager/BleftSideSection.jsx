@@ -70,10 +70,10 @@ const BleftSideSection = () => {
           </div>
           {account &&
             [
+              "Create Account",
               "All Accounts",
               "Savings Accounts",
               "Current Accounts",
-              "Loan Accounts",
             ].map(d => {
               return (
                 <div className="ms-4 p-1  text-[rgb(112,112,112)]">
@@ -149,7 +149,7 @@ const BleftSideSection = () => {
             </span>
           </div>
           {card &&
-            ["Debit Cards"].map(d => {
+            ["Credit Cards"].map(d => {
               return (
                 <div className="ms-4 p-1  text-[rgb(112,112,112)]">
                   <NavLink
