@@ -41,7 +41,7 @@ const LeftSection = () => {
           <div className="p-1 flex items-center ">
             <RiDashboard3Fill className="mr-2" />
             <NavLink
-              to="#"
+              to="/customer"
               className={({ isActive }) => (isActive ? "active" : "")}
             >
               DashBoard
@@ -103,10 +103,9 @@ const LeftSection = () => {
               return (
                 <div className="ms-4 p-1  text-[rgb(112,112,112)]">
                   <NavLink
-                    to={`/customer/${d}`}
-                    className={({ isActive }) =>
-                      isActive ? "bg-gray-600" : ""
-                    }
+                    state={"customerSection"}
+                    to="/customer/comingSoon"
+                    className={({ isActive }) => (isActive ? "" : "")}
                   >
                     {d}
                   </NavLink>
