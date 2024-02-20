@@ -11,7 +11,7 @@ const Chome = () => {
           <LeftSection />
         </aside>
         <aside className="w-[83%] h-[100%]">
-          <div className="h-[100%] w-[100%]">
+          <div className="h-[95%] w-[100%]">
             <Outlet />
           </div>
         </aside>

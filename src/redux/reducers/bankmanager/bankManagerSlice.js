@@ -133,6 +133,21 @@ export const getBmProfile = createAsyncThunk("getBmProfile", async () => {
   }
 });
 
+// ============getBmDasBoard==============/
+export const getBmDasBoard = createAsyncThunk(
+  "getBmDashBoard",
+  async branchId => {
+    try {
+      const { data } = await AxiosInstanceProtected.get(
+        `/branchManagers/getBranchManagerDashBoard?branchId=${branchId}`
+      );
+      return data;
+    } catch (error) {
+      return error.message;
+    }
+  }
+);
+
 // //=================Fetch all unassigned==============/
 // export const getAllUnassigned = createAsyncThunk(
 //   "getAllUnassigned",

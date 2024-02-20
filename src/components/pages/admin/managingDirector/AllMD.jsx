@@ -24,7 +24,7 @@ const AllMD = () => {
 
   let [search, setSearch] = useState(null);
 
-  const [itemsPerPage, setItemsPerPage] = useState(8);
+  const [itemsPerPage, setItemsPerPage] = useState(3);
 
   const [currentPage, setCurrentPage] = useState(1);
   let [loading, setLoading] = useState(false);
@@ -106,10 +106,10 @@ const AllMD = () => {
                   for (let i = 0; i < data.length; i++) {
                     for (let j = 0; j < currentItems.length; j++) {
                       if (
-                        data[i].email.toLowerCase() ==
-                          currentItems[j].email.toLowerCase() ||
-                        data[i].name.toLowerCase() ==
-                          currentItems[j].name.toLowerCase()
+                        data[i]?.email.toLowerCase() ==
+                          currentItems[j]?.email.toLowerCase() ||
+                        data[i]?.name.toLowerCase() ==
+                          currentItems[j]?.name.toLowerCase()
                       ) {
                         data = data.toSpliced(i, 1);
                       }

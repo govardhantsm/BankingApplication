@@ -57,6 +57,8 @@ import AccountDetails from "../components/pages/Customer/AccountDetails";
 import UploadProfile from "../components/navbar/UploadProfile";
 import CommingSoon from "../components/pages/admin/CommingSoon";
 // import LoanAccounts from './../components/pages/md/Accounts/LoanAccount';
+import BMDashboard from "./../components/bankmanager/bankManagerDashboard/BMDashboard";
+import CustomerDashBoard from "../components/pages/Customer/CustomerDashBoard";
 
 const router = createBrowserRouter([
   { path: "/", element: <Landingpage /> },
@@ -197,9 +199,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: (
-              <ManagingDirectorDashboard name="Bank Manager DashBoard" />
-            ),
+            element: <BMDashboard name="Bank Manager DashBoard" />,
           },
           {
             path: "/bankmanager/create-account",
@@ -281,7 +281,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <AdminDashboard name="Customer DashBoard" />,
+            element: <CustomerDashBoard name="Customer DashBoard" />,
           },
           {
             path: "/customer/Manage Beneficiary",
