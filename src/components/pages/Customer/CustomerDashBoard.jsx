@@ -5,20 +5,21 @@ import { useDispatch } from "react-redux";
 import { getCustomerProfile } from "../../../redux/reducers/customer/customerSlice";
 import { RiFundsLine } from "react-icons/ri";
 import { MdAdd } from "react-icons/md";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { LuBookMinus } from "react-icons/lu";
 import { MdOutlineAccountBalanceWallet } from "react-icons/md";
+import { ChangeStatus } from "../../../redux/services/CustomerThunk/AccountsThunk";
 
 const CustomerDashBoard = () => {
   let dispatch = useDispatch();
+  let navigate = useNavigate();
   let [showDebitCard, setShowDebitCard] = useState(false);
   const [data, SetData] = useState();
-  useEffect(() => {}, []);
-  dispatch(getCustomerProfile()).then(y => {
-    SetData(y.payload.data);
-  });
-
-  let [toggle, setToggle] = useState(true);
+  useEffect(() => {
+    dispatch(getCustomerProfile()).then(y => {
+      SetData(y.payload.data);
+    });
+  }, []);
 
   // Animation:
   useEffect(() => {
@@ -98,30 +99,42 @@ const CustomerDashBoard = () => {
           </p>
           <section className=" h-[auto] w-[72%] py-5 px-10 rounded shadow-md shadow-slate-400	">
             <div className="w-[100%] h-[100%] flex flex-col  gap-3 basis-[19rem] justify-evenly border-neutral-700 rounded">
-              <p className="flex items-center border">
+              <p className="flex items-center ">
                 <span className="w-[170px] inline-block font-semibold  text-[#424242]">
                   Status
                 </span>
-                <span className="text-[#6e6e6e]">{data.status}</span>
+                <span className="text-[#6e6e6e]">
+                  {data?.accounts[0]?.debitCard?.status}
+                </span>
 
                 <span
                   className="w-[auto] pl-4 mt-1 inline-block font-semibold rounded  cursor-pointer"
-                  onClick={() => setToggle(!toggle)}
+                  onClick={() => {
+                   
+                    dispatch(
+                      ChangeStatus({
+                        accountNumber: data?.accounts[0]?.accountNumber,
+                        status:
+                          data?.accounts[0]?.debitCard?.status == "ACTIVE"
+                            ? "INACTIVE"
+                            : "ACTIVE",
+                      })
+                    );
+                    window.location.reload();
+                  }}
                 >
-                  {toggle ? (
-                    <button>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="30"
-                        height="30"
-                        viewBox="0 0 32 32"
-                      >
-                        <path
-                          fill="orange"
-                          d="M9 7c-4.96 0-9 4.035-9 9s4.04 9 9 9h14c4.957 0 9-4.043 9-9s-4.043-9-9-9zm14 2c3.879 0 7 3.121 7 7s-3.121 7-7 7s-7-3.121-7-7s3.121-7 7-7"
-                        />
-                      </svg>
-                    </button>
+                  {data?.accounts[0]?.debitCard?.status == "ACTIVE" ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="30"
+                      height="30"
+                      viewBox="0 0 32 32"
+                    >
+                      <path
+                        fill="orange"
+                        d="M9 7c-4.96 0-9 4.035-9 9s4.04 9 9 9h14c4.957 0 9-4.043 9-9s-4.043-9-9-9zm14 2c3.879 0 7 3.121 7 7s-3.121 7-7 7s-7-3.121-7-7s3.121-7 7-7"
+                      />
+                    </svg>
                   ) : (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

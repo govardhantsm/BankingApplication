@@ -150,3 +150,16 @@ export const DeleteBeneficiary = createAsyncThunk(
     }
   }
 );
+
+//ChangeStatus
+export const ChangeStatus = createAsyncThunk("ChangeStatus", async payload => {
+  try {
+    const { data } = await AxiosInstanceProtected.patch(
+      `/accounts/debitCard/changeStatus`,
+      payload
+    );
+    return data;
+  } catch (error) {
+    return error.message;
+  }
+});
