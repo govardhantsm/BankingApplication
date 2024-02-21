@@ -48,7 +48,7 @@ const AllBank = () => {
                     key={index + 1}
                   >
                     <div className="w-1/3 flex flex-col">
-                      <div className="p-3 pl-4 font-medium">
+                      <div className="p-3 pl-4 font-medium flex">
                         <span className="font-bold w-32 inline-block text-[rgba(136,136,136)]">
                           Bank Name :
                         </span>{" "}
