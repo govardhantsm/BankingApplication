@@ -153,7 +153,7 @@ const Navbar = () => {
               <FaUserTie />
             </span>
             <div
-              className="invisible group-hover:visible shadow-lg w-[auto] rounded-lg p-6 max-w-md absolute -right-[50px] z-20 bg-orange-400 text-[#fff] mr-2"
+              className="invisible group-hover:visible shadow-lg w-[auto] rounded-lg p-6 max-w-md absolute -right-[50px] z-20 bg-gray-400 text-[#fff] mr-2"
               data-aos="fade-down"
             >
               <div className="flex w-[270px] items-center mb-4 text-[#fff]">
