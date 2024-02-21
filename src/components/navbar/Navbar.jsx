@@ -24,6 +24,7 @@ import { MdAccountBalanceWallet } from "react-icons/md";
 import { TbMoneybag } from "react-icons/tb";
 import { IoTrailSignOutline } from "react-icons/io5";
 import { MdEmojiObjects } from "react-icons/md";
+import { FaCreditCard } from "react-icons/fa6";
 
 const Navbar = () => {
   let [toggle, setToggle] = useState(false);
@@ -44,139 +45,199 @@ const Navbar = () => {
             ? bankName
             : bankName || data.userType == "ACCOUNT_HOLDER"
             ? data?.bank?.bankName
-            : ""}
+            : "Bank Launcher"}
         </p>
       </div>
       <div className="flex justify-between w-[83%] h-[100%]">
-        <section className="w-[33%] flex justify-evenly items-center">
-          {/* <FaBars className="ms-2" /> */}
-          {/* <div className="flex">
-            <span className="ms-7 ">English</span>
-            <span>
-              <RiArrowDropDownLine className="text-2xl me-4" />
-            </span>
-          </div> */}
-          {/* <div className="flex">
-            <span>
-              <input
-                type="text"
-                placeholder="Search..."
-                className="border-2 p-1 rounded-full ps-4 w-[15rem]"
-              />
-            </span>
-            <span className="relative top-2 text-xl right-[2rem] text-slate-500">
-              <IoIosSearch />
-            </span>
-          </div> */}
-        </section>
+        <section className="w-[33%] flex justify-evenly items-center"></section>
         <section className="mr-6 w-[10%] flex text-2xl justify-between items-center">
           <BsBell className="text-xl" />
-          {/* <CiMail /> */}
 
-          {/* <img
-            src={
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAK2Ud4gQr9pQFT6rc3xbeq74MhZe7bOdvQ&usqp=CAU"
-            }
-            alt=""
-            className="h-[1.8rem] w-[1.8rem] rounded-full"
-          /> */}
-          {/* <FaUserTie /> */}
-          <div>
-            <span className="cursor-pointer" onClick={() => setToggle(!toggle)}>
+          {/* <div className="group-relative">
+            <span className="cursor-pointer">
               <FaUserTie />
-            </span>
-            {toggle ? (
-              <div
-                class="shadow-lg w-[auto] rounded-lg p-6 mx-auto my-6 max-w-md  absolute top-[30px] right-[0] z-20 bg-orange-400 text-[#fff] mr-2"
-                data-aos="fade-down"
-              >
-                <div class="flex items-center mb-4 text-[#fff]">
-                  <div class="mr-4">
-                    <span class="text-5xl ">
-                      <FaRegCircleUser />
-                    </span>
-                  </div>
-                  <div>
-                    <h3 class="font-semibold text-lg	">
-                      {data?.name || data?.branchManagerName || "NA"}
-                    </h3>
-                    <p class="text-base	font-light	">
-                      {data.role === "MANAGING_DIRECTOR"
-                        ? "MANAGING DIRECTOR"
-                        : data.role === "BRANCH_MANAGER"
-                        ? "BRANCH MANAGER"
-                        : data.role == "ADMIN"
-                        ? "ADMIN"
-                        : data.role == "CUSTOMER"
-                        ? "Customer"
-                        : ""}
-                    </p>
-                  </div>
+            </span> */}
+          {/* {toggle ? ( */}
+          {/* <div
+              class="invisible group-hover:visible shadow-lg w-[auto] rounded-lg p-6 mx-auto my-6 max-w-md  absolute top-[30px] right-[0] z-20 bg-orange-400 text-[#fff] mr-2"
+              data-aos="fade-down"
+            >
+              <div class="flex items-center mb-4 text-[#fff]">
+                <div class="mr-4">
+                  <span class="text-5xl ">
+                    <FaRegCircleUser />
+                  </span>
                 </div>
-
                 <div>
+                  <h3 class="font-semibold text-lg	">
+                    {data?.name || data?.branchManagerName || "NA"}
+                  </h3>
+                  <p class="text-base	font-light	">
+                    {data.role === "MANAGING_DIRECTOR"
+                      ? "MANAGING DIRECTOR"
+                      : data.role === "BRANCH_MANAGER"
+                      ? "BRANCH MANAGER"
+                      : data.role == "ADMIN"
+                      ? "ADMIN"
+                      : data.role == "CUSTOMER"
+                      ? "Customer"
+                      : ""}
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <div>
+                  <p class="flex">
+                    <span className="mr-[10px] mt-1 text-xl">
+                      <FaUserCheck />
+                    </span>
+                    <span class="text-base">
+                      <span className="font-semibold"> Employee ID: </span>
+                      <span className="ml-2">
+                        {data?.managingDirectorId ||
+                          data?.branchId ||
+                          data?.employeeId ||
+                          data?.userId ||
+                          "NA"}
+                      </span>
+                    </span>
+                  </p>
+                  <p class="flex">
+                    <span className="mr-[10px] mt-1 text-xl">
+                      <MdOutlineMail />
+                    </span>
+                    <span class="text-base">
+                      <span className="font-semibold"> Email: : </span>
+                      <span className="ml-2">{data?.email || "NA"}</span>
+                    </span>
+                  </p>
                   <div>
                     <p class="flex">
-                      <span className="mr-[10px] mt-1 text-xl">
-                        <FaUserCheck />
+                      <span className="pt-2 mr-[10px] mt-1 text-xl">
+                        <FiEdit />
                       </span>
-                      <span class="text-base">
-                        <span className="font-semibold"> Employee ID: </span>
-                        <span className="ml-2">
-                          {data?.managingDirectorId ||
-                            data?.branchId ||
-                            data?.employeeId ||
-                            data?.userId ||
-                            "NA"}
-                        </span>
-                      </span>
-                    </p>
-                    <p class="flex">
-                      <span className="mr-[10px] mt-1 text-xl">
-                        <MdOutlineMail />
-                      </span>
-                      <span class="text-base">
-                        <span className="font-semibold"> Email: : </span>
-                        <span className="ml-2">{data?.email || "NA"}</span>
+                      <span class="text-base bg-slate-500 w-auto p-2 rounded">
+                        <NavLink
+                          to={
+                            data.role == "ADMIN"
+                              ? "/adminlayout/uploadProfile"
+                              : data.role == "MANAGING_DIRECTOR"
+                              ? "/mdlayout/uploadProfile"
+                              : data.role == "BRANCH_MANAGER"
+                              ? "/bankmanager/uploadProfile"
+                              : ""
+                          }
+                        >
+                          Update Profile Picture
+                        </NavLink>
                       </span>
                     </p>
-                    <div>
-                      <p class="flex">
-                        <span className="pt-2 mr-[10px] mt-1 text-xl">
-                          <FiEdit />
-                        </span>
-                        <span class="text-base bg-slate-500 w-auto p-2 rounded">
-                          <NavLink
-                            to={
-                              data.role == "ADMIN"
-                                ? "/adminlayout/uploadProfile"
-                                : data.role == "MANAGING_DIRECTOR"
-                                ? "/mdlayout/uploadProfile"
-                                : data.role == "BRANCH_MANAGER"
-                                ? "/bankmanager/uploadProfile"
-                                : ""
-                            }
-                          >
-                            Update Profile Picture
-                          </NavLink>
-                        </span>
-                      </p>
 
-                      <p class="flex">
-                        <span className="pt-3 mr-[10px] mt-1 text-xl">
-                          <MdOutlineRemoveCircle />
-                        </span>
-                        <span class="text-base bg-red-400 w-auto p-2 rounded mt-2">
-                          <NavLink>Remove Profile Picture</NavLink>
-                        </span>
-                      </p>
-                    </div>
+                    <p class="flex">
+                      <span className="pt-3 mr-[10px] mt-1 text-xl">
+                        <MdOutlineRemoveCircle />
+                      </span>
+                      <span class="text-base bg-red-400 w-auto p-2 rounded mt-2">
+                        <NavLink>Remove Profile Picture</NavLink>
+                      </span>
+                    </p>
                   </div>
                 </div>
               </div>
-            ) : (
-              ""
-            )}
+            </div>
+            
+          </div> */}
+          <div className="group relative">
+            <span className="cursor-pointer">
+              <FaUserTie />
+            </span>
+            <div
+              className="invisible group-hover:visible shadow-lg w-[auto] rounded-lg p-6 max-w-md absolute -right-[50px] z-20 bg-orange-400 text-[#fff] mr-2"
+              data-aos="fade-down"
+            >
+              <div className="flex w-[270px] items-center mb-4 text-[#fff]">
+                <div className="mr-4">
+                  <span className="text-5xl">
+                    <FaRegCircleUser />
+                  </span>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg ">
+                    {data?.name || data?.branchManagerName || "NA"}
+                  </h3>
+                  <p className="text-base font-light">
+                    {data.role === "MANAGING_DIRECTOR"
+                      ? "MANAGING DIRECTOR"
+                      : data.role === "BRANCH_MANAGER"
+                      ? "BRANCH MANAGER"
+                      : data.role === "ADMIN"
+                      ? "ADMIN"
+                      : data.role === "CUSTOMER"
+                      ? "Customer"
+                      : ""}
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <p className="flex">
+                  <span className="mr-[10px] mt-1 text-xl">
+                    <FaUserCheck />
+                  </span>
+                  <span className="text-base">
+                    <span className="font-semibold"> Employee ID: </span>
+                    <span className="ml-2">
+                      {data?.managingDirectorId ||
+                        data?.branchId ||
+                        data?.employeeId ||
+                        data?.userId ||
+                        "NA"}
+                    </span>
+                  </span>
+                </p>
+                <p className="flex">
+                  <span className="mr-[10px] mt-1 text-xl">
+                    <MdOutlineMail />
+                  </span>
+                  <span className="text-base">
+                    <span className="font-semibold"> Email: </span>
+                    <span className="ml-2">{data?.email || "NA"}</span>
+                  </span>
+                </p>
+                <div>
+                  <p className="flex">
+                    <span className="pt-2 mr-[10px] mt-1 text-xl">
+                      <FiEdit />
+                    </span>
+                    <span className="text-base bg-slate-500 w-auto p-2 rounded">
+                      <NavLink
+                        to={
+                          data.role === "ADMIN"
+                            ? "/adminlayout/uploadProfile"
+                            : data.role === "MANAGING_DIRECTOR"
+                            ? "/mdlayout/uploadProfile"
+                            : data.role === "BRANCH_MANAGER"
+                            ? "/bankmanager/uploadProfile"
+                            : ""
+                        }
+                      >
+                        Update Profile Picture
+                      </NavLink>
+                    </span>
+                  </p>
+
+                  <p className="flex">
+                    <span className="pt-3 mr-[10px] mt-1 text-xl">
+                      <MdOutlineRemoveCircle />
+                    </span>
+                    <span className="text-base bg-red-400 w-auto p-2 rounded mt-2">
+                      <NavLink>Remove Profile Picture</NavLink>
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
           <button className="group relative">
@@ -219,11 +280,7 @@ const Navbar = () => {
                     >
                       <LiaIdCardSolid className="" />
                     </NavLink>
-                    <NavLink
-                      title="ComingSoon"
-                      to="#"
-                      // className={({ isActive }) => (isActive ? "active" : "")}
-                    >
+                    <NavLink title="ComingSoon" to="#">
                       <MdEmojiObjects className="" />
                     </NavLink>
                   </div>
@@ -374,10 +431,10 @@ const Navbar = () => {
                     </NavLink>
                     <NavLink
                       title="CreditCard"
-                      to="/customer/Credit Cards"
+                      to="#"
                       className={({ isActive }) => (isActive ? "active" : "")}
                     >
-                      <TbMoneybag className="me-3" />
+                      <FaCreditCard className="me-3" />
                     </NavLink>
                   </div>
                 </div>
