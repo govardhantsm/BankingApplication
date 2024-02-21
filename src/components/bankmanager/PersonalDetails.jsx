@@ -89,7 +89,29 @@ const PersonalDetails = () => {
 
   return (
     <section>
-      <section className=" flex w-[100%] flex-wrap gap-y-3 gap-x-4 h-[21rem] overflow-auto no-scrollbar">
+      <section className=" ms-6 flex w-[95%] flex-wrap gap-y-5 gap-x-4 h-[30rem] overflow-auto no-scrollbar">
+        <div className=" flex flex-col basis-[19rem]">
+          <label
+            htmlFor="nameprefix"
+            className="text-[15px] pb-2 text-gray-400"
+          >
+            Name Prefix
+          </label>
+          <select
+            name="nameprefix"
+            id="nameprefix"
+            value={state.nameprefix}
+            onChange={e => {
+              setState({ ...state, nameprefix: e.target.value });
+            }}
+            className="border-2 rounded-md focus:outline-none pl-3 p-[0.36rem] text-[rgb(145,142,143)] sm:text-sm sm:leading-6"
+          >
+            <option value="">--select here--</option>
+            <option value="Mr">Mr</option>
+            <option value="Mrs">Mrs</option>
+            <option value="Ms">Ms</option>
+          </select>
+        </div>
         <div className=" flex flex-col basis-[19rem] ">
           <label htmlFor="firstname" className="text-[15px] pb-2 text-gray-400">
             First Name
@@ -138,28 +160,7 @@ const PersonalDetails = () => {
             }}
           />
         </div>
-        <div className=" flex flex-col basis-[19rem]">
-          <label
-            htmlFor="nameprefix"
-            className="text-[15px] pb-2 text-gray-400"
-          >
-            Name Prefix
-          </label>
-          <select
-            name="nameprefix"
-            id="nameprefix"
-            value={state.nameprefix}
-            onChange={e => {
-              setState({ ...state, nameprefix: e.target.value });
-            }}
-            className="border-2 rounded-md focus:outline-none pl-3 p-[0.36rem] text-[rgb(145,142,143)] sm:text-sm sm:leading-6"
-          >
-            <option value="">--select here--</option>
-            <option value="Mr">Mr</option>
-            <option value="Mrs">Mrs</option>
-            <option value="Ms">Ms</option>
-          </select>
-        </div>
+
         <div className=" flex flex-col basis-[19rem]">
           <label
             htmlFor="fatherName"
@@ -240,7 +241,7 @@ const PersonalDetails = () => {
             OTHERS
           </label>
         </div>
-        <div className="flex flex-col w-[25.5%] ">
+        <div className="ms-2 flex flex-col w-[25.5%] ">
           <label htmlFor="dob" className="text-[15px] pb-2 text-gray-400">
             DOB
           </label>
