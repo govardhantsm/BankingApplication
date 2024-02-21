@@ -104,12 +104,12 @@ const ManagingDirector = () => {
             </p>
           </div>
         </section> */}
-        <section className="h-[20%] w-[100%] flex flex-wrap justify-around mt-5">
+        <section className="h-[20%] pb-2 w-[100%] flex flex-wrap justify-around mt-5">
           <div> 1- SavingAccount</div>
           <div> 2- CurrentAccount</div>
           <div> 3- CreditAccount</div>
           <div className="mr-4"> 4- TodayDeposit</div>
-          <div> 3- FundTransfer</div>
+          <div> 5- FundTransfer</div>
         </section>
       </div>
     </section>

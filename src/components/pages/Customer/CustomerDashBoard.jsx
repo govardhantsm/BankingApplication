@@ -9,6 +9,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { LuBookMinus } from "react-icons/lu";
 import { MdOutlineAccountBalanceWallet } from "react-icons/md";
 import { ChangeStatus } from "../../../redux/services/CustomerThunk/AccountsThunk";
+import { LuIndianRupee } from "react-icons/lu";
 
 const CustomerDashBoard = () => {
   let dispatch = useDispatch();
@@ -59,11 +60,14 @@ const CustomerDashBoard = () => {
                   {data?.accounts[0]?.accountType || "NA"}{" "}
                 </span>
               </p>
-              <p>
-                <span className="w-[170px]  inline-block font-semibold text-[#424242]">
-                  Available Balance:
+              <p className="flex">
+                <span className="w-[180px]  inline-block font-semibold text-[#424242] flex">
+                  <p>Available Balance </p>:
                 </span>
-                <span className="text-[#6e6e6e]">
+                <span className="text-[#6e6e6e] flex">
+                  <span className="mt-1">
+                    <LuIndianRupee />
+                  </span>
                   {data?.accounts[0]?.availableBalance}{" "}
                 </span>
               </p>
@@ -105,7 +109,7 @@ const CustomerDashBoard = () => {
             <div className="w-[100%] h-[100%] flex flex-col  gap-3 basis-[19rem] justify-evenly border-neutral-700 rounded">
               <p className="flex items-center ">
                 <span className="w-[170px] inline-block font-semibold  text-[#424242]">
-                  Status
+                  Status:
                 </span>
                 <span className="text-[#6e6e6e]">
                   {data?.accounts[0]?.debitCard?.status}

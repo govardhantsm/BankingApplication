@@ -362,12 +362,15 @@ const AllAccounts = () => {
           </div>
           <footer className="mx-10 my-2 w-[93%]  flex justify-between items-center">
             <p>
-              Showing {indexOfFirstItem + 1} to
-              {indexOfLastItem < state?.length
-                ? indexOfLastItem
-                : state?.length}
-              of
-              {state?.length} entries
+              <span>Showing</span> {indexOfFirstItem + 1}{" "}
+              <span className="">to</span>{" "}
+              <span className="mr-1">
+                {indexOfLastItem < state?.length
+                  ? indexOfLastItem
+                  : state?.length}
+              </span>
+              <span className="mr-1">of</span>
+              <span>{state?.length}</span> <span>entries</span>
             </p>
             <div className="mt-4 flex  items-center justify-center">
               <ul className="flex ">
