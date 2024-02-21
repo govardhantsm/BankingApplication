@@ -51,8 +51,8 @@ const ManagingDirectorDashboard = ({ name }) => {
             </p> */}
           </div>
         </div>
-        <div className="h-[100%] w-[19%] bg-white flex flex-col items-center rounded-md">
-          <div className="flex w-[85%] justify-between mt-5">
+        <div className="h-[100%] w-[19%] bg-white flex flex-col items-center rounded-md ">
+          <div className="flex w-[85%] justify-between mt-5 ">
             <p>Total Accounts</p>
             {/* <p className="p-2 bg-gray-400 h-[1.1rem] w-[1.1rem] text-[0.7rem] flex items-center justify-center text-white rounded-full">
               i
