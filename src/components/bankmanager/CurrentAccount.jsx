@@ -20,7 +20,7 @@ import { MdOutlineCreditScore } from "react-icons/md";
 import { MdOutlineCreditCard } from "react-icons/md";
 import { MdCreditScore } from "react-icons/md";
 const BranchCurrentAccount = () => {
-  // localStorage.setItem("path", "/bankmanager/Current Accounts");  
+  // localStorage.setItem("path", "/bankmanager/Current Accounts");
   let [accountNumber, SetAccountNumber] = useState();
   let [state, setState] = useState(null);
   let [toggle, SetToggle] = useState(false);
@@ -241,12 +241,12 @@ const BranchCurrentAccount = () => {
                             </button>
                             {toggle ? (
                               <div
-                                class="shadow-lg w-[20rem] h-[12rem] rounded-lg p-6 mx-auto my-6 max-w-md  absolute top-[100px] right-[400px] z-20 bg-[#ecc7bd] text-[#2a2929] mr-2"
+                                class="shadow-lg w-[25rem] h-[12rem] rounded-lg p-6 mx-auto my-6 max-w-md  absolute top-[100px] right-[400px] z-20 bg-gray-300 text-[#2a2929] mr-2"
                                 data-aos="fade-down"
                               >
                                 <div class="flex flex-col items-center mb-4 p-2 pt-6 ">
-                                  <div className="pb-6">
-                                    <label className="text-[20px] pb-2 text-black font-bold ">
+                                  <div className="pb-6 flex">
+                                    <label className="text-[20px] pt-2 pr-2 text-black font-bold ">
                                       Approval :{" "}
                                     </label>
                                     <select
@@ -358,12 +358,12 @@ const BranchCurrentAccount = () => {
                             </button>
                             {toggle ? (
                               <div
-                                class="shadow-lg w-[20rem] h-[12rem] rounded-lg p-6 mx-auto my-6 max-w-md  absolute top-[100px] right-[400px] z-20 bg-[#ecc7bd] text-[#2a2929] mr-2"
+                                class="shadow-lg w-[25rem] h-[12rem] rounded-lg p-6 mx-auto my-6 max-w-md  absolute top-[100px] right-[400px] z-20 bg-gray-300 text-[#2a2929] mr-2"
                                 data-aos="fade-down"
                               >
                                 <div class="flex flex-col items-center mb-4 p-2 pt-6 ">
-                                  <div className="pb-6">
-                                    <label className="text-[20px] pb-2 text-black font-bold ">
+                                  <div className="pb-6 flex">
+                                    <label className="text-[20px] pt-2 pr-2 text-black font-bold ">
                                       Approval :{" "}
                                     </label>
                                     <select

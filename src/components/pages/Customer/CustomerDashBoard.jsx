@@ -21,6 +21,10 @@ const CustomerDashBoard = () => {
     });
   }, []);
 
+  let [toggle, setToggle] = useState(
+    data?.accounts[0]?.debitCard?.status == "INACTIVE" ? false : true
+  );
+
   // Animation:
   useEffect(() => {
     AOS.init();
@@ -110,7 +114,8 @@ const CustomerDashBoard = () => {
                 <span
                   className="w-[auto] pl-4 mt-1 inline-block font-semibold rounded  cursor-pointer"
                   onClick={() => {
-                   
+                    setToggle(!toggle);
+
                     dispatch(
                       ChangeStatus({
                         accountNumber: data?.accounts[0]?.accountNumber,
@@ -119,11 +124,14 @@ const CustomerDashBoard = () => {
                             ? "INACTIVE"
                             : "ACTIVE",
                       })
-                    );
-                    window.location.reload();
+                    ).then(() => {
+                      dispatch(getCustomerProfile()).then(y => {
+                        SetData(y.payload.data);
+                      });
+                    });
                   }}
                 >
-                  {data?.accounts[0]?.debitCard?.status == "ACTIVE" ? (
+                  {toggle ? (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="30"

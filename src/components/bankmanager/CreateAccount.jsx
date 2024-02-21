@@ -96,7 +96,7 @@ const CreateAccount = () => {
                 <span className="pl-2 ">Document Section</span>
               </NavLink>
             </div>
-            <div className="py-2">
+            <div className="py-2 w-[100%] h-[65vh]">
               <Outlet />
             </div>
             {/* <section className=" flex gap-2 mr-4 items-center justify-end text-[14px]">

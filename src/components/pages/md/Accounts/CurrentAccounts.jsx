@@ -184,7 +184,7 @@ let bankId = dat.bankId;
                       <td className="px-2 py-3 ">{data.name}</td>
                       <td className="px-2">{data.emailID}</td>
 
-                      <td className="px-2">{data.accountType}</td>
+                      <td className="px-2">{data.phoneNumber}</td>
                       <td className="px-2">{data?.accountNumber}</td>
                       <td className="px-2">{data.status}</td>
 
@@ -273,7 +273,7 @@ let bankId = dat.bankId;
                         <td className="px-2 py-3 ">{data.name}</td>
                         <td className="px-2">{data.emailID}</td>
 
-                        <td className="px-2">{data.accountType}</td>
+                        <td className="px-2">{data.phoneNumber}</td>
                         <td className="px-2">{data?.accountNumber}</td>
                         <td className="px-2">{data.status}</td>
                         <td className="px-2">

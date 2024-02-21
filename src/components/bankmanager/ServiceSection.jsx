@@ -15,9 +15,11 @@ import "aos/dist/aos.css";
 
 const ServiceSection = () => {
   let { state } = useLocation();
-console.log(state);
+  console.log(state);
   const [data, setData] = useState({
     accountType: "",
+    availableBalance: null,
+    currentBalance: null,
   });
   let payload = {
     name: state?.name,
@@ -32,6 +34,7 @@ console.log(state);
     maritalStatus: state?.maritalStatus,
     annualIncome: state?.annualIncome,
     branchId: state?.branchId,
+
     status: "ACTIVE",
     userType: "ACCOUNT_HOLDER",
     address: {
@@ -45,6 +48,8 @@ console.log(state);
         status: "ACTIVE",
         primaryAccount: true,
         accountType: data.accountType,
+        availableBalance: data.availableBalance,
+        currentBalance: data.currentBalance,
       },
     ],
   };
@@ -109,6 +114,32 @@ console.log(state);
           </div>
         </section>
       </section>
+      <div className="h-[10vh] w-[100%] flex mt-10 flex-col basis-[40rem]">
+        <label htmlFor="fatherName" className="text-[15px] pb-2 text-gray-400">
+          Account Balance
+        </label>
+        <section className="flex gap-1 w-[100%]">
+          <input
+            type="number"
+            name="fatherName"
+            id="fatherName"
+            className="border-2 W-[30%] rounded-md focus:outline-none pl-2 p-1"
+            value={
+              data?.accountType == "SAVINGS_ACCOUNT"
+                ? data?.availableBalance
+                : data?.currentBalance
+            }
+            onChange={e => {
+              if (data.accountType == "SAVINGS_ACCOUNT")
+                setData({ ...data, availableBalance: e.target.value });
+              else SetPayload({ ...data, currentBalance: e.target.value });
+            }}
+          />
+          <p className="pt-2  text-gray-400 ">
+            ( Should accept only numeric value )
+          </p>
+        </section>
+      </div>
       <section className=" flex gap-2 mr-4 items-center justify-end text-[14px]">
         <NavLink
           to="/bankmanager/create-account/PersonalDetails"
