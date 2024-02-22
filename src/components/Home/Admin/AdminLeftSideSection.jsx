@@ -20,23 +20,21 @@ const AdminLeftSideSection = () => {
 
   return (
     <>
-      <section className="text-sm h-[100%] w-[100%] bg-black flex flex-col ">
-        <div>
-          {
-            <div className="flex flex-col items-center">
-              <img
-                src={
-                  // user?.avatar ||
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAK2Ud4gQr9pQFT6rc3xbeq74MhZe7bOdvQ&usqp=CAU"
-                }
-                alt=""
-                className="h-[4rem] w-[4rem] rounded-full mt-5"
-              />
-              <p className="mt-3">{data?.name}</p>
-              <p className="mt-1 text-[rgb(112,112,112)]">{data?.role}</p>
-            </div>
-          }
+      <section className="text-sm h-[100%] w-[100%] bg-black flex flex-col justify-between">
+        <div className="flex flex-col items-center">
+          <img
+            src={
+              // user?.avatar ||
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAK2Ud4gQr9pQFT6rc3xbeq74MhZe7bOdvQ&usqp=CAU"
+            }
+            alt="Load Failed"
+            className="h-[4rem] w-[4rem] rounded-full mt-5"
+          />
+          <p className="mt-3">{data?.name}</p>
+          <p className="mt-1 text-[rgb(112,112,112)]">{data?.role}</p>
+        </div>
 
+        <section className="h-[70%]">
           <div
             className="flex mt-6 items-center cursor-pointer"
             onClick={() =>
@@ -123,11 +121,11 @@ const AdminLeftSideSection = () => {
               </li>
             </div>
           )}
-        </div>
+        </section>
 
-        <div className="ms-20 ">
+        <div className="text-center">
           <button
-            className=" text-white bg-gradient-to-r from-blue-500 via-blue-700 to-blue-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-2 text-center mt-[17rem]"
+            className=" text-white bg-gradient-to-r from-blue-500 via-blue-700 to-blue-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-2 text-center mb-8"
             onClick={() => {
               dispatch(logout());
               navigate("/");
