@@ -7,7 +7,7 @@ const AdminHome = () => {
   return (
     <section className="h-[100%]">
       <article className="h-[100%] flex">
-        <aside className="w-[18%] bg-black text-white h-[auto] ">
+        <aside className="w-[18.2vw] text-white h-[auto]">
           <AdminLeftSideSection />
         </aside>
         <aside className="w-[83%] h-[100%]">
