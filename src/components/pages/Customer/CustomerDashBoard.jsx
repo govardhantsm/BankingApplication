@@ -36,13 +36,13 @@ const CustomerDashBoard = () => {
         {" "}
         <p className="text-[#424242]">Customer Dashboard</p>
       </div>
-      <article className="flex  h-[50vh]">
-        <div className=" flex flex-col items-center justify-center gap-4 w-[50%]">
+      <article className="flex justify-around h-[auto] mt-5">
+        <div className=" flex flex-col items-center justify-center gap-4 w-[auto]">
           <p className="font-semibold text-xl text-gray-600">
             {" "}
             Account Details
           </p>
-          <section className=" h-[30vh] w-[70%] p-10 rounded shadow-md shadow-slate-400	">
+          <section className=" h-[auto] w-[auto] p-10 rounded shadow-md shadow-slate-400">
             <div className="w-[100%] h-[100%] flex flex-col gap-3 basis-[19rem] justify-evenly border-neutral-700 rounded">
               <p>
                 <span className="w-[170px]  inline-block font-semibold text-[#424242]">
@@ -100,12 +100,12 @@ const CustomerDashBoard = () => {
           <p>Card Details</p>
           <section className="bg-gray-300 h-[30vh] w-[80%] "></section>
         </div> */}
-        <div className=" flex flex-col items-center justify-center gap-4 w-[50%]">
+        <div className=" flex flex-col items-center justify-center gap-4 w-[auto]">
           <p className="font-semibold text-xl text-gray-600">
             {" "}
             DebitCard Details
           </p>
-          <section className=" h-[auto] w-[72%] py-5 px-10 rounded shadow-md shadow-slate-400	">
+          <section className=" h-[auto] w-[auto] py-5 px-10 rounded shadow-md shadow-slate-400	">
             <div className="w-[100%] h-[100%] flex flex-col  gap-3 basis-[19rem] justify-evenly border-neutral-700 rounded">
               <p className="flex items-center ">
                 <span className="w-[170px] inline-block font-semibold  text-[#424242]">

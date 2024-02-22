@@ -19,23 +19,21 @@ const BleftSideSection = () => {
   let [loan, setLoan] = useState(false);
   let [card, setCard] = useState(false);
   return (
-    <div className="flex items-center justify-between flex-col h-[100%]">
-      <section className="text-sm h-[10%] w-[100%] bg-black">
-        <div className="flex flex-col items-center">
-          <img
-            src={
-              // user?.avatar ||
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAK2Ud4gQr9pQFT6rc3xbeq74MhZe7bOdvQ&usqp=CAU"
-            }
-            alt=""
-            className="h-[4rem] w-[4rem] rounded-full mt-5"
-          />
-          <p className="mt-3">{data?.branchManagerName.toUpperCase()}</p>
-          <p className="mt-1 text-[rgb(112,112,112)]">
-            {data?.role == "BRANCH_MANAGER" ? "BRANCH MANAGER" : ""}
-          </p>
-        </div>
-      </section>
+    <section className="text-sm h-[100%] w-[100%] bg-black flex flex-col justify-between">
+      <div className="flex flex-col items-center">
+        <img
+          src={
+            // user?.avatar ||
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAK2Ud4gQr9pQFT6rc3xbeq74MhZe7bOdvQ&usqp=CAU"
+          }
+          alt=""
+          className="h-[4rem] w-[4rem] rounded-full mt-5"
+        />
+        <p className="mt-3">{data?.branchManagerName.toUpperCase()}</p>
+        <p className="mt-1 text-[rgb(112,112,112)]">
+          {data?.role == "BRANCH_MANAGER" ? "BRANCH MANAGER" : ""}
+        </p>
+      </div>
       <section className="h-[65%]">
         <div className="ms-8 mt-6">
           <div className="p-1 flex items-center ">
@@ -175,7 +173,7 @@ const BleftSideSection = () => {
           Logout
         </button>
       </div>
-    </div>
+    </section>
   );
 };
 

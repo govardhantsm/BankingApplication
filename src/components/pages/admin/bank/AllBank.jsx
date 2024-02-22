@@ -49,7 +49,7 @@ const AllBank = () => {
                   >
                     <div className="w-1/3 flex flex-col">
                       <div className="p-3 pl-4 font-medium flex">
-                        <span className="font-bold w-32 inline-block text-[rgba(136,136,136)]">
+                        <span className="font-bold w-32 inline-block ">
                           Bank Name :
                         </span>{" "}
                         <span className=" text-[rgba(136,136,136)]">
@@ -58,7 +58,7 @@ const AllBank = () => {
                       </div>
 
                       <div className="p-3 pl-4 font-medium">
-                        <span className="font-bold w-32 inline-block text-[rgba(136,136,136)]">
+                        <span className="font-bold w-32 inline-block ">
                           Bank Location :
                         </span>{" "}
                         <span className="text-[rgba(136,136,136)]">
@@ -66,7 +66,7 @@ const AllBank = () => {
                         </span>
                       </div>
                       <div className="p-3 pl-4 font-medium">
-                        <span className="font-bold w-32 inline-block text-[rgba(136,136,136)]">
+                        <span className="font-bold w-32 inline-block ">
                           MD Name :{" "}
                         </span>
                         <span className="text-[rgba(136,136,136)]">
@@ -77,20 +77,18 @@ const AllBank = () => {
                     <div className="w-2/3 border-s-[1px]">
                       <div className="flex justify-between pl-4">
                         <section>
-                          <div className="p-2 font-bold text-[rgba(136,136,136)]">
+                          <div className="p-2 font-bold ">
                             Total Debit Card Holders :
                           </div>
-                          <div className="p-2 font-bold w-auto inline-block text-[rgba(136,136,136)]">
+                          <div className="p-2 font-bold w-auto inline-block ]">
                             Total Credit Card Holders :{" "}
                           </div>
                         </section>
                         <section>
-                          <div className="p-2 font-bold text-[rgba(136,136,136)]">
+                          <div className="p-2 font-bold ">
                             Total Loan Card Holders :{" "}
                           </div>
-                          <div className="p-2 font-bold text-[rgba(136,136,136)]">
-                            Total Accounts :
-                          </div>
+                          <div className="p-2 font-bold ">Total Accounts :</div>
                         </section>
                         <div className="p-2 font-semibold text-[rgba(136,136,136)]">
                           <NavLink
@@ -113,7 +111,7 @@ const AllBank = () => {
                         </div>
                       </div>
                       <div className="pl-4 flex">
-                        <div className="pt-2 px-2 font-semibold text-[rgba(136,136,136)] w-60">
+                        <div className="pt-2 px-2 font-semibold  w-60">
                           Main Branch Address :
                         </div>
                         <div className="ms-2  h-[7vh] pt-2 ps-1 text-[rgba(136,136,136)]">

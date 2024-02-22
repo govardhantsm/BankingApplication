@@ -7,12 +7,12 @@ const ManagingDirectorHome = () => {
   return (
     <section className="h-[100%]">
       <article className="h-[100%] flex">
-        <aside className="w-[17%] text-white h-[671px]">
+        <aside className="w-[18.2vw] text-white">
           <MdLeftSideSection />
         </aside>
         <aside className="w-[83%] h-[100%]">
           <div className="h-[99%] w-[100%]">
-            <Outlet/>
+            <Outlet />
           </div>
         </aside>
       </article>

@@ -36,9 +36,9 @@ const Navbar = () => {
   let branchName = data?.branchName;
   let bankName = data?.bankName;
   return (
-    <section className="bg-white h-[100%] w-[100%] flex">
-      <div className="w-[18.2%] bg-orange-400 h-[100%] flex items-center justify-center">
-        <p className="ml-2 mr-2 text-slate-950 text-center">
+    <section className="bg-white h-[100%] w-[100vw] flex">
+      <div className="w-[18.2vw] bg-orange-400 h-[100%] flex items-center justify-center">
+        <p className="ml-2 mr-2 text-slate-950 text-center ">
           {role === "MANAGING_DIRECTOR"
             ? bankName
             : role === "BRANCH_MANAGER"
@@ -71,7 +71,7 @@ const Navbar = () => {
                   <h3 className="font-semibold text-lg ">
                     {data?.name || data?.branchManagerName || "NA"}
                   </h3>
-                  <p className="text-base font-light">
+                  <p className="text-base font-light w-[170px]">
                     {data.role === "MANAGING_DIRECTOR"
                       ? "MANAGING DIRECTOR"
                       : data.role === "BRANCH_MANAGER"
@@ -91,7 +91,7 @@ const Navbar = () => {
                     <FaUserCheck />
                   </span>
                   <span className="text-base flex">
-                    <span className="font-semibold w-[120px]">
+                    <span className="font-semibold w-[110px]">
                       {" "}
                       Employee ID:{" "}
                     </span>
