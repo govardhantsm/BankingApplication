@@ -12,21 +12,26 @@ import { useDispatch } from "react-redux";
 import { getMdDashBoard } from "../../../../redux/services/managingDirectorThunk/mdBranchThunk/MdBranchThunk";
 
 function LineChart() {
+  const data1 = JSON.parse(sessionStorage.getItem("myObject"));
+  console.log(data1.managingDirectorId);
   let [mdDashBoard, setMdDashBoard] = useState();
   let dispatch = useDispatch();
-  const user = useGetMd();
-  // console.log(user);
+  let lab = [];
+  let dad = [];
+  let dac = [];
+  useEffect(() => {
+    dispatch(getMdDashBoard(data1.managingDirectorId)).then(x => {
 
+      console.log(x.payload.data.revenues);
+      x.payload.data.revenues.map(obj => {
+        lab.push(obj.revenueDate);
+        dad.push(obj.debited);
+        dac.push(obj.credited);
+      })
 
-  // useEffect(() => {
-  //   if (user?.data?.data?.managingDirectorId) {
-  //     let t = dispatch(getMdDashBoard(user?.data?.data?.managingDirectorId));
-  //     t.unwrap().then(x => {
-  //       setMdDashBoard(x.data);
-  //       console.log(x.data);
-  //     });
-  //   }
-  // }, [user?.data?.data?.managingDirectorId]);
+    });
+  }, []);
+
   const data = {
     labels: ["January", "February", "March", "April", "May"],
     datasets: [
@@ -59,5 +64,3 @@ function LineChart() {
 }
 
 export default LineChart;
-
-
