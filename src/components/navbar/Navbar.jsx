@@ -37,7 +37,7 @@ const Navbar = () => {
   let bankName = data?.bankName;
   return (
     <section className="bg-white h-[100%] w-[100%] flex">
-      <div className="w-[17%] bg-orange-400 h-[100%] flex items-center justify-center">
+      <div className="w-[18.2%] bg-orange-400 h-[100%] flex items-center justify-center">
         <p className="ml-2 mr-2 text-slate-950 text-center">
           {role === "MANAGING_DIRECTOR"
             ? bankName
@@ -53,110 +53,15 @@ const Navbar = () => {
         <section className="mr-6 w-[10%] flex text-2xl justify-between items-center">
           <BsBell className="text-xl" />
 
-          {/* <div className="group-relative">
-            <span className="cursor-pointer">
-              <FaUserTie />
-            </span> */}
-          {/* {toggle ? ( */}
-          {/* <div
-              class="invisible group-hover:visible shadow-lg w-[auto] rounded-lg p-6 mx-auto my-6 max-w-md  absolute top-[30px] right-[0] z-20 bg-orange-400 text-[#fff] mr-2"
-              data-aos="fade-down"
-            >
-              <div class="flex items-center mb-4 text-[#fff]">
-                <div class="mr-4">
-                  <span class="text-5xl ">
-                    <FaRegCircleUser />
-                  </span>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-lg	">
-                    {data?.name || data?.branchManagerName || "NA"}
-                  </h3>
-                  <p class="text-base	font-light	">
-                    {data.role === "MANAGING_DIRECTOR"
-                      ? "MANAGING DIRECTOR"
-                      : data.role === "BRANCH_MANAGER"
-                      ? "BRANCH MANAGER"
-                      : data.role == "ADMIN"
-                      ? "ADMIN"
-                      : data.role == "CUSTOMER"
-                      ? "Customer"
-                      : ""}
-                  </p>
-                </div>
-              </div>
-
-              <div>
-                <div>
-                  <p class="flex">
-                    <span className="mr-[10px] mt-1 text-xl">
-                      <FaUserCheck />
-                    </span>
-                    <span class="text-base">
-                      <span className="font-semibold"> Employee ID: </span>
-                      <span className="ml-2">
-                        {data?.managingDirectorId ||
-                          data?.branchId ||
-                          data?.employeeId ||
-                          data?.userId ||
-                          "NA"}
-                      </span>
-                    </span>
-                  </p>
-                  <p class="flex">
-                    <span className="mr-[10px] mt-1 text-xl">
-                      <MdOutlineMail />
-                    </span>
-                    <span class="text-base">
-                      <span className="font-semibold"> Email: : </span>
-                      <span className="ml-2">{data?.email || "NA"}</span>
-                    </span>
-                  </p>
-                  <div>
-                    <p class="flex">
-                      <span className="pt-2 mr-[10px] mt-1 text-xl">
-                        <FiEdit />
-                      </span>
-                      <span class="text-base bg-slate-500 w-auto p-2 rounded">
-                        <NavLink
-                          to={
-                            data.role == "ADMIN"
-                              ? "/adminlayout/uploadProfile"
-                              : data.role == "MANAGING_DIRECTOR"
-                              ? "/mdlayout/uploadProfile"
-                              : data.role == "BRANCH_MANAGER"
-                              ? "/bankmanager/uploadProfile"
-                              : ""
-                          }
-                        >
-                          Update Profile Picture
-                        </NavLink>
-                      </span>
-                    </p>
-
-                    <p class="flex">
-                      <span className="pt-3 mr-[10px] mt-1 text-xl">
-                        <MdOutlineRemoveCircle />
-                      </span>
-                      <span class="text-base bg-red-400 w-auto p-2 rounded mt-2">
-                        <NavLink>Remove Profile Picture</NavLink>
-                      </span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-          </div> */}
           <div className="group relative">
             <span className="cursor-pointer">
               <FaUserTie />
             </span>
             <div
-              className="invisible group-hover:visible shadow-lg w-[auto] rounded-lg p-6 max-w-md absolute -right-[50px] z-20 bg-orange-400 text-[#fff] mr-2"
+              className="invisible group-hover:visible shadow-md rounded-lg p-7 max-w-md absolute -right-[50px] z-20 bg-[#b8b8b8] text-[#fff] mr-2"
               data-aos="fade-down"
             >
-              <div className="flex w-[270px] items-center mb-4 text-[#fff]">
+              <div className="flex w-[auto] items-center mb-4 text-[#fff]">
                 <div className="mr-4">
                   <span className="text-5xl">
                     <FaRegCircleUser />
@@ -181,12 +86,15 @@ const Navbar = () => {
               </div>
 
               <div>
-                <p className="flex">
+                <p className="flex w-auto">
                   <span className="mr-[10px] mt-1 text-xl">
                     <FaUserCheck />
                   </span>
-                  <span className="text-base">
-                    <span className="font-semibold"> Employee ID: </span>
+                  <span className="text-base flex">
+                    <span className="font-semibold w-[120px]">
+                      {" "}
+                      Employee ID:{" "}
+                    </span>
                     <span className="ml-2">
                       {data?.managingDirectorId ||
                         data?.branchId ||
@@ -200,8 +108,8 @@ const Navbar = () => {
                   <span className="mr-[10px] mt-1 text-xl">
                     <MdOutlineMail />
                   </span>
-                  <span className="text-base">
-                    <span className="font-semibold"> Email: </span>
+                  <span className="text-base flex">
+                    <span className="font-semibold "> Email: </span>
                     <span className="ml-2">{data?.email || "NA"}</span>
                   </span>
                 </p>
@@ -210,7 +118,7 @@ const Navbar = () => {
                     <span className="pt-2 mr-[10px] mt-1 text-xl">
                       <FiEdit />
                     </span>
-                    <span className="text-base bg-slate-500 w-auto p-2 rounded">
+                    <span className="text-base bg-slate-500 w-auto p-1 rounded mt-2">
                       <NavLink
                         to={
                           data.role === "ADMIN"
@@ -231,7 +139,7 @@ const Navbar = () => {
                     <span className="pt-3 mr-[10px] mt-1 text-xl">
                       <MdOutlineRemoveCircle />
                     </span>
-                    <span className="text-base bg-red-400 w-auto p-2 rounded mt-2">
+                    <span className="text-base bg-red-400 w-[auto] p-1 rounded mt-2">
                       <NavLink>Remove Profile Picture</NavLink>
                     </span>
                   </p>

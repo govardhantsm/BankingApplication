@@ -48,32 +48,47 @@ const AllBank = () => {
                     key={index + 1}
                   >
                     <div className="w-1/3 flex flex-col">
-                      <div className="p-3 pl-4 font-medium">
-                        Bank Name : <strong>{user.bankName}</strong>
+                      <div className="p-3 pl-4 font-medium flex">
+                        <span className="font-bold w-32 inline-block text-[rgba(136,136,136)]">
+                          Bank Name :
+                        </span>{" "}
+                        <span className=" text-[rgba(136,136,136)]">
+                          {user.bankName}
+                        </span>
                       </div>
 
                       <div className="p-3 pl-4 font-medium">
-                        Bank Location : <strong>{user?.address?.city}</strong>
+                        <span className="font-bold w-32 inline-block text-[rgba(136,136,136)]">
+                          Bank Location :
+                        </span>{" "}
+                        <span className="text-[rgba(136,136,136)]">
+                          {user?.address?.city}
+                        </span>
                       </div>
                       <div className="p-3 pl-4 font-medium">
-                        MD Name : <strong>{user.managingDirectorName}</strong>
+                        <span className="font-bold w-32 inline-block text-[rgba(136,136,136)]">
+                          MD Name :{" "}
+                        </span>
+                        <span className="text-[rgba(136,136,136)]">
+                          {user.managingDirectorName}
+                        </span>
                       </div>
                     </div>
                     <div className="w-2/3 border-s-[1px]">
                       <div className="flex justify-between pl-4">
                         <section>
-                          <div className="p-2 font-font-semibold text-[rgba(136,136,136)]">
+                          <div className="p-2 font-bold text-[rgba(136,136,136)]">
                             Total Debit Card Holders :
                           </div>
-                          <div className="p-2 font-font-semibold text-[rgba(136,136,136)]">
+                          <div className="p-2 font-bold w-auto inline-block text-[rgba(136,136,136)]">
                             Total Credit Card Holders :{" "}
                           </div>
                         </section>
                         <section>
-                          <div className="p-2 font-font-semibold text-[rgba(136,136,136)]">
+                          <div className="p-2 font-bold text-[rgba(136,136,136)]">
                             Total Loan Card Holders :{" "}
                           </div>
-                          <div className="p-2 font-font-semibold text-[rgba(136,136,136)]">
+                          <div className="p-2 font-bold text-[rgba(136,136,136)]">
                             Total Accounts :
                           </div>
                         </section>
@@ -97,11 +112,11 @@ const AllBank = () => {
                           />
                         </div>
                       </div>
-                      <div className="pl-4">
-                        <div className="pt-2 px-2 font-semibold text-[rgba(136,136,136)]">
+                      <div className="pl-4 flex">
+                        <div className="pt-2 px-2 font-semibold text-[rgba(136,136,136)] w-60">
                           Main Branch Address :
                         </div>
-                        <div className="ms-2  font-semibold text-gray w-[98%] h-[7vh] pt-2 ps-1">
+                        <div className="ms-2  h-[7vh] pt-2 ps-1 text-[rgba(136,136,136)]">
                           {user?.address?.addressLine} ,{user?.address?.state},{" "}
                           {user?.address?.city} ,{user?.address?.country} ,{" "}
                           {user?.address?.pincode}
