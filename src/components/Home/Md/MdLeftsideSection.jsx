@@ -15,12 +15,22 @@ import { MdAccountCircle } from "react-icons/md";
 import { FaHandHoldingDollar } from "react-icons/fa6";
 import { LiaIdCardSolid } from "react-icons/lia";
 import useGetMd from "../../../utils/useGetMd";
+import axios from "axios";
 
 const MdLeftsideSection = () => {
   const data = JSON.parse(sessionStorage.getItem("myObject"));
-  // In another file
-  let storedFile = localStorage.getItem("profilePicMd");
-  console.log(storedFile);
+  // let [profilePic, setProfilePic] = useState(null);
+
+  // let getProfilePic = async () => {
+  //   let img = await axios.get(
+  //     `http://106.51.76.167:8082/api/version/v1/documents/findProfile?id=FF0010&users=Employee`
+  //   );
+  //   console.log(img.data.data);
+  //   setProfilePic(img.data.data);
+  // };
+  // useEffect(() => {
+  //   getProfilePic();
+  // }, []);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,11 +46,9 @@ const MdLeftsideSection = () => {
     <>
       <section className="text-sm h-[100%] w-[100%] bg-black flex justify-between flex-col">
         <div className="flex flex-col items-center h-[20%]">
+          {/* "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAK2Ud4gQr9pQFT6rc3xbeq74MhZe7bOdvQ&usqp=CAU" */}
           <img
-            src={
-              // user?.avatar ||
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAK2Ud4gQr9pQFT6rc3xbeq74MhZe7bOdvQ&usqp=CAU"
-            }
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAK2Ud4gQr9pQFT6rc3xbeq74MhZe7bOdvQ&usqp=CAU"
             alt=""
             className="h-[4rem] w-[4rem] rounded-full mt-5"
           />

@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IoIosArrowRoundUp } from "react-icons/io";
 import { IoIosArrowRoundDown } from "react-icons/io";
 import PieChart from "./PieChart";
 import DoughnutChart from "./DoughnutChart";
 import LineChart from "./LineChart";
 import { MdOutlineConstruction } from "react-icons/md";
+
 const ManagingDirector = () => {
   return (
     <section className="h-[100%] w-[100%] mt-8 flex justify-between relative ">
-      <div className="h-[100%] w-[27%] bg-white rounded-md">
+      <div className="h-[100%] w-[27%] bg-white rounded-md ">
         <p className="p-5 ">Loan Portfolio</p>
-        <span className="absolute top-36 left-28">
-          <MdOutlineConstruction className="text-8xl text-gray-600" />
+        <span className="flex justify-center items-center flex-col">
+          <MdOutlineConstruction className="text-8xl text-gray-600 mt-6" />
           <p>Comming Soon...!</p>
         </span>
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa6";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { IoIosSearch } from "react-icons/io";
@@ -25,9 +25,9 @@ import { TbMoneybag } from "react-icons/tb";
 import { IoTrailSignOutline } from "react-icons/io5";
 import { MdEmojiObjects } from "react-icons/md";
 import { FaCreditCard } from "react-icons/fa6";
+import axios from "axios";
 
 const Navbar = () => {
-  let [toggle, setToggle] = useState(false);
   const data = JSON.parse(sessionStorage.getItem("myObject"));
   console.log(data);
   let user;
@@ -35,6 +35,19 @@ const Navbar = () => {
   let role = data?.role;
   let branchName = data?.branchName;
   let bankName = data?.bankName;
+  // useEffect(() => {
+  //   const fetchImageUrl = async () => {
+  //     try {
+  //       const response = await axios.get();
+
+  //     } catch (error) {
+  //       console.error("Error:", error);
+  //       alert("An error occurred. Please try again later.");
+  //     }
+  //   };
+
+  //   fetchImageUrl();
+  // }, []);
   return (
     <section className="bg-white h-[100%] w-[100vw] flex">
       <div className="w-[18.2vw] bg-orange-400 h-[100%] flex items-center justify-center">
@@ -118,7 +131,7 @@ const Navbar = () => {
                     <span className="pt-2 mr-[10px] mt-1 text-xl">
                       <FiEdit />
                     </span>
-                    <span className="text-base bg-slate-500 w-auto p-1 rounded mt-2">
+                    <span className="text-base w-auto p-1 rounded mt-1 border-b-2">
                       <NavLink
                         to={
                           data.role === "ADMIN"
@@ -139,7 +152,7 @@ const Navbar = () => {
                     <span className="pt-3 mr-[10px] mt-1 text-xl">
                       <MdOutlineRemoveCircle />
                     </span>
-                    <span className="text-base bg-red-400 w-[auto] p-1 rounded mt-2">
+                    <span className="text-base border-b-2 w-[auto] p-1 rounded mt-2">
                       <NavLink>Remove Profile Picture</NavLink>
                     </span>
                   </p>

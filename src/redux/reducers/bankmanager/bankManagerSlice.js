@@ -161,6 +161,33 @@ export const getApprove = createAsyncThunk("getApprove", async payload => {
   }
 });
 
+// =============Upload Profile=============/
+export const getBmProfilePic = createAsyncThunk("getProfilePic", async id => {
+  try {
+    const { data } = await AxiosInstancePublic.get(
+      `documents/findProfile?id=${id}&users=Employee`
+    );
+    return data;
+  } catch (error) {
+    return error.message;
+  }
+});
+
+// ===========postProfilePic==============/
+export const postBmProfilePic = createAsyncThunk(
+  "postBmProfilePic",
+  async id => {
+    try {
+      const { data } = await AxiosInstancePublic.post(
+        `documents/saveProfile?id=${id}&users=Employee`
+      );
+      return data;
+    } catch (error) {
+      return error.message;
+    }
+  }
+);
+
 // //=================Fetch all unassigned==============/
 // export const getAllUnassigned = createAsyncThunk(
 //   "getAllUnassigned",

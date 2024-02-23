@@ -10,6 +10,7 @@ import { logout } from "../../redux/reducers/auth/authSlice";
 import { LiaIdCardSolid } from "react-icons/lia";
 import { FaHandHoldingDollar } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
+import { getBmProfilePic } from "../../redux/reducers/bankmanager/bankManagerSlice";
 
 const BleftSideSection = () => {
   const data = JSON.parse(sessionStorage.getItem("myObject"));
@@ -18,14 +19,25 @@ const BleftSideSection = () => {
   let [account, setAccount] = useState(false);
   let [loan, setLoan] = useState(false);
   let [card, setCard] = useState(false);
+  let [profilePic, setProfilePic] = useState(null);
+
+  useEffect(() => {
+    dispatch(getBmProfilePic(data.branchManagerId))
+      .unwrap()
+      .then(img => {
+        setProfilePic(img.data);
+        console.log(img);
+      });
+  }, []);
+
+  
   return (
     <section className="text-sm h-[100%] w-[100%] bg-black flex flex-col justify-between">
       <div className="flex flex-col items-center">
+        {/* // user?.avatar ||
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAK2Ud4gQr9pQFT6rc3xbeq74MhZe7bOdvQ&usqp=CAU" */}
         <img
-          src={
-            // user?.avatar ||
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAK2Ud4gQr9pQFT6rc3xbeq74MhZe7bOdvQ&usqp=CAU"
-          }
+          src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAK2Ud4gQr9pQFT6rc3xbeq74MhZe7bOdvQ&usqp=CAU"||profilePic}
           alt=""
           className="h-[4rem] w-[4rem] rounded-full mt-5"
         />

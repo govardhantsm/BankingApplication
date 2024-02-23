@@ -38,10 +38,7 @@ const AmountTransfer = () => {
         <p className="text-blue-500 pb-2 text-sm  ">
           Select the account from which you wish to transfer funds
         </p>
-        <div
-         
-          className="flex justify-between text-sm font-semibold text-gray-400 border-b-[1px] pb-3 ms-3 me-8"
-        >
+        <div className="flex justify-between text-sm font-semibold text-gray-400 border-b-[1px] pb-3 ms-3 me-8">
           <label htmlFor="account" className="basis-[25%]">
             Account Number
           </label>

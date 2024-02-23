@@ -7,12 +7,12 @@ import LineChart from "./LineChart";
 import { MdOutlineConstruction } from "react-icons/md";
 const ManagingDirector = () => {
   return (
-    <section className="h-[100%] w-[100%] mt-8 flex justify-between relative ">
-      <div className="h-[100%] w-[27%] bg-white rounded-md">
+    <section className="h-[100%] w-[100%] mt-8 flex justify-between relative">
+      <div className="h-[45vh] w-[27%] bg-white rounded-md">
         <p className="p-5 ">Loan Portfolio</p>
-        <span className="absolute top-36 left-28">
-          <MdOutlineConstruction className="text-8xl text-gray-600" />
-          <p>Comming Soon...!</p>
+        <span className="flex justify-center items-center flex-col">
+          <MdOutlineConstruction className="text-8xl text-gray-600 mt-6" />
+          <p className="mt-2">Comming Soon...!</p>
         </span>
 
         {/* <section className="h-[20%] w-[100%] flex justify-evenly">
@@ -104,7 +104,7 @@ const ManagingDirector = () => {
             </p>
           </div>
         </section> */}
-        <section className="h-[20%] pb-2 w-[100%] flex flex-wrap justify-around mt-5">
+        <section className="h-[auto] w-[auto] flex flex-wrap justify-around mt-2">
           <div> 1- SavingAccount</div>
           <div> 2- CurrentAccount</div>
           <div> 3- CreditAccount</div>

@@ -78,17 +78,45 @@ const AllBank = () => {
                       <div className="flex justify-between pl-4">
                         <section>
                           <div className="p-2 font-bold ">
-                            Total Debit Card Holders :
+                            <span className="pr-3">
+                              Total Debit Card Holders :
+                            </span>
+                            <span className="text-[rgba(136,136,136)]">
+                              {user?.bankAccountDetails?.totalDebitCardHolders}
+                            </span>
                           </div>
                           <div className="p-2 font-bold w-auto inline-block ]">
-                            Total Credit Card Holders :{" "}
+                            <span className="pr-3 ">
+                              Total Credit Card Holders :{" "}
+                            </span>
+                            <span>
+                              <span className="text-[rgba(136,136,136)]">
+                                {
+                                  user?.bankAccountDetails
+                                    ?.totalCreditCardHolders
+                                }
+                              </span>
+                            </span>
                           </div>
                         </section>
                         <section>
                           <div className="p-2 font-bold ">
-                            Total Loan Card Holders :{" "}
+                            <span className="pr-3 ">
+                              Total Loan Account Holders :{" "}
+                            </span>
+                            <span className="text-[rgba(136,136,136)]">
+                              {
+                                user?.bankAccountDetails
+                                  ?.totalLoanAccountHolders
+                              }
+                            </span>
                           </div>
-                          <div className="p-2 font-bold ">Total Accounts :</div>
+                          <div className="p-2 font-bold ">
+                            <span className="pr-3">Total Accounts :</span>
+                            <span className="text-[rgba(136,136,136)]">
+                              {user?.bankAccountDetails?.totalAccountHolders}
+                            </span>
+                          </div>
                         </section>
                         <div className="p-2 font-semibold text-[rgba(136,136,136)]">
                           <NavLink
