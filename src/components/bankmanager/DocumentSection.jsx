@@ -17,7 +17,7 @@ const DocumentSection = () => {
   let navigate = useNavigate();
   let dispatch = useDispatch();
 
-  let [file, setFile] = useState();
+  let [file, setFile] = useState(null);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -62,7 +62,17 @@ const DocumentSection = () => {
           <label className=" w-[35rem] border-2 bg-blue-100 border-blue-700 h-[15rem] border-dashed rounded-[5px] text-[10px] ">
             <div className="flex flex-col items-center justify-center mt-4">
               {/* <PiFilesLight className="text-9xl  text-gray-500" /> */}
-              <img src={file} alt="" className="w-[120px] h-[120px] mt-2" />
+              {/* <img src={file} alt="" className="w-[120px] h-[120px] mt-2" /> */}
+              {file === null ? null : (
+                <img
+                  className="w-[80px] h-[50px] mt-2"
+                  loading="lazy"
+                  src={URL?.createObjectURL(file)}
+                  alt=""
+                  height="100%"
+                  width="120px"
+                />
+              )}
               <p className="font-semibold text-xl">Drag and drop an Image</p>
               <p className="text-xs ml-3 text-slate-500">
                 or to <span className="text-blue-900 ">Browse</span> choose a
@@ -71,8 +81,9 @@ const DocumentSection = () => {
               <p className="text-xs ml-3 text-slate-500">PNG, JPG, PDF</p>
             </div>
             <input
+              className="ml-36 text-sm cursor-pointer"
               type="file"
-              className="hidden"
+              accept="image/x-png,image/gif,image/jpeg"
               onChange={e => setFile(e.target.files[0])}
             />
           </label>

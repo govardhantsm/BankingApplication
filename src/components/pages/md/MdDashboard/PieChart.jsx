@@ -23,10 +23,10 @@ function PieChart() {
   return (
     <Pie
       data={{
-        labels: [1, 2, 3, 4],
+        labels: [1 + "Saving", 2 + " " + "Current", 3 +"Credit", 4+"Loan"],
         datasets: [
           {
-            label: "revenue",
+            label: "",
             data: [
               mdDashBoard?.totalSavingAccounts,
               mdDashBoard?.totalCurrentAccounts,

@@ -106,7 +106,7 @@ const CreateBank = () => {
           </div>
           <div className="flex justify-between w-[99%] mb-4">
             <label htmlFor="branchaddress" className="text-[rgb(145,142,143)]">
-              Main Branch Address
+             Address
             </label>
             <textarea
               className="p-2 w-[80%] rounded-md border-0 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"

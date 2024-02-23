@@ -23,10 +23,16 @@ function PieChart() {
   return (
     <Pie
       data={{
-        labels: [1, 2, 3, 4, 5],
+        labels: [
+          1 + "saving",
+          2 + "current",
+          3 + "credit",
+          4 + "deposit",
+          5 + "fundTr",
+        ],
         datasets: [
           {
-            label: "revenue",
+            // label: "",
             data: [
               bmDashBoard?.totalSavingAccountNumber,
               bmDashBoard?.totalCurrentAccount,

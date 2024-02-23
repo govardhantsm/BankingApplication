@@ -1,18 +1,36 @@
 import React, { useState, useEffect } from "react";
-import file from "../../images/submit.png";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import axios from "axios";
+import toast from "react-hot-toast";
+
 
 const UploadProfile = () => {
-  let [image, setImage] = useState(null);
-  let handleFileChange = e => {
-    let files = e.target.files[0];
-    setImage(files);
+  let [file, setFile] = useState(null);
+  const data = JSON.parse(sessionStorage.getItem("myObject"));
+  console.log(data);
+  console.log(data.branchManagerId);
+  console.log(file);
 
-    // Store the file itself directly in localStorage
-    localStorage.setItem("profilePicMd", files);
+  let handleSubmit = async e => {
+    e.preventDefault();
+    let formData = new FormData();
+    formData.append("files", file);
+    try {
+      let val = await axios.post(
+        `http://106.51.76.167:8082/api/version/v1/documents/saveProfile?id=${data.branchManagerId}&users=Employee`,
+        formData
+      );
+      console.log(val);
+
+      if (val.status == 201) {
+        toast.success("Uploaded Successfully");
+      }
+    } catch (error) {
+      console.log(data);
+      toast.error(error.data);
+    }
   };
-  console.log(image);
 
   // Animation:
   useEffect(() => {
@@ -27,16 +45,17 @@ const UploadProfile = () => {
         </label>
 
         <div className="flex items-center mt-4">
-          <label className=" w-[35rem] border-2 bg-blue-100 border-blue-700 h-[auto] border-dashed rounded-[5px] text-[10px] p-4">
+          <label className=" w-[35rem] h-[200px] border-2 bg-blue-100 border-blue-700 border-dashed rounded-[5px] text-[10px] p-4">
             <div className="flex flex-col items-center justify-center mt-4">
               {/* <PiFilesLight className="text-9xl  text-gray-500" /> */}
-              <img src={file} alt="" className="w-[120px] h-[120px] mt-2" />
-              {image === null ? null : (
+              {/* <img src={file} alt="" className="w-[120px] h-[120px] mt-2" /> */}
+              {file === null ? null : (
                 <img
+                  data-aos="zoom-in"
                   className="w-[80px] h-[50px] mt-2"
                   loading="lazy"
-                  src={URL.createObjectURL(image)}
-                  alt="Loading failed"
+                  src={URL?.createObjectURL(file)}
+                  alt=""
                   height="100%"
                   width="120px"
                 />
@@ -53,13 +72,16 @@ const UploadProfile = () => {
               type="file"
               accept="image/x-png,image/gif,image/jpeg"
               name="image"
-              onChange={handleFileChange}
+              onChange={e => setFile(e?.target?.files[0])}
             />
           </label>
         </div>
       </div>
       <section className=" flex gap-2 mr-4 items-center justify-end text-[14px]">
-        <button className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-1.5 text-center me-2 ">
+        <button
+          onClick={handleSubmit}
+          className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-1.5 text-center me-2 "
+        >
           submit
         </button>
       </section>
