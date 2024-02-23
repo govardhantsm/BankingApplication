@@ -35,7 +35,10 @@ const LandingTopFooter = () => {
               WhatsApp Banking
             </div>
           </section>
-          <button className="uppercase bg-orange-500 py-2 px-5 text-white rounded-full mt-6 text-sm mx-3 hover:text-orange-500 hover:bg-white hover:border-2 hover:border-orange-500">
+          <button
+            className="uppercase bg-orange-500 py-2 px-5 text-white rounded-full mt-6 text-sm mx-3 hover:text-orange-500 hover:bg-white hover:border-2 hover:border-orange-500"
+            data-aos="flip-left"
+          >
             explore digital banking
           </button>
         </div>
@@ -75,7 +78,10 @@ const LandingTopFooter = () => {
             <span className="text-blue-800 text-lg font-semibold ms-2">
               0100 5200 369
             </span>
-            <button className="uppercase bg-orange-500 py-2 px-5 text-white rounded-full mt-16 text-sm hover:text-orange-500 hover:bg-white hover:border-2 hover:border-orange-500 ">
+            <button
+              className="uppercase bg-orange-500 py-2 px-5 text-white rounded-full mt-16 text-sm hover:text-orange-500 hover:bg-white hover:border-2 hover:border-orange-500 "
+              data-aos="flip-left"
+            >
               contact us
             </button>
           </div>
