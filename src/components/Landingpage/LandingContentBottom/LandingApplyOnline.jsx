@@ -11,8 +11,8 @@ const LandingApplyOnline = () => {
     AOS.init();
   }, []);
   return (
-    <section className="mb-12 flex flex-col justify-center items-center w-[100%] h-[60%] ">
-      <h1 className="text-center text-[2rem] font-bold pb-3">
+    <section className="flex flex-col justify-center items-center w-[100%] h-[auto] mt-20 ">
+      <h1 className="text-center text-[2rem] font-bold pb-3" data-aos="zoom-in">
         <span>Apply </span>
         <span className=" text-orange-500"> Online</span>
       </h1>

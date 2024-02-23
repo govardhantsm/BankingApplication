@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -9,11 +9,11 @@ const LandingSteptoGetloan = () => {
   }, []);
   return (
     <section
-      className="w-[90%] h-[15rem] flex mt-16 ms-24 justify-between"
+      className="w-[90%] h-[17rem] flex mt-16 ms-24 justify-between"
       data-aos="fade-up"
     >
-      <div className="w-[23%] h-[100%] bg-white rounded-xl hover:shadow-lg hover:shadow-slate-400 group">
-        <h1 className="text-3xl font-semibold text-blue-800 pt-8 ps-8 mb-6 group-hover:text-4xl group-hover:transition-all">
+      <div className="w-[23%] h-[100%] bg-white rounded-xl hover:shadow-lg hover:shadow-slate-400 group p-2">
+        <h1 className="text-3xl font-semibold text-blue-800 px-7 py-3 group-hover:text-4xl group-hover:transition-all">
           01
         </h1>
         <p className="text-black font-semibold ms-8">Check Eligibility</p>
@@ -22,8 +22,8 @@ const LandingSteptoGetloan = () => {
           Discover personalized financing options tailored to your needs.
         </p>
       </div>
-      <div className="w-[23%] h-[100%] bg-white rounded-xl hover:shadow-lg hover:shadow-slate-400 group">
-        <h1 className="text-3xl font-semibold text-blue-800 pt-8 ps-8 mb-6 group-hover:text-4xl group-hover:transition-all">
+      <div className="w-[23%] h-[100%] bg-white rounded-xl hover:shadow-lg hover:shadow-slate-400 group p-2">
+        <h1 className="text-3xl font-semibold text-blue-800 px-7 py-3 group-hover:text-4xl group-hover:transition-all">
           02
         </h1>
         <p className="text-black font-semibold ms-8">Apply for loan</p>
@@ -32,8 +32,8 @@ const LandingSteptoGetloan = () => {
           application process with quick approvals.
         </p>
       </div>
-      <div className="w-[23%] h-[100%] bg-white rounded-xl hover:shadow-lg hover:shadow-slate-400 group">
-        <h1 className="text-3xl font-semibold text-blue-800 pt-8 ps-8 mb-6 group-hover:text-4xl group-hover:transition-all">
+      <div className="w-[23%] h-[100%] bg-white rounded-xl hover:shadow-lg hover:shadow-slate-400 group p-2">
+        <h1 className="text-3xl font-semibold text-blue-800 px-7 py-3 group-hover:text-4xl group-hover:transition-all">
           03
         </h1>
         <p className="text-black font-semibold ms-8">Get Approved</p>
@@ -42,8 +42,8 @@ const LandingSteptoGetloan = () => {
           access the funds you need promptly.
         </p>
       </div>
-      <div className="w-[23%] h-[100%] bg-white rounded-xl hover:shadow-lg hover:shadow-slate-400 group">
-        <h1 className="text-3xl font-semibold text-blue-800 pt-8 ps-8 mb-6 group-hover:text-4xl group-hover:transition-all">
+      <div className="w-[23%] h-[100%] bg-white rounded-xl hover:shadow-lg hover:shadow-slate-400 group p-2">
+        <h1 className="text-3xl font-semibold text-blue-800 px-7 py-3 group-hover:text-4xl group-hover:transition-all">
           04
         </h1>
         <p className="text-black font-semibold ms-8">Get your money</p>
@@ -54,6 +54,6 @@ const LandingSteptoGetloan = () => {
       </div>
     </section>
   );
-}
+};
 
-export default LandingSteptoGetloan
+export default LandingSteptoGetloan;

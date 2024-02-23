@@ -19,7 +19,7 @@ const LandingTopFooter = () => {
           <p className="font-semibold text-md text-gray-400 -mt-1 ps-2">
             Advance.Innovative.Instant
           </p>
-          <section className="w-[60%] h-[9rem] mt-2 ms-4 flex flex-col justify-between text-sm">
+          <section className="w-[70%] h-[9rem] mt-2 ms-4 flex flex-col justify-between text-sm">
             <div className="border-2 rounded-full py-2 flex items-center">
               <span className="h-[1.2rem] w-[1.2rem] rounded-full border-2 mx-4">
                 <RiLoader5Fill className="relative bottom-1 right-1 text-orange-400 text-2xl" />
@@ -70,8 +70,8 @@ const LandingTopFooter = () => {
             </p>
           </div>
         </div>
-        <div className="w-[22%] h-[100%] bg-white">
-          <div className="mt-10 ms-14">
+        <div className="w-[25%] h-[100%] bg-white">
+          <div className="mt-10 ms-6">
             <h1 className="text-xl font-semibold">Save Money , Save Life !</h1>
             <p>Any questions?</p>
             <span>Call</span>
