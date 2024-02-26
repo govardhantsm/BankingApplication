@@ -42,7 +42,6 @@ const UpdateBank = () => {
     if (isValidation()) {
       dispatch(updateBank(updatedState));
       // navigate("/adminlayout/all-bank");
-      
     } else {
       toast.error("Please enter all fields");
     }
@@ -223,7 +222,7 @@ const UpdateBank = () => {
               <label htmlFor="pincode" className="text-[rgb(145,142,143)]">
                 Pincode
               </label>
-              {!/^[0-9]+$/.test(updatedState?.address?.pincode) &&
+              {/* {!/^[0-9]+$/.test(updatedState?.address?.pincode) &&
               updatedState?.address?.pincode ? (
                 <div className="w-[80%]">
                   <input
@@ -240,7 +239,8 @@ const UpdateBank = () => {
                     Enter only numeric value
                   </p>
                 </div>
-              ) : (
+              ) : ( */}
+              <div className="w-[80%]">
                 <input
                   className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
                   type="tel"
@@ -251,7 +251,15 @@ const UpdateBank = () => {
                   value={updatedState && updatedState.address.pincode}
                   onChange={handleChange}
                 />
-              )}
+                {!/^[0-9]+$/.test(updatedState?.address?.pincode) ? (
+                  <p className="text-red-600 text-xm">
+                    Enter only numeric value
+                  </p>
+                ) : (
+                  ""
+                )}
+              </div>
+              {/* )} */}
             </div>
             <div className="flex justify-end pt-4">
               {isValidation() ? (

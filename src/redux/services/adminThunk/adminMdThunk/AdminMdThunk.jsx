@@ -7,7 +7,7 @@ export const createMd = createAsyncThunk("createMdk", async payload => {
     `/managingDirectors?bankId=${payload.bankId}`,
     payload
   );
-  window.location.reload();
+  window.location.assign("/adminlayout/all-md");
   console.log(data);
   return data;
 });
@@ -45,7 +45,7 @@ export const updateMd = createAsyncThunk("updateMd", async payload => {
       `/managingDirectors?managerId=${payload.employeeId}`,
       payload
     );
-    window.location.relaoad();
+    window.location.assign("/adminlayout/all-md");
     return data;
   } catch (error) {
     return error.message;

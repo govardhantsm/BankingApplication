@@ -56,7 +56,7 @@ const CreateMD = () => {
     e.preventDefault();
     if (isValidation()) {
       dispatch(createMd(payload));
-      navigate("/adminlayout/all-md");
+      // navigate("/adminlayout/all-md");
       // toast.success("MD Created successfully");
     } else {
       toast.error("Please enter all fields");
@@ -68,6 +68,7 @@ const CreateMD = () => {
     AOS.init();
   }, []);
 
+  // validation:
   let isValidation = () => {
     if (
       /^[0-9]+$/.test(state.pincode) &&
@@ -90,33 +91,37 @@ const CreateMD = () => {
   };
 
   return (
-    <section className="h-[99%] w-[100%] relative" data-aos="zoom-in">
-      <section className=" rounded-md border-2 w-[97%] bg-white absolute top-4 left-3">
+    <section className="h-[90vh] w-[98%] relative" data-aos="zoom-in">
+      <section className=" rounded-md border-2 w-[97%] h-[auto] bg-white ml-2 mt-2">
         <div className="ps-4 py-3 uppercase font-semibold">
           Create Managing director
         </div>
-        <form className="p-2 ps-4" onSubmit={handleSubmit}>
-          <div className="flex justify-between w-[99%] mb-4">
+        <form className="p-2 ps-4 h-[auto] " onSubmit={handleSubmit}>
+          <div className="flex justify-between w-[99%] mb-2">
             <label htmlFor="name" className="text-[rgb(145,142,143)]">
               Name
             </label>
-            {!/^[A-Za-z\s]+$/.test(state.name) && state.name ? (
-              <div className="w-[80%]">
-                <input
-                  className="w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-                  type="text"
-                  pattern="[A-Za-z\s]+"
-                  placeholder="Enter Name"
-                  id="name"
-                  name="name"
-                  value={state.name}
-                  onChange={e => {
-                    setState({ ...state, name: e.target.value });
-                  }}
-                />
+            {/* {!/^[A-Za-z\s]+$/.test(state.name) && state.name ? ( */}
+            <div className="w-[80%]">
+              <input
+                className="w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+                type="text"
+                pattern="[A-Za-z\s]+"
+                placeholder="Enter Name"
+                id="name"
+                name="name"
+                value={state.name}
+                onChange={e => {
+                  setState({ ...state, name: e.target.value });
+                }}
+              />
+              {!/^[A-Za-z\s]+$/.test(state.name) && state.name ? (
                 <p className="text-red-600 text-xm">Enter only string value</p>
-              </div>
-            ) : (
+              ) : (
+                ""
+              )}
+            </div>
+            {/* ) : (
               <input
                 className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
                 type="text"
@@ -129,9 +134,9 @@ const CreateMD = () => {
                   setState({ ...state, name: e.target.value });
                 }}
               />
-            )}
+            )} */}
           </div>
-          <div className="flex justify-between w-[99%] mb-4">
+          <div className="flex justify-between w-[99%] mb-2">
             <label htmlFor="email" className="text-[rgb(145,142,143)]">
               Email
             </label>
@@ -147,27 +152,31 @@ const CreateMD = () => {
               }}
             />
           </div>
-          <div className="flex justify-between w-[99%] mb-4">
+          <div className="flex justify-between w-[99%] mb-2">
             <label htmlFor="name" className="text-[rgb(145,142,143)]">
               Phone number
             </label>
-            {!/^[0-9]+$/.test(state.phoneNumber) && state.phoneNumber ? (
-              <div className="w-[80%]">
-                <input
-                  className=" w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-                  type="tel"
-                  pattern="[0-9]{10}"
-                  placeholder="Enter Phonenumber"
-                  id="phonenumber"
-                  name="phonenumber"
-                  value={state.phoneNumber}
-                  onChange={e => {
-                    setState({ ...state, phoneNumber: e.target.value });
-                  }}
-                />
+            {/* {!/^[0-9]+$/.test(state.phoneNumber) && state.phoneNumber ? ( */}
+            <div className="w-[80%]">
+              <input
+                className=" w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+                type="tel"
+                pattern="[0-9]{10}"
+                placeholder="Enter Phonenumber"
+                id="phonenumber"
+                name="phonenumber"
+                value={state.phoneNumber}
+                onChange={e => {
+                  setState({ ...state, phoneNumber: e.target.value });
+                }}
+              />
+              {!/^[0-9]+$/.test(state.phoneNumber) && state.phoneNumber ? (
                 <p className="text-red-600 text-xm">Enter only numeric value</p>
-              </div>
-            ) : (
+              ) : (
+                ""
+              )}
+            </div>
+            {/* ) : (
               <input
                 className=" w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
                 type="tel"
@@ -180,9 +189,9 @@ const CreateMD = () => {
                   setState({ ...state, phoneNumber: e.target.value });
                 }}
               />
-            )}
+            )} */}
           </div>
-          <div className="flex justify-between w-[99%] mb-4">
+          <div className="flex justify-between w-[99%] mb-2">
             <label htmlFor="branchaddress" className="text-[rgb(145,142,143)]">
               Address
             </label>
@@ -198,7 +207,7 @@ const CreateMD = () => {
               rows={3}
             />
           </div>
-          <div className="flex justify-between w-[99%] mb-4">
+          <div className="flex justify-between w-[99%] mb-2">
             <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
               Country
             </label>
@@ -228,7 +237,7 @@ const CreateMD = () => {
             </select>
           </div>
 
-          <div className="flex justify-between w-[99%] mb-4">
+          <div className="flex justify-between w-[99%] mb-2">
             <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
               State
             </label>
@@ -258,7 +267,7 @@ const CreateMD = () => {
             </select>
           </div>
 
-          <div className="flex justify-between w-[99%] mb-4">
+          <div className="flex justify-between w-[99%] mb-2">
             <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
               City
             </label>
@@ -283,27 +292,31 @@ const CreateMD = () => {
             </select>
           </div>
 
-          <div className="flex justify-between w-[99%] mb-4">
+          <div className="flex justify-between w-[99%] mb-2">
             <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
               Pincode
             </label>
-            {!/^[0-9]+$/.test(state.pincode) && state.pincode ? (
-              <div className="w-[80%]">
-                <input
-                  className="w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-                  type="tel"
-                  pattern="[0-9]{6}"
-                  placeholder="Enter pincode"
-                  id="pincode"
-                  name="pincode"
-                  value={state.pincode}
-                  onChange={e => {
-                    setState({ ...state, pincode: e.target.value });
-                  }}
-                />
+            {/* {!/^[0-9]+$/.test(state.pincode) && state.pincode ? ( */}
+            <div className="w-[80%]">
+              <input
+                className="w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+                type="tel"
+                pattern="[0-9]{6}"
+                placeholder="Enter pincode"
+                id="pincode"
+                name="pincode"
+                value={state.pincode}
+                onChange={e => {
+                  setState({ ...state, pincode: e.target.value });
+                }}
+              />
+              {!/^[0-9]+$/.test(state.pincode) && state.pincode ? (
                 <p className="text-red-600 text-xm">Enter only numeric value</p>
-              </div>
-            ) : (
+              ) : (
+                ""
+              )}
+            </div>
+            {/* ) : (
               <input
                 className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
                 type="tel"
@@ -316,11 +329,11 @@ const CreateMD = () => {
                   setState({ ...state, pincode: e.target.value });
                 }}
               />
-            )}
+            )} */}
           </div>
           <section className="w-[80%] flex ms-64">
             <div className="text-[rgb(145,142,143)] w-[60%]">
-              <div className="mb-4">
+              <div className="mb-2">
                 <label htmlFor="gender">Gender</label>
               </div>
               <input
@@ -379,7 +392,7 @@ const CreateMD = () => {
               />
             </div>
           </section>
-          <div className="flex justify-between w-[99%] mb-4 mt-2">
+          <div className="flex justify-between w-[99%] mb-2 mt-2">
             <div>
               <label htmlFor="name" className="text-[rgb(145,142,143)]">
                 banks

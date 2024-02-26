@@ -16,11 +16,10 @@ import { MdOutlineCreditCard } from "react-icons/md";
 
 import { MdOutlineCreditScore } from "react-icons/md";
 import { MdOutlineCreditCardOff } from "react-icons/md";
+
 const AllAccounts = () => {
   const dat = JSON.parse(sessionStorage.getItem("myObject"));
-
   let bankId = dat.bankId;
-
   let [state, setState] = useState(null);
   let dispatch = useDispatch();
   useEffect(() => {

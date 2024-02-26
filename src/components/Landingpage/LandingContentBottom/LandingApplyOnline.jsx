@@ -29,7 +29,7 @@ const LandingApplyOnline = () => {
             Paperless digital process with instant disbursal
           </p>
           <button
-            className="my-4 bg-orange-500 py-2 px-4 font-medium text-white rounded-full text-sm hover:text-orange-500 hover:bg-white hover:border-2 hover:border-orange-500"
+            className="my-4 bg-orange-500 py-2 px-4 font-medium text-white rounded-full text-sm hover:text-orange-500 border-2 border-orange-500 hover:bg-white hover:border-2 hover:border-orange-500"
             data-aos="flip-right"
           >
             APPLY ONLINE
@@ -44,7 +44,7 @@ const LandingApplyOnline = () => {
             Open Account Online with Video KYC
           </p>
           <button
-            className="my-4 bg-orange-500 py-2 px-4 font-medium text-white rounded-full text-sm hover:text-orange-500 hover:bg-white hover:border-2 hover:border-orange-500"
+            className="my-4 bg-orange-500 py-2 px-4 font-medium text-white rounded-full text-sm hover:text-orange-500 border-2 border-orange-500 hover:bg-white hover:border-2 hover:border-orange-500"
             data-aos="flip-right"
           >
             APPLY ONLINE
@@ -57,7 +57,7 @@ const LandingApplyOnline = () => {
           </p>
           <p className="text-[10px] text-center mb-2">Depository Services</p>
           <button
-            className="my-4 bg-orange-500 py-2 px-4 font-medium text-white rounded-full text-sm hover:text-orange-500 hover:bg-white hover:border-2 hover:border-orange-500"
+            className="my-4 bg-orange-500 py-2 px-4 font-medium text-white rounded-full text-sm hover:text-orange-500 border-2 border-orange-500 hover:bg-white hover:border-2 hover:border-orange-500"
             data-aos="flip-right"
           >
             APPLY ONLINE
@@ -72,7 +72,7 @@ const LandingApplyOnline = () => {
             National Electronic Toll Collection
           </p>
           <button
-            className="my-4 bg-orange-500 py-2 px-4 font-medium text-white rounded-full text-sm hover:text-orange-500 hover:bg-white hover:border-2 hover:border-orange-500"
+            className="my-4 bg-orange-500 py-2 px-4 font-medium text-white rounded-full text-sm hover:text-orange-500 border-2 border-orange-500  hover:bg-white hover:border-2 hover:border-orange-500"
             data-aos="flip-right"
           >
             APPLY ONLINE

@@ -10,7 +10,7 @@ const ManagingDirectorHome = () => {
         <aside className="w-[18.2vw] text-white">
           <MdLeftSideSection />
         </aside>
-        <aside className="w-[83%] h-[100%]">
+        <aside className="w-[83%] h-[100%] overflow-auto no-scrollbar">
           <div className="h-[99%] w-[100%]">
             <Outlet />
           </div>

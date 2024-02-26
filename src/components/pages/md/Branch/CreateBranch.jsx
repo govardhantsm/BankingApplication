@@ -47,10 +47,12 @@ const CreateBranch = () => {
   const handleSubmit = e => {
     e.preventDefault();
     payload.bankId = bankId;
-    dispatch(createBranch(payload));
-    navigate("/mdlayout/all-branches");
-    window.location.reload();
-    toast.success("created successfully");
+    if (isValidation()) {
+      dispatch(createBranch(payload));
+      toast.success("created successfully");
+    } else {
+      toast.error("please fill all fields properly!");
+    }
   };
 
   // Animation:
@@ -58,11 +60,27 @@ const CreateBranch = () => {
     AOS.init();
   }, []);
 
-  // let isValidation = () => {
-  //   return (
-
-  //   )
-  // }
+  let isValidation = () => {
+    if (
+      /^[A-Za-z\s]+$/.test(state.branchName) &&
+      state.branchName &&
+      /^[0-9]+$/.test(state.branchPhoneNumber) &&
+      state.branchPhoneNumber &&
+      /^[0-9]+$/.test(state.pincode) &&
+      state.pincode
+    )
+      return (
+        state.branchName &&
+        state.branchPhoneNumber &&
+        state.branchEmail &&
+        state.branchType &&
+        state.addressLine &&
+        state.pincode &&
+        state.country &&
+        state.city &&
+        state.state
+      );
+  };
   return (
     <section className="h-[100%] w-[100%] relative" data-aos="zoom-in">
       <section className="rounded-md border-2 py-1.5 w-[97%] bg-white absolute top-4 left-3">
@@ -72,17 +90,25 @@ const CreateBranch = () => {
             <label htmlFor="branchname" className="text-[rgb(145,142,143)]">
               Branch Name
             </label>
-            <input
-              className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-              type="text"
-              placeholder="Enter here..."
-              id="branchname"
-              name="branchname"
-              value={state.branchName}
-              onChange={e => {
-                setState({ ...state, branchName: e.target.value });
-              }}
-            />
+            <div className="w-[80%]">
+              <input
+                className="w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+                type="text"
+                pattern="[A-Za-z\s]+"
+                placeholder="Enter here..."
+                id="branchname"
+                name="branchname"
+                value={state.branchName}
+                onChange={e => {
+                  setState({ ...state, branchName: e.target.value });
+                }}
+              />
+              {!/^[A-Za-z\s]+$/.test(state.branchName) && state.branchName ? (
+                <p className="text-red-600 text-xm">Enter only string value</p>
+              ) : (
+                ""
+              )}
+            </div>
           </div>
           <div className="flex justify-between w-[99%] mb-4">
             <label htmlFor="branchEmail" className="text-[rgb(145,142,143)]">
@@ -107,18 +133,26 @@ const CreateBranch = () => {
             >
               Phone number
             </label>
-            <input
-              className=" w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-              type="tel"
-              pattern="[0-9]{10}"
-              placeholder="Enter Phonenumber"
-              id="branchPhoneNumber"
-              name="branchPhoneNumber"
-              value={state.branchPhoneNumber}
-              onChange={e => {
-                setState({ ...state, branchPhoneNumber: e.target.value });
-              }}
-            />
+            <div className="w-[80%]">
+              <input
+                className=" w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+                type="tel"
+                pattern="[0-9]{10}"
+                placeholder="Enter Phonenumber"
+                id="branchPhoneNumber"
+                name="branchPhoneNumber"
+                value={state.branchPhoneNumber}
+                onChange={e => {
+                  setState({ ...state, branchPhoneNumber: e.target.value });
+                }}
+              />
+              {!/^[0-9]+$/.test(state.branchPhoneNumber) &&
+              state.branchPhoneNumber ? (
+                <p className="text-red-600 text-xm">Enter only numeric value</p>
+              ) : (
+                ""
+              )}
+            </div>
           </div>
           <div className="flex justify-between w-[99%] mb-4">
             <label htmlFor="addressLine" className="text-[rgb(145,142,143)]">
@@ -222,18 +256,25 @@ const CreateBranch = () => {
             <label htmlFor="pincode" className="text-[rgb(145,142,143)]">
               Pincode
             </label>
-            <input
-              className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-              type="tel"
-              pattern="[0-9]{6}"
-              placeholder="Enter pincode"
-              id="pincode"
-              name="pincode"
-              value={state.pincode}
-              onChange={e => {
-                setState({ ...state, pincode: e.target.value });
-              }}
-            />
+            <div className="w-[80%]">
+              <input
+                className="w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+                type="tel"
+                pattern="[0-9]{6}"
+                placeholder="Enter pincode"
+                id="pincode"
+                name="pincode"
+                value={state.pincode}
+                onChange={e => {
+                  setState({ ...state, pincode: e.target.value });
+                }}
+              />
+              {!/^[0-9]+$/.test(state.pincode) && state.pincode ? (
+                <p className="text-red-600 text-xm">Enter only numeric value</p>
+              ) : (
+                ""
+              )}
+            </div>
           </div>
 
           <div className="flex justify-between w-[99%] mb-4">
@@ -256,7 +297,16 @@ const CreateBranch = () => {
             </select>
           </div>
           <div className="flex justify-end pt-4">
-            <Button type="submit" name="Create Branch"></Button>
+            {/* <Button type="submit" name="Create Branch"></Button> */}
+            {isValidation() ? (
+              <button className="p-[10px] m-3 bg-blue-500 text-white rounded">
+                Create Bank
+              </button>
+            ) : (
+              <button className="p-[10px] m-3 bg-gray-400 text-white rounded cursor-not-allowed">
+                Create Bank
+              </button>
+            )}
           </div>
         </form>
       </section>

@@ -16,6 +16,7 @@ export const createBranch = createAsyncThunk("createBranch", async payload => {
       },
     }
   );
+  window.location.assign("/mdlayout/all-branches");
   console.log(data);
   return data;
 });
