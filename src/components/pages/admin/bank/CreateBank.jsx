@@ -66,12 +66,12 @@ const CreateBank = () => {
     <section className="h-[100%] w-[100%] relative" data-aos="zoom-in">
       <section className="rounded-md border-2 py-1.5 w-[97%] bg-white absolute top-4 left-3">
         <div className="ps-4 py-3 uppercase font-semibold">Create Bank</div>
-        <form onSubmit={handleSubmit} className="p-2 ps-4">
+        <form className="h-[auto] p-2 ps-4" onSubmit={handleSubmit}>
           <div className="flex justify-between w-[99%] mb-4">
             <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
               Bank Name
             </label>
-            {!/^[A-Za-z\s]+$/.test(state.bankName) && state.bankName ? (
+            {/* {!/^[A-Za-z\s]+$/.test(state.bankName) && state.bankName ? (
               <div className="w-[80%]">
                 <input
                   className="border-red-600 rounded-md py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6 w-[100%] "
@@ -87,26 +87,31 @@ const CreateBank = () => {
                 />
                 <p className="text-red-600 text-xm">Enter only string value</p>
               </div>
-            ) : (
-              <div className="w-[80%]">
-                <input
-                  className="w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-                  type="text"
-                  pattern="[A-Za-z\s]{4,}"
-                  placeholder="Enter bankname"
-                  id="bankname"
-                  name="bankname"
-                  value={state.bankName}
-                  onChange={e => {
-                    setState({ ...state, bankName: e.target.value });
-                  }}
-                />
-              </div>
-            )}
+            ) : ( */}
+
+            <div className="w-[80%]">
+              <input
+                className="w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6 "
+                type="text"
+                pattern="[A-Za-z\s]{4,}"
+                placeholder="Enter bankname"
+                id="bankname"
+                name="bankname"
+                value={state.bankName}
+                onChange={e => {
+                  setState({ ...state, bankName: e.target.value });
+                }}
+              />
+              {!/^[A-Za-z\s]+$/.test(state.bankName) && state.bankName ? (
+                <p className="text-red-600 text-xm">Enter only string value</p>
+              ) : (
+                ""
+              )}
+            </div>
           </div>
           <div className="flex justify-between w-[99%] mb-4">
             <label htmlFor="branchaddress" className="text-[rgb(145,142,143)]">
-             Address
+              Address
             </label>
             <textarea
               className="p-2 w-[80%] rounded-md border-0 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
@@ -215,7 +220,7 @@ const CreateBank = () => {
             <label htmlFor="pincode" className="text-[rgb(145,142,143)]">
               Pincode
             </label>
-            {!/^[0-9]+$/.test(state.pincode) && state.pincode ? (
+            {/* {!/^[0-9]+$/.test(state.pincode) && state.pincode ? (
               <div className="w-[80%]">
                 <input
                   className="w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
@@ -231,9 +236,10 @@ const CreateBank = () => {
                 />
                 <p className="text-red-600 text-xm">Enter only numeric value</p>
               </div>
-            ) : (
+            ) : ( */}
+            <div className="w-[80%]">
               <input
-                className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+                className="w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
                 type="tel"
                 pattern="[0-9]{6}"
                 placeholder="Enter pincode"
@@ -244,7 +250,13 @@ const CreateBank = () => {
                   setState({ ...state, pincode: e.target.value });
                 }}
               />
-            )}
+              {!/^[0-9]+$/.test(state.pincode) && state.pincode ? (
+                <p className="text-red-600 text-xm">Enter only numeric value</p>
+              ) : (
+                ""
+              )}
+            </div>
+            {/* )} */}
           </div>
 
           <div className="flex justify-end pt-4">

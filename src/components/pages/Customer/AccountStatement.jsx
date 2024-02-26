@@ -101,7 +101,7 @@ const AccountStatement = () => {
               ></input>
               <p>By Month</p>
             </div>
-            <div className="flex text-xs basis-[10%] gap-2">
+            <div className="flex text-xs basis-[auto] gap-2">
               <input
                 type="radio"
                 name="date"

@@ -15,19 +15,21 @@ import {
 } from "../../../../redux/services/managingDirectorThunk/mdBranchManagerThunk/MdBranchManagerThunk";
 
 const AllBranchManager = () => {
+  const dat = JSON.parse(sessionStorage.getItem("myObject"));
   let dispatch = useDispatch();
   let [search, setSearch] = useState(null);
-  const [itemsPerPage, setItemsPerPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(2);
   const [currentPage, setCurrentPage] = useState(1);
 
   let data = useBranchState();
-  let [bankId, setBankId] = useState(null);
+  // let [bankId, setBankId] = useState(null);
   let [state, setState] = useState(null);
-  useEffect(() => {
-    setBankId(data && data?.data?.data?.bankId);
-  }, [data, bankId]);
+  // useEffect(() => {
+  //   setBankId(data && data?.data?.data?.bankId);
+  // }, [data, bankId]);
+  let bankId = dat.bankId;
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (bankId) {
       let test = dispatch(getBranchManager(bankId));
       test.unwrap().then(x => {
@@ -67,7 +69,6 @@ const AllBranchManager = () => {
   return (
     <div className="w-[100%] p-5 h-[100%]" data-aos="zoom-in">
       <div className="pb-3 font-semibold">All Branch Managers</div>
-
       {state?.length <= 0 ? (
         <Spinner />
       ) : (

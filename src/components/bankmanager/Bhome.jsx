@@ -13,11 +13,14 @@ const Bhome = () => {
   return (
     <section className="h-[100%]">
       <article className="h-[100%] flex">
-        <aside className="w-[18.2vw] bg-black text-white h-[100%] ">
+        <aside className="w-[18.2vw] text-white h-[100%] ">
           <BleftSideSection />
         </aside>
-        <aside className="w-[83%] h-[100%]" data-aos="zoom-in">
-          <div className="h-[90%] w-[100%]">
+        <aside
+          className="w-[83%] h-[100%] overflow-auto no-scrollbar"
+          data-aos="zoom-in"
+        >
+          <div className="h-[100%] w-[100%]">
             <Outlet />
           </div>
         </aside>

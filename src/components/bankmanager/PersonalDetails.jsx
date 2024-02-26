@@ -89,7 +89,7 @@ const PersonalDetails = () => {
 
   return (
     <section>
-      <section className=" ms-6 flex w-[95%] flex-wrap gap-y-5 gap-x-4 h-[30rem] overflow-auto no-scrollbar">
+      <section className=" ms-6 flex w-[95%] flex-wrap gap-y-5 gap-x-4 h-[auto]">
         <div className=" flex flex-col basis-[19rem]">
           <label
             htmlFor="nameprefix"
@@ -197,7 +197,7 @@ const PersonalDetails = () => {
             }}
           />
         </div>
-        <div className="text-[rgb(145,142,143)] w-[25.5%]">
+        <div className="text-[rgb(145,142,143)] w-[18.5rem]">
           <div className="mb-4">
             <label htmlFor="gender">Gender</label>
           </div>
@@ -241,7 +241,7 @@ const PersonalDetails = () => {
             OTHERS
           </label>
         </div>
-        <div className="ms-2 flex flex-col w-[25.5%] ">
+        <div className="ms-2 flex flex-col basis-[19rem] ">
           <label htmlFor="dob" className="text-[15px] pb-2 text-gray-400">
             DOB
           </label>
@@ -503,7 +503,7 @@ const PersonalDetails = () => {
           />
         </div>
       </section>
-      <section className="flex gap-2 mr-4 items-center justify-end text-[14px]">
+      <section className="flex mt-4 mr-10 items-center justify-end text-[14px]">
         <NavLink
           state={payload}
           to={

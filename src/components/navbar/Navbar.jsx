@@ -131,7 +131,7 @@ const Navbar = () => {
                     <span className="pt-2 mr-[10px] mt-1 text-xl">
                       <FiEdit />
                     </span>
-                    <span className="text-base w-auto p-1 rounded mt-1 border-b-2">
+                    <span className="text-base w-auto p-1 rounded mt-1 border-b-2 border-red-400">
                       <NavLink
                         to={
                           data.role === "ADMIN"
@@ -152,7 +152,7 @@ const Navbar = () => {
                     <span className="pt-3 mr-[10px] mt-1 text-xl">
                       <MdOutlineRemoveCircle />
                     </span>
-                    <span className="text-base border-b-2 w-[auto] p-1 rounded mt-2">
+                    <span className="text-base border-b-2 w-[auto] p-1 rounded mt-2  border-red-400">
                       <NavLink>Remove Profile Picture</NavLink>
                     </span>
                   </p>

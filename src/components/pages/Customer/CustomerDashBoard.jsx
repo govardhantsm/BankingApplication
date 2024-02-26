@@ -177,7 +177,7 @@ const CustomerDashBoard = () => {
                   </span>
                 ) : (
                   <span className="text-[#6e6e6e]">
-                    XXXXXXXX
+                    XXXXXXX
                     {data?.accounts[0]?.debitCard?.cardNumber.slice(8, 13) ||
                       "NA"}
                   </span>

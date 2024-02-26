@@ -65,7 +65,7 @@ const PassBook = () => {
           <tbody className="text-left">
             {statement?.map(st => {
               return (
-                <tr className="bg-gray-50">
+                <tr className="odd:bg-gray-50">
                   <td className="p-[10px] border-r">{st.date?.slice(0, 10)}</td>
                   <td className="p-[10px] border-r  ">
                     To Transfer <br />
