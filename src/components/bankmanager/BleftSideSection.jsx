@@ -2,11 +2,9 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { RiArrowDropRightLine } from "react-icons/ri";
 import { RiArrowDropDownLine } from "react-icons/ri";
-
 import { RiDashboard3Fill } from "react-icons/ri";
 import { FaRegUserCircle } from "react-icons/fa";
 import { logout } from "../../redux/reducers/auth/authSlice";
-
 import { LiaIdCardSolid } from "react-icons/lia";
 import { FaHandHoldingDollar } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
@@ -25,22 +23,20 @@ const BleftSideSection = () => {
     dispatch(getBmProfilePic(data.branchManagerId))
       .unwrap()
       .then(img => {
-        setProfilePic(img.data);
+        setProfilePic(img);
         console.log(img);
       });
-  }, []);
+  }, [data.branchManagerId]);
 
-  
   return (
     <section className="text-sm h-[100%] w-[100%] bg-black flex flex-col justify-between">
       <div className="flex flex-col items-center">
-        {/* // user?.avatar ||
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAK2Ud4gQr9pQFT6rc3xbeq74MhZe7bOdvQ&usqp=CAU" */}
         <img
-          src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAK2Ud4gQr9pQFT6rc3xbeq74MhZe7bOdvQ&usqp=CAU"||profilePic}
-          alt=""
+          src={profilePic}
+          alt="Profile Imag"
           className="h-[4rem] w-[4rem] rounded-full mt-5"
         />
+
         <p className="mt-3">{data?.branchManagerName.toUpperCase()}</p>
         <p className="mt-1 text-[rgb(112,112,112)]">
           {data?.role == "BRANCH_MANAGER" ? "BRANCH MANAGER" : ""}
