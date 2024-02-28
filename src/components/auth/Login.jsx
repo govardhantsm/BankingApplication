@@ -38,6 +38,10 @@ const Login = ({ name }) => {
   let isValidation = () => {
     return email !== "" && password !== "" ? true : false;
   };
+  let emailValidation =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.(in)$/.test(
+      email
+    );
   console.log(
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.(in)$/.test(
       email
@@ -47,17 +51,6 @@ const Login = ({ name }) => {
   let handleSubmit = e => {
     e.preventDefault();
 
-    if (
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.(in)$/.test(
-        email
-      )
-    ) {
-      setEmailFormat(true);
-    } else if (email !== "") {
-      setEmailFormat(false);
-    } else {
-      setEmailFormat(true);
-    }
     if (email == "") {
       setEmailVerify("Email is required*");
     } else {
@@ -142,7 +135,6 @@ const Login = ({ name }) => {
           )} */}
 
           <div className="form-group relative">
-            {/* <label htmlFor="password">password</label> */}
             <input
               type={isPswdVisible ? "password" : "text"}
               className="form-control p-2 border-b-2 w-[88%] mx-6 m-2"
