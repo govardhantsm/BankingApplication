@@ -16,9 +16,11 @@ import { FaHandHoldingDollar } from "react-icons/fa6";
 import { LiaIdCardSolid } from "react-icons/lia";
 import useGetMd from "../../../utils/useGetMd";
 import axios from "axios";
+import { FaUserCircle } from "react-icons/fa";
 
 const MdLeftsideSection = () => {
   const data = JSON.parse(sessionStorage.getItem("myObject"));
+  console.log(data?.managingDirectorId);
   // let [profilePic, setProfilePic] = useState(null);
 
   // let getProfilePic = async () => {
@@ -31,6 +33,26 @@ const MdLeftsideSection = () => {
   // useEffect(() => {
   //   getProfilePic();
   // }, []);
+  let [imageTest, setImageTest] = useState(null);
+
+  useEffect(() => {
+    let fetchData = async () => {
+      fetch(
+        `http://106.51.76.167:8082/api/version/v1/documents/findProfile?id=${data?.managingDirectorId}&users=Employee`
+      )
+        .then(response => {
+          return response.blob(); // Add return statement here
+        })
+        .then(blob => {
+          const file = new File([blob], "filename", {
+            type: blob.type,
+          });
+          setImageTest(file);
+        })
+        .catch((err) => {err});
+    };
+    fetchData();
+  }, []);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -45,13 +67,22 @@ const MdLeftsideSection = () => {
   return (
     <>
       <section className="text-sm h-[100%] w-[100%] bg-black flex justify-between flex-col">
-        <div className="flex flex-col items-center h-[20%]">
-          {/* "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAK2Ud4gQr9pQFT6rc3xbeq74MhZe7bOdvQ&usqp=CAU" */}
+        <div className="flex flex-col mt-5 items-center h-[auto]">
+          {/* "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAK2Ud4gQr9pQFT6rc3xbeq74MhZe7bOdvQ&usqp=CAU"
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAK2Ud4gQr9pQFT6rc3xbeq74MhZe7bOdvQ&usqp=CAU"
             alt=""
             className="h-[4rem] w-[4rem] rounded-full mt-5"
-          />
+          /> */}
+          {imageTest == null ? (
+            <FaUserCircle className="h-[4rem] w-[4rem] rounded-full mt-5" />
+          ) : (
+            <img
+              src={imageTest !== null ? URL.createObjectURL(imageTest) : ""}
+              alt="Image Load Failed"
+              className="h-[4rem] w-[4rem] rounded-full"
+            />
+          )}
           <p className="mt-3">{data?.name.toUpperCase()}</p>
           <p className="mt-1 text-[rgb(112,112,112)]">
             {data?.role == "MANAGING_DIRECTOR" ? "MANAGING DIRECTOR" : ""}

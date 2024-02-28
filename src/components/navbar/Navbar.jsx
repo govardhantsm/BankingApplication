@@ -50,7 +50,7 @@ const Navbar = () => {
 
   //   fetchImageUrl();
   // }, []);
- 
+
   return (
     <section className="bg-white h-[100%] w-[100vw] flex">
       <div className="w-[18.2vw] bg-orange-400 h-[100%] flex items-center justify-center">
@@ -143,6 +143,8 @@ const Navbar = () => {
                             ? "/mdlayout/uploadProfile"
                             : data.role === "BRANCH_MANAGER"
                             ? "/bankmanager/uploadProfile"
+                            : data?.userType == "ACCOUNT_HOLDER"
+                            ? "/customer/uploadProfile"
                             : ""
                         }
                       >
