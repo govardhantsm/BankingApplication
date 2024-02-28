@@ -394,6 +394,10 @@ const router = createBrowserRouter([
             path: "/customer/comingSoon",
             element: <CommingSoon />,
           },
+          {
+            path: "/customer/uploadProfile",
+            element: <UploadProfile />,
+          },
         ],
       },
 

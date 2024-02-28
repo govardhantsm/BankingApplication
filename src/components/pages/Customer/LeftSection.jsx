@@ -7,30 +7,55 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { LiaIdCardSolid } from "react-icons/lia";
 import { FaHandHoldingDollar } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
-
+import { FaUserCircle } from "react-icons/fa";
 import { logout } from "../../../redux/reducers/auth/authSlice";
 import Spinner from "./../spinner/Spinner";
 import { getCustomerProfile } from "../../../redux/reducers/customer/customerSlice";
 
 const LeftSection = () => {
   const data = JSON.parse(sessionStorage.getItem("myObject"));
+  console.log(data.userId)
   let dispatch = useDispatch();
   let [account, setAccount] = useState(false);
 
   let [loan, setLoan] = useState(false);
   let [card, setCard] = useState(false);
 
+  let [imageTest, setImageTest] = useState(null);
+
+  useEffect(() => {
+    let fetchData = async () => {
+      fetch(
+        `http://106.51.76.167:8082/api/version/v1/documents/findProfile?id=${data?.userId}&users=Customer`
+      )
+        .then(response => {
+          return response.blob(); // Add return statement here
+        })
+        .then(blob => {
+          const file = new File([blob], "filename", {
+            type: blob.type,
+          });
+          setImageTest(file);
+        })
+        .catch(err => {
+          err;
+        });
+    };
+    fetchData();
+  }, []);
+
   return (
     <section className="text-sm h-[100%] w-[100%] bg-black flex flex-col justify-between">
-      <div className="flex flex-col items-center">
-        <img
-          src={
-            // user?.avatar ||
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAK2Ud4gQr9pQFT6rc3xbeq74MhZe7bOdvQ&usqp=CAU"
-          }
-          alt="Load Failed"
-          className="h-[4rem] w-[4rem] rounded-full mt-5"
-        />
+      <div className="flex flex-col items-center mt-5">
+        {imageTest == null ? (
+          <FaUserCircle className="h-[4rem] w-[4rem] rounded-full mt-5" />
+        ) : (
+          <img
+            src={imageTest !== null ? URL.createObjectURL(imageTest) : ""}
+            alt="Image Load Failed"
+            className="h-[4rem] w-[4rem] rounded-full"
+          />
+        )}
         <p className="mt-3">{data?.name}</p>
         <p className="mt-1 text-[rgb(112,112,112)]">Customer</p>
       </div>

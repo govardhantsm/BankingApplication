@@ -6,7 +6,10 @@ import toast from "react-hot-toast";
 import { Country, State, City } from "country-state-city";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { getBranchById, updateBranch } from "../../../../redux/services/managingDirectorThunk/mdBranchThunk/MdBranchThunk";
+import {
+  getBranchById,
+  updateBranch,
+} from "../../../../redux/services/managingDirectorThunk/mdBranchThunk/MdBranchThunk";
 
 const UpdateBranch = () => {
   let { branchId } = useParams();
@@ -14,7 +17,7 @@ const UpdateBranch = () => {
   let dispatch = useDispatch();
   let [updatedState, setUpdatedState] = useState();
   let [cou, setCon] = useState(null);
-  let [stat,setStat]=useState(null)
+  let [stat, setStat] = useState(null);
   useEffect(() => {
     dispatch(getBranchById(branchId)).then(x =>
       setUpdatedState(x.payload.data)
@@ -98,7 +101,7 @@ const UpdateBranch = () => {
           </div>
           <div className="flex justify-between w-[99%] mb-4">
             <label htmlFor="addressId" className="text-[rgb(145,142,143)]">
-              Main Branch Address
+              Branch Address
             </label>
             <textarea
               className="p-2 w-[80%] rounded-md border-0 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
