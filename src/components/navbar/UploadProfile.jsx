@@ -24,6 +24,7 @@ const UploadProfile = () => {
 
       if (val.status == 201) {
         toast.success("Uploaded Successfully");
+        window.location.reload();
       }
     } catch (error) {
       console.log(data);
