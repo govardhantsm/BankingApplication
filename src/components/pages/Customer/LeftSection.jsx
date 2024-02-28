@@ -14,6 +14,7 @@ import { getCustomerProfile } from "../../../redux/reducers/customer/customerSli
 
 const LeftSection = () => {
   const data = JSON.parse(sessionStorage.getItem("myObject"));
+  console.log(data.userId)
   let dispatch = useDispatch();
   let [account, setAccount] = useState(false);
 
