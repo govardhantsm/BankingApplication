@@ -21,7 +21,7 @@ const UploadProfile = () => {
           data?.branchManagerId ||
           data?.managingDirectorId ||
           data?.employeeId ||
-          data.userId
+          data?.userId
         }&users=${
           data?.userType == "ACCOUNT_HOLDER" ? "Customer" : "Employee"
         }`,

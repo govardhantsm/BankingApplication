@@ -100,7 +100,7 @@ const AllBranches = () => {
                                 Total Debit Card Holders :
                               </span>
                               <span className="p-2 font-font-semibold text-[rgba(136,136,136)]">
-                                {user.card || "NA"}
+                                {user?.accountDetailsDto?.totalDebitCardHolders}
                               </span>
                             </div>
 
@@ -109,7 +109,10 @@ const AllBranches = () => {
                                 Total Credit Card Holders :
                               </span>
                               <span className="p-2 font-font-semibold text-[rgba(136,136,136)]">
-                                {user.card || "NA"}
+                                {
+                                  user?.accountDetailsDto
+                                    ?.totalCreditCardHolders
+                                }
                               </span>
                             </div>
                           </section>
@@ -119,7 +122,10 @@ const AllBranches = () => {
                                 Total Loan Card Holders :
                               </span>
                               <span className="p-2 font-font-semibold text-[rgba(136,136,136)]">
-                                {user.card || "NA"}
+                                {
+                                  user?.accountDetailsDto
+                                    ?.totalLoanAccountHolders
+                                }
                               </span>
                             </div>
 
@@ -128,7 +134,7 @@ const AllBranches = () => {
                                 Total Accounts :
                               </span>
                               <span className="p-2 font-font-semibold text-[rgba(136,136,136)]">
-                                {user.card || "NA"}
+                                {user?.accountDetailsDto?.totalAccountHolders}
                               </span>
                             </div>
                           </section>
