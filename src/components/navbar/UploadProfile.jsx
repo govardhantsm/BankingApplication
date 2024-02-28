@@ -17,7 +17,11 @@ const UploadProfile = () => {
     formData.append("files", file);
     try {
       let val = await axios.post(
-        `http://106.51.76.167:8082/api/version/v1/documents/saveProfile?id=${data.branchManagerId}&users=Employee`,
+        `http://106.51.76.167:8082/api/version/v1/documents/saveProfile?id=${
+          data?.branchManagerId || data?.managingDirectorId || data?.employeeId
+        }&users=${
+          data?.userType == "ACCOUNT_HOLDER" ? "Customer" : "Employee"
+        }`,
         formData
       );
       console.log(val);
@@ -27,8 +31,8 @@ const UploadProfile = () => {
         window.location.reload();
       }
     } catch (error) {
-      console.log(data);
-      toast.error(error.data);
+      console.log(error.response.data.message);
+      toast.error(error.response.data.message);
     }
   };
 
