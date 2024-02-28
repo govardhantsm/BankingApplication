@@ -18,7 +18,10 @@ const UploadProfile = () => {
     try {
       let val = await axios.post(
         `http://106.51.76.167:8082/api/version/v1/documents/saveProfile?id=${
-          data?.branchManagerId || data?.managingDirectorId || data?.employeeId
+          data?.branchManagerId ||
+          data?.managingDirectorId ||
+          data?.employeeId ||
+          data.userId
         }&users=${
           data?.userType == "ACCOUNT_HOLDER" ? "Customer" : "Employee"
         }`,
