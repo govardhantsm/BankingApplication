@@ -65,7 +65,7 @@ export const DeleteAccountThunk = createAsyncThunk(
       const { data } = await AxiosInstanceProtected.delete(
         `/accounts/remove?accountNumber=${accountNumber}`
       );
-      window.location.reload();
+      
       return data;
     } catch (error) {
       return error.message;

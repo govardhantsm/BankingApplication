@@ -5,10 +5,10 @@ import { BiSolidPencil } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import Spinner from "../../spinner/Spinner";
+
 import AOS from "aos";
 import "aos/dist/aos.css";
-import useGetMd from "../../../../utils/useGetMd";
+
 import DeleteAccountThunk, {
   getAllAccountsMd,
 } from "../../../../redux/services/managingDirectorThunk/mdAccountThunk/MdAccountThunk";
@@ -16,6 +16,7 @@ import { MdOutlineCreditCard } from "react-icons/md";
 
 import { MdOutlineCreditScore } from "react-icons/md";
 import { MdOutlineCreditCardOff } from "react-icons/md";
+import toast from "react-hot-toast";
 
 const AllAccounts = () => {
   const dat = JSON.parse(sessionStorage.getItem("myObject"));
@@ -26,7 +27,6 @@ const AllAccounts = () => {
     if (bankId) {
       let t = dispatch(getAllAccountsMd(bankId));
       t.unwrap().then(x => {
-        console.log(x.data);
         setState(x.data);
       });
     }
@@ -114,7 +114,6 @@ const AllAccounts = () => {
                         ?.toLowerCase()
                         .includes(e.target.value.toLowerCase())
                   );
-                  console.log(data);
 
                   e.target.value && true ? setSearch(data) : setSearch(null);
                 }}
@@ -258,8 +257,14 @@ const AllAccounts = () => {
                                   window.confirm("Are you sure");
                                 if (deleteConfirm === true) {
                                   dispatch(
-                                    DeleteAccountThunk(data?.accountNumber)
-                                  );
+                                    DeleteAccountThunk(data.accountNumber)
+                                  ).then(() => {
+                                    let t = dispatch(getAllAccountsMd(bankId));
+                                    t.unwrap().then(x => {
+                                      setState(x.data);
+                                    });
+                                    toast.success("created successfully");
+                                  });
                                 }
                               }}
                             />
@@ -346,7 +351,15 @@ const AllAccounts = () => {
                                   if (deleteConfirm === true) {
                                     dispatch(
                                       DeleteAccountThunk(data.accountNumber)
-                                    );
+                                    ).then(() => {
+                                      let t = dispatch(
+                                        getAllAccountsMd(bankId)
+                                      );
+                                      t.unwrap().then(x => {
+                                        setState(x.data);
+                                      });
+                                      toast.success("created successfully");
+                                    });
                                   }
                                 }}
                               />

@@ -13,9 +13,9 @@ import { MdOutlineCreditCard } from "react-icons/md";
 import { MdOutlineCreditCardOff } from "react-icons/md";
 import { MdOutlineCreditScore } from "react-icons/md";
 const BCurrentAccounts = () => {
-const dat = JSON.parse(sessionStorage.getItem("myObject"));
+  const dat = JSON.parse(sessionStorage.getItem("myObject"));
 
-let bankId = dat.bankId;
+  let bankId = dat.bankId;
 
   let [state, setState] = useState(null);
   let dispatch = useDispatch();
@@ -143,14 +143,14 @@ let bankId = dat.bankId;
                       </span>
                     </div>
                   </th>
-                  <th>
+                  {/* <th>
                     <div className="w-20% flex justify-between align-center px-2">
                       <span>Phone Number</span>
                       <span>
                         <TbArrowsDownUp />
                       </span>
                     </div>
-                  </th>
+                  </th> */}
                   <th>
                     <div className="w-20% flex justify-between align-center px-2">
                       <span>Account Number</span>
@@ -165,6 +165,11 @@ let bankId = dat.bankId;
                       <span>
                         <TbArrowsDownUp />
                       </span>
+                    </div>
+                  </th>
+                  <th>
+                    <div className="w-20% flex justify-between align-center px-2">
+                      <span>Debit Card</span>
                     </div>
                   </th>
                   <th>
@@ -184,7 +189,7 @@ let bankId = dat.bankId;
                       <td className="px-2 py-3 ">{data.name}</td>
                       <td className="px-2">{data.emailID}</td>
 
-                      <td className="px-2">{data.phoneNumber}</td>
+                      {/* <td className="px-2">{data.phoneNumber}</td> */}
                       <td className="px-2">{data?.accountNumber}</td>
                       <td className="px-2">{data.status}</td>
 
@@ -273,7 +278,7 @@ let bankId = dat.bankId;
                         <td className="px-2 py-3 ">{data.name}</td>
                         <td className="px-2">{data.emailID}</td>
 
-                        <td className="px-2">{data.phoneNumber}</td>
+                        {/* <td className="px-2">{data.phoneNumber}</td> */}
                         <td className="px-2">{data?.accountNumber}</td>
                         <td className="px-2">{data.status}</td>
                         <td className="px-2">

@@ -24,8 +24,8 @@ function LineChart() {
       console.log(x.payload.data.revenues);
       x.payload.data.revenues.map(obj => {
         setlab(l => new Set([...l, obj.revenueDate]));
-        setdad(l => new Set([...l, obj.debited]));
-        setdac(l => new Set([...l, obj.credited]));
+        setdad(l => [...l, obj.debited]);
+        setdac(l => [...l, obj.credited]);
       });
     });
   }, []);
@@ -35,7 +35,7 @@ function LineChart() {
     datasets: [
       {
         label: "Debit",
-        data:[ ...dad],
+        data: [...dad],
         backgroundColor: "rgba(255, 99, 132, 0.2)",
         borderColor: "rgba(255, 99, 132, 1)",
         borderWidth: 1,
