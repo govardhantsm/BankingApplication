@@ -89,7 +89,7 @@ const Login = ({ name }) => {
         } else if (x.payload.role == "ACCOUNT_HOLDER") {
           dispatch(getCustomerProfile()).then(y => {
             sessionStorage.setItem("myObject", JSON.stringify(y.payload.data));
-            // navigate("/customer");
+            navigate("/customer");
           });
         } else {
           setIncorrect(true);
