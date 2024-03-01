@@ -13,6 +13,7 @@ import {
   deleteBranchManager,
   getBranchManager,
 } from "../../../../redux/services/managingDirectorThunk/mdBranchManagerThunk/MdBranchManagerThunk";
+import toast from "react-hot-toast";
 
 const AllBranchManager = () => {
   const dat = JSON.parse(sessionStorage.getItem("myObject"));
@@ -192,8 +193,16 @@ const AllBranchManager = () => {
                                   window.confirm("Are you sure");
                                 if (deleteConfirm === true) {
                                   dispatch(
-                                    deleteBranchManager(data.employeeId)
-                                  );
+                                    deleteBranchManager(data.branchManagerId)
+                                  ).then(() => {
+                                    let test = dispatch(
+                                      getBranchManager(bankId)
+                                    );
+                                    test.unwrap().then(x => {
+                                      setState(x.data);
+                                    });
+                                    toast.success("Deleted Sucessfully");
+                                  });
                                 }
                               }}
                             />
@@ -228,7 +237,15 @@ const AllBranchManager = () => {
                                 if (deleteConfirm === true) {
                                   dispatch(
                                     deleteBranchManager(data.branchManagerId)
-                                  );
+                                  ).then(() => {
+                                    let test = dispatch(
+                                      getBranchManager(bankId)
+                                    );
+                                    test.unwrap().then(x => {
+                                      setState(x.data);
+                                    });
+                                    toast.success("Deleted Sucessfully");
+                                  });
                                 }
                               }}
                             />

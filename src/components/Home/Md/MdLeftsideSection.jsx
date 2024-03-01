@@ -139,7 +139,7 @@ const MdLeftsideSection = () => {
                   to="/mdlayout/all-branches"
                   className={({ isActive }) => (isActive ? "active" : "")}
                 >
-                  All branches
+                  All Branches
                 </NavLink>
               </li>
             </div>

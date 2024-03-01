@@ -59,12 +59,36 @@ const CreateBranchManager = () => {
       city: state.city,
     },
   };
+
+  const isValid = () => {
+    return (
+      state.name &&
+      state.phoneNumber &&
+      state.email &&
+      state.gender &&
+      state.dateOfBirth &&
+      state.branchId &&
+      state.addressLine &&
+      state.pincode &&
+      state.country &&
+      state.state &&
+      state.city
+    );
+  };
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(createBranchManager(payload));
-    navigate("/mdlayout/all-branchManager");
-    window.location.reload();
-    toast.success("created successfully");
+    if (isValid()) {
+      dispatch(createBranchManager(payload)).then(() => {
+        navigate("/mdlayout/all-branchManager");
+        toast.success("created successfully");
+      });
+    } else {
+      
+      toast.error("Enter All the fields");
+    }
+    // dispatch(createBranchManager(payload));
+    //
+    // window.location.reload();
   };
 
   // Animation:
@@ -83,17 +107,25 @@ const CreateBranchManager = () => {
             <label htmlFor="name" className="text-[rgb(145,142,143)]">
               Name
             </label>
-            <input
-              className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-              type="text"
-              placeholder="Enter Name"
-              id="name"
-              name="name"
-              value={state.name}
-              onChange={e => {
-                setState({ ...state, name: e.target.value });
-              }}
-            />
+
+            <div className="w-[80%]">
+              <input
+                className="w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+                type="text"
+                placeholder="Enter Name"
+                id="name"
+                name="name"
+                value={state.name}
+                onChange={e => {
+                  setState({ ...state, name: e.target.value });
+                }}
+              />
+              {!/^[A-Za-z\s]+$/.test(state?.name) && state.name ? (
+                <p className="text-red-600 text-xm">Enter only Alphabets</p>
+              ) : (
+                ""
+              )}
+            </div>
           </div>
           <div className="flex justify-between w-[99%] mb-4">
             <label htmlFor="email" className="text-[rgb(145,142,143)]">
@@ -115,18 +147,33 @@ const CreateBranchManager = () => {
             <label htmlFor="phonenumber" className="text-[rgb(145,142,143)]">
               Phone number
             </label>
-            <input
-              className=" w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-              type="tel"
-              pattern="[0-9]{10}"
-              placeholder="Enter Phonenumber"
-              id="phonenumber"
-              name="phonenumber"
-              value={state.phoneNumber}
-              onChange={e => {
-                setState({ ...state, phoneNumber: e.target.value });
-              }}
-            />
+
+            <div className="w-[80%]">
+              <input
+                className=" w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+                type="tel"
+                pattern="[0-9]{10}"
+                placeholder="Enter Phone Number"
+                id="name"
+                name="phoneNumber"
+                value={state.phoneNumber}
+                onChange={e => {
+                  setState({ ...state, phoneNumber: e.target.value });
+                }}
+              />
+              {!/^[0-9]+$/.test(state?.phoneNumber) && state?.phoneNumber ? (
+                <p className="text-red-600 text-xm">Enter only numeric value</p>
+              ) : (
+                ""
+              )}
+              {state?.phoneNumber.length > 10 ? (
+                <p className="text-red-600 text-xm">
+                  Enter only 10 digit phone number
+                </p>
+              ) : (
+                ""
+              )}
+            </div>
           </div>
           <div className="flex justify-between w-[99%] mb-4">
             <label htmlFor="branchaddress" className="text-[rgb(145,142,143)]">
@@ -213,7 +260,7 @@ const CreateBranchManager = () => {
                 setState({ ...state, city: e.target.value });
               }}
             >
-              <option disabled value="" className="text-gray-400">
+              <option disabled value="" className="text-gray-300">
                 -- Select The City --
               </option>
               {City.getCitiesOfState(cou, stat).map(city => {
@@ -225,18 +272,31 @@ const CreateBranchManager = () => {
             <label htmlFor="pincode" className="text-[rgb(145,142,143)]">
               Pincode
             </label>
-            <input
-              className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-              type="tel"
-              pattern="[0-9]{6}"
-              placeholder="Enter Pincode"
-              id="pincode"
-              name="pincode"
-              value={state.pincode}
-              onChange={e => {
-                setState({ ...state, pincode: e.target.value });
-              }}
-            />
+
+            <div className="w-[80%]">
+              <input
+                className="w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+                type="tel"
+                pattern="[0-9]{6}"
+                placeholder="Enter here..."
+                id="pincode"
+                name="pincode"
+                value={state.pincode}
+                onChange={e => {
+                  setState({ ...state, pincode: e.target.value });
+                }}
+              />
+              {!/^[0-9]+$/.test(state.pincode) && state.pincode ? (
+                <p className="text-red-600 text-xm">Enter only numeric value</p>
+              ) : (
+                ""
+              )}
+              {state.pincode?.length > 6 ? (
+                <p className="text-red-600 text-xm">Enter only 6 value</p>
+              ) : (
+                ""
+              )}
+            </div>
           </div>
           <section className="w-[80%] flex ms-64">
             <div className="text-[rgb(145,142,143)] w-[60%]">
