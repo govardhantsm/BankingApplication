@@ -48,8 +48,10 @@ const CreateBranch = () => {
     e.preventDefault();
     payload.bankId = bankId;
     if (isValidation()) {
-      dispatch(createBranch(payload));
-      toast.success("created successfully");
+      dispatch(createBranch(payload)).then((x) => {console.log(x);
+        navigate("/mdlayout/all-branches");
+        toast.success("created successfully");
+      });
     } else {
       toast.error("please fill all fields properly!");
     }
@@ -104,7 +106,7 @@ const CreateBranch = () => {
                 }}
               />
               {!/^[A-Za-z\s]+$/.test(state.branchName) && state.branchName ? (
-                <p className="text-red-600 text-xm">Enter only string value</p>
+                <p className="text-red-600 text-xm">Enter only Alphabets</p>
               ) : (
                 ""
               )}
@@ -304,7 +306,7 @@ const CreateBranch = () => {
               </button>
             ) : (
               <button className="p-[10px] m-3 bg-gray-400 text-white rounded cursor-not-allowed">
-                Create Bank
+                Create Branch
               </button>
             )}
           </div>

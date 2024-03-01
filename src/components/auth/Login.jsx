@@ -67,7 +67,10 @@ const Login = ({ name }) => {
         localStorage.setItem("access_token", x.payload.token);
         if (x.payload.role == "ADMIN") {
           dispatch(GetAdminProfile()).then(y => {
-            sessionStorage.setItem("myObject", JSON.stringify(y.payload.data));
+            const { payload } = y;
+            const { data } = payload;
+
+            sessionStorage.setItem("myObject", JSON.stringify(data));
             navigate("/adminlayout");
           });
 
@@ -86,7 +89,7 @@ const Login = ({ name }) => {
         } else if (x.payload.role == "ACCOUNT_HOLDER") {
           dispatch(getCustomerProfile()).then(y => {
             sessionStorage.setItem("myObject", JSON.stringify(y.payload.data));
-            navigate("/customer");
+            // navigate("/customer");
           });
         } else {
           setIncorrect(true);
