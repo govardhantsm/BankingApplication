@@ -16,8 +16,7 @@ export const createBranch = createAsyncThunk("createBranch", async payload => {
       },
     }
   );
-  window.location.assign("/mdlayout/all-branches");
-  console.log(data);
+
   return data;
 });
 //! get branch
@@ -67,7 +66,7 @@ export const deleteBranch = createAsyncThunk("deleteBranch", async bankId => {
     const { data } = await AxiosInstanceProtected.delete(
       `/branchs/delete?branchId=${bankId}`
     );
-    window.location.reload();
+
     return data;
   } catch (error) {
     return error.message;
@@ -98,7 +97,7 @@ export const getMdProfile = createAsyncThunk("getMdProfile", async () => {
 // });
 
 export const getMdDashBoard = createAsyncThunk("getMdData", async payload => {
-  console.log(payload)
+  console.log(payload);
   try {
     const { data } = await AxiosInstanceProtected.get(
       `managingDirectors/getManagingDirectorDashBoard?managingDirectorId=${payload}`,

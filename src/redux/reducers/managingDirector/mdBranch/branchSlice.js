@@ -1,5 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { createBranch, deleteBranch, getBranch, getBranchById, getMdProfile, updateBranch } from './../../../services/managingDirectorThunk/mdBranchThunk/MdBranchThunk';
+import {
+  createBranch,
+  deleteBranch,
+  getBranch,
+  getBranchById,
+  getMdProfile,
+  updateBranch,
+} from "./../../../services/managingDirectorThunk/mdBranchThunk/MdBranchThunk";
 
 const initialState = {
   data: [],
@@ -13,17 +20,17 @@ export const branchSlice = createSlice({
   name: "branch",
   initialState,
   reducers: {},
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     //create branch
     builder
-      .addCase(createBranch.pending, (state) => {
+      .addCase(createBranch.pending, state => {
         state.status = true;
         state.success = false;
       })
       .addCase(createBranch.fulfilled, (state, action) => {
         state.status = false;
         state.success = true;
-        state.data.push(action.payload);
+        state.data = action.payload;
       })
       .addCase(createBranch.rejected, (state, action) => {
         state.status = false;
@@ -33,7 +40,7 @@ export const branchSlice = createSlice({
 
     //fetch md
     builder
-      .addCase(getMdProfile.pending, (state) => {
+      .addCase(getMdProfile.pending, state => {
         state.status = true;
         state.success = false;
       })
@@ -50,7 +57,7 @@ export const branchSlice = createSlice({
 
     // fetch branch
     builder
-      .addCase(getBranch.pending, (state) => {
+      .addCase(getBranch.pending, state => {
         state.status = true;
         state.success = false;
       })
@@ -67,7 +74,7 @@ export const branchSlice = createSlice({
 
     // fetch branch by id
     builder
-      .addCase(getBranchById.pending, (state) => {
+      .addCase(getBranchById.pending, state => {
         state.status = true;
         state.success = false;
       })
@@ -84,16 +91,17 @@ export const branchSlice = createSlice({
 
     // update bank
     builder
-      .addCase(updateBranch.pending, (state) => {
+      .addCase(updateBranch.pending, state => {
         state.status = true;
         state.success = false;
       })
       .addCase(updateBranch.fulfilled, (state, action) => {
         state.status = false;
         state.success = true;
-        state.data = state.data.map((el) =>
-          action.payload.bankId === el.bankId ? action.payload : el
-        );
+        state.data = action.payload;
+        // state.data = state.data.map(el =>
+        //   action.payload.bankId === el.bankId ? action.payload : el
+        // );
       })
 
       .addCase(updateBranch.rejected, (state, action) => {
@@ -104,7 +112,7 @@ export const branchSlice = createSlice({
 
     // delete branch
     builder
-      .addCase(deleteBranch.pending, (state) => {
+      .addCase(deleteBranch.pending, state => {
         state.status = true;
         state.success = false;
       })

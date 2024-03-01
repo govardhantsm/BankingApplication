@@ -11,6 +11,7 @@ import {
   deleteBranch,
   getBranch,
 } from "../../../../redux/services/managingDirectorThunk/mdBranchThunk/MdBranchThunk";
+import toast from "react-hot-toast";
 
 const AllBranches = () => {
   let dispatch = useDispatch();
@@ -151,7 +152,12 @@ const AllBranches = () => {
                                 let deleteConfirm =
                                   window.confirm("Are you sure");
                                 if (deleteConfirm === true) {
-                                  dispatch(deleteBranch(user.branchId));
+                                  dispatch(deleteBranch(user.branchId)).then(
+                                    () => {
+                                      navigate("/mdlayout/all-branches");
+                                      toast.success("Deleted successfully");
+                                    }
+                                  );
                                 }
                               }}
                             />

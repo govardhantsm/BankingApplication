@@ -48,8 +48,10 @@ const CreateBranch = () => {
     e.preventDefault();
     payload.bankId = bankId;
     if (isValidation()) {
-      dispatch(createBranch(payload));
-      toast.success("created successfully");
+      dispatch(createBranch(payload)).then((x) => {console.log(x);
+        navigate("/mdlayout/all-branches");
+        toast.success("created successfully");
+      });
     } else {
       toast.error("please fill all fields properly!");
     }

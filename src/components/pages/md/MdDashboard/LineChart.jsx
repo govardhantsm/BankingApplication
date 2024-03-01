@@ -16,35 +16,33 @@ function LineChart() {
   console.log(data1.managingDirectorId);
   let [mdDashBoard, setMdDashBoard] = useState();
   let dispatch = useDispatch();
-  let lab = [];
-  let dad = [];
-  let dac = [];
+  let [lab, setlab] = useState([]);
+  let [dad, setdad] = useState([]);
+  let [dac, setdac] = useState([]);
   useEffect(() => {
     dispatch(getMdDashBoard(data1.managingDirectorId)).then(x => {
-
       console.log(x.payload.data.revenues);
       x.payload.data.revenues.map(obj => {
-        lab.push(obj.revenueDate);
-        dad.push(obj.debited);
-        dac.push(obj.credited);
-      })
-
+        setlab(l => new Set([...l, obj.revenueDate]));
+        setdad(l => new Set([...l, obj.debited]));
+        setdac(l => new Set([...l, obj.credited]));
+      });
     });
   }, []);
 
   const data = {
-    labels: ["January", "February", "March", "April", "May"],
+    labels: [...lab],
     datasets: [
       {
         label: "Debit",
-        data: [65, 59, 80, 81, 56],
+        data:[ ...dad],
         backgroundColor: "rgba(255, 99, 132, 0.2)",
         borderColor: "rgba(255, 99, 132, 1)",
         borderWidth: 1,
       },
       {
         label: "Credit",
-        data: [45, 70, 60, 55, 75],
+        data: [...dac],
         backgroundColor: "rgba(54, 162, 235, 0.2)",
         borderColor: "rgba(54, 162, 235, 1)",
         borderWidth: 1,

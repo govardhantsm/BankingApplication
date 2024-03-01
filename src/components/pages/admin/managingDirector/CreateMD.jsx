@@ -116,7 +116,7 @@ const CreateMD = () => {
                 }}
               />
               {!/^[A-Za-z\s]+$/.test(state.name) && state.name ? (
-                <p className="text-red-600 text-xm">Enter only string value</p>
+                <p className="text-red-600 text-xm">Enter only Alphabets value</p>
               ) : (
                 ""
               )}
