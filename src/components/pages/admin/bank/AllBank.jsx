@@ -14,6 +14,7 @@ const AllBank = () => {
   let dispatch = useDispatch();
   let navigate = useNavigate();
   let state = useGetBank();
+  console.log(state);
 
   // Animation:
   useEffect(() => {
@@ -41,6 +42,7 @@ const AllBank = () => {
         <section className="w-full overflow-auto h-[95%] no-scrollbar">
           {Array.isArray(state?.data?.data) &&
             state?.data?.data?.map((user, index) => {
+              console.log(user);
               if (user?.bankName?.toString().includes(search?.toString())) {
                 return (
                   <div
@@ -82,7 +84,7 @@ const AllBank = () => {
                               Total Debit Card Holders :
                             </span>
                             <span className="text-[rgba(136,136,136)]">
-                              {user?.bankAccountDetails?.totalDebitCardHolders}
+                              {user?.accountDetailsDto?.totalDebitCardHolders}
                             </span>
                           </div>
                           <div className="p-2 font-bold w-auto inline-block ]">
@@ -92,7 +94,7 @@ const AllBank = () => {
                             <span>
                               <span className="text-[rgba(136,136,136)]">
                                 {
-                                  user?.bankAccountDetails
+                                  user?.accountDetailsDto
                                     ?.totalCreditCardHolders
                                 }
                               </span>
@@ -105,16 +107,13 @@ const AllBank = () => {
                               Total Loan Account Holders :{" "}
                             </span>
                             <span className="text-[rgba(136,136,136)]">
-                              {
-                                user?.bankAccountDetails
-                                  ?.totalLoanAccountHolders
-                              }
+                              {user?.accountDetailsDto?.totalLoanAccountHolders}
                             </span>
                           </div>
                           <div className="p-2 font-bold ">
                             <span className="pr-3">Total Accounts :</span>
                             <span className="text-[rgba(136,136,136)]">
-                              {user?.bankAccountDetails?.totalAccountHolders}
+                              {user?.accountDetailsDto?.totalAccountHolders}
                             </span>
                           </div>
                         </section>

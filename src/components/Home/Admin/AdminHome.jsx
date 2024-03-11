@@ -5,13 +5,13 @@ import { Outlet } from "react-router-dom";
 
 const AdminHome = () => {
   return (
-    <section className="h-[90vh] ">
+    <section className="h-[100%]">
       <article className="h-[100%] flex">
-        <aside className="w-[18.2vw] text-white h-[auto]">
+        <aside className="w-[18.2vw] text-white h-[100%]">
           <AdminLeftSideSection />
         </aside>
-        <aside className="w-[83%] h-[90vh] overflow-auto no-scrollbar">
-          <div className="h-[99%] w-[100%]">
+        <aside className="w-[83%] h-[100%] overflow-auto no-scrollbar">
+          <div className="h-[100%] w-[100%]">
             <Outlet />
           </div>
         </aside>

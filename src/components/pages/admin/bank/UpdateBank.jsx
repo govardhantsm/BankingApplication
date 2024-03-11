@@ -252,7 +252,7 @@ const UpdateBank = () => {
                   onChange={handleChange}
                 />
                 {!/^[0-9]+$/.test(updatedState?.address?.pincode) ? (
-                  <p className="text-red-600 text-xm">
+                  <p className="text-red-600 text-sm">
                     Enter only numeric value
                   </p>
                 ) : (

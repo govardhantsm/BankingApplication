@@ -8,7 +8,7 @@ import { MdOutlineConstruction } from "react-icons/md";
 const ManagingDirector = () => {
   return (
     <section className="h-[100%] w-[100%] mt-8 flex justify-between relative">
-      <div className="h-[45vh] w-[27%] bg-white rounded-md">
+      <div className="h-[100%] w-[27%] bg-white rounded-md">
         <p className="p-5 ">Loan Portfolio</p>
         <span className="flex justify-center items-center flex-col">
           <MdOutlineConstruction className="text-8xl text-gray-600 mt-6" />

@@ -44,6 +44,25 @@ const UpdateBranch = () => {
     window.location.reload();
     toast.success("updated successfully");
   };
+  let isValidation = () => {
+    if (
+      /^[A-Za-z\s]+$/.test(updatedState?.branchName) &&
+      /^[0-9]+$/.test(updatedState?.branchPhoneNumber) &&
+      /^[0-9]+$/.test(updatedState?.address?.pincode)
+    )
+      return (
+        updatedState?.branchName &&
+        updatedState?.branchEmail &&
+        updatedState?.branchPhoneNumber &&
+        updatedState?.address?.addressLine &&
+        updatedState.address.country &&
+        updatedState.address.state &&
+        updatedState?.address?.city &&
+        updatedState?.address?.pincode &&
+        updatedState?.branchType
+      );
+  };
+  console.log(updatedState);
   // Animation:
   useEffect(() => {
     AOS.init();
@@ -57,15 +76,24 @@ const UpdateBranch = () => {
             <label htmlFor="branchName" className="text-[rgb(145,142,143)]">
               Branch Name
             </label>
-            <input
-              className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-              type="text"
-              placeholder="Enter here..."
-              id="branchName"
-              name="branchName"
-              value={updatedState && updatedState.branchName}
-              onChange={handleChange}
-            />
+            <div className="w-[80%]">
+              <input
+                className="w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+                type="text"
+                pattern="[A-Za-z\s]+"
+                placeholder="Enter here..."
+                id="branchName"
+                name="branchName"
+                value={updatedState && updatedState.branchName}
+                onChange={handleChange}
+              />
+              {!/^[A-Za-z\s]+$/.test(updatedState?.branchName) &&
+              updatedState?.branchName ? (
+                <p className="text-red-600 text-sm">Enter only string value</p>
+              ) : (
+                ""
+              )}
+            </div>
           </div>
           <div className="flex justify-between w-[99%] mb-4">
             <label htmlFor="branchEmail" className="text-[rgb(145,142,143)]">
@@ -88,16 +116,24 @@ const UpdateBranch = () => {
             >
               Phone number
             </label>
-            <input
-              className=" w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-              type="tel"
-              pattern="[0-9]{10}"
-              placeholder="Enter Phonenumber"
-              id="branchPhoneNumber"
-              name="branchPhoneNumber"
-              value={updatedState && updatedState.branchPhoneNumber}
-              onChange={handleChange}
-            />
+            <div className="w-[80%]">
+              <input
+                className=" w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+                type="tel"
+                pattern="[0-9]{10}"
+                placeholder="Enter Phonenumber"
+                id="branchPhoneNumber"
+                name="branchPhoneNumber"
+                value={updatedState && updatedState.branchPhoneNumber}
+                onChange={handleChange}
+              />
+              {!/^[0-9]+$/.test(updatedState?.branchPhoneNumber) &&
+              updatedState?.branchPhoneNumber ? (
+                <p className="text-red-600 text-sm">Enter only numeric value</p>
+              ) : (
+                ""
+              )}
+            </div>
           </div>
           <div className="flex justify-between w-[99%] mb-4">
             <label htmlFor="addressId" className="text-[rgb(145,142,143)]">
@@ -230,16 +266,24 @@ const UpdateBranch = () => {
             <label htmlFor="pincode" className="text-[rgb(145,142,143)]">
               Pincode
             </label>
-            <input
-              className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-              type="tel"
-              pattern="[0-9]{6}"
-              placeholder="Enter pincode"
-              id="pincode"
-              name="pincode"
-              value={updatedState && updatedState.address.pincode}
-              onChange={handleChange}
-            />
+            <div className="w-[80%]">
+              <input
+                className="w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+                type="tel"
+                pattern="[0-9]{6}"
+                placeholder="Enter pincode"
+                id="pincode"
+                name="pincode"
+                value={updatedState && updatedState.address.pincode}
+                onChange={handleChange}
+              />
+              {!/^[0-9]+$/.test(updatedState?.address?.pincode) &&
+              updatedState?.address?.pincode ? (
+                <p className="text-red-600 text-sm">Enter only numeric value</p>
+              ) : (
+                ""
+              )}
+            </div>
           </div>
           <div className="flex justify-between w-[99%] mb-4">
             <label htmlFor="branchType" className="text-[rgb(145,142,143)]">
@@ -259,7 +303,16 @@ const UpdateBranch = () => {
             </select>
           </div>
           <div className="flex justify-end pt-4">
-            <Button type="submit" name="Update Branch"></Button>
+            {/* <Button type="submit" name="Update Branch"></Button> */}
+            {isValidation() ? (
+              <button className="text-white border-2 border-orange-400 bg-orange-400 hover:bg-white hover:text-orange-500 hover:border-2 hover:border-orange-500 focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-800 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2">
+                Update Branch
+              </button>
+            ) : (
+              <button className="text-white border-2 border-orange-300 bg-orange-300 hover:border-2 hover:border-orange-500 focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-800 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 cursor-not-allowed">
+                Update Branch
+              </button>
+            )}
           </div>
         </form>
       </section>

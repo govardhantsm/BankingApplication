@@ -104,7 +104,7 @@ const CreateBranch = () => {
                 }}
               />
               {!/^[A-Za-z\s]+$/.test(state.branchName) && state.branchName ? (
-                <p className="text-red-600 text-xm">Enter only string value</p>
+                <p className="text-red-600 text-sm">Enter only string value</p>
               ) : (
                 ""
               )}
@@ -148,7 +148,7 @@ const CreateBranch = () => {
               />
               {!/^[0-9]+$/.test(state.branchPhoneNumber) &&
               state.branchPhoneNumber ? (
-                <p className="text-red-600 text-xm">Enter only numeric value</p>
+                <p className="text-red-600 text-sm">Enter only numeric value</p>
               ) : (
                 ""
               )}
@@ -270,7 +270,7 @@ const CreateBranch = () => {
                 }}
               />
               {!/^[0-9]+$/.test(state.pincode) && state.pincode ? (
-                <p className="text-red-600 text-xm">Enter only numeric value</p>
+                <p className="text-red-600 text-sm">Enter only numeric value</p>
               ) : (
                 ""
               )}
