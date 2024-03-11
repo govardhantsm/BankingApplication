@@ -9,6 +9,7 @@ import {
   getBranchManagerById,
   updateBranchManager,
 } from "../../../../redux/services/managingDirectorThunk/mdBranchManagerThunk/MdBranchManagerThunk";
+import toast from "react-hot-toast";
 
 const UpdateBranchManager = () => {
   let { employeeId } = useParams();
@@ -19,9 +20,10 @@ const UpdateBranchManager = () => {
 
   let [updatedState, setUpdatedState] = useState();
   useEffect(() => {
-    dispatch(getBranchManagerById(employeeId)).then(x =>
-      setUpdatedState(x.payload.data)
-    );
+    dispatch(getBranchManagerById(employeeId)).then(x => {
+      console.log(x.payload.data);
+      setUpdatedState(x.payload.data);
+    });
   }, [employeeId]);
 
   const handleChange = e => {
@@ -39,16 +41,46 @@ const UpdateBranchManager = () => {
   };
   let handleSubmit = e => {
     e.preventDefault();
-    dispatch(updateBranchManager(updatedState));
-    navigate("/mdlayout/all-branchManager");
-    window.location.reload();
-    toast.success("updated successfully");
+
+    if (isValidation()) {
+      dispatch(updateBranchManager(updatedState)).then(x => {
+        if (x.payload)
+        {
+          navigate("/mdlayout/all-branchManager");
+          toast.success("updated successfully");
+          }
+      });
+
+      // window.location.reload();
+      // 
+    }
   };
 
   // Animation:
   useEffect(() => {
     AOS.init();
   }, []);
+
+  // validation:
+  let isValidation = () => {
+    if (
+      /^[0-9]+$/.test(updatedState?.address.pincode) &&
+      /^[A-Za-z\s]+$/.test(updatedState.name) &&
+      /^[0-9]+$/.test(updatedState.phoneNumber)
+    )
+      return (
+        updatedState.name &&
+        updatedState.phoneNumber &&
+        updatedState.email &&
+        updatedState.gender &&
+        updatedState.dateOfBirth &&
+        updatedState.address.addressLine &&
+        updatedState?.address.pincode &&
+        updatedState?.address.state &&
+        updatedState?.address.country &&
+        updatedState?.address.city
+      );
+  };
 
   return (
     <section className="h-[100%] w-[100%] relative" data-aos="zoom-in">
@@ -61,15 +93,25 @@ const UpdateBranchManager = () => {
             <label htmlFor="name" className="text-[rgb(145,142,143)]">
               Name
             </label>
-            <input
-              className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-              type="text"
-              placeholder="Enter Name"
-              id="name"
-              name="name"
-              value={updatedState && updatedState.name}
-              onChange={handleChange}
-            />
+            <div className="w-[80%]">
+              <input
+                className="w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+                type="text"
+                placeholder="Enter Name"
+                id="name"
+                name="name"
+                value={updatedState && updatedState.name}
+                onChange={handleChange}
+              />
+              {!/^[A-Za-z\s]+$/.test(updatedState?.name) &&
+              updatedState.name ? (
+                <p className="text-red-600 text-xm">
+                  Enter only Alphabets value
+                </p>
+              ) : (
+                ""
+              )}
+            </div>
           </div>
           <div className="flex justify-between w-[99%] mb-4">
             <label htmlFor="email" className="text-[rgb(145,142,143)]">
@@ -82,23 +124,31 @@ const UpdateBranchManager = () => {
               id="email"
               name="email"
               value={updatedState && updatedState.email}
-              onChange={handleChange}
+              // onChange={handleChange}
             />
           </div>
           <div className="flex justify-between w-[99%] mb-4">
             <label htmlFor="name" className="text-[rgb(145,142,143)]">
               Phone number
             </label>
-            <input
-              className=" w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-              type="tel"
-              pattern="[0-9]{10}"
-              placeholder="Enter Name"
-              id="name"
-              name="phoneNumber"
-              value={updatedState && updatedState.phoneNumber}
-              onChange={handleChange}
-            />
+            <div className="w-[80%]">
+              <input
+                className=" w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+                type="tel"
+                pattern="[0-9]{10}"
+                placeholder="Enter Name"
+                id="name"
+                name="phoneNumber"
+                value={updatedState && updatedState.phoneNumber}
+                onChange={handleChange}
+              />
+              {!/^[0-9]+$/.test(updatedState?.phoneNumber) &&
+              updatedState?.phoneNumber ? (
+                <p className="text-red-600 text-xm">Enter only numeric value</p>
+              ) : (
+                ""
+              )}
+            </div>
           </div>
 
           <div className="flex justify-between w-[99%] mb-4">
@@ -232,16 +282,29 @@ const UpdateBranchManager = () => {
             <label htmlFor="bankname" className="text-[rgb(145,142,143)]">
               Pincode
             </label>
-            <input
-              className="w-[80%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
-              type="tel"
-              pattern="[0-9]{6}"
-              placeholder="Enter here..."
-              id="pincode"
-              name="pincode"
-              value={updatedState && updatedState.address.pincode}
-              onChange={handleChange}
-            />
+            <div className="w-[80%]">
+              <input
+                className="w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
+                type="tel"
+                pattern="[0-9]{6}"
+                placeholder="Enter here..."
+                id="pincode"
+                name="pincode"
+                value={updatedState && updatedState.address.pincode}
+                onChange={handleChange}
+              />
+              {!/^[0-9]+$/.test(updatedState?.address.pincode) &&
+              updatedState?.address.pincode ? (
+                <p className="text-red-600 text-xm">Enter only numeric value</p>
+              ) : (
+                ""
+              )}
+              {updatedState?.address.pincode?.length > 6 ? (
+                <p className="text-red-600 text-xm">Enter only 6 value</p>
+              ) : (
+                ""
+              )}
+            </div>
           </div>
           <section className="w-[80%] flex ms-64">
             <div className="text-[rgb(145,142,143)] w-[60%]">
@@ -265,7 +328,7 @@ const UpdateBranchManager = () => {
                 id="female"
                 name="gender"
                 value="female"
-                checked={"female" === updatedState && updatedState?.gender}
+                checked={"female" === updatedState?.gender?.toLowerCase()}
                 className="ms-4 w-4 h-4"
                 onChange={handleChange}
               />
@@ -277,7 +340,7 @@ const UpdateBranchManager = () => {
                 id="others"
                 name="gender"
                 value="others"
-                checked={"others" === updatedState && updatedState?.gender}
+                checked={"others" === updatedState?.gender?.toLowerCase()}
                 className="ms-4 w-4 h-4"
                 onChange={handleChange}
               />

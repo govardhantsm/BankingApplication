@@ -151,14 +151,6 @@ const SavingsAccounts = () => {
                   </th>
 
                   <th>
-                    <div className="w-15% flex justify-between align-center px-2">
-                      <span>Phone Number</span>
-                      <span>
-                        <TbArrowsDownUp />
-                      </span>
-                    </div>
-                  </th>
-                  <th>
                     <div className="w-20% flex justify-between align-center px-1">
                       <span>Account Number</span>
                       <span>
@@ -191,12 +183,11 @@ const SavingsAccounts = () => {
               </thead>
               <tbody>
                 {search?.map(data => {
-                  
                   return (
                     <tr className="text-xs border-b-2">
                       <td className="px-2 py-3 ">{data.name}</td>
                       <td className="px-2">{data.emailID}</td>
-                      <td className="px-2">{data?.phoneNumber}</td>
+
                       <td className="px-2">{data?.accountNumber}</td>
                       <td className="px-2">{data.status}</td>
 
@@ -284,7 +275,7 @@ const SavingsAccounts = () => {
                       <tr className="text-xs border-b-2">
                         <td className="px-2 py-3 ">{data.name}</td>
                         <td className="px-2">{data.emailID}</td>
-                        <td className="px-2">{data.phoneNumber}</td>
+
                         <td className="px-2">{data?.accountNumber}</td>
                         <td className="px-2">{data.status}</td>
                         <td className="px-2">

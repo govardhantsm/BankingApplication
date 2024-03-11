@@ -48,8 +48,10 @@ const CreateBranch = () => {
     e.preventDefault();
     payload.bankId = bankId;
     if (isValidation()) {
-      dispatch(createBranch(payload));
-      toast.success("created successfully");
+      dispatch(createBranch(payload)).then(x => {
+        navigate("/mdlayout/all-branches");
+        toast.success("created successfully");
+      });
     } else {
       toast.error("please fill all fields properly!");
     }
@@ -95,7 +97,7 @@ const CreateBranch = () => {
                 className="w-[100%] rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black-600 sm:text-sm sm:leading-6"
                 type="text"
                 pattern="[A-Za-z\s]+"
-                placeholder="Enter here..."
+                placeholder="Enter Branch Name"
                 id="branchname"
                 name="branchname"
                 value={state.branchName}
@@ -104,7 +106,7 @@ const CreateBranch = () => {
                 }}
               />
               {!/^[A-Za-z\s]+$/.test(state.branchName) && state.branchName ? (
-                <p className="text-red-600 text-sm">Enter only string value</p>
+                <p className="text-red-600 text-xm">Enter only Alphabets</p>
               ) : (
                 ""
               )}
@@ -274,6 +276,11 @@ const CreateBranch = () => {
               ) : (
                 ""
               )}
+              { state.pincode.length>6 ? (
+                <p className="text-red-600 text-xm">Enter 6 digit pincode</p>
+              ) : (
+                ""
+              )}
             </div>
           </div>
 
@@ -300,11 +307,11 @@ const CreateBranch = () => {
             {/* <Button type="submit" name="Create Branch"></Button> */}
             {isValidation() ? (
               <button className="p-[10px] m-3 bg-blue-500 text-white rounded">
-                Create Bank
+                Create Branch
               </button>
             ) : (
               <button className="p-[10px] m-3 bg-gray-400 text-white rounded cursor-not-allowed">
-                Create Bank
+                Create Branch
               </button>
             )}
           </div>

@@ -11,6 +11,7 @@ import {
   deleteBranch,
   getBranch,
 } from "../../../../redux/services/managingDirectorThunk/mdBranchThunk/MdBranchThunk";
+import toast from "react-hot-toast";
 
 const AllBranches = () => {
   let dispatch = useDispatch();
@@ -119,7 +120,7 @@ const AllBranches = () => {
                           <section>
                             <div className="p-2 font-font-semibold ">
                               <span className="p-3 pl-4 font-bold w-48">
-                                Total Loan Card Holders :
+                                Total Loan Account Holders :
                               </span>
                               <span className="p-2 font-font-semibold text-[rgba(136,136,136)]">
                                 {
@@ -151,7 +152,15 @@ const AllBranches = () => {
                                 let deleteConfirm =
                                   window.confirm("Are you sure");
                                 if (deleteConfirm === true) {
-                                  dispatch(deleteBranch(user.branchId));
+                                  dispatch(deleteBranch(user.branchId)).then(
+                                    () => {
+                                      let test = dispatch(getBranch(bankId));
+                                      test
+                                        .unwrap()
+                                        .then(x => setBranch(x.data));
+                                      toast.success("Deleted successfully");
+                                    }
+                                  );
                                 }
                               }}
                             />

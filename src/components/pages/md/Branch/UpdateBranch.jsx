@@ -39,10 +39,10 @@ const UpdateBranch = () => {
   };
   let handleSubmit = e => {
     e.preventDefault();
-    dispatch(updateBranch(updatedState));
-    navigate("/mdlayout/all-branches");
-    window.location.reload();
-    toast.success("updated successfully");
+    dispatch(updateBranch(updatedState)).then(() => {
+      navigate("/mdlayout/all-branches");
+      toast.success("updated successfully");
+    });
   };
   let isValidation = () => {
     if (

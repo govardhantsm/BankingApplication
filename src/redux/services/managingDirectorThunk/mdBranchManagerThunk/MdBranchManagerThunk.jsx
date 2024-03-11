@@ -46,7 +46,7 @@ export const getBranchManagerById = createAsyncThunk("getBranchManagerById", asy
           `/branchManagers/update?branchManagerId=${payload.employeeId}`,
           payload
         );
-        window.location.reload();
+        
          return data;
       } catch (error) {
         return error.message;
@@ -59,7 +59,7 @@ export const getBranchManagerById = createAsyncThunk("getBranchManagerById", asy
       const { data } = await AxiosInstanceProtected.delete(
         `/branchManagers/delete?branchManagerId=${employeeId}`
       )
-      window.location.reload();
+      
       return data;
     } catch (error) {
       return error.message;
@@ -71,7 +71,7 @@ export const getBranchManagerById = createAsyncThunk("getBranchManagerById", asy
       const { data } = await AxiosInstanceProtected.get(
         `/branchs/getAllUnAssigned?bankId=${bankId}`
       );  
-      console.log(data)
+      
       return data;
   
     } catch (error) {
